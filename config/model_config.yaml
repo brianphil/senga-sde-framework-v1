@@ -1,0 +1,88 @@
+# Senga SDE Model Configuration
+# Powell's Sequential Decision Analytics Framework Parameters
+
+# Learning Configuration (VFA - Value Function Approximation)
+learning:
+  learning_rate: 0.001
+  discount_factor: 0.95
+  lambda: 0.7
+  epsilon: 0.1
+  batch_size: 32
+  update_frequency: 10
+  replay_buffer_size: 10000
+  num_features: 25
+  feature_scaling: true
+  convergence_threshold: 0.001
+  max_iterations: 100000
+
+# Optimization Configuration (CFA - Cost Function Approximation)
+optimization:
+  solver: "CP-SAT"
+  time_limit_seconds: 30
+  num_workers: 4
+  optimality_gap: 0.01
+  use_warm_start: true
+  fuel_cost_weight: 1.0
+  driver_cost_weight: 1.0
+  late_penalty_weight: 2.0
+  priority_bonus_weight: 1.5
+  max_route_duration_hours: 8
+  max_stops_per_route: 10
+  enforce_time_windows: true
+  enforce_capacity: true
+
+# Lookahead Configuration (DLA - Direct Lookahead Approximation)
+lookahead:
+  num_scenarios: 100
+  max_scenarios: 1000
+  scenario_pruning: true
+  lookahead_horizon_hours: 4
+  time_step_minutes: 15
+  traffic_uncertainty: 0.3
+  demand_uncertainty: 0.2
+  breakdown_probability: 0.05
+  use_historical_data: true
+  weather_impact: true
+  time_of_day_impact: true
+
+# Policy Configuration (PFA - Policy Function Approximation)
+policy:
+  enable_emergency_dispatch: true
+  emergency_priority_threshold: 0.8
+  nearest_neighbor: true
+  greedy_insertion: true
+  distance_weight: 0.4
+  urgency_weight: 0.3
+  capacity_weight: 0.3
+
+# Meta-Controller Configuration
+meta_controller:
+  pfa_urgency_threshold: 0.8
+  pfa_driver_availability_threshold: 0.2
+  dla_uncertainty_threshold: 0.6
+  dla_horizon_threshold: 4
+  cfa_time_available: 30
+  vfa_confidence_threshold: 0.7
+  default_function: "CFA"
+  enable_fallback: true
+  fallback_order: ["CFA", "VFA", "PFA"]
+
+# Logging and Monitoring
+logging:
+  level: "INFO"
+  log_decisions: true
+  log_learning_metrics: true
+  log_performance: true
+  collect_td_errors: true
+  collect_feature_importance: true
+  collect_function_usage: true
+  save_frequency: 100
+  checkpoint_frequency: 1000
+
+# Performance Settings
+performance:
+  enable_caching: true
+  parallel_scenarios: true
+  batch_processing: true
+  max_memory_mb: 4096
+  max_cpu_percent: 80

@@ -1,0 +1,149 @@
+2025-10-20 10:31:52,371 - __main__ - INFO - Starting Senga SDE API server on 0.0.0.0:8000
+2025-10-20 10:34:08,190 - __main__ - INFO - Starting Senga SDE API server on 0.0.0.0:8000
+2025-10-20 10:34:08,286 - src.api.main - INFO - ============================================================
+2025-10-20 10:34:08,286 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-20 10:34:08,287 - src.api.main - INFO - ============================================================
+2025-10-20 10:34:08,607 - src.api.main - ERROR - Failed to start Senga SDE: no such column: parameter_key
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 93, in startup_event
+    config = SengaConfigurator()
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\senga_config.py", line 29, in __init__
+    self.business = BusinessConfigurator(db_path)
+                    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\business_config.py", line 38, in __init__
+    self._load_cache()
+    ~~~~~~~~~~~~~~~~^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\business_config.py", line 102, in _load_cache
+    cursor = self.conn.execute("""
+        SELECT parameter_key, parameter_value, value_type, description,
+               min_value, max_value, updated_at, updated_by
+        FROM business_config
+    """)
+sqlite3.OperationalError: no such column: parameter_key
+2025-10-20 10:37:31,553 - __main__ - INFO - Starting Senga SDE API server on 0.0.0.0:8000
+2025-10-20 10:37:31,672 - src.api.main - INFO - ============================================================
+2025-10-20 10:37:31,673 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-20 10:37:31,674 - src.api.main - INFO - ============================================================
+2025-10-20 10:37:32,179 - src.api.main - ERROR - Failed to start Senga SDE: Missing required config section: learning
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 93, in startup_event
+    config = SengaConfigurator()
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\senga_config.py", line 30, in __init__
+    self.model = ModelConfigurator(model_config_path, env)
+                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\model_config.py", line 32, in __init__
+    self._load_config()
+    ~~~~~~~~~~~~~~~~~^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\model_config.py", line 48, in _load_config
+    self._validate_config(config_dict)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\model_config.py", line 79, in _validate_config
+    raise ValueError(f"Missing required config section: {section}")
+ValueError: Missing required config section: learning
+2025-10-20 10:42:23,668 - __main__ - INFO - Starting Senga SDE API server on 0.0.0.0:8000
+2025-10-20 10:42:23,807 - src.api.main - INFO - ============================================================
+2025-10-20 10:42:23,808 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-20 10:42:23,808 - src.api.main - INFO - ============================================================
+2025-10-20 10:42:23,935 - src.api.main - ERROR - Failed to start Senga SDE: Missing required config section: learning
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 93, in startup_event
+    config = SengaConfigurator()
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\senga_config.py", line 30, in __init__
+    self.model = ModelConfigurator(model_config_path, env)
+                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\model_config.py", line 32, in __init__
+    self._load_config()
+    ~~~~~~~~~~~~~~~~~^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\model_config.py", line 48, in _load_config
+    self._validate_config(config_dict)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\model_config.py", line 79, in _validate_config
+    raise ValueError(f"Missing required config section: {section}")
+ValueError: Missing required config section: learning
+2025-10-20 10:48:34,646 - __main__ - INFO - Starting Senga SDE API server on 0.0.0.0:8000
+2025-10-20 10:48:34,742 - src.api.main - INFO - ============================================================
+2025-10-20 10:48:34,743 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-20 10:48:34,743 - src.api.main - INFO - ============================================================
+2025-10-20 10:48:34,808 - src.api.main - ERROR - Failed to start Senga SDE: string indices must be integers, not 'str'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 93, in startup_event
+    config = SengaConfigurator()
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\senga_config.py", line 30, in __init__
+    self.model = ModelConfigurator(model_config_path, env)
+                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\model_config.py", line 32, in __init__
+    self._load_config()
+    ~~~~~~~~~~~~~~~~~^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\model_config.py", line 48, in _load_config
+    self._validate_config(config_dict)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\model_config.py", line 89, in _validate_config
+    assert cfa['solver']['time_limit_seconds'] > 0
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+2025-10-20 10:51:47,453 - __main__ - INFO - Starting Senga SDE API server on 0.0.0.0:8000
+2025-10-20 10:51:47,549 - src.api.main - INFO - ============================================================
+2025-10-20 10:51:47,550 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-20 10:51:47,550 - src.api.main - INFO - ============================================================
+2025-10-20 10:51:47,590 - src.api.main - ERROR - Failed to start Senga SDE: string indices must be integers, not 'str'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 93, in startup_event
+    config = SengaConfigurator()
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\senga_config.py", line 30, in __init__
+    self.model = ModelConfigurator(model_config_path, env)
+                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\model_config.py", line 32, in __init__
+    self._load_config()
+    ~~~~~~~~~~~~~~~~~^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\model_config.py", line 48, in _load_config
+    self._validate_config(config_dict)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\model_config.py", line 89, in _validate_config
+    assert cfa['solver']['time_limit_seconds'] > 0
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+2025-10-20 10:53:20,189 - __main__ - INFO - Starting Senga SDE API server on 0.0.0.0:8000
+2025-10-20 10:53:20,294 - src.api.main - INFO - ============================================================
+2025-10-20 10:53:20,295 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-20 10:53:20,296 - src.api.main - INFO - ============================================================
+2025-10-20 10:53:20,319 - src.api.main - ERROR - Failed to start Senga SDE: string indices must be integers, not 'str'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 93, in startup_event
+    config = SengaConfigurator()
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\senga_config.py", line 30, in __init__
+    self.model = ModelConfigurator(model_config_path, env)
+                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\model_config.py", line 32, in __init__
+    self._load_config()
+    ~~~~~~~~~~~~~~~~~^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\model_config.py", line 48, in _load_config
+    self._validate_config(config_dict)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\config\model_config.py", line 89, in _validate_config
+    assert cfa['solver']['time_limit_seconds'] > 0
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+TypeError: string indices must be integers, not 'str'
+2025-10-20 11:00:06,294 - __main__ - INFO - Starting Senga SDE API server on 0.0.0.0:8000
+2025-10-20 11:00:06,388 - src.api.main - INFO - ============================================================
+2025-10-20 11:00:06,389 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-20 11:00:06,390 - src.api.main - INFO - ============================================================
+2025-10-20 11:00:07,715 - src.api.main - ERROR - Failed to start Senga SDE: 'SengaConfigurator' object has no attribute 'business_config'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 102, in startup_event
+    'google_places_api_key': config.business_config.get('google_places_api_key', ''),
+                             ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SengaConfigurator' object has no attribute 'business_config'
+2025-10-20 11:03:50,996 - __main__ - INFO - Starting Senga SDE API server on 0.0.0.0:8000
+2025-10-20 11:03:51,101 - src.api.main - INFO - ============================================================
+2025-10-20 11:03:51,102 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-20 11:03:51,103 - src.api.main - INFO - ============================================================
+2025-10-20 11:03:52,866 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-20 11:03:52,872 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-20 11:03:52,873 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-20 11:03:52,874 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-20 11:03:52,934 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-20 11:03:52,946 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-20 11:03:52,954 - src.api.main - INFO - ============================================================
+2025-10-20 11:03:52,954 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-20 11:03:52,954 - src.api.main - INFO - ============================================================
+2025-10-20 11:13:57,359 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine

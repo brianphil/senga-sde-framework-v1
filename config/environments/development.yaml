@@ -1,0 +1,16 @@
+vfa:
+  learning:
+    initial_learning_rate: 0.01
+  exploration:
+    initial_epsilon: 0.2
+cfa:
+  solver:
+    time_limit_seconds: 10
+dla:
+  lookahead:
+    num_monte_carlo_samples: 20
+system:
+  logging:
+    level: DEBUG
+  mode:
+    offline_mode: true

@@ -1,0 +1,29 @@
+vfa:
+  learning:
+    initial_learning_rate: 0.005
+  exploration:
+    initial_epsilon: 0.1
+    epsilon_decay: 0.995
+cfa:
+  solver:
+    time_limit_seconds: 60
+    optimality_gap: 0.01
+dla:
+  lookahead:
+    num_monte_carlo_samples: 50
+    horizon_hours: 3
+  activation:
+    complexity_threshold: 0.7
+    stakes_threshold: 50000
+pfa:
+  emergency:
+    urgent_threshold_hours: 6
+    emergency_threshold_hours: 2
+  heuristics:
+    simple_dispatch_threshold: 3
+coordination:
+  multi_scale:
+    decision_cycle_minutes: 60
+system:
+  mode:
+    offline_mode: true

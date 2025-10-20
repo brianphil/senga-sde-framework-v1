@@ -1,0 +1,28 @@
+# ============================================================
+# Senga SDE Demo Requirements
+# Compatible with Python 3.10–3.13
+# Streamlit + FastAPI + OR-Tools (no protobuf conflicts)
+# ============================================================
+
+# --- Core demo dependencies ---
+streamlit==1.29.0
+plotly==5.18.0
+requests==2.31.0
+
+# --- Backend / engine ---
+fastapi==0.109.0
+uvicorn==0.27.0
+pandas==2.1.4
+numpy==1.26.3
+sqlalchemy==2.0.25
+
+# OR-Tools compatible with Streamlit’s protobuf <5
+ortools==9.7.2996
+protobuf==4.25.3        # Explicit pin to avoid 6.x conflict
+
+# --- Optional / developer tools ---
+watchdog==3.0.0          # For auto-reload during development
+python-multipart==0.0.6  # For file uploads in demo
+
+# --- Production deployment ---
+gunicorn==21.2.0

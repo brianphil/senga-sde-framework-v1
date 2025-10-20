@@ -1,0 +1,100 @@
+# Senga Business Configuration
+# Operational parameters for African logistics
+
+# Company Information
+company:
+  name: "Senga Logistics"
+  region: "East Africa"
+  base_currency: "KES"
+  timezone: "Africa/Nairobi"
+
+# Cost Structure (KES - Kenyan Shillings)
+costs:
+  fuel_cost_per_km: 15.0
+  driver_cost_per_hour: 300.0
+  vehicle_depreciation_per_km: 5.0
+  late_delivery_penalty_per_hour: 500.0
+  priority_delivery_bonus: 200.0
+
+# Service Level Agreements
+sla:
+  standard_delivery_hours: 24
+  urgent_delivery_hours: 6
+  emergency_delivery_hours: 2
+  on_time_delivery_target: 0.90
+
+# Operational Parameters
+operations:
+  standard_shift_hours: 8
+  max_shift_hours: 12
+  max_route_duration_hours: 8
+  max_stops_per_route: 10
+  average_stop_duration_minutes: 15
+  default_vehicle_capacity_kg: 1000
+  drivers_per_shift: 5
+
+# Traffic Patterns
+traffic:
+  patterns:
+    morning_rush:
+      hours: [7, 8, 9, 10]
+      multiplier: 1.8
+    midday:
+      hours: [11, 12, 13, 14, 15]
+      multiplier: 1.0
+    evening_rush:
+      hours: [16, 17, 18, 19]
+      multiplier: 2.0
+    night:
+      hours: [20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6]
+      multiplier: 0.7
+
+# Weather Impact
+weather:
+  clear:
+    speed_multiplier: 1.0
+    delay_minutes: 0
+  rain:
+    speed_multiplier: 0.8
+    delay_minutes: 15
+  heavy_rain:
+    speed_multiplier: 0.6
+    delay_minutes: 30
+
+# Customer Priorities
+priorities:
+  standard:
+    sla_hours: 24
+    penalty_multiplier: 1.0
+    cost_multiplier: 1.0
+  urgent:
+    sla_hours: 6
+    penalty_multiplier: 2.0
+    cost_multiplier: 1.5
+  emergency:
+    sla_hours: 2
+    penalty_multiplier: 5.0
+    cost_multiplier: 2.5
+
+# Infrastructure Constraints
+infrastructure:
+  gps_reliability: 0.85
+  network_coverage: 0.75
+  formal_addresses_percent: 0.4
+  require_landmark_guidance: true
+
+# Business Rules
+rules:
+  allow_vehicle_overload: false
+  allow_order_batching: true
+  max_batch_size: 5
+  cash_on_delivery_enabled: true
+  mpesa_payment_enabled: true
+
+# Integration Settings
+integrations:
+  google_maps_enabled: true
+  weather_api_enabled: true
+  oms_integration: true
+  driver_app_integration: true
+  offline_mode_enabled: true

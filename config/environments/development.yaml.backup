@@ -1,0 +1,23 @@
+cfa:
+  max_iterations: 1000
+  mip_gap_tolerance: 0.01
+  solver: ortools
+  solver_time_limit: 30
+decision_cycle_minutes: 15
+dla:
+  complexity_threshold: 0.7
+  lookahead_depth: 3
+  num_scenarios: 50
+  stakes_threshold: 50000
+offline_mode: true
+pfa:
+  emergency_threshold_hours: 2
+  simple_dispatch_threshold: 3
+  urgent_threshold_hours: 6
+vfa:
+  discount_factor: 0.95
+  exploration_decay: 0.995
+  exploration_rate: 0.1
+  feature_count: 25
+  learning_rate: 0.05
+  min_exploration_rate: 0.01

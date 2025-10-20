@@ -1,0 +1,8 @@
+
+# Staging environment overrides
+system:
+  log_level: "INFO"
+
+vfa:
+  exploration:
+    initial_epsilon: 0.3

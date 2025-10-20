@@ -1,0 +1,118 @@
+vfa:
+  learning:
+    initial_learning_rate: 0.01
+    learning_rate_decay: 0.9995
+    min_learning_rate: 0.0001
+    discount_factor: 0.95
+    lambda_trace: 0.7
+  exploration:
+    initial_epsilon: 0.1
+    final_epsilon: 0.01
+    epsilon_decay: 0.995
+  features:
+    count: 25
+    normalization: min_max
+  updates:
+    batch_size: 32
+    replay_buffer_size: 10000
+    update_frequency: 10
+cfa:
+  solver:
+    time_limit_seconds: 30
+    engine: ortools
+    num_workers: 4
+    optimality_gap: 0.01
+  batching:
+    min_batch_size: 2
+    max_batch_size: 5
+    enable_batching: true
+  optimization:
+    fuel_cost_weight: 1.0
+    driver_cost_weight: 1.0
+    late_penalty_weight: 2.0
+dla:
+  lookahead:
+    horizon_hours: 4
+    num_monte_carlo_samples: 100
+    time_step_minutes: 15
+  uncertainty:
+    traffic_variance: 0.3
+    demand_variance: 0.2
+  activation:
+    complexity_threshold: 0.7
+    stakes_threshold: 50000
+pfa:
+  emergency:
+    enable_dispatch: true
+    urgent_threshold_hours: 6
+    emergency_threshold_hours: 2
+  heuristics:
+    simple_dispatch_threshold: 3
+    nearest_neighbor: true
+learning:
+  scales:
+    hourly:
+      enabled: true
+      window_size: 24
+      update_frequency_minutes: 60
+    daily:
+      enabled: true
+      window_size: 7
+      update_frequency_hours: 24
+  adaptation:
+    learning_rate_adaptation: true
+    online_learning: true
+  persistence:
+    save_frequency_iterations: 100
+    checkpoint_frequency: 1000
+coordination:
+  meta_controller:
+    pfa_urgency_threshold: 0.8
+    pfa_driver_threshold: 0.2
+    dla_uncertainty_threshold: 0.6
+    dla_horizon_threshold: 4
+    cfa_time_available: 30
+    vfa_confidence_threshold: 0.7
+    default_function: CFA
+    enable_fallback: true
+    fallback_order:
+    - CFA
+    - VFA
+    - PFA
+  multi_scale:
+    enable_coordination: true
+    decision_cycle_minutes: 60
+    propagate_updates: true
+system:
+  mode:
+    offline_mode: true
+    graceful_degradation: true
+  resources:
+    max_memory_mb: 4096
+    max_cpu_percent: 80
+  logging:
+    level: INFO
+    log_decisions: true
+    log_learning_metrics: true
+  database:
+    connection_pool_size: 10
+    query_timeout_seconds: 30
+integration:
+  google_maps:
+    enabled: true
+    api_timeout_seconds: 10
+    cache_duration_hours: 24
+  weather:
+    enabled: true
+    provider: openweather
+    api_timeout_seconds: 5
+  oms:
+    enabled: true
+    endpoint: http://localhost:9000
+    api_timeout_seconds: 10
+  driver_app:
+    enabled: true
+    offline_mode_supported: true
+  sync:
+    enable_sync: true
+    sync_frequency_minutes: 5

@@ -1,0 +1,9 @@
+vfa:
+  learning:
+    initial_learning_rate: 0.008
+cfa:
+  solver:
+    time_limit_seconds: 45
+system:
+  logging:
+    level: INFO

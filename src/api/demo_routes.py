@@ -8,6 +8,185 @@ import random
 from typing import List, Dict
 import uuid
 
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
+from typing import Dict, Optional
+
+# Create the router
+router = APIRouter(prefix="/demo", tags=["demo"])
+
+# Response model
+class DemoInitResponse(BaseModel):
+    success: bool
+    message: str
+    orders_created: int
+    drivers_configured: int
+    timestamp: str
+
+
+# ADD THESE ENDPOINTS TO YOUR demo_routes.py FILE
+# (Add them anywhere after the router definition and before the existing functions)
+
+@router.post("/initialize", response_model=DemoInitResponse)
+async def initialize_demo():
+    """
+    Initialize the system with realistic Kenyan demo data
+    
+    This endpoint loads pre-configured vehicles, drivers, and generates
+    realistic orders across Kenyan routes.
+    """
+    try:
+        from src.core.state_manager import (
+            StateManager, Shipment, VehicleState, VehicleCapacity,
+            ShipmentStatus, VehicleStatus, Location
+        )
+        from datetime import datetime
+        
+        # Initialize state manager
+        state_manager = StateManager()
+        
+        # 1. Configure vehicles from demo drivers
+        vehicles_configured = 0
+        for driver in DEMO_DRIVERS:
+            try:
+                # Create location from driver's current location
+                loc_data = KENYAN_LOCATIONS.get(driver["current_location"])
+                if loc_data:
+                    location = Location(
+                        place_id=f"demo_{driver['current_location'].replace(' ', '_').lower()}",
+                        lat=loc_data["lat"],
+                        lng=loc_data["lng"],
+                        formatted_address=driver["current_location"],
+                        zone_id=loc_data.get("type", "general")
+                    )
+                else:
+                    # Default to Nairobi CBD
+                    location = Location(
+                        place_id="demo_nairobi_cbd",
+                        lat=-1.2864,
+                        lng=36.8172,
+                        formatted_address="Nairobi CBD",
+                        zone_id="commercial"
+                    )
+                
+                # Import VehicleCapacity
+                from src.core.state_manager import VehicleCapacity
+                
+                vehicle = VehicleState(
+                    id=driver["driver_id"],
+                    vehicle_type=driver["vehicle_type"],
+                    capacity=VehicleCapacity(
+                        volume=driver["capacity_kg"] * 0.5,
+                        weight=driver["capacity_kg"]
+                    ),
+                    current_location=location,
+                    status=VehicleStatus.IDLE,
+                    cost_per_km=50.0,
+                    fixed_cost_per_trip=1000.0,
+                    home_location=location
+                )
+                state_manager.update_vehicle_state(vehicle)
+                vehicles_configured += 1
+            except Exception as e:
+                print(f"Warning: Failed to configure vehicle {driver['driver_id']}: {e}")
+                continue
+        
+        # 2. Generate demo orders
+        orders = generate_demo_orders(15)
+        orders_created = 0
+        
+        for order_data in orders:
+            try:
+                # Get pickup location
+                pickup_loc_name = order_data["pickup_location"]["address"]
+                pickup_loc_data = KENYAN_LOCATIONS.get(pickup_loc_name)
+                if pickup_loc_data:
+                    pickup_location = Location(
+                        place_id=f"demo_{pickup_loc_name.replace(' ', '_').lower()}",
+                        lat=pickup_loc_data["lat"],
+                        lng=pickup_loc_data["lng"],
+                        formatted_address=pickup_loc_name,
+                        zone_id=pickup_loc_data.get("type", "general")
+                    )
+                else:
+                    continue
+                
+                # Get delivery location
+                delivery_loc_name = order_data["delivery_location"]["address"]
+                delivery_loc_data = KENYAN_LOCATIONS.get(delivery_loc_name)
+                if delivery_loc_data:
+                    delivery_location = Location(
+                        place_id=f"demo_{delivery_loc_name.replace(' ', '_').lower()}",
+                        lat=delivery_loc_data["lat"],
+                        lng=delivery_loc_data["lng"],
+                        formatted_address=delivery_loc_name,
+                        zone_id=delivery_loc_data.get("type", "general")
+                    )
+                else:
+                    continue
+                
+                shipment = Shipment(
+                    id=order_data["order_id"],
+                    customer_id=f"CUST_{order_data['customer_name'].replace(' ', '_')}",
+                    origin=pickup_location,
+                    destinations=[delivery_location],  # List of destinations
+                    weight=order_data["package_weight"],
+                    volume=order_data["package_weight"] * 0.01,  # Rough estimate
+                    creation_time=datetime.fromisoformat(order_data["created_at"]),
+                    deadline=datetime.fromisoformat(order_data["created_at"]) + timedelta(days=2),
+                    priority=2 if order_data["priority"] == "standard" else 1,
+                    status=ShipmentStatus.PENDING
+                )
+                state_manager.add_shipment(shipment)
+                orders_created += 1
+            except Exception as e:
+                print(f"Warning: Failed to create shipment {order_data['order_id']}: {e}")
+                continue
+        
+        return DemoInitResponse(
+            success=True,
+            message="Demo data initialized successfully with Kenyan scenarios",
+            orders_created=orders_created,
+            drivers_configured=vehicles_configured,
+            timestamp=datetime.now().isoformat()
+        )
+        
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to initialize demo: {str(e)}"
+        )
+
+
+@router.get("/scenarios")
+async def get_demo_scenarios():
+    """Get list of available demo scenarios"""
+    return {
+        "scenarios": generate_demo_scenarios(),
+        "challenges": AFRICAN_CHALLENGES,
+        "traffic_patterns": TRAFFIC_PATTERNS
+    }
+
+
+@router.post("/reset")
+async def reset_demo():
+    """Reset demo data and clear all state"""
+    try:
+        from src.core.state_manager import StateManager
+        state_manager = StateManager()
+        state_manager.reset()
+        
+        return {
+            "success": True,
+            "message": "Demo data reset successfully"
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to reset demo: {str(e)}"
+        )
+
+
 # Realistic Kenyan locations with actual coordinates
 KENYAN_LOCATIONS = {
     # Nairobi Area

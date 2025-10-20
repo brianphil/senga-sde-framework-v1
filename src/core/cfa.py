@@ -106,154 +106,88 @@ class CostFunctionApproximator:
                 reasoning=f"Optimization failed: {str(e)}"
             )
     
+    # REPLACE the _solve_mip method in src/core/cfa.py with this WORKING version:
+
     def _solve_mip(self, state: SystemState, 
-                   shipments: List[Shipment],
-                   vehicles: List[VehicleState],
-                   value_function) -> CFASolution:
+               shipments: List[Shipment],
+               vehicles: List[VehicleState],
+               value_function) -> CFASolution:
         """
-        Solve the batch formation and routing MIP
-        
-        Decision Variables:
-        - x[i,j]: shipment i in batch j
-        - y[j]: batch j is dispatched
-        - z[j,k]: batch j assigned to vehicle k
-        
-        Objective:
-        - Minimize: fixed costs + variable costs + delay penalties
-        - Bonus: high utilization
-        
-        Constraints:
-        - Each shipment in exactly one batch (if dispatched)
-        - Capacity constraints
-        - Time window constraints
-        - Vehicle availability
+        Simplified MIP that actually works - dispatches all pending shipments
         """
         
         model = cp_model.CpModel()
         
         n_shipments = len(shipments)
         n_vehicles = len(vehicles)
-        max_batches = min(n_shipments, n_vehicles * 2)  # Upper bound on batches
         
         # Decision variables
-        # x[i, j] = 1 if shipment i assigned to batch j
+        # x[i, k] = 1 if shipment i assigned to vehicle k
         x = {}
         for i in range(n_shipments):
-            for j in range(max_batches):
-                x[i, j] = model.NewBoolVar(f'x_{i}_{j}')
+            for k in range(n_vehicles):
+                x[i, k] = model.NewBoolVar(f'x_{i}_{k}')
         
-        # y[j] = 1 if batch j is used
+        # y[k] = 1 if vehicle k is used
         y = {}
-        for j in range(max_batches):
-            y[j] = model.NewBoolVar(f'y_{j}')
-        
-        # z[j, k] = 1 if batch j assigned to vehicle k
-        z = {}
-        for j in range(max_batches):
-            for k in range(n_vehicles):
-                z[j, k] = model.NewBoolVar(f'z_{j}_{k}')
-        
-        # Constraint 1: Each shipment in at most one batch
-        for i in range(n_shipments):
-            model.Add(sum(x[i, j] for j in range(max_batches)) <= 1)
-        
-        # Constraint 2: Batch activation
-        for j in range(max_batches):
-            for i in range(n_shipments):
-                model.Add(x[i, j] <= y[j])
-        
-        # Constraint 3: Each batch assigned to at most one vehicle
-        for j in range(max_batches):
-            model.Add(sum(z[j, k] for k in range(n_vehicles)) <= 1)
-            # If batch is used, must be assigned to a vehicle
-            model.Add(sum(z[j, k] for k in range(n_vehicles)) >= y[j])
-        
-        # Constraint 4: Each vehicle used at most once
         for k in range(n_vehicles):
-            model.Add(sum(z[j, k] for j in range(max_batches)) <= 1)
+            y[k] = model.NewBoolVar(f'y_{k}')
         
-        # Constraint 5: Volume capacity
-        for j in range(max_batches):
-            for k in range(n_vehicles):
-                total_volume = sum(
-                    int(shipments[i].volume * 1000) * x[i, j]  # Scale to integer
-                    for i in range(n_shipments)
-                )
-                vehicle_capacity = int(vehicles[k].capacity.volume * 1000)
-                
-                # If batch j assigned to vehicle k, volume must fit
-                model.Add(total_volume <= vehicle_capacity).OnlyEnforceIf(z[j, k])
+        # Constraint 1: Each shipment assigned to exactly ONE vehicle
+        for i in range(n_shipments):
+            model.Add(sum(x[i, k] for k in range(n_vehicles)) == 1)
         
-        # Constraint 6: Weight capacity
-        for j in range(max_batches):
-            for k in range(n_vehicles):
-                total_weight = sum(
-                    int(shipments[i].weight) * x[i, j]
-                    for i in range(n_shipments)
-                )
-                vehicle_capacity = int(vehicles[k].capacity.weight)
-                
-                model.Add(total_weight <= vehicle_capacity).OnlyEnforceIf(z[j, k])
+        # Constraint 2: Vehicle activation
+        for k in range(n_vehicles):
+            for i in range(n_shipments):
+                model.Add(x[i, k] <= y[k])
         
-        # Objective function
-        # Cost = fixed costs + variable costs - utilization bonus
+        # Constraint 3: Volume capacity
+        for k in range(n_vehicles):
+            total_volume = sum(
+                int(shipments[i].volume * 1000) * x[i, k]
+                for i in range(n_shipments)
+            )
+            vehicle_capacity = int(vehicles[k].capacity.volume * 1000)
+            model.Add(total_volume <= vehicle_capacity)
         
-        # Fixed costs
+        # Constraint 4: Weight capacity
+        for k in range(n_vehicles):
+            total_weight = sum(
+                int(shipments[i].weight) * x[i, k]
+                for i in range(n_shipments)
+            )
+            vehicle_capacity = int(vehicles[k].capacity.weight)
+            model.Add(total_weight <= vehicle_capacity)
+        
+        # Objective: Minimize total cost
         fixed_costs = []
-        for j in range(max_batches):
-            for k in range(n_vehicles):
-                fixed_cost = int(vehicles[k].fixed_cost_per_trip)
-                fixed_costs.append(fixed_cost * z[j, k])
+        for k in range(n_vehicles):
+            fixed_cost = int(vehicles[k].fixed_cost_per_trip)
+            fixed_costs.append(fixed_cost * y[k])
         
-        # Variable costs (estimated)
+        # Variable costs (simplified - assume 50km average per shipment)
         variable_costs = []
-        for j in range(max_batches):
-            for k in range(n_vehicles):
-                # Estimate route distance for this batch
-                batch_shipments = [shipments[i] for i in range(n_shipments)]
-                estimated_distance = self._estimate_batch_distance(
-                    vehicles[k], batch_shipments
-                )
-                var_cost = int(vehicles[k].cost_per_km * estimated_distance)
-                variable_costs.append(var_cost * z[j, k])
+        for k in range(n_vehicles):
+            cost_per_km = int(vehicles[k].cost_per_km)
+            num_shipments_in_vehicle = sum(x[i, k] for i in range(n_shipments))
+            # Rough estimate: 50km * number of stops
+            estimated_km = 50 * num_shipments_in_vehicle
+            variable_costs.append(cost_per_km * estimated_km)
         
-        # Utilization bonus
-        utilization_bonus = []
-        min_util = self.config.min_utilization
-        bonus_per_percent = self.config.get('utilization_bonus_per_percent', 100)
-        
-        for j in range(max_batches):
-            for k in range(n_vehicles):
-                total_volume = sum(
-                    int(shipments[i].volume * 1000) * x[i, j]
-                    for i in range(n_shipments)
-                )
-                vehicle_capacity = int(vehicles[k].capacity.volume * 1000)
-                
-                # Bonus if utilization > threshold
-                # Simplified: bonus proportional to volume used
-                bonus = int((total_volume / 1000) * bonus_per_percent)
-                utilization_bonus.append(bonus * z[j, k])
-        
-        # Total objective
-        total_cost = (
-            sum(fixed_costs) +
-            sum(variable_costs) -
-            sum(utilization_bonus)
-        )
-        
+        total_cost = sum(fixed_costs) + sum(variable_costs)
         model.Minimize(total_cost)
         
         # Solve
         solver = cp_model.CpSolver()
-        solver.parameters.max_time_in_seconds = self.config.cfa_solver_time_limit
-        solver.parameters.num_search_workers = self.config.get('cfa.solver.num_workers', 4)
+        solver.parameters.max_time_in_seconds = 30
+        solver.parameters.num_search_workers = 4
         
         status = solver.Solve(model)
         
         if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
-            return self._extract_solution(
-                solver, x, y, z, shipments, vehicles,
+            return self._extract_simple_solution(
+                solver, x, y, shipments, vehicles,
                 status == cp_model.OPTIMAL
             )
         else:
@@ -263,62 +197,52 @@ class CostFunctionApproximator:
                 avg_utilization=0.0,
                 solver_time=0.0,
                 status='INFEASIBLE',
-                reasoning="No feasible solution found within time limit"
+                reasoning=f"Solver status: {solver.StatusName(status)}"
             )
-    
-    def _extract_solution(self, solver, x, y, z,
-                         shipments: List[Shipment],
-                         vehicles: List[VehicleState],
-                         is_optimal: bool) -> CFASolution:
-        """Extract solution from solved model"""
+
+    def _extract_simple_solution(self, solver, x, y,
+                                shipments: List[Shipment],
+                                vehicles: List[VehicleState],
+                                is_optimal: bool) -> CFASolution:
+        """Extract solution from simplified model"""
+        from uuid import uuid4
         
         batches = []
         n_shipments = len(shipments)
         n_vehicles = len(vehicles)
-        max_batches = len(y)
         
-        for j in range(max_batches):
-            if solver.Value(y[j]) == 0:
-                continue  # Batch not used
+        for k in range(n_vehicles):
+            if solver.Value(y[k]) == 0:
+                continue  # Vehicle not used
             
-            # Find shipments in this batch
+            # Find shipments assigned to this vehicle
             batch_shipments = []
             for i in range(n_shipments):
-                if solver.Value(x[i, j]) == 1:
+                if solver.Value(x[i, k]) == 1:
                     batch_shipments.append(shipments[i])
             
             if not batch_shipments:
                 continue
             
-            # Find assigned vehicle
-            assigned_vehicle = None
-            for k in range(n_vehicles):
-                if solver.Value(z[j, k]) == 1:
-                    assigned_vehicle = vehicles[k]
-                    break
-            
-            if not assigned_vehicle:
-                continue
-            
-            # Optimize route sequence for this batch
+            # Optimize route sequence
             sequence, distance, duration = self._optimize_route_sequence(
-                assigned_vehicle, batch_shipments
+                vehicles[k], batch_shipments
             )
             
             # Calculate utilization
             total_volume = sum(s.volume for s in batch_shipments)
-            utilization = total_volume / assigned_vehicle.capacity.volume
+            utilization = total_volume / vehicles[k].capacity.volume
             
             # Calculate cost
             total_cost = (
-                assigned_vehicle.fixed_cost_per_trip +
-                assigned_vehicle.cost_per_km * distance
+                vehicles[k].fixed_cost_per_trip +
+                vehicles[k].cost_per_km * distance
             )
             
             batch = Batch(
-                id=f"batch_{j}_{datetime.now().strftime('%Y%m%d%H%M%S')}",
+                id=f"BATCH{uuid4().hex[:8].upper()}",
                 shipments=batch_shipments,
-                vehicle=assigned_vehicle,
+                vehicle=vehicles[k],
                 sequence=sequence,
                 estimated_distance=distance,
                 estimated_duration=duration,
@@ -335,21 +259,21 @@ class CostFunctionApproximator:
                 avg_utilization=0.0,
                 solver_time=0.0,
                 status='NO_SOLUTION',
-                reasoning="Solution found but no valid batches extracted"
+                reasoning="No batches extracted from solution"
             )
         
-        avg_utilization = np.mean([b.utilization for b in batches])
+        avg_utilization = sum(b.utilization for b in batches) / len(batches)
         total_cost = sum(b.total_cost for b in batches)
         
         return CFASolution(
             batches=batches,
             total_cost=total_cost,
             avg_utilization=avg_utilization,
-            solver_time=0.0,  # Will be set by caller
+            solver_time=0.0,
             status='OPTIMAL' if is_optimal else 'FEASIBLE',
-            reasoning=f"Found {len(batches)} batches with avg utilization {avg_utilization:.2%}"
+            reasoning=f"Dispatching {len(batches)} vehicles for {len(shipments)} shipments (avg util: {avg_utilization:.1%})"
         )
-    
+
     def _optimize_route_sequence(self, vehicle: VehicleState,
                                  shipments: List[Shipment]) -> Tuple[List[Location], float, timedelta]:
         """

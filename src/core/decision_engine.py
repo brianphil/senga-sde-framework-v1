@@ -149,76 +149,108 @@ class DecisionEngine:
             logger.error(f"Cycle failed: {str(e)}", exc_info=True)
             raise
     
+ 
     def _execute_decision(self, decision: MetaDecision, state: SystemState) -> Dict:
-        """
-        Execute the decision made by meta-controller
-        
-        Args:
-            decision: Decision to execute
-            state: Current state
+            """
+            Execute the decision made by meta-controller
             
-        Returns:
-            Execution result dictionary
-        """
-        result = {
-            'shipments_dispatched': 0,
-            'vehicles_utilized': 0,
-            'routes_created': 0
-        }
-        
-        if decision.action_type == 'WAIT':
-            logger.info("Decision: WAIT - no action taken")
+            Args:
+                decision: Decision to execute
+                state: Current state
+                
+            Returns:
+                Execution result dictionary
+            """
+            from uuid import uuid4
             
-            # Log the wait decision
-            self.state_manager.log_decision(
-                decision_type='WAIT',
-                state_before=state,
-                action_details={'reasoning': decision.reasoning},
-                outcome={'status': 'executed'}
-            )
+            result = {
+                'shipments_dispatched': 0,
+                'vehicles_utilized': 0,
+                'routes_created': 0
+            }
             
-            return result
-        
-        elif decision.action_type == 'DISPATCH':
-            # Extract dispatch details
-            batches = decision.action_details.get('batches', [])
-            
-            if not batches:
-                logger.warning("DISPATCH decision but no batches provided")
+            if decision.action_type == 'WAIT':
+                logger.info("Decision: WAIT - no action taken")
+                
+                # Create DecisionEvent for logging
+                decision_event = DecisionEvent(
+                    id=f"DEC{uuid4().hex[:8].upper()}",
+                    timestamp=datetime.now(),
+                    state_snapshot=state,
+                    decision_type='WAIT',
+                    function_class=decision.function_class.value,
+                    action_details={'reasoning': decision.reasoning},
+                    reasoning=decision.reasoning
+                )
+                
+                # Log the wait decision
+                self.state_manager.log_decision(decision_event)
+                
                 return result
             
-            # Execute each batch dispatch
-            for batch in batches:
-                route_result = self._dispatch_batch(batch, state)
-                result['shipments_dispatched'] += route_result['shipments']
-                result['vehicles_utilized'] += 1
-                result['routes_created'] += 1
+            elif decision.action_type == 'DISPATCH':
+                # Extract dispatch details
+                batches = decision.action_details.get('batches', [])
+                
+                if not batches:
+                    logger.warning("DISPATCH decision but no batches provided")
+                    return result
+                
+                # Execute each batch dispatch
+                for batch in batches:
+                    route_result = self._dispatch_batch(batch, state)
+                    result['shipments_dispatched'] += route_result['shipments']
+                    result['vehicles_utilized'] += 1
+                    result['routes_created'] += 1
+                
+                logger.info(
+                    f"Dispatched {result['shipments_dispatched']} shipments "
+                    f"using {result['vehicles_utilized']} vehicles"
+                )
+                
+                # Create DecisionEvent for logging
+                decision_event = DecisionEvent(
+                    id=f"DEC{uuid4().hex[:8].upper()}",
+                    timestamp=datetime.now(),
+                    state_snapshot=state,
+                    decision_type='DISPATCH',
+                    function_class=decision.function_class.value,
+                    action_details={
+                        **decision.action_details,
+                        'outcome': result
+                    },
+                    reasoning=decision.reasoning
+                )
+                
+                # Log the dispatch decision
+                self.state_manager.log_decision(decision_event)
+                
+                return result
             
-            logger.info(
-                f"Dispatched {result['shipments_dispatched']} shipments "
-                f"using {result['vehicles_utilized']} vehicles"
-            )
+            elif decision.action_type.startswith('EMERGENCY_'):
+                # Handle emergency actions
+                logger.warning(f"Emergency action: {decision.action_type}")
+                
+                # Create DecisionEvent for logging
+                decision_event = DecisionEvent(
+                    id=f"DEC{uuid4().hex[:8].upper()}",
+                    timestamp=datetime.now(),
+                    state_snapshot=state,
+                    decision_type=decision.action_type,
+                    function_class=decision.function_class.value,
+                    action_details=decision.action_details,
+                    reasoning=decision.reasoning
+                )
+                
+                # Log the emergency decision
+                self.state_manager.log_decision(decision_event)
+                
+                # Emergency handling would go here (alerts, escalations, etc.)
+                return result
             
-            # Log the dispatch decision
-            self.state_manager.log_decision(
-                decision_type='DISPATCH',
-                state_before=state,
-                action_details=decision.action_details,
-                outcome=result
-            )
-            
-            return result
-        
-        elif decision.action_type.startswith('EMERGENCY_'):
-            # Handle emergency actions
-            logger.warning(f"Emergency action: {decision.action_type}")
-            # Emergency handling would go here (alerts, escalations, etc.)
-            return result
-        
-        else:
-            logger.error(f"Unknown action type: {decision.action_type}")
-            return result
-    
+            else:
+                logger.error(f"Unknown action type: {decision.action_type}")
+                return result
     def _dispatch_batch(self, batch: Dict, state: SystemState) -> Dict:
         """
         Dispatch a single batch (route)

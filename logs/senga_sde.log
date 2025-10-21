@@ -157,3 +157,308 @@ AttributeError: 'DecisionEngine' object has no attribute 'make_decision'
 2025-10-21 20:51:14,005 - watchfiles.main - INFO - 2 changes detected
 2025-10-21 20:51:21,295 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
 2025-10-21 20:51:21,296 - src.api.main - INFO - Shutdown complete
+2025-10-21 20:52:51,205 - src.api.main - INFO - ============================================================
+2025-10-21 20:52:51,206 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-21 20:52:51,207 - src.api.main - INFO - ============================================================
+2025-10-21 20:52:51,303 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-21 20:52:51,323 - src.api.main - INFO - ============================================================
+2025-10-21 20:52:51,323 - src.api.main - INFO - Senga SDE Ready
+2025-10-21 20:52:51,323 - src.api.main - INFO - ============================================================
+2025-10-21 20:53:23,217 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:53:26,166 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:55:24,857 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-21 20:55:24,859 - src.api.main - INFO - Shutdown complete
+2025-10-21 20:56:40,068 - src.api.main - INFO - ============================================================
+2025-10-21 20:56:40,068 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-21 20:56:40,069 - src.api.main - INFO - ============================================================
+2025-10-21 20:56:40,168 - watchfiles.main - INFO - 3 changes detected
+2025-10-21 20:56:40,527 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:56:40,888 - watchfiles.main - INFO - 5 changes detected
+2025-10-21 20:56:41,247 - watchfiles.main - INFO - 7 changes detected
+2025-10-21 20:56:41,610 - watchfiles.main - INFO - 4 changes detected
+2025-10-21 20:56:41,793 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-21 20:56:41,817 - src.api.main - INFO - ============================================================
+2025-10-21 20:56:41,817 - src.api.main - INFO - Senga SDE Ready
+2025-10-21 20:56:41,818 - src.api.main - INFO - ============================================================
+2025-10-21 20:56:41,969 - watchfiles.main - INFO - 3 changes detected
+2025-10-21 20:57:53,736 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:57:54,096 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:57:54,458 - watchfiles.main - INFO - 3 changes detected
+2025-10-21 20:57:54,818 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:58:27,856 - src.api.main - INFO - Running consolidation cycle with 1 pending orders
+2025-10-21 20:58:27,858 - src.core.decision_engine - INFO - Cycle 0: 1 pending shipments
+2025-10-21 20:58:27,859 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
+2025-10-21 20:58:27,860 - src.core.decision_engine - INFO - Decision: WAIT - no action taken
+2025-10-21 20:58:27,919 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:58:28,297 - src.core.decision_engine - INFO - Cycle completed in 440.4ms
+2025-10-21 20:58:28,383 - watchfiles.main - INFO - 3 changes detected
+2025-10-21 20:58:28,837 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:59:10,059 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:59:10,472 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:59:10,832 - watchfiles.main - INFO - 3 changes detected
+2025-10-21 20:59:11,187 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:59:41,689 - src.api.main - INFO - Running consolidation cycle with 2 pending orders
+2025-10-21 20:59:41,692 - src.core.decision_engine - INFO - Cycle 1: 2 pending shipments
+2025-10-21 20:59:41,695 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
+2025-10-21 20:59:41,698 - src.core.decision_engine - INFO - Decision: WAIT - no action taken
+2025-10-21 20:59:41,775 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:59:42,129 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:59:42,205 - src.core.decision_engine - INFO - Cycle completed in 514.8ms
+2025-10-21 20:59:42,489 - watchfiles.main - INFO - 3 changes detected
+2025-10-21 20:59:42,847 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:01:49,827 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:01:50,050 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-21 21:01:50,051 - src.api.main - INFO - Shutdown complete
+2025-10-21 21:01:52,006 - watchfiles.main - INFO - 3 changes detected
+2025-10-21 21:01:55,325 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:02:03,029 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:02:03,168 - src.api.main - INFO - ============================================================
+2025-10-21 21:02:03,169 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-21 21:02:03,170 - src.api.main - INFO - ============================================================
+2025-10-21 21:02:03,403 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:02:03,423 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-21 21:02:03,455 - src.api.main - INFO - ============================================================
+2025-10-21 21:02:03,455 - src.api.main - INFO - Senga SDE Ready
+2025-10-21 21:02:03,455 - src.api.main - INFO - ============================================================
+2025-10-21 21:02:03,762 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:02:04,123 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:02:04,487 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:02:04,852 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:02:05,212 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:02:05,623 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:02:06,031 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:02:06,447 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:02:06,857 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:02:07,174 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-21 21:02:07,176 - src.api.main - INFO - Shutdown complete
+2025-10-21 21:02:30,181 - src.api.main - INFO - ============================================================
+2025-10-21 21:02:30,182 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-21 21:02:30,183 - src.api.main - INFO - ============================================================
+2025-10-21 21:02:30,259 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-21 21:02:30,274 - src.api.main - INFO - ============================================================
+2025-10-21 21:02:30,275 - src.api.main - INFO - Senga SDE Ready
+2025-10-21 21:02:30,275 - src.api.main - INFO - ============================================================
+2025-10-21 21:03:29,210 - src.api.main - INFO - Running consolidation cycle with 2 pending orders
+2025-10-21 21:03:29,212 - src.core.decision_engine - INFO - Cycle 0: 2 pending shipments
+2025-10-21 21:03:29,388 - src.core.decision_engine - INFO - Decision: cfa -> DISPATCH (confidence: 0.80)
+2025-10-21 21:03:29,389 - src.core.decision_engine - ERROR - Cycle failed: type object 'ShipmentStatus' has no attribute 'IN_TRANSIT'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 115, in run_cycle
+    execution_result = self._execute_decision(decision, state_before)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 201, in _execute_decision
+    route_result = self._dispatch_batch(batch, state)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 274, in _dispatch_batch
+    new_status=ShipmentStatus.IN_TRANSIT,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'ShipmentStatus' has no attribute 'IN_TRANSIT'
+2025-10-21 21:03:29,804 - src.api.main - ERROR - Consolidation cycle failed: type object 'ShipmentStatus' has no attribute 'IN_TRANSIT'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 304, in trigger_consolidation_cycle
+    cycle_result = decision_engine.run_cycle()
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 115, in run_cycle
+    execution_result = self._execute_decision(decision, state_before)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 201, in _execute_decision
+    route_result = self._dispatch_batch(batch, state)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 274, in _dispatch_batch
+    new_status=ShipmentStatus.IN_TRANSIT,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'ShipmentStatus' has no attribute 'IN_TRANSIT'
+2025-10-21 21:07:51,002 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:51,450 - watchfiles.main - INFO - 2 changes detected
+2025-10-21 21:07:51,839 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:52,202 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:52,566 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:52,931 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:53,293 - watchfiles.main - INFO - 6 changes detected
+2025-10-21 21:07:53,654 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:54,066 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:54,471 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:54,692 - src.api.main - INFO - ============================================================
+2025-10-21 21:07:54,694 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-21 21:07:54,695 - src.api.main - INFO - ============================================================
+2025-10-21 21:07:54,773 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-21 21:07:54,793 - src.api.main - INFO - ============================================================
+2025-10-21 21:07:54,793 - src.api.main - INFO - Senga SDE Ready
+2025-10-21 21:07:54,793 - src.api.main - INFO - ============================================================
+2025-10-21 21:07:54,825 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:55,189 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:55,548 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:55,907 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:56,265 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:56,677 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:57,063 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:57,495 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:57,902 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:58,311 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:58,718 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:59,125 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:59,533 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:59,940 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:07:59,945 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-21 21:07:59,946 - src.api.main - INFO - Shutdown complete
+2025-10-21 21:08:00,295 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:08:00,657 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:08:01,020 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:08:01,382 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:08:01,792 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:08:02,200 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:08:02,605 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:08:03,012 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:08:03,418 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:08:03,823 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:08:04,229 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:08:04,635 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:08:05,041 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:08:05,448 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:08:16,076 - src.api.main - INFO - ============================================================
+2025-10-21 21:08:16,077 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-21 21:08:16,079 - src.api.main - INFO - ============================================================
+2025-10-21 21:08:16,150 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-21 21:08:16,165 - src.api.main - INFO - ============================================================
+2025-10-21 21:08:16,166 - src.api.main - INFO - Senga SDE Ready
+2025-10-21 21:08:16,166 - src.api.main - INFO - ============================================================
+2025-10-21 21:09:08,783 - src.api.main - INFO - Running consolidation cycle with 2 pending orders
+2025-10-21 21:09:08,786 - src.core.decision_engine - INFO - Cycle 0: 2 pending shipments
+2025-10-21 21:09:08,856 - src.core.decision_engine - INFO - Decision: cfa -> DISPATCH (confidence: 0.80)
+2025-10-21 21:09:08,856 - src.core.decision_engine - ERROR - Cycle failed: StateManager.update_shipment_status() got an unexpected keyword argument 'new_status'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 115, in run_cycle
+    execution_result = self._execute_decision(decision, state_before)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 201, in _execute_decision
+    route_result = self._dispatch_batch(batch, state)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 272, in _dispatch_batch
+    success = self.state_manager.update_shipment_status(
+        shipment_id=shipment_id,
+        new_status=ShipmentStatus.EN_ROUTE,
+        location=route[0] if route else None
+    )
+TypeError: StateManager.update_shipment_status() got an unexpected keyword argument 'new_status'
+2025-10-21 21:09:08,864 - src.api.main - ERROR - Consolidation cycle failed: StateManager.update_shipment_status() got an unexpected keyword argument 'new_status'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 304, in trigger_consolidation_cycle
+    cycle_result = decision_engine.run_cycle()
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 115, in run_cycle
+    execution_result = self._execute_decision(decision, state_before)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 201, in _execute_decision
+    route_result = self._dispatch_batch(batch, state)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 272, in _dispatch_batch
+    success = self.state_manager.update_shipment_status(
+        shipment_id=shipment_id,
+        new_status=ShipmentStatus.EN_ROUTE,
+        location=route[0] if route else None
+    )
+TypeError: StateManager.update_shipment_status() got an unexpected keyword argument 'new_status'
+2025-10-21 21:12:57,313 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:12:57,789 - watchfiles.main - INFO - 2 changes detected
+2025-10-21 21:12:58,211 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:12:58,572 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:12:58,929 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:12:59,291 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:12:59,652 - watchfiles.main - INFO - 6 changes detected
+2025-10-21 21:13:00,011 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:13:00,421 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:13:00,828 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:13:01,190 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:13:01,269 - src.api.main - INFO - ============================================================
+2025-10-21 21:13:01,270 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-21 21:13:01,270 - src.api.main - INFO - ============================================================
+2025-10-21 21:13:01,476 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-21 21:13:01,496 - src.api.main - INFO - ============================================================
+2025-10-21 21:13:01,496 - src.api.main - INFO - Senga SDE Ready
+2025-10-21 21:13:01,497 - src.api.main - INFO - ============================================================
+2025-10-21 21:13:01,562 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:13:01,920 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:13:02,280 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:13:02,881 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:13:03,451 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:13:07,149 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-21 21:13:07,149 - src.api.main - INFO - Shutdown complete
+2025-10-21 21:13:19,121 - src.api.main - INFO - ============================================================
+2025-10-21 21:13:19,122 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-21 21:13:19,123 - src.api.main - INFO - ============================================================
+2025-10-21 21:13:19,210 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-21 21:13:19,228 - src.api.main - INFO - ============================================================
+2025-10-21 21:13:19,228 - src.api.main - INFO - Senga SDE Ready
+2025-10-21 21:13:19,229 - src.api.main - INFO - ============================================================
+2025-10-21 21:14:02,137 - src.api.main - INFO - Running consolidation cycle with 2 pending orders
+2025-10-21 21:14:02,140 - src.core.decision_engine - INFO - Cycle 0: 2 pending shipments
+2025-10-21 21:14:02,223 - src.core.decision_engine - INFO - Decision: cfa -> DISPATCH (confidence: 0.80)
+2025-10-21 21:14:02,634 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:14:02,930 - src.core.decision_engine - INFO - Dispatched 2 shipments using 1 vehicles
+2025-10-21 21:14:02,993 - watchfiles.main - INFO - 5 changes detected
+2025-10-21 21:14:03,018 - src.core.decision_engine - ERROR - Cycle failed: 'SengaConfigurator' object has no attribute 'vfa_discount_factor'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 123, in run_cycle
+    learning_updates = self._trigger_learning_update(
+        state_before, decision, execution_result
+    )
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 326, in _trigger_learning_update
+    action_value=immediate_reward + self.config.vfa_discount_factor * next_state_value,
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SengaConfigurator' object has no attribute 'vfa_discount_factor'
+2025-10-21 21:14:03,025 - src.api.main - ERROR - Consolidation cycle failed: 'SengaConfigurator' object has no attribute 'vfa_discount_factor'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 304, in trigger_consolidation_cycle
+    cycle_result = decision_engine.run_cycle()
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 123, in run_cycle
+    learning_updates = self._trigger_learning_update(
+        state_before, decision, execution_result
+    )
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 326, in _trigger_learning_update
+    action_value=immediate_reward + self.config.vfa_discount_factor * next_state_value,
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SengaConfigurator' object has no attribute 'vfa_discount_factor'
+2025-10-21 21:14:03,355 - watchfiles.main - INFO - 2 changes detected
+2025-10-21 21:20:03,853 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:04,448 - watchfiles.main - INFO - 2 changes detected
+2025-10-21 21:20:05,229 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:05,932 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:06,533 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:07,011 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:07,418 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:07,861 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:08,415 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:09,195 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:09,834 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:10,228 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:10,675 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:11,066 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:11,610 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:12,261 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:12,726 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:13,368 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:13,780 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:14,137 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:14,544 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:15,084 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:15,526 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:15,926 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:15,949 - src.api.main - INFO - ============================================================
+2025-10-21 21:20:15,959 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-21 21:20:15,961 - src.api.main - INFO - ============================================================
+2025-10-21 21:20:16,348 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-21 21:20:16,395 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:16,524 - src.api.main - INFO - ============================================================
+2025-10-21 21:20:16,531 - src.api.main - INFO - Senga SDE Ready
+2025-10-21 21:20:16,534 - src.api.main - INFO - ============================================================
+2025-10-21 21:20:16,805 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:17,206 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:17,571 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:17,937 - watchfiles.main - INFO - 2 changes detected
+2025-10-21 21:20:18,111 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-21 21:20:18,111 - src.api.main - INFO - Shutdown complete
+2025-10-21 21:20:19,593 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:20:57,528 - src.api.main - INFO - ============================================================
+2025-10-21 21:20:57,529 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-21 21:20:57,530 - src.api.main - INFO - ============================================================
+2025-10-21 21:20:57,629 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-21 21:20:57,647 - src.api.main - INFO - ============================================================
+2025-10-21 21:20:57,648 - src.api.main - INFO - Senga SDE Ready
+2025-10-21 21:20:57,648 - src.api.main - INFO - ============================================================
+2025-10-21 21:23:16,876 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:24:21,769 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:24:22,228 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:24:36,409 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:24:36,787 - watchfiles.main - INFO - 1 change detected
+2025-10-21 21:25:15,365 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-21 21:25:15,370 - src.api.main - INFO - Shutdown complete

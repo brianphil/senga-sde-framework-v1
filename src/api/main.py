@@ -313,7 +313,7 @@ async def trigger_consolidation_cycle(request: ConsolidationCycleRequest):
         for shipment in current_state.pending_shipments:
             # Check if shipment status changed to EN_ROUTE or BATCHED
             updated_shipment = state_manager.get_shipment(shipment.id)
-            if updated_shipment and updated_shipment.status in [ShipmentStatus.EN_ROUTE, ShipmentStatus.BATCHED]:
+            if updated_shipment and updated_shipment.status in [ShipmentStatus.EN_ROUTE]:
                 dispatched_orders.append(OrderAdapter.from_shipment_to_api(updated_shipment))
             else:
                 waiting_orders.append(OrderAdapter.from_shipment_to_api(shipment))

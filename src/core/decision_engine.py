@@ -266,25 +266,25 @@ class DecisionEngine:
         vehicle_id = batch.get('vehicle')
         route = batch.get('route', [])
         
-        # Update shipment statuses to IN_TRANSIT
+        # Update shipment statuses to EN_ROUTE
         dispatched_count = 0
         for shipment_id in shipment_ids:
             success = self.state_manager.update_shipment_status(
                 shipment_id=shipment_id,
-                new_status=ShipmentStatus.IN_TRANSIT,
-                location=route[0] if route else None
+                status=ShipmentStatus.EN_ROUTE,
+                route_id=batch.get('id')  # Associate with route
             )
+
             if success:
                 dispatched_count += 1
         
-        # Update vehicle status to IN_TRANSIT
+        # Update vehicle status to EN_ROUTE
         if vehicle_id:
-            self.state_manager.update_vehicle_status(
-                vehicle_id=vehicle_id,
-                new_status=VehicleStatus.IN_TRANSIT,
-                current_location=route[0] if route else None,
-                assigned_shipments=shipment_ids
-            )
+            vehicle = self.state_manager.get_vehicle_state(vehicle_id)
+            if vehicle:
+                vehicle.status = VehicleStatus.EN_ROUTE
+                vehicle.current_route_id = batch.get('id')
+                self.state_manager.update_vehicle_state(vehicle)
         
         return {
             'shipments': dispatched_count,
@@ -323,7 +323,7 @@ class DecisionEngine:
         # TD update
         self.vfa.update(
             state=state_before,
-            action_value=immediate_reward + self.config.vfa_discount_factor * next_state_value,
+            action_value=immediate_reward + self.config.get('vfa.learning.discount_factor', 0.95) * next_state_value,
             actual_outcome=immediate_reward
         )
         

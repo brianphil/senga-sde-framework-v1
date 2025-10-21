@@ -3,15 +3,17 @@
 """
 Policy Function Approximation (PFA): Simple rule-based decisions
 Fast, deterministic, transparent - for simple states and emergencies
+UPDATED: Fixed to prevent premature dispatch of standard orders
 """
 
 from typing import Optional, List, Dict, Tuple
 from datetime import datetime, timedelta
 from dataclasses import dataclass
+import numpy as np
 
 from .state_manager import (
     StateManager, SystemState, Shipment, VehicleState,
-    ShipmentStatus, VehicleStatus
+    ShipmentStatus, VehicleStatus, Location
 )
 from ..config.senga_config import SengaConfigurator
 
@@ -29,16 +31,17 @@ class PolicyFunctionApproximator:
     PFA: Fast rule-based decisions for simple states
     
     Rule Priority Order:
-    1. Emergency dispatch (deadline imminent)
-    2. Emergency no vehicle available (alert)
-    3. Emergency capacity exceeded (alert)
-    4. Simple single-shipment single-vehicle match
-    5. Defer to CFA for complex scenarios
-    6. Wait for consolidation
+    1. Emergency dispatch (deadline imminent < 2 hours)
+    2. Simple high-utilization dispatch (single order, ≥75% utilization)
+    3. Defer to CFA for consolidation opportunities
+    4. Wait for better consolidation
     
     Mathematical Foundation:
     π_PFA: S → A is a deterministic policy based on if-then rules
     Each rule has clear triggering conditions and outputs
+    
+    CRITICAL FIX: Standard orders (priority=1.0) should NOT dispatch immediately
+    Only emergency/urgent (priority≥2.0) OR high utilization (≥75%) trigger dispatch
     """
     
     def __init__(self):
@@ -61,52 +64,56 @@ class PolicyFunctionApproximator:
         if emergency_action:
             return emergency_action
         
-        # Rule 2: Simple dispatch check
-        simple_action = self._check_simple_dispatch(state)
+        # Rule 2: Simple high-utilization dispatch check
+        simple_action = self._check_simple_high_util_dispatch(state)
         if simple_action:
             return simple_action
         
-        # Rule 3: Check if state is too complex for PFA
-        if self._is_complex_state(state):
+        # Rule 3: Check if state needs CFA optimization
+        if self._should_use_cfa(state):
             return PFAAction(
                 action_type='DEFER_TO_CFA',
                 shipments=[],
                 vehicle=None,
-                reasoning=f"Complex state: {len(state.pending_shipments)} pending shipments, "
-                         f"{len(state.get_available_vehicles())} available vehicles - requires CFA optimization",
+                reasoning=self._get_cfa_deferral_reason(state),
                 confidence=1.0
             )
         
-        # Rule 4: Check if waiting is beneficial
-        wait_decision = self._evaluate_wait(state)
-        return wait_decision
+        # Rule 4: Default to waiting for consolidation
+        return self._evaluate_wait(state)
     
     def _check_emergency_dispatch(self, state: SystemState) -> Optional[PFAAction]:
         """
-        Rule 1: Emergency dispatch for shipments approaching deadline
+        Rule 1: Emergency dispatch ONLY for genuinely urgent shipments
         
         Mathematical Condition:
-        IF ∃ shipment s: time_to_deadline(s) < threshold
-        AND shipment not in active route
-        THEN dispatch immediately with available vehicle
+        IF ∃ shipment s WHERE:
+           - priority ≥ 2.0 (urgent or emergency) AND
+           - time_to_deadline(s) < emergency_threshold_hours (default 2h)
+        THEN dispatch immediately
         
-        Triggers when:
-        - Shipment has < emergency_threshold_hours until deadline
-        - No active route covers this shipment
-        - Available vehicle exists
+        CRITICAL: Standard orders (priority=1.0) NEVER trigger this rule
         """
-        emergency_threshold = self.config.emergency_threshold_hours
+        emergency_threshold = self.config.get('emergency_threshold_hours', 2.0)
+        
+        # Get shipments approaching deadline
         urgent_shipments = state.get_urgent_shipments(emergency_threshold)
         
-        if not urgent_shipments:
+        # Filter: ONLY dispatch if priority indicates emergency/urgent
+        genuine_emergencies = [
+            s for s in urgent_shipments 
+            if s.priority >= 2.0  # Must be urgent (2.0) or emergency (3.0)
+        ]
+        
+        if not genuine_emergencies:
             return None
         
         # Sort by urgency (most urgent first)
-        urgent_shipments.sort(
+        genuine_emergencies.sort(
             key=lambda s: s.time_to_deadline(state.timestamp)
         )
         
-        most_urgent = urgent_shipments[0]
+        most_urgent = genuine_emergencies[0]
         time_remaining = most_urgent.time_to_deadline(state.timestamp)
         
         # Check if already being handled by an active route
@@ -122,8 +129,8 @@ class PolicyFunctionApproximator:
                 action_type='EMERGENCY_NO_VEHICLE',
                 shipments=[most_urgent],
                 vehicle=None,
-                reasoning=f"CRITICAL EMERGENCY: Shipment {most_urgent.id} has only "
-                         f"{time_remaining.total_seconds()/3600:.1f} hours until deadline but "
+                reasoning=f"CRITICAL EMERGENCY: {most_urgent.priority_name()} shipment {most_urgent.id} "
+                         f"has only {time_remaining.total_seconds()/3600:.1f}h until deadline but "
                          f"NO VEHICLE AVAILABLE! Customer: {most_urgent.customer_id}",
                 confidence=1.0
             )
@@ -137,8 +144,8 @@ class PolicyFunctionApproximator:
                 action_type='EMERGENCY_NO_CAPACITY',
                 shipments=[most_urgent],
                 vehicle=None,
-                reasoning=f"CRITICAL EMERGENCY: Shipment {most_urgent.id} "
-                         f"(volume={most_urgent.volume}m³, weight={most_urgent.weight}kg) "
+                reasoning=f"CRITICAL EMERGENCY: {most_urgent.priority_name()} shipment {most_urgent.id} "
+                         f"(volume={most_urgent.volume:.2f}m³, weight={most_urgent.weight:.1f}kg) "
                          f"exceeds ALL available vehicle capacities!",
                 confidence=1.0
             )
@@ -148,126 +155,137 @@ class PolicyFunctionApproximator:
             action_type='DISPATCH_IMMEDIATE',
             shipments=[most_urgent],
             vehicle=best_vehicle,
-            reasoning=f"EMERGENCY DISPATCH: Shipment {most_urgent.id} has "
-                     f"{time_remaining.total_seconds()/3600:.1f}h until deadline. "
-                     f"Dispatching with vehicle {best_vehicle.id}",
+            reasoning=f"EMERGENCY DISPATCH: {most_urgent.priority_name()} shipment {most_urgent.id} "
+                     f"has only {time_remaining.total_seconds()/3600:.1f}h until deadline. "
+                     f"Dispatching immediately with vehicle {best_vehicle.id}",
             confidence=1.0
         )
     
-    def _check_simple_dispatch(self, state: SystemState) -> Optional[PFAAction]:
+    def _check_simple_high_util_dispatch(self, state: SystemState) -> Optional[PFAAction]:
         """
-        Rule 2: Simple dispatch when obvious match exists
+        Rule 2: Simple dispatch ONLY when high utilization achieved
         
         Mathematical Condition:
-        IF |pending_shipments| = 1 AND |available_vehicles| = 1
+        IF |pending_shipments| = 1 AND |available_vehicles| ≥ 1
         AND vehicle_can_handle(vehicle, shipment)
-        AND (utilization(shipment, vehicle) ≥ threshold OR time_pressure > 0.5)
+        AND utilization(shipment, vehicle) ≥ min_utilization_threshold (75%)
         THEN dispatch
         
-        Triggers when:
-        - Exactly one shipment waiting
-        - Exactly one vehicle idle
-        - Vehicle has capacity
-        - Either utilization is good OR time pressure is building
+        CRITICAL CHANGE: Removed time_pressure bypass
+        Standard orders must achieve ≥75% utilization OR wait for consolidation
         """
         pending = state.pending_shipments
         available_vehicles = state.get_available_vehicles()
         
-        # Not a simple case if multiple shipments or vehicles
-        if len(pending) != 1 or len(available_vehicles) != 1:
+        # Only consider if exactly one shipment
+        if len(pending) != 1:
+            return None
+        
+        if not available_vehicles:
             return None
         
         shipment = pending[0]
-        vehicle = available_vehicles[0]
         
-        # Check capacity
-        if not self._vehicle_can_handle(vehicle, [shipment]):
+        # Find best vehicle for this shipment
+        best_vehicle = self._select_best_vehicle(shipment, available_vehicles)
+        
+        if not best_vehicle:
             return PFAAction(
                 action_type='DEFER_TO_CFA',
                 shipments=[],
                 vehicle=None,
-                reasoning=f"Single shipment exceeds single vehicle capacity - need CFA",
+                reasoning=f"Single shipment exceeds available vehicle capacities - need CFA",
                 confidence=0.8
             )
         
         # Calculate utilization
-        volume_util = shipment.volume / vehicle.capacity.volume
-        weight_util = shipment.weight / vehicle.capacity.weight
+        volume_util = shipment.volume / best_vehicle.capacity.volume
+        weight_util = shipment.weight / best_vehicle.capacity.weight
         utilization = max(volume_util, weight_util)  # Limiting factor
         
-        min_utilization = self.config.min_utilization
-        time_pressure = shipment.time_pressure(state.timestamp)
+        min_utilization = self.config.get('min_utilization_threshold', 0.75)
         
-        # Decision logic
+        # CRITICAL: Only dispatch if utilization meets threshold
         if utilization >= min_utilization:
-            # Good utilization - dispatch
             return PFAAction(
                 action_type='DISPATCH_IMMEDIATE',
                 shipments=[shipment],
-                vehicle=vehicle,
-                reasoning=f"Simple dispatch: utilization={utilization:.2%} "
-                         f"≥ threshold={min_utilization:.2%}",
+                vehicle=best_vehicle,
+                reasoning=f"High utilization dispatch: {utilization:.1%} ≥ {min_utilization:.1%} threshold. "
+                         f"Single order achieves good vehicle utilization.",
                 confidence=0.95
             )
         
-        elif time_pressure > 0.5:
-            # Moderate time pressure - dispatch even with lower utilization
-            return PFAAction(
-                action_type='DISPATCH_IMMEDIATE',
-                shipments=[shipment],
-                vehicle=vehicle,
-                reasoning=f"Simple dispatch: time_pressure={time_pressure:.2f} > 0.5, "
-                         f"utilization={utilization:.2%}",
-                confidence=0.85
-            )
-        
-        # Low utilization and low time pressure - should wait
+        # Low utilization - should wait for consolidation
+        # Do NOT dispatch - return None to trigger CFA/WAIT evaluation
         return None
     
-    def _is_complex_state(self, state: SystemState) -> bool:
+    def _should_use_cfa(self, state: SystemState) -> bool:
         """
-        Determine if state is too complex for PFA
+        Determine if CFA optimization is needed
         
-        Mathematical Condition:
-        complexity(S) > threshold where:
-        complexity = f(|pending|, |vehicles|, spatial_clustering, time_variance)
+        CFA should be used when:
+        1. Multiple shipments with potential geographical clustering
+        2. Multiple vehicles requiring assignment optimization
+        3. Consolidation opportunities exist
+        4. Time constraints allow for optimization
         
-        Complex when:
-        - Multiple shipments with consolidation opportunities
-        - Multiple vehicles requiring optimization
-        - Spatial clustering suggests batch potential
-        - Varying time pressures across shipments
+        Returns True if state requires CFA optimization
         """
         num_pending = len(state.pending_shipments)
         num_available = len(state.get_available_vehicles())
         
-        # Thresholds from config
-        max_simple_pending = self.config.get(
-            'dla.complexity_assessment.low_complexity_threshold.max_pending_shipments', 
-            5
-        )
+        # No pending = no need for CFA
+        if num_pending == 0:
+            return False
         
-        # Too many shipments for simple rules
-        if num_pending > max_simple_pending:
+        # Multiple shipments = potential consolidation → use CFA
+        if num_pending >= 2:
             return True
         
-        # Too many vehicles for simple matching
-        if num_available > 3:
+        # Single shipment with low utilization = might wait for consolidation
+        if num_pending == 1 and num_available > 0:
+            shipment = state.pending_shipments[0]
+            vehicles = state.get_available_vehicles()
+            
+            # Check if any vehicle achieves good utilization
+            for vehicle in vehicles:
+                if self._vehicle_can_handle(vehicle, [shipment]):
+                    volume_util = shipment.volume / vehicle.capacity.volume
+                    weight_util = shipment.weight / vehicle.capacity.weight
+                    utilization = max(volume_util, weight_util)
+                    
+                    min_util = self.config.get('min_utilization_threshold', 0.75)
+                    if utilization >= min_util:
+                        # High utilization possible - not complex
+                        return False
+            
+            # Low utilization - should consider waiting → use CFA to evaluate
             return True
-        
-        # Check for consolidation potential
-        if num_pending >= 2:
-            if self._has_consolidation_potential(state.pending_shipments):
-                return True
-        
-        # Check for time pressure variance (some urgent, some not)
-        if num_pending >= 2:
-            time_pressures = [s.time_pressure(state.timestamp) for s in state.pending_shipments]
-            pressure_variance = max(time_pressures) - min(time_pressures)
-            if pressure_variance > 0.3:  # High variance
-                return True
         
         return False
+    
+    def _get_cfa_deferral_reason(self, state: SystemState) -> str:
+        """Generate reasoning for why we're deferring to CFA"""
+        num_pending = len(state.pending_shipments)
+        num_available = len(state.get_available_vehicles())
+        
+        reasons = []
+        
+        if num_pending >= 2:
+            reasons.append(f"{num_pending} pending orders with potential consolidation")
+            
+            # Check geographical clustering
+            if self._has_geographical_clustering(state.pending_shipments):
+                reasons.append("geographical clustering detected")
+        
+        if num_pending == 1:
+            reasons.append("single order with low utilization - evaluating wait vs dispatch")
+        
+        if num_available > 1:
+            reasons.append(f"{num_available} vehicles requiring optimal assignment")
+        
+        return "CFA optimization needed: " + ", ".join(reasons)
     
     def _evaluate_wait(self, state: SystemState) -> PFAAction:
         """
@@ -282,60 +300,144 @@ class PolicyFunctionApproximator:
                 action_type='WAIT',
                 shipments=[],
                 vehicle=None,
-                reasoning="No pending shipments",
+                reasoning="No pending shipments - system idle",
                 confidence=1.0
             )
         
-        # Calculate consolidation window
-        max_wait_hours = self.config.get('max_consolidation_wait_hours', 24)
-        
-        if pending:
-            min_time_to_deadline = min(
-                s.time_to_deadline(state.timestamp).total_seconds() / 3600
-                for s in pending
-            )
-            
-            if min_time_to_deadline > max_wait_hours:
-                # Plenty of time - wait for more shipments
-                return PFAAction(
-                    action_type='WAIT',
-                    shipments=[],
-                    vehicle=None,
-                    reasoning=f"Waiting for consolidation: {min_time_to_deadline:.1f}h "
-                             f"until next deadline (max wait: {max_wait_hours}h)",
-                    confidence=0.7
-                )
-            else:
-                # Time getting tight but not emergency - defer to CFA
-                return PFAAction(
-                    action_type='DEFER_TO_CFA',
-                    shipments=[],
-                    vehicle=None,
-                    reasoning=f"Time constraint approaching: {min_time_to_deadline:.1f}h "
-                             f"until deadline - need CFA optimization",
-                    confidence=0.8
-                )
-        
-        return PFAAction(
-            action_type='WAIT',
-            shipments=[],
-            vehicle=None,
-            reasoning="Waiting for better consolidation opportunities",
-            confidence=0.6
+        # Calculate time until next deadline
+        min_time_to_deadline = min(
+            s.time_to_deadline(state.timestamp).total_seconds() / 3600
+            for s in pending
         )
+        
+        max_wait_hours = self.config.get('max_consolidation_wait_hours', 24.0)
+        
+        if min_time_to_deadline > max_wait_hours:
+            # Plenty of time - wait for more shipments
+            return PFAAction(
+                action_type='WAIT',
+                shipments=[],
+                vehicle=None,
+                reasoning=f"Waiting for consolidation: {min_time_to_deadline:.1f}h until next deadline "
+                         f"(max wait: {max_wait_hours:.1f}h). Low utilization orders should wait for batching.",
+                confidence=0.7
+            )
+        else:
+            # Time getting tighter - defer to CFA for optimization
+            return PFAAction(
+                action_type='DEFER_TO_CFA',
+                shipments=[],
+                vehicle=None,
+                reasoning=f"Time constraint approaching: {min_time_to_deadline:.1f}h until deadline. "
+                         f"Need CFA to optimize dispatch vs wait decision.",
+                confidence=0.8
+            )
+    
+    def _has_geographical_clustering(self, shipments: List[Shipment]) -> bool:
+        """
+        Check if shipments have geographical clustering potential
+        
+        Clustering indicators:
+        1. Shared origin zones
+        2. Shared destination zones
+        3. Geographic proximity (origins within ~20km)
+        4. Route overlap potential
+        
+        Returns True if consolidation makes geographical sense
+        """
+        if len(shipments) < 2:
+            return False
+        
+        # Check 1: Origin zone clustering
+        origin_zones = {}
+        for s in shipments:
+            zone = s.origin.zone_id or 'unknown'
+            origin_zones[zone] = origin_zones.get(zone, 0) + 1
+        
+        # If 2+ shipments share origin zone → good clustering
+        if any(count >= 2 for count in origin_zones.values()):
+            return True
+        
+        # Check 2: Destination zone clustering
+        dest_zones = {}
+        for s in shipments:
+            for dest in s.destinations:
+                zone = dest.zone_id or 'unknown'
+                dest_zones[zone] = dest_zones.get(zone, 0) + 1
+        
+        # If 2+ destinations in same zone → good clustering
+        if any(count >= 2 for count in dest_zones.values()):
+            return True
+        
+        # Check 3: Geographic proximity of origins
+        origins = [s.origin for s in shipments]
+        if self._locations_are_clustered(origins, radius_km=20):
+            return True
+        
+        # Check 4: Geographic proximity of destinations
+        all_destinations = []
+        for s in shipments:
+            all_destinations.extend(s.destinations)
+        
+        if len(all_destinations) >= 2:
+            if self._locations_are_clustered(all_destinations, radius_km=50):
+                return True
+        
+        return False
+    
+    def _locations_are_clustered(self, locations: List[Location], radius_km: float) -> bool:
+        """
+        Check if locations are geographically clustered within radius
+        
+        Args:
+            locations: List of Location objects
+            radius_km: Maximum radius for clustering (km)
+            
+        Returns:
+            True if locations cluster within radius
+        """
+        if len(locations) < 2:
+            return False
+        
+        # Calculate centroid
+        lats = [loc.lat for loc in locations]
+        lngs = [loc.lng for loc in locations]
+        
+        centroid_lat = np.mean(lats)
+        centroid_lng = np.mean(lngs)
+        
+        # Check if all locations within radius of centroid
+        for loc in locations:
+            distance = self._haversine_distance(
+                loc.lat, loc.lng,
+                centroid_lat, centroid_lng
+            )
+            if distance > radius_km:
+                return False  # At least one location too far
+        
+        return True  # All locations within radius
+    
+    def _haversine_distance(self, lat1: float, lng1: float, 
+                           lat2: float, lng2: float) -> float:
+        """Calculate haversine distance between two points in km"""
+        from math import radians, sin, cos, sqrt, atan2
+        
+        R = 6371  # Earth radius in km
+        
+        lat1, lng1 = radians(lat1), radians(lng1)
+        lat2, lng2 = radians(lat2), radians(lng2)
+        
+        dlat = lat2 - lat1
+        dlng = lng2 - lng1
+        
+        a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlng/2)**2
+        c = 2 * atan2(sqrt(a), sqrt(1-a))
+        
+        return R * c
     
     def _shipment_covered_by_active_route(self, shipment: Shipment, 
                                           state: SystemState) -> bool:
-        """
-        Check if shipment is already in an active route
-        
-        Args:
-            shipment: Shipment to check
-            state: Current system state
-            
-        Returns:
-            True if shipment is already being handled
-        """
+        """Check if shipment is already in an active route"""
         for route in state.active_routes:
             if shipment.id in route.shipment_ids:
                 return True
@@ -349,7 +451,7 @@ class PolicyFunctionApproximator:
         Criteria (in order):
         1. Has sufficient capacity
         2. Closest to shipment origin
-        3. Most cost-efficient
+        3. Best utilization
         
         Returns:
             Best vehicle or None if no suitable vehicle
@@ -362,32 +464,31 @@ class PolicyFunctionApproximator:
                 continue
             
             # Calculate distance to origin
-            distance = self._estimate_distance(
-                vehicle.current_location, 
-                shipment.origin
+            distance = self._haversine_distance(
+                vehicle.current_location.lat,
+                vehicle.current_location.lng,
+                shipment.origin.lat,
+                shipment.origin.lng
             )
             
-            # Calculate cost score (lower is better)
-            # Cost = distance_cost + utilization_penalty
-            distance_cost = distance * vehicle.cost_per_km
+            # Calculate utilization
+            volume_util = shipment.volume / vehicle.capacity.volume
+            weight_util = shipment.weight / vehicle.capacity.weight
+            utilization = max(volume_util, weight_util)
             
-            # Penalty for low utilization
-            utilization = shipment.volume / vehicle.capacity.volume
-            min_util = self.config.min_utilization
-            if utilization < min_util:
-                utilization_penalty = (min_util - utilization) * 1000
-            else:
-                utilization_penalty = 0
+            # Score: prioritize high utilization and low distance
+            # Higher score = better vehicle
+            utilization_score = utilization * 100
+            distance_penalty = distance * 0.1
+            total_score = utilization_score - distance_penalty
             
-            total_score = distance_cost + utilization_penalty
-            
-            candidates.append((vehicle, total_score, distance))
+            candidates.append((vehicle, total_score, utilization, distance))
         
         if not candidates:
             return None
         
-        # Sort by score (lowest first)
-        candidates.sort(key=lambda x: x[1])
+        # Sort by score (highest first)
+        candidates.sort(key=lambda x: x[1], reverse=True)
         
         return candidates[0][0]
     
@@ -409,110 +510,12 @@ class PolicyFunctionApproximator:
         return (total_volume <= vehicle.capacity.volume and
                 total_weight <= vehicle.capacity.weight)
     
-    def _vehicle_near_location(self, vehicle: VehicleState, 
-                              location, threshold_km: float = 5.0) -> bool:
-        """
-        Check if vehicle is near a location
-        
-        Args:
-            vehicle: Vehicle to check
-            location: Target location
-            threshold_km: Distance threshold in km
-            
-        Returns:
-            True if vehicle is within threshold distance
-        """
-        distance = self._estimate_distance(vehicle.current_location, location)
-        return distance <= threshold_km
-    
-    def _estimate_distance(self, loc1, loc2) -> float:
-        """
-        Estimate distance between two locations using Haversine formula
-        
-        Args:
-            loc1: First location (Location object)
-            loc2: Second location (Location object)
-            
-        Returns:
-            Distance in kilometers
-        """
-        from math import radians, sin, cos, sqrt, atan2
-        
-        R = 6371  # Earth's radius in km
-        
-        lat1, lon1 = radians(loc1.lat), radians(loc1.lng)
-        lat2, lon2 = radians(loc2.lat), radians(loc2.lng)
-        
-        dlat = lat2 - lat1
-        dlon = lon2 - lon1
-        
-        a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
-        c = 2 * atan2(sqrt(a), sqrt(1-a))
-        
-        return R * c
-    
-    def _has_consolidation_potential(self, shipments: List[Shipment]) -> bool:
-        """
-        Check if shipments have consolidation potential
-        
-        Mathematical Criterion:
-        Potential exists when:
-        - Multiple shipments share origin zones
-        - Destinations are in similar geographic areas
-        - Time windows overlap sufficiently
-        
-        Args:
-            shipments: List of shipments to check
-            
-        Returns:
-            True if consolidation potential exists
-        """
-        if len(shipments) < 2:
-            return False
-        
-        # Check 1: Origin clustering
-        origin_zones = {}
-        for s in shipments:
-            zone = s.origin.zone_id or 'unknown'
-            origin_zones[zone] = origin_zones.get(zone, 0) + 1
-        
-        # If multiple shipments share origins, good consolidation potential
-        max_same_origin = max(origin_zones.values())
-        if max_same_origin >= 2:
-            return True
-        
-        # Check 2: Destination clustering
-        all_destinations = []
-        for s in shipments:
-            all_destinations.extend(s.destinations)
-        
-        if len(all_destinations) >= 2:
-            dest_zones = {}
-            for dest in all_destinations:
-                zone = dest.zone_id or 'unknown'
-                dest_zones[zone] = dest_zones.get(zone, 0) + 1
-            
-            # If destinations cluster, good for consolidation
-            max_same_dest = max(dest_zones.values())
-            if max_same_dest >= 2:
-                return True
-        
-        # Check 3: Geographic proximity
-        # Calculate centroid and check if shipments are clustered
-        if len(shipments) >= 2:
-            lats = [s.origin.lat for s in shipments]
-            lngs = [s.origin.lng for s in shipments]
-            
-            # Standard deviation of locations (measure of spread)
-            import numpy as np
-            lat_std = np.std(lats)
-            lng_std = np.std(lngs)
-            
-            # If spread is small (< 0.1 degrees ≈ 11km), good consolidation
-            if lat_std < 0.1 and lng_std < 0.1:
-                return True
-        
-        return False
+    def _estimate_distance(self, loc1: Location, loc2: Location) -> float:
+        """Estimate distance between two locations in km"""
+        return self._haversine_distance(
+            loc1.lat, loc1.lng,
+            loc2.lat, loc2.lng
+        )
     
     def can_handle_state(self, state: SystemState) -> Tuple[bool, float]:
         """
@@ -526,60 +529,31 @@ class PolicyFunctionApproximator:
         Returns:
             Tuple of (can_handle: bool, confidence: float)
         """
-        # PFA can always try, but confidence varies
+        decision = self.decide(state)
         
-        urgent_shipments = state.get_urgent_shipments(
-            self.config.emergency_threshold_hours
-        )
+        # PFA can handle if it made a confident decision
+        if decision.action_type.startswith('EMERGENCY'):
+            return (True, 1.0)  # Always handle emergencies
         
-        if urgent_shipments:
-            # Always handle emergencies with high confidence
-            return True, 1.0
+        if decision.action_type == 'DISPATCH_IMMEDIATE':
+            return (True, decision.confidence)
         
-        num_pending = len(state.pending_shipments)
-        num_available = len(state.get_available_vehicles())
-        
-        if num_pending == 0:
-            # Trivial case
-            return True, 1.0
-        
-        if num_pending == 1 and num_available == 1:
-            # Simple case - high confidence
-            return True, 0.9
-        
-        if self._is_complex_state(state):
-            # Too complex for PFA
-            return False, 0.0
-        
-        # Can try but moderate confidence
-        return True, 0.6
+        # Defers to CFA or waits - PFA cannot handle
+        return (False, 0.0)
+
+
+# Helper method to add to Shipment class (if not already present)
+def _add_shipment_priority_name_method():
+    """Add priority_name() method to Shipment class if needed"""
+    def priority_name(self) -> str:
+        """Convert priority value to readable name"""
+        if self.priority >= 3.0:
+            return "EMERGENCY"
+        elif self.priority >= 2.0:
+            return "URGENT"
+        else:
+            return "STANDARD"
     
-    def get_emergency_status(self, state: SystemState) -> Dict:
-        """
-        Get emergency status summary for monitoring
-        
-        Returns:
-            Dictionary with emergency metrics
-        """
-        emergency_threshold = self.config.emergency_threshold_hours
-        urgent = state.get_urgent_shipments(emergency_threshold)
-        
-        critical = []
-        for s in urgent:
-            time_remaining = s.time_to_deadline(state.timestamp)
-            if time_remaining.total_seconds() < 3600:  # < 1 hour
-                critical.append(s)
-        
-        return {
-            'num_urgent': len(urgent),
-            'num_critical': len(critical),
-            'urgent_shipments': [
-                {
-                    'id': s.id,
-                    'time_remaining_hours': s.time_to_deadline(state.timestamp).total_seconds() / 3600,
-                    'customer_id': s.customer_id
-                }
-                for s in urgent
-            ],
-            'available_vehicles': len(state.get_available_vehicles())
-        }
+    # This would be added to Shipment dataclass
+    # For now, it's defined here as a reference
+    pass

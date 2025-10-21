@@ -106,7 +106,24 @@ class Shipment:
             'batch_id': self.batch_id,
             'route_id': self.route_id
         }
-    
+    def priority_name(self) -> str:
+        """
+        Convert priority value to human-readable name
+        
+        Priority mapping:
+        - 3.0+ = EMERGENCY (2 hour SLA)
+        - 2.0-2.9 = URGENT (6 hour SLA)
+        - 1.0-1.9 = STANDARD (24 hour SLA)
+        
+        Returns:
+            Priority level as string
+        """
+        if self.priority >= 3.0:
+            return "EMERGENCY"
+        elif self.priority >= 2.0:
+            return "URGENT"
+        else:
+            return "STANDARD"
     @classmethod
     def from_dict(cls, data: dict) -> 'Shipment':
         """Deserialize from storage"""

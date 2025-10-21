@@ -1,0 +1,159 @@
+2025-10-21 20:28:35,596 - src.api.main - INFO - ============================================================
+2025-10-21 20:28:35,596 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-21 20:28:35,597 - src.api.main - INFO - ============================================================
+2025-10-21 20:28:35,832 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-21 20:28:35,851 - src.api.main - INFO - ============================================================
+2025-10-21 20:28:35,851 - src.api.main - INFO - Senga SDE Ready
+2025-10-21 20:28:35,852 - src.api.main - INFO - ============================================================
+2025-10-21 20:29:21,855 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:29:22,407 - watchfiles.main - INFO - 3 changes detected
+2025-10-21 20:39:27,492 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:39,658 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:39,800 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-21 20:39:39,805 - src.api.main - INFO - Shutdown complete
+2025-10-21 20:39:40,649 - watchfiles.main - INFO - 2 changes detected
+2025-10-21 20:39:44,487 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:44,531 - src.api.main - INFO - ============================================================
+2025-10-21 20:39:44,533 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-21 20:39:44,534 - src.api.main - INFO - ============================================================
+2025-10-21 20:39:44,612 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-21 20:39:44,629 - src.api.main - INFO - ============================================================
+2025-10-21 20:39:44,630 - src.api.main - INFO - Senga SDE Ready
+2025-10-21 20:39:44,630 - src.api.main - INFO - ============================================================
+2025-10-21 20:39:44,851 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:45,210 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:45,572 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:45,933 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:46,296 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:46,658 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:47,068 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:47,475 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:47,881 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:48,289 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:48,644 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:49,056 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:49,464 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:49,871 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:50,279 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:50,687 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:51,096 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:51,513 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:51,923 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:52,328 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:52,742 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:53,150 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:53,560 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:53,965 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:54,369 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:54,779 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:55,225 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:55,652 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:56,083 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:56,506 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:56,937 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:57,333 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:57,768 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:58,204 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:58,679 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:59,116 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:59,499 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:39:59,913 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:00,352 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:00,790 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:01,209 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:01,571 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:02,033 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:02,455 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:02,866 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:03,274 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:03,682 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:04,088 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:04,446 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:04,857 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:05,264 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:05,675 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:06,080 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:06,533 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:06,887 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:07,301 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:07,713 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:08,117 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:08,521 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:08,952 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:09,356 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:09,730 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:10,138 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:10,546 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:10,954 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:11,390 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:11,754 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:40:12,204 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-21 20:40:12,205 - src.api.main - INFO - Shutdown complete
+2025-10-21 20:40:22,926 - src.api.main - INFO - ============================================================
+2025-10-21 20:40:22,927 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-21 20:40:22,928 - src.api.main - INFO - ============================================================
+2025-10-21 20:40:23,020 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-21 20:40:23,046 - src.api.main - INFO - ============================================================
+2025-10-21 20:40:23,047 - src.api.main - INFO - Senga SDE Ready
+2025-10-21 20:40:23,047 - src.api.main - INFO - ============================================================
+2025-10-21 20:41:19,942 - src.api.main - INFO - Running consolidation cycle with 42 pending orders
+2025-10-21 20:41:19,943 - src.api.main - ERROR - Consolidation cycle failed: 'DecisionEngine' object has no attribute 'make_decision'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 304, in trigger_consolidation_cycle
+    decision = decision_engine.make_decision(current_state)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DecisionEngine' object has no attribute 'make_decision'
+2025-10-21 20:46:19,777 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:46:19,962 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-21 20:46:19,963 - src.api.main - INFO - Shutdown complete
+2025-10-21 20:46:20,638 - watchfiles.main - INFO - 6 changes detected
+2025-10-21 20:46:23,809 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:46:23,821 - src.api.main - INFO - ============================================================
+2025-10-21 20:46:23,822 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-21 20:46:23,822 - src.api.main - INFO - ============================================================
+2025-10-21 20:46:23,890 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-21 20:46:23,907 - src.api.main - INFO - ============================================================
+2025-10-21 20:46:23,907 - src.api.main - INFO - Senga SDE Ready
+2025-10-21 20:46:23,907 - src.api.main - INFO - ============================================================
+2025-10-21 20:46:24,167 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:46:24,528 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:46:24,938 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:46:25,347 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:46:25,754 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:46:26,161 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:46:26,567 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:46:26,924 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:46:27,336 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:46:27,741 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:46:28,160 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:46:28,573 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:46:28,980 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:46:29,388 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:46:29,692 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-21 20:46:29,693 - src.api.main - INFO - Shutdown complete
+2025-10-21 20:46:39,925 - src.api.main - INFO - ============================================================
+2025-10-21 20:46:39,928 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-21 20:46:39,929 - src.api.main - INFO - ============================================================
+2025-10-21 20:46:40,056 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-21 20:46:40,083 - src.api.main - INFO - ============================================================
+2025-10-21 20:46:40,083 - src.api.main - INFO - Senga SDE Ready
+2025-10-21 20:46:40,084 - src.api.main - INFO - ============================================================
+2025-10-21 20:47:18,943 - src.api.main - INFO - Running consolidation cycle with 42 pending orders
+2025-10-21 20:47:18,952 - src.core.decision_engine - INFO - Cycle 0: 42 pending shipments
+2025-10-21 20:47:18,954 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-21 20:47:18,955 - src.core.decision_engine - ERROR - Unknown action type: DISPATCH_IMMEDIATE
+2025-10-21 20:47:18,956 - src.core.decision_engine - INFO - Cycle completed in 11.3ms
+2025-10-21 20:48:43,327 - src.api.main - INFO - Running consolidation cycle with 42 pending orders
+2025-10-21 20:48:43,332 - src.core.decision_engine - INFO - Cycle 1: 42 pending shipments
+2025-10-21 20:48:43,333 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-21 20:48:43,334 - src.core.decision_engine - ERROR - Unknown action type: DISPATCH_IMMEDIATE
+2025-10-21 20:48:43,335 - src.core.decision_engine - INFO - Cycle completed in 7.3ms
+2025-10-21 20:49:40,701 - src.api.main - INFO - Running consolidation cycle with 42 pending orders
+2025-10-21 20:49:40,705 - src.core.decision_engine - INFO - Cycle 2: 42 pending shipments
+2025-10-21 20:49:40,707 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-21 20:49:40,707 - src.core.decision_engine - ERROR - Unknown action type: DISPATCH_IMMEDIATE
+2025-10-21 20:49:40,708 - src.core.decision_engine - INFO - Cycle completed in 6.6ms
+2025-10-21 20:50:51,306 - watchfiles.main - INFO - 1 change detected
+2025-10-21 20:51:14,005 - watchfiles.main - INFO - 2 changes detected
+2025-10-21 20:51:21,295 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-21 20:51:21,296 - src.api.main - INFO - Shutdown complete

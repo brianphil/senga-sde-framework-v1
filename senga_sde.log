@@ -545,3 +545,25 @@ TypeError: StateManager.log_decision() got an unexpected keyword argument 'decis
 2025-10-20 14:46:53,808 - src.core.decision_engine - INFO - Decision: dla -> WAIT (confidence: 0.90)
 2025-10-20 14:46:53,809 - src.core.decision_engine - INFO - Decision: WAIT - no action taken
 2025-10-20 14:46:54,080 - src.core.decision_engine - INFO - Cycle completed in 14830.3ms
+2025-10-21 19:30:48,346 - __main__ - INFO - Starting Senga SDE API server on 0.0.0.0:8000
+2025-10-21 19:30:48,771 - src.api.main - INFO - ============================================================
+2025-10-21 19:30:48,772 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-21 19:30:48,773 - src.api.main - INFO - ============================================================
+2025-10-21 19:30:51,494 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-21 19:30:51,501 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-21 19:30:51,502 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-21 19:30:51,503 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-21 19:30:51,562 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-21 19:30:51,588 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-21 19:30:51,605 - src.api.main - INFO - ============================================================
+2025-10-21 19:30:51,605 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-21 19:30:51,606 - src.api.main - INFO - ============================================================
+2025-10-21 19:32:13,820 - src.core.decision_engine - INFO - Cycle 0: 40 pending shipments
+2025-10-21 19:32:13,821 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-21 19:32:13,821 - src.core.decision_engine - ERROR - Unknown action type: DISPATCH_IMMEDIATE
+2025-10-21 19:32:13,822 - src.core.decision_engine - INFO - Cycle completed in 6.9ms
+2025-10-21 19:33:45,711 - src.core.decision_engine - INFO - Cycle 1: 41 pending shipments
+2025-10-21 19:33:45,712 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-21 19:33:45,713 - src.core.decision_engine - ERROR - Unknown action type: DISPATCH_IMMEDIATE
+2025-10-21 19:33:45,713 - src.core.decision_engine - INFO - Cycle completed in 5.6ms
+2025-10-21 20:26:52,048 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine

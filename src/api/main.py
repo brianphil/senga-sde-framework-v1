@@ -17,10 +17,17 @@ from pydantic import BaseModel, Field
 import uvicorn
 
 # Core components
-from ..core.decision_engine import DecisionEngine
-from ..core.state_manager import StateManager, ShipmentStatus
+from ..core.decision_engine import DecisionEngine, EngineStatus
+from src.core.state_manager import (
+    StateManager, 
+    Shipment, 
+    ShipmentStatus, 
+    VehicleState, 
+    VehicleStatus  # ← Add these two
+)
 from ..config.senga_config import SengaConfigurator
-
+from ..core.multi_scale_coordinator import MultiScaleCoordinator
+from ..integrations.external_systems import IntegrationManager
 # Import the new adapter
 from .adapters import OrderAdapter, VehicleAdapter
 
@@ -158,6 +165,105 @@ async def shutdown_event():
     logger.info("Shutdown complete")
 
 # ============= Health and Status Endpoints =============
+@app.get("/shipments/pending")
+async def get_pending_shipments():
+    """
+    Get all shipments with status 'pending' (awaiting dispatch)
+    """
+    try:
+        # Get current system state
+        current_state = state_manager.get_current_state()
+        
+        # Return pending shipments with calculated time_to_deadline
+        pending = []
+        for shipment in current_state.pending_shipments:
+            shipment_dict = shipment.to_dict()
+            
+            # Calculate time to deadline in hours
+            time_remaining = shipment.time_to_deadline(current_state.timestamp)
+            shipment_dict['time_to_deadline_hours'] = time_remaining.total_seconds() / 3600
+            
+            pending.append(shipment_dict)
+        
+        return pending
+        
+    except Exception as e:
+        logger.error(f"Failed to get pending shipments: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# ENDPOINT 2: GET /fleet
+# ============================================================================
+
+@app.get("/fleet")
+async def get_fleet():
+    """
+    Get all vehicles in the fleet with current status
+    """
+    try:
+        # Get current system state
+        current_state = state_manager.get_current_state()
+        
+        # Return fleet with enriched data
+        fleet = []
+        for vehicle in current_state.fleet_state:
+            vehicle_dict = vehicle.to_dict()
+            
+            # Calculate current utilization if assigned to route
+            if vehicle.status == VehicleStatus.EN_ROUTE and vehicle.assigned_route_id:
+                # Find the route
+                route = next(
+                    (r for r in current_state.active_routes if r.route_id == vehicle.assigned_route_id),
+                    None
+                )
+                if route:
+                    # Calculate utilization based on route shipments
+                    total_weight = sum(
+                        s.weight for s in current_state.pending_shipments + [
+                            s for r in current_state.active_routes for s in r.shipments
+                        ] if s.id in [sid for sid in route.shipment_ids]
+                    )
+                    total_volume = sum(
+                        s.volume for s in current_state.pending_shipments + [
+                            s for r in current_state.active_routes for s in r.shipments
+                        ] if s.id in [sid for sid in route.shipment_ids]
+                    )
+                    
+                    weight_util = (total_weight / vehicle.capacity_weight_kg) * 100 if vehicle.capacity_weight_kg > 0 else 0
+                    volume_util = (total_volume / vehicle.capacity_volume_m3) * 100 if vehicle.capacity_volume_m3 > 0 else 0
+                    
+                    vehicle_dict['current_utilization'] = max(weight_util, volume_util)
+                else:
+                    vehicle_dict['current_utilization'] = 0
+            else:
+                vehicle_dict['current_utilization'] = 0
+            
+            fleet.append(vehicle_dict)
+        
+        return fleet
+        
+    except Exception as e:
+        logger.error(f"Failed to get fleet: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# OPTIONAL: GET /routes/active (if not already present)
+# ============================================================================
+
+@app.get("/routes/active")
+async def get_active_routes():
+    """
+    Get all routes currently in progress
+    """
+    try:
+        current_state = state_manager.get_current_state()
+        return [route.to_dict() for route in current_state.active_routes]
+        
+    except Exception as e:
+        logger.error(f"Failed to get active routes: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/health")
 async def health_check():
@@ -191,7 +297,425 @@ async def get_system_status():
         active_routes=len(current_state.active_routes),
         timestamp=datetime.now().isoformat()
     )
+# ============= Autonomous Mode Control =============
 
+@app.post("/autonomous/start")
+async def start_autonomous_mode(
+    background_tasks: BackgroundTasks,
+    cycle_interval_minutes: int = 60
+):
+    """
+    Start autonomous decision-making mode
+    
+    Args:
+        cycle_interval_minutes: Time between decision cycles (default: 60)
+        
+    Returns:
+        Status message
+    """
+    global decision_engine
+    
+    if not decision_engine:
+        raise HTTPException(status_code=503, detail="Engine not initialized")
+    
+    if decision_engine.status == EngineStatus.AUTONOMOUS:
+        return {
+            "status": "already_running",
+            "message": "Autonomous mode is already active"
+        }
+    
+    # Start autonomous mode in background
+    async def run_autonomous():
+        await decision_engine.start_autonomous_mode(cycle_interval_minutes)
+    
+    background_tasks.add_task(run_autonomous)
+    
+    return {
+        "status": "started",
+        "cycle_interval_minutes": cycle_interval_minutes,
+        "message": f"Autonomous mode started - decisions every {cycle_interval_minutes} minutes"
+    }
+
+
+@app.post("/autonomous/stop")
+async def stop_autonomous_mode():
+    """Stop autonomous decision-making"""
+    global decision_engine
+    
+    if not decision_engine:
+        raise HTTPException(status_code=503, detail="Engine not initialized")
+    
+    decision_engine.stop_autonomous_mode()
+    
+    return {
+        "status": "stopped",
+        "message": "Autonomous mode stopped"
+    }
+
+
+# ============= Decision Cycle Endpoints =============
+
+@app.get("/cycles/recent")
+async def get_recent_cycles(n: int = 20):
+    """
+    Get recent decision cycles
+    
+    Args:
+        n: Number of recent cycles to return (default: 20, max: 100)
+        
+    Returns:
+        List of recent decision cycles with details
+    """
+    global decision_engine
+    
+    if not decision_engine:
+        raise HTTPException(status_code=503, detail="Engine not initialized")
+    
+    n = min(n, 100)  # Cap at 100
+    
+    return decision_engine.get_recent_cycles(n)
+
+
+@app.post("/trigger-cycle")
+async def trigger_single_cycle():
+    """
+    Manually trigger a single decision cycle
+    
+    Returns:
+        Cycle result details
+    """
+    global decision_engine
+    
+    if not decision_engine:
+        raise HTTPException(status_code=503, detail="Engine not initialized")
+    
+    if decision_engine.status == EngineStatus.AUTONOMOUS:
+        raise HTTPException(
+            status_code=400,
+            detail="Cannot trigger manual cycle while in autonomous mode"
+        )
+    
+    try:
+        cycle_result = decision_engine.run_cycle()
+        
+        return {
+            "status": "success",
+            "cycle_number": cycle_result.cycle_number,
+            "function_class": cycle_result.decision.function_class.value,
+            "action_type": cycle_result.decision.action_type,
+            "reward": cycle_result.reward_components.total_reward,
+            "td_error": cycle_result.td_error,
+            "shipments_dispatched": cycle_result.shipments_dispatched,
+            "vehicles_utilized": cycle_result.vehicles_utilized,
+            "execution_time_ms": cycle_result.execution_time_ms
+        }
+        
+    except Exception as e:
+        logger.error(f"Error in manual cycle trigger: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============= Metrics Endpoints =============
+
+@app.get("/metrics/performance")
+async def get_performance_metrics():
+    """
+    Get comprehensive performance metrics
+    
+    Returns:
+        Performance statistics across all cycles
+    """
+    global decision_engine
+    
+    if not decision_engine:
+        raise HTTPException(status_code=503, detail="Engine not initialized")
+    
+    try:
+        metrics = decision_engine.get_performance_metrics()
+        
+        return {
+            "total_cycles": metrics.total_cycles,
+            "total_shipments_processed": metrics.total_shipments_processed,
+            "total_dispatches": metrics.total_dispatches,
+            "avg_utilization": metrics.avg_utilization,
+            "avg_reward_per_cycle": metrics.avg_reward_per_cycle,
+            "avg_cycle_time_ms": metrics.avg_cycle_time_ms,
+            "function_class_usage": metrics.function_class_usage,
+            "learning_convergence": metrics.learning_convergence,
+            "on_time_delivery_rate": 0.89,  # TODO: Calculate from actual data
+            "cycles_last_hour": 1,  # TODO: Calculate from timestamps
+            "reward_trend": 0.0,  # TODO: Calculate trend
+            "sla_trend": 0.0,  # TODO: Calculate trend
+            "utilization_trend": 0.0  # TODO: Calculate trend
+        }
+        
+    except Exception as e:
+        logger.error(f"Error getting performance metrics: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/learning/vfa-metrics")
+async def get_vfa_metrics():
+    """
+    Get VFA learning metrics and statistics
+    
+    Returns:
+        VFA learning progress, feature importance, convergence info
+    """
+    global decision_engine
+    
+    if not decision_engine:
+        raise HTTPException(status_code=503, detail="Engine not initialized")
+    
+    try:
+        vfa_metrics = decision_engine.vfa.get_learning_metrics()
+        
+        # Calculate convergence score
+        avg_td_error = vfa_metrics.get('avg_td_error', 100)
+        convergence_score = 1.0 / (1.0 + avg_td_error / 100)
+        
+        return {
+            "num_updates": vfa_metrics['num_updates'],
+            "learning_rate": vfa_metrics['learning_rate'],
+            "epsilon": vfa_metrics['epsilon'],
+            "avg_td_error": vfa_metrics['avg_td_error'],
+            "max_td_error": vfa_metrics['max_td_error'],
+            "weight_norm": vfa_metrics['weight_norm'],
+            "feature_importance": vfa_metrics['feature_importance'],
+            "convergence_score": convergence_score,
+            "initial_learning_rate": decision_engine.config.get('vfa.learning.initial_learning_rate', 0.01),
+            "learning_rate_decay": decision_engine.config.get('vfa.learning.learning_rate_decay', 0.9995),
+            "min_learning_rate": decision_engine.config.get('vfa.learning.min_learning_rate', 0.0001),
+            "initial_epsilon": decision_engine.config.get('vfa.exploration.initial_epsilon', 0.1),
+            "epsilon_decay": decision_engine.config.get('vfa.exploration.epsilon_decay', 0.995),
+            "min_epsilon": decision_engine.config.get('vfa.exploration.final_epsilon', 0.01)
+        }
+        
+    except Exception as e:
+        logger.error(f"Error getting VFA metrics: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============= Analytics Endpoints =============
+
+@app.get("/analytics/function-class-distribution")
+async def get_function_class_distribution(last_n_cycles: int = 100):
+    """
+    Get distribution of function class usage
+    
+    Args:
+        last_n_cycles: Number of recent cycles to analyze
+        
+    Returns:
+        Breakdown of PFA/CFA/DLA usage
+    """
+    global decision_engine
+    
+    if not decision_engine:
+        raise HTTPException(status_code=503, detail="Engine not initialized")
+    
+    recent_cycles = decision_engine.get_recent_cycles(last_n_cycles)
+    
+    distribution = {
+        "PFA": 0,
+        "CFA": 0,
+        "DLA": 0
+    }
+    
+    for cycle in recent_cycles:
+        fc = cycle['function_class']
+        distribution[fc] = distribution.get(fc, 0) + 1
+    
+    return distribution
+
+
+@app.get("/analytics/reward-timeline")
+async def get_reward_timeline(last_n_cycles: int = 100):
+    """
+    Get reward values over time
+    
+    Args:
+        last_n_cycles: Number of recent cycles
+        
+    Returns:
+        Timeline of rewards for plotting
+    """
+    global decision_engine
+    
+    if not decision_engine:
+        raise HTTPException(status_code=503, detail="Engine not initialized")
+    
+    recent_cycles = decision_engine.get_recent_cycles(last_n_cycles)
+    
+    return {
+        "cycle_numbers": [c['cycle_number'] for c in recent_cycles],
+        "rewards": [c['reward'] for c in recent_cycles],
+        "vfa_values": [c['vfa_value'] for c in recent_cycles],
+        "td_errors": [c['td_error'] for c in recent_cycles]
+    }
+
+
+# ============= Health Check Enhancement =============
+
+@app.get("/health/detailed")
+async def detailed_health_check():
+    """
+    Detailed health check with all component status
+    
+    Returns:
+        Status of engine, integrations, database, etc.
+    """
+    global decision_engine, integration_manager, state_manager
+    
+    health = {
+        "status": "healthy",
+        "timestamp": datetime.now().isoformat(),
+        "components": {}
+    }
+    
+    # Check decision engine
+    if decision_engine:
+        health["components"]["decision_engine"] = {
+            "status": "online",
+            "mode": decision_engine.status.value,
+            "cycles": decision_engine.current_cycle
+        }
+    else:
+        health["components"]["decision_engine"] = {
+            "status": "offline",
+            "error": "Not initialized"
+        }
+    
+    # Check integrations
+    if integration_manager:
+        health["components"]["integrations"] = integration_manager.get_health_status()
+    else:
+        health["components"]["integrations"] = {
+            "status": "offline",
+            "error": "Not initialized"
+        }
+    
+    # Check state manager
+    if state_manager:
+        try:
+            current_state = state_manager.get_current_state()
+            health["components"]["state_manager"] = {
+                "status": "online",
+                "pending_shipments": len(current_state.pending_shipments),
+                "active_routes": len(current_state.active_routes)
+            }
+        except Exception as e:
+            health["components"]["state_manager"] = {
+                "status": "error",
+                "error": str(e)
+            }
+    else:
+        health["components"]["state_manager"] = {
+            "status": "offline",
+            "error": "Not initialized"
+        }
+    
+    # Overall status
+    if any(c.get("status") == "offline" for c in health["components"].values()):
+        health["status"] = "degraded"
+    
+    return health
+
+
+# ============= Error Handlers =============
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request, exc):
+    """Handle HTTP exceptions with proper error messages"""
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "error": exc.detail,
+            "timestamp": datetime.now().isoformat(),
+            "status_code": exc.status_code
+        }
+    )
+
+
+@app.exception_handler(Exception)
+async def general_exception_handler(request, exc):
+    """Handle general exceptions"""
+    logger.error(f"Unhandled exception: {exc}", exc_info=True)
+    return JSONResponse(
+        status_code=500,
+        content={
+            "error": "Internal server error",
+            "message": str(exc),
+            "timestamp": datetime.now().isoformat()
+        }
+    )
+
+
+# ============= CORS Configuration (if needed for web UI) =============
+
+from fastapi.middleware.cors import CORSMiddleware
+
+# Add this after app = FastAPI() if you need CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # In production, restrict to specific domains
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+# ============= Startup Event Enhancement =============
+
+# REPLACE the existing startup_event with this enhanced version:
+
+@app.on_event("startup")
+async def startup_event():
+    """Initialize all system components with enhanced error handling"""
+    global decision_engine, multi_scale_coordinator, integration_manager, state_manager, config
+    
+    logger.info("=" * 60)
+    logger.info("Starting Senga Sequential Decision Engine")
+    logger.info("=" * 60)
+    
+    try:
+        # Load configuration
+        config = SengaConfigurator()
+        logger.info("✓ Configuration loaded")
+        
+        # Initialize state manager
+        state_manager = StateManager()
+        logger.info("✓ State Manager initialized")
+        
+        # Initialize integrations
+        integration_config = {
+            'google_places_api_key': config.business.get('google_places_api_key', ''),
+            'oms_base_url': config.business.get('oms_base_url', ''),
+            'oms_api_key': config.business.get('oms_api_key', ''),
+            'driver_app_base_url': config.business.get('driver_app_base_url', ''),
+            'driver_app_api_key': config.business.get('driver_app_api_key', '')
+        }
+        integration_manager = IntegrationManager(integration_config)
+        logger.info("✓ Integration Manager initialized")
+        
+        # Initialize decision engine (with enhanced version)
+        decision_engine = DecisionEngine()
+        logger.info("✓ Decision Engine initialized")
+        
+        # Initialize multi-scale coordinator
+        multi_scale_coordinator = MultiScaleCoordinator()
+        logger.info("✓ Multi-Scale Coordinator initialized")
+        
+        logger.info("=" * 60)
+        logger.info("Senga SDE started successfully!")
+        logger.info("API available at http://localhost:8000")
+        logger.info("Docs available at http://localhost:8000/docs")
+        logger.info("Streamlit UI: streamlit run streamlit_app_complete.py")
+        logger.info("=" * 60)
+        
+    except Exception as e:
+        logger.error(f"Failed to start Senga SDE: {e}", exc_info=True)
+        raise
 # ============= Order Management Endpoints =============
 
 @app.post("/orders", response_model=OrderResponse)

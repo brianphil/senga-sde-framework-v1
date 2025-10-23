@@ -32,6 +32,7 @@ class VehicleStatus(Enum):
     UNLOADING = "unloading"
     OFFLINE = "offline"
     MAINTENANCE = "maintenance"
+    DISPATCHED = "dispatched"
 
 @dataclass
 class Location:

@@ -223,7 +223,7 @@ class ValueFunctionApproximator:
         # Average time to deadline for pending shipments (normalized)
         if state.pending_shipments:
             avg_hours_to_deadline = np.mean([
-                (s.delivery_deadline - state.timestamp).total_seconds() / 3600
+                (s.deadline - state.timestamp).total_seconds() / 3600
                 for s in state.pending_shipments
             ])
             features[4] = max(0, min(1, avg_hours_to_deadline / 48))  # Normalize to 0-1
@@ -271,7 +271,7 @@ class ValueFunctionApproximator:
             features[15] = avg_capacity / 50.0  # Normalize (assume max ~50 m³)
             
             # Fleet diversity (different vehicle types)
-            unique_types = len(set(v.type for v in available_vehicles))
+            unique_types = len(set(v.vehicle_type for v in available_vehicles))
             features[16] = unique_types / max(total_fleet, 1)
         
         # Active routes count

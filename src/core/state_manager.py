@@ -59,6 +59,25 @@ class Shipment:
     batch_id: Optional[str] = None
     route_id: Optional[str] = None
     
+    # Additional fields needed for proper SDE functionality:
+    declared_value: float = 0.0  # For cost calculations and prioritization
+    
+    # Legacy aliases for backwards compatibility (can remove later)
+    @property
+    def delivery_deadline(self):
+        """Alias for deadline"""
+        return self.deadline
+    
+    @property
+    def weight_kg(self):
+        """Alias for weight"""
+        return self.weight
+    
+    @property
+    def volume_m3(self):
+        """Alias for volume"""
+        return self.volume
+    
     def time_to_deadline(self, current_time: datetime) -> timedelta:
         """Time remaining until deadline"""
         return self.deadline - current_time
@@ -104,27 +123,11 @@ class Shipment:
             'deadline': self.deadline.isoformat(),
             'status': self.status.value,
             'priority': self.priority,
+            'declared_value': self.declared_value,  # ← ADD THIS
             'batch_id': self.batch_id,
             'route_id': self.route_id
         }
-    def priority_name(self) -> str:
-        """
-        Convert priority value to human-readable name
-        
-        Priority mapping:
-        - 3.0+ = EMERGENCY (2 hour SLA)
-        - 2.0-2.9 = URGENT (6 hour SLA)
-        - 1.0-1.9 = STANDARD (24 hour SLA)
-        
-        Returns:
-            Priority level as string
-        """
-        if self.priority >= 3.0:
-            return "EMERGENCY"
-        elif self.priority >= 2.0:
-            return "URGENT"
-        else:
-            return "STANDARD"
+    
     @classmethod
     def from_dict(cls, data: dict) -> 'Shipment':
         """Deserialize from storage"""
@@ -139,10 +142,10 @@ class Shipment:
             deadline=datetime.fromisoformat(data['deadline']),
             status=ShipmentStatus(data['status']),
             priority=data['priority'],
+            declared_value=data.get('declared_value', 0.0),  # ← ADD THIS (with default for old records)
             batch_id=data.get('batch_id'),
             route_id=data.get('route_id')
         )
-
 @dataclass
 class VehicleCapacity:
     volume: float  # m³
@@ -323,27 +326,60 @@ class SystemState:
 
 @dataclass
 class DecisionEvent:
-    """Record of a decision made by the system"""
+    """Record of a decision made by the system."""
     id: str
     timestamp: datetime
-    state_snapshot: SystemState
-    decision_type: str  # 'DISPATCH', 'WAIT', 'REOPTIMIZE'
-    function_class: str  # 'PFA', 'CFA', 'VFA', 'DLA'
-    action_details: dict
+    state_snapshot: 'SystemState'
+    decision_type: str  # 'DISPATCH', 'WAIT', 'REOPTIMIZE', etc.
+    function_class: str  # 'PFA', 'CFA', 'VFA', 'DLA', etc.
+    action_details: Dict
     reasoning: str
-    alternatives_considered: List[dict] = field(default_factory=list)
+    confidence: Optional[float] = None
+    reward: Optional[float] = None
+    vfa_value_before: Optional[float] = None
+    vfa_value_after: Optional[float] = None
+    td_error: Optional[float] = None
+    alternatives_considered: List[Dict] = field(default_factory=list)
     
+    @classmethod
     def to_dict(self) -> dict:
         return {
             'id': self.id,
             'timestamp': self.timestamp.isoformat(),
-            'state_snapshot': self.state_snapshot.to_dict(),
+            'state_snapshot': (
+                self.state_snapshot.to_dict()
+                if hasattr(self.state_snapshot, "to_dict")
+                else str(self.state_snapshot)
+            ),
             'decision_type': self.decision_type,
             'function_class': self.function_class,
             'action_details': self.action_details,
             'reasoning': self.reasoning,
-            'alternatives_considered': self.alternatives_considered
+            'confidence': self.confidence,
+            'reward': self.reward,
+            'vfa_value_before': self.vfa_value_before,
+            'vfa_value_after': self.vfa_value_after,
+            'td_error': self.td_error,
+            'alternatives_considered': self.alternatives_considered,
         }
+    @classmethod
+    def from_dict(cls, data: dict) -> 'DecisionEvent':
+        """Deserialize from storage"""
+        return cls(
+            id=data['id'],
+            timestamp=datetime.fromisoformat(data['timestamp']),
+            state_snapshot=SystemState.from_dict(data['state_snapshot']),
+            decision_type=data['decision_type'],
+            function_class=data['function_class'],
+            action_details=data['action_details'],
+            reasoning=data['reasoning'],
+            confidence=data.get('confidence'),
+            reward=data.get('reward'),
+            vfa_value_before=data.get('vfa_value_before'),
+            vfa_value_after=data.get('vfa_value_after'),
+            td_error=data.get('td_error'),
+            alternatives_considered=data.get('alternatives_considered', [])
+        )
 
 # ============= State Manager Implementation =============
 

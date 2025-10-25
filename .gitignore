@@ -1,2 +1,7 @@
 init_demo.py
 scripts/quick_fix.py
+test_ingestion.py
+data/senga_config.back.db
+data/senga_state.back.db
+logs/
+__pycache__/

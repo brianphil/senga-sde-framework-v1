@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 import logging
 import asyncio
 from enum import Enum
-
+from uuid import uuid4
 from .state_manager import (
     StateManager, SystemState, Shipment, ShipmentStatus, VehicleState,
     Route, DecisionEvent
@@ -326,20 +326,21 @@ class DecisionEngine:
         """Log decision event to database for analysis"""
         event = DecisionEvent(
             timestamp=cycle_result.timestamp,
-            cycle_number=cycle_result.cycle_number,
-            function_class_used=cycle_result.decision.function_class.value,
-            action_type=cycle_result.decision.action_type,
+            id=f"decision_{uuid4().hex[:8]}",
+            function_class=cycle_result.decision.function_class.value,
+            decision_type=cycle_result.decision.action_type,
             reasoning=cycle_result.decision.reasoning,
             confidence=cycle_result.decision.confidence,
             reward=cycle_result.reward_components.total_reward,
             vfa_value_before=cycle_result.vfa_value_before,
             vfa_value_after=cycle_result.vfa_value_after,
             td_error=cycle_result.td_error,
-            state_snapshot=str(cycle_result.state_before),  # Simplified
-            alternatives_considered=[]
+            state_snapshot=cycle_result.state_before,  # Simplified
+            alternatives_considered=[],
+            action_details=cycle_result.decision.action_details,
         )
         
-        self.state_manager.log_decision_event(event)
+        self.state_manager.log_decision(event)
     
     def get_performance_metrics(self) -> PerformanceMetrics:
         """Get comprehensive performance metrics"""

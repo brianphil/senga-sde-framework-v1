@@ -185,7 +185,7 @@ class DirectLookaheadApproximator:
             sim_state.timestamp += timedelta(hours=1)
         
         # Add terminal value estimate from VFA
-        terminal_value = self.vfa.evaluate(sim_state).value
+        terminal_value = self.vfa.estimate_value(sim_state).value
         total_value += (gamma ** horizon) * terminal_value
         
         return total_value

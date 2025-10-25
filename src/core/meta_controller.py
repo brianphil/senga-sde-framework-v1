@@ -203,6 +203,7 @@ class MetaController:
                 function_class=FunctionClass.CFA,
                 action_type='DISPATCH',
                 action_details={
+                    'type': 'DISPATCH',  # CRITICAL: Add type key
                     'batches': [
                         {
                             'id': b.id,
@@ -212,7 +213,9 @@ class MetaController:
                             'estimated_cost': b.total_cost
                         }
                         for b in solution.batches
-                    ]
+                    ],
+                    'total_cost': solution.total_cost,
+                    'avg_utilization': solution.avg_utilization
                 },
                 reasoning=solution.reasoning,
                 confidence=0.8 if solution.status == 'OPTIMAL' else 0.6
@@ -222,11 +225,36 @@ class MetaController:
             return MetaDecision(
                 function_class=FunctionClass.CFA,
                 action_type='WAIT',
-                action_details={},
+                action_details={'type': 'WAIT'},  # CRITICAL: Add type key
                 reasoning=solution.reasoning,
                 confidence=0.5
             )
     
+    def _use_pfa(self, state: SystemState) -> MetaDecision:
+        """Use PFA for simple/emergency cases"""
+        
+        action = self.pfa.select_action(state)
+        
+        if action.action_type == 'DISPATCH':
+            return MetaDecision(
+                function_class=FunctionClass.PFA,
+                action_type='DISPATCH',
+                action_details={
+                    'type': 'DISPATCH',  # CRITICAL: Add type key
+                    'batches': action.batches,
+                    'reasoning': action.reasoning
+                },
+                reasoning=action.reasoning,
+                confidence=0.7
+            )
+        else:
+            return MetaDecision(
+                function_class=FunctionClass.PFA,
+                action_type='WAIT',
+                action_details={'type': 'WAIT'},  # CRITICAL: Add type key
+                reasoning=action.reasoning,
+                confidence=0.7
+            )
     def _use_dla(self, state: SystemState,
                 complexity: ComplexityAssessment,
                 stakes: StakesAssessment) -> MetaDecision:

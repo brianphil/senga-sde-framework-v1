@@ -142,113 +142,115 @@ class DecisionEngine:
     
     def run_cycle(self, current_time: Optional[datetime] = None) -> CycleResult:
         """
-        Run a single decision cycle with closed learning loop
-        
-        This is the core sequential decision process:
-        1. Observe current state S_t
-        2. Estimate value V(S_t)
-        3. Make decision via meta-controller
-        4. Execute decision
-        5. Observe new state S_{t+1}
-        6. Calculate reward r_t
-        7. Update VFA with TD learning
-        8. Record results
+        Run a single decision cycle
         
         Args:
             current_time: Current timestamp (defaults to now)
             
         Returns:
-            CycleResult with complete cycle information
+            CycleResult with decision and execution details
         """
         if current_time is None:
             current_time = datetime.now()
         
         start_time = datetime.now()
         self.status = EngineStatus.RUNNING
-        self.current_cycle += 1
         
         try:
-            # === STEP 1: Observe State S_t ===
+            # Step 1: Get current state
             state_before = self.state_manager.get_current_state()
-            logger.info(
-                f"Cycle {self.current_cycle}: "
-                f"{len(state_before.pending_shipments)} pending, "
-                f"{len(state_before.get_available_vehicles())} vehicles available"
-            )
+            logger.info(f"Cycle {self.current_cycle}: {len(state_before.pending_shipments)} pending shipments")
             
-            # === STEP 2: Estimate V(S_t) ===
-            value_estimate_before = self.vfa.estimate_value(state_before)
-            logger.debug(f"V(S_t) = {value_estimate_before.value:.2f}")
-            
-            # === STEP 3: Make Decision ===
+            # Step 2: Make decision via meta-controller
             decision = self.meta_controller.decide(state_before)
             logger.info(
                 f"Decision: {decision.function_class.value} -> {decision.action_type} "
                 f"(confidence: {decision.confidence:.2f})"
             )
             
-            # === STEP 4: Execute Decision ===
+            # Step 3: Execute decision
             execution_result = self._execute_decision(decision, state_before)
             
-            # === STEP 5: Observe New State S_{t+1} ===
+            # Step 4: Get updated state
             state_after = self.state_manager.get_current_state()
-            value_estimate_after = self.vfa.estimate_value(state_after)
-            logger.debug(f"V(S_{{t+1}}) = {value_estimate_after.value:.2f}")
             
-            # === STEP 6: Calculate Reward r_t ===
+            # Step 5: Calculate reward
+            # CRITICAL FIX: Normalize action structure before passing to reward calculator
+            # Ensure action dict always has 'type' key by combining action_type and action_details
+            normalized_action = self._normalize_action(decision)
+            
             reward_components = self.reward_calculator.calculate_reward(
                 state_before,
-                decision.action_details,
-                state_after
-            )
-            logger.info(f"Reward: {reward_components.total_reward:.1f} - {reward_components.reasoning}")
-            
-            # === STEP 7: VFA TD Learning Update ===
-            self.vfa.update(
-                state_before,
-                decision.action_details,
-                reward_components.total_reward,
+                normalized_action,  # Pass normalized action instead of action_details
                 state_after
             )
             
-            td_error = (
-                reward_components.total_reward + 
-                self.vfa.discount_factor * value_estimate_after.value - 
-                value_estimate_before.value
-            )
+            # Step 6: Trigger learning update (if dispatch occurred)
+            learning_updates = 0
+            if decision.action_type == 'DISPATCH':
+                learning_updates = self._trigger_learning_update(
+                    state_before, decision, execution_result
+                )
             
-            # === STEP 8: Record Results ===
+            # Step 7: Record cycle result
             execution_time = (datetime.now() - start_time).total_seconds() * 1000
-            
-            cycle_result = CycleResult(
-                cycle_number=self.current_cycle,
+            result = CycleResult(
                 timestamp=current_time,
+                cycle_number=self.current_cycle,  # ADD
                 state_before=state_before,
                 decision=decision,
-                reward_components=reward_components,
                 state_after=state_after,
                 execution_time_ms=execution_time,
                 shipments_dispatched=execution_result['shipments_dispatched'],
                 vehicles_utilized=execution_result['vehicles_utilized'],
-                learning_updates_applied=True,
-                vfa_value_before=value_estimate_before.value,
-                vfa_value_after=value_estimate_after.value,
-                td_error=td_error
+                reward_components=reward_components,  
+                vfa_value_before=self.vfa.evaluate(state_before).value,  
+                vfa_value_after=self.vfa.evaluate(state_after).value,
+                td_error=0.0,
+                learning_updates_applied=learning_updates
             )
             
-            self.cycle_history.append(cycle_result)
-            
-            # Log decision event to database
-            self._log_decision_event(cycle_result)
-            
+            self.cycle_history.append(result)
+            self.current_cycle += 1
             self.status = EngineStatus.IDLE
-            return cycle_result
+            
+            logger.info(f"Cycle completed in {execution_time:.1f}ms")
+            return result
             
         except Exception as e:
-            logger.error(f"Error in decision cycle: {e}", exc_info=True)
             self.status = EngineStatus.ERROR
+            logger.error(f"Cycle failed: {str(e)}", exc_info=True)
             raise
     
+    def _normalize_action(self, decision: MetaDecision) -> dict:
+        """
+        Normalize action structure to ensure consistent format for reward calculation
+        
+        Mathematical Foundation:
+        Action space A must have consistent representation:
+        a ∈ A where a = {type: ActionType, parameters: Dict}
+        
+        This ensures reward function R(s,a,s') receives well-formed actions.
+        
+        Args:
+            decision: MetaDecision from meta-controller
+            
+        Returns:
+            Normalized action dict with 'type' key and all parameters
+        """
+        # Start with action_details
+        normalized = decision.action_details.copy() if decision.action_details else {}
+        
+        # CRITICAL: Ensure 'type' key is present
+        # If action_details doesn't have 'type', use decision.action_type
+        if 'type' not in normalized:
+            normalized['type'] = decision.action_type
+        
+        # Add metadata that may be useful for reward calculation
+        normalized['function_class'] = decision.function_class.value
+        normalized['confidence'] = decision.confidence
+        
+        return normalized 
     def _execute_decision(self, decision: MetaDecision, state: SystemState) -> Dict:
         """
         Execute the decision and update system state

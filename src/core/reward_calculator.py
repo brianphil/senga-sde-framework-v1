@@ -15,9 +15,11 @@ from typing import Dict, List
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 import numpy as np
-
+from logging import getLogger
 from .state_manager import SystemState, Shipment, Route, VehicleState
 from ..config.senga_config import SengaConfigurator
+
+logger = getLogger(__name__)
 
 @dataclass
 class RewardComponents:
@@ -63,38 +65,124 @@ class RewardCalculator:
         self.min_acceptable_utilization = self.config.min_utilization
         self.sla_target_hours = self.config.sla_hours
     
-    def calculate_reward(self, 
-                        state_before: SystemState,
-                        action: Dict,
-                        state_after: SystemState) -> RewardComponents:
+    def calculate_reward(
+        self,
+        state_before: SystemState,
+        action: dict,
+        state_after: SystemState
+    ) -> Dict[str, float]:
         """
-        Calculate reward for transitioning from state_before to state_after via action
+        Calculate reward components for state transition
+        
+        Mathematical Foundation:
+        R(s, a, s') = R_utilization + R_timeliness - C_operations - P_delays
+        
+        Where:
+        - R_utilization: Bonus for vehicle utilization
+        - R_timeliness: Bonus for on-time deliveries  
+        - C_operations: Operational costs
+        - P_delays: Penalties for delays and SLA violations
         
         Args:
-            state_before: State S_t before decision
-            action: Action a_t taken (dispatch or wait)
-            state_after: Resulting state S_{t+1}
+            state_before: State before action
+            action: Action taken (MUST have 'type' key)
+            state_after: State after action
             
         Returns:
-            RewardComponents with detailed breakdown
+            Dict with reward components
         """
+        # DEFENSIVE PROGRAMMING: Validate action structure
+        if not isinstance(action, dict):
+            raise ValueError(f"Action must be dict, got {type(action)}")
         
-        if action['type'] == 'WAIT':
-            return self._reward_for_wait(state_before, state_after)
-        elif action['type'] == 'DISPATCH':
-            return self._reward_for_dispatch(state_before, action, state_after)
-        else:
-            # Unknown action type
-            return RewardComponents(
-                utilization_reward=0.0,
-                on_time_reward=0.0,
-                cost_penalty=0.0,
-                late_penalty=0.0,
-                efficiency_bonus=0.0,
-                total_reward=0.0,
-                reasoning="Unknown action type"
+        if 'type' not in action:
+            raise ValueError(
+                f"Action dict must have 'type' key. Got keys: {list(action.keys())}. "
+                f"This indicates an integration error in decision_engine.py"
             )
+        
+        action_type = action['type']
+        
+        # Initialize reward components
+        components = {
+            'utilization_bonus': 0.0,
+            'timeliness_bonus': 0.0,
+            'operational_cost': 0.0,
+            'delay_penalty': 0.0,
+            'total': 0.0
+        }
+        
+        if action_type == 'WAIT':
+            # Small negative reward for waiting (opportunity cost)
+            components['operational_cost'] = self.config.get('wait_cost_per_cycle', 10.0)
+            components['total'] = -components['operational_cost']
+            
+        elif action_type in ['DISPATCH', 'DISPATCH_IMMEDIATE']:
+            # Extract batches from action
+            batches = action.get('batches', [])
+            
+            if not batches:
+                logger.warning("DISPATCH action with no batches - treating as WAIT")
+                components['operational_cost'] = self.config.get('wait_cost_per_cycle', 10.0)
+                components['total'] = -components['operational_cost']
+                return components
+            
+            # Calculate reward components for each batch
+            for batch in batches:
+                # Utilization bonus
+                utilization = batch.get('utilization', 0.0)
+                util_bonus_rate = self.config.get('utilization_bonus_per_percent', 100.0)
+                components['utilization_bonus'] += utilization * 100 * util_bonus_rate
+                
+                # Operational cost
+                batch_cost = batch.get('estimated_cost', 0.0)
+                components['operational_cost'] += batch_cost
+                
+                # Timeliness bonus (estimated based on shipment urgency)
+                shipment_ids = batch.get('shipments', [])
+                on_time_bonus_per_shipment = self.config.get('on_time_delivery_bonus', 1000.0)
+                # Assume 90% on-time for now (actual tracked later)
+                components['timeliness_bonus'] += len(shipment_ids) * on_time_bonus_per_shipment * 0.9
+                
+                # Delay penalty (estimated based on time pressure)
+                # This is a risk-adjusted penalty
+                penalty_rate = self.config.get('delay_penalty_per_hour', 500.0)
+                avg_time_pressure = self._estimate_time_pressure(state_before, shipment_ids)
+                if avg_time_pressure > 0.7:  # High pressure = higher delay risk
+                    risk_factor = (avg_time_pressure - 0.7) / 0.3  # 0 to 1
+                    estimated_delay_penalty = len(shipment_ids) * penalty_rate * risk_factor * 0.2
+                    components['delay_penalty'] += estimated_delay_penalty
+            
+            # Total reward
+            components['total'] = (
+                components['utilization_bonus'] +
+                components['timeliness_bonus'] -
+                components['operational_cost'] -
+                components['delay_penalty']
+            )
+        
+        else:
+            logger.warning(f"Unknown action type: {action_type}. Assuming zero reward.")
+            components['total'] = 0.0
+        
+        return components
     
+    def _estimate_time_pressure(self, state: SystemState, shipment_ids: List[str]) -> float:
+        """
+        Estimate average time pressure for shipments
+        
+        Returns value between 0 (no pressure) and 1 (urgent)
+        """
+        if not shipment_ids:
+            return 0.0
+        
+        pressures = []
+        for shipment in state.pending_shipments:
+            if shipment.id in shipment_ids:
+                pressure = shipment.time_pressure(state.timestamp)
+                pressures.append(pressure)
+        
+        return sum(pressures) / len(pressures) if pressures else 0.0 
     def _reward_for_wait(self, state_before: SystemState, state_after: SystemState) -> RewardComponents:
         """
         Reward for WAIT decision

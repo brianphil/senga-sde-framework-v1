@@ -120,7 +120,27 @@ class ValueFunctionApproximator:
             confidence=confidence,
             features=features
         )
-    
+    def evaluate(self, state: SystemState) -> ValueEstimate:
+        """
+        Evaluate V(S_t | θ) = θ^T · φ(S_t)
+        
+        Returns: ValueEstimate with value and confidence
+        """
+        features = self.extract_features(state)
+        value = np.dot(self.weights, features)
+        
+        # Confidence based on recent prediction errors
+        if len(self.recent_errors) > 10:
+            error_std = np.std(self.recent_errors[-100:])
+            confidence = 1.0 / (1.0 + error_std)
+        else:
+            confidence = 0.5
+        
+        return ValueEstimate(
+            value=value,
+            confidence=min(confidence, 1.0),
+            features=features
+        )
     def update(self, s_t: SystemState, action: Dict, reward: float, s_tp1: SystemState):
         """
         TD(λ) Update: Learn from experience (s_t, a_t, r_t, s_{t+1})

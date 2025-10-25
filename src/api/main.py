@@ -23,13 +23,15 @@ from src.core.state_manager import (
     Shipment, 
     ShipmentStatus, 
     VehicleState, 
-    VehicleStatus  # ← Add these two
+    VehicleStatus 
 )
 from ..config.senga_config import SengaConfigurator
 from ..core.multi_scale_coordinator import MultiScaleCoordinator
 from ..integrations.external_systems import IntegrationManager
 # Import the new adapter
 from .adapters import OrderAdapter, VehicleAdapter
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 # Create logs directory if it doesn't exist
 log_dir = Path("logs")

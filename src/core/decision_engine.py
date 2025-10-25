@@ -12,6 +12,7 @@ import logging
 import asyncio
 from enum import Enum
 from uuid import uuid4
+import sys
 from .state_manager import (
     StateManager, SystemState, Shipment, ShipmentStatus, VehicleState,
     Route, DecisionEvent
@@ -20,7 +21,7 @@ from .meta_controller import MetaController, MetaDecision, FunctionClass
 from .vfa import ValueFunctionApproximator
 from .reward_calculator import RewardCalculator, RewardComponents
 from ..config.senga_config import SengaConfigurator
-
+sys.stdout.reconfigure(encoding='utf-8')
 logger = logging.getLogger(__name__)
 
 class EngineStatus(Enum):
@@ -266,7 +267,7 @@ class DecisionEngine:
                 'routes_created': 0
             }
         
-        elif decision.action_type == 'DISPATCH':
+        elif decision.action_type == 'DISPATCH' or decision.action_type == 'DISPATCH_IMMEDIATE':
             batches = decision.action_details.get('batches', [])
             
             shipments_dispatched = 0

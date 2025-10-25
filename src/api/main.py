@@ -38,6 +38,7 @@ log_dir.mkdir(exist_ok=True)
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
+    encoding='utf-8',
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
         logging.FileHandler(log_dir / 'senga_sde.log'),
@@ -136,19 +137,19 @@ async def startup_event():
     try:
         # Initialize configuration
         config = SengaConfigurator()
-        logger.info("✓ Configuration loaded")
+        logger.info(" Configuration loaded")
         
         # Initialize state manager (with database persistence)
         state_manager = StateManager()
-        logger.info("✓ State Manager initialized with persistent storage")
+        logger.info(" State Manager initialized with persistent storage")
         
         # Initialize decision engine
         decision_engine = DecisionEngine()
-        logger.info("✓ Decision Engine initialized")
+        logger.info(" Decision Engine initialized")
         
         # Load existing pending orders count
         current_state = state_manager.get_current_state()
-        logger.info(f"✓ Loaded {len(current_state.pending_shipments)} pending orders from database")
+        logger.info(f" Loaded {len(current_state.pending_shipments)} pending orders from database")
         
         logger.info("=" * 60)
         logger.info("Senga SDE Ready")
@@ -681,11 +682,11 @@ async def startup_event():
     try:
         # Load configuration
         config = SengaConfigurator()
-        logger.info("✓ Configuration loaded")
+        logger.info(" Configuration loaded")
         
         # Initialize state manager
         state_manager = StateManager()
-        logger.info("✓ State Manager initialized")
+        logger.info(" State Manager initialized")
         
         # Initialize integrations
         integration_config = {
@@ -696,15 +697,15 @@ async def startup_event():
             'driver_app_api_key': config.business.get('driver_app_api_key', '')
         }
         integration_manager = IntegrationManager(integration_config)
-        logger.info("✓ Integration Manager initialized")
+        logger.info(" Integration Manager initialized")
         
         # Initialize decision engine (with enhanced version)
         decision_engine = DecisionEngine()
-        logger.info("✓ Decision Engine initialized")
+        logger.info(" Decision Engine initialized")
         
         # Initialize multi-scale coordinator
         multi_scale_coordinator = MultiScaleCoordinator()
-        logger.info("✓ Multi-Scale Coordinator initialized")
+        logger.info(" Multi-Scale Coordinator initialized")
         
         logger.info("=" * 60)
         logger.info("Senga SDE started successfully!")
@@ -745,7 +746,7 @@ async def create_order(order_request: OrderCreateRequest):
         if not success:
             raise HTTPException(status_code=500, detail="Failed to save order to database")
         
-        logger.info(f"✓ Order {shipment.id} created and persisted to database")
+        logger.info(f" Order {shipment.id} created and persisted to database")
         
         # Convert back to API format for response
         response_dict = OrderAdapter.from_shipment_to_api(shipment)
@@ -773,7 +774,7 @@ async def get_pending_orders():
         # Convert to API format using adapter
         orders_api_format = OrderAdapter.batch_from_shipments_to_api(pending_shipments)
         
-        logger.info(f"✓ Retrieved {len(orders_api_format)} pending orders from database")
+        logger.info(f" Retrieved {len(orders_api_format)} pending orders from database")
         
         return [OrderResponse(**order) for order in orders_api_format]
         
@@ -856,7 +857,7 @@ async def trigger_consolidation_cycle(request: ConsolidationCycleRequest):
                 }
                 dispatched_batches.append(batch_info)
         
-        logger.info(f"✓ Consolidation cycle complete: {len(dispatched_orders)} dispatched, {len(waiting_orders)} waiting")
+        logger.info(f" Consolidation cycle complete: {len(dispatched_orders)} dispatched, {len(waiting_orders)} waiting")
         
         return ConsolidationCycleResponse(
             timestamp=datetime.now().isoformat(),

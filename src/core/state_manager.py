@@ -94,7 +94,15 @@ class Shipment:
             return 1.0
         
         return 1.0 - (remaining.total_seconds() / total_sla.total_seconds())
-    
+   
+    def priority_name(self) -> str:
+        """Convert priority value to readable name"""
+        if self.priority >= 3.0:
+            return "EMERGENCY"
+        elif self.priority >= 2.0:
+            return "URGENT"
+        else:
+            return "STANDARD"
     def to_dict(self) -> dict:
         """Serialize for storage"""
         return {

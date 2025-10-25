@@ -231,30 +231,45 @@ class MetaController:
             )
     
     def _use_pfa(self, state: SystemState) -> MetaDecision:
-        """Use PFA for simple/emergency cases"""
-        
-        action = self.pfa.select_action(state)
-        
-        if action.action_type == 'DISPATCH':
-            return MetaDecision(
-                function_class=FunctionClass.PFA,
-                action_type='DISPATCH',
-                action_details={
-                    'type': 'DISPATCH',  # CRITICAL: Add type key
-                    'batches': action.batches,
-                    'reasoning': action.reasoning
-                },
-                reasoning=action.reasoning,
-                confidence=0.7
-            )
-        else:
-            return MetaDecision(
-                function_class=FunctionClass.PFA,
-                action_type='WAIT',
-                action_details={'type': 'WAIT'},  # CRITICAL: Add type key
-                reasoning=action.reasoning,
-                confidence=0.7
-            )
+            """Use PFA for simple/emergency cases"""
+            
+            action = self.pfa.select_action(state)
+            
+            if action.action_type in ['DISPATCH', 'DISPATCH_IMMEDIATE']:
+                # Convert PFA action format to standard batch format
+                batches = []
+                if hasattr(action, 'batches') and action.batches:
+                    batches = action.batches
+                elif 'shipments' in action.__dict__ or (hasattr(action, 'shipments') and action.shipments):
+                    # PFA returns simple format - convert to batch format
+                    batches = [{
+                        'id': f"PFA_BATCH_{state.timestamp.timestamp()}",
+                        'shipments': action.shipments if isinstance(action.shipments, list) else [action.shipments],
+                        'vehicle': action.vehicle if hasattr(action, 'vehicle') else None,
+                        'utilization': 0.8,  # Estimate
+                        'estimated_cost': 5000  # Estimate
+                    }]
+                
+                return MetaDecision(
+                    function_class=FunctionClass.PFA,
+                    action_type=action.action_type,
+                    action_details={
+                        'type': action.action_type,
+                        'batches': batches,
+                        'reasoning': action.reasoning
+                    },
+                    reasoning=action.reasoning,
+                    confidence=1.0
+                )
+            else:
+                return MetaDecision(
+                    function_class=FunctionClass.PFA,
+                    action_type='WAIT',
+                    action_details={'type': 'WAIT'},
+                    reasoning=action.reasoning,
+                    confidence=0.7
+                )
+            
     def _use_dla(self, state: SystemState,
                 complexity: ComplexityAssessment,
                 stakes: StakesAssessment) -> MetaDecision:

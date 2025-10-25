@@ -21,7 +21,6 @@ from .meta_controller import MetaController, MetaDecision, FunctionClass
 from .vfa import ValueFunctionApproximator
 from .reward_calculator import RewardCalculator, RewardComponents
 from ..config.senga_config import SengaConfigurator
-sys.stdout.reconfigure(encoding='utf-8')
 logger = logging.getLogger(__name__)
 
 class EngineStatus(Enum):
@@ -167,7 +166,7 @@ class DecisionEngine:
                 f"Decision: {decision.function_class.value} -> {decision.action_type} "
                 f"(confidence: {decision.confidence:.2f})"
             )
-            
+            logger.info(f"Action details: {decision.action_details}")
             # Step 3: Execute decision
             execution_result = self._execute_decision(decision, state_before)
             
@@ -269,7 +268,7 @@ class DecisionEngine:
                 'routes_created': 0
             }
         
-        elif decision.action_type == 'DISPATCH' or decision.action_type == 'DISPATCH_IMMEDIATE':
+        elif decision.action_type in ['DISPATCH', 'DISPATCH_IMMEDIATE']:
             batches = decision.action_details.get('batches', [])
             
             shipments_dispatched = 0

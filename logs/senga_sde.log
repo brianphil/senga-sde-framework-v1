@@ -11441,3 +11441,2459 @@ TypeError: CycleResult.__init__() missing 5 required positional arguments: 'cycl
 2025-10-25 12:03:28,594 - src.api.main - INFO -  Retrieved 40 pending orders from database
 2025-10-25 12:03:33,122 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
 2025-10-25 12:03:33,123 - src.api.main - INFO - Shutdown complete
+2025-10-25 12:05:43,903 - src.api.main - INFO - ============================================================
+2025-10-25 12:05:43,906 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 12:05:43,906 - src.api.main - INFO - ============================================================
+2025-10-25 12:05:43,927 - src.api.main - INFO -  Configuration loaded
+2025-10-25 12:05:43,929 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 12:05:43,936 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:05:43,941 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:05:43,943 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:05:43,943 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 12:05:43,944 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 12:05:43,947 - src.api.main - INFO -  Loaded 40 pending orders from database
+2025-10-25 12:05:43,947 - src.api.main - INFO - ============================================================
+2025-10-25 12:05:43,948 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 12:05:43,948 - src.api.main - INFO - ============================================================
+2025-10-25 12:05:43,948 - src.api.main - INFO - ============================================================
+2025-10-25 12:05:43,949 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 12:05:43,949 - src.api.main - INFO - ============================================================
+2025-10-25 12:05:43,949 - src.api.main - INFO -  Configuration loaded
+2025-10-25 12:05:43,951 - src.api.main - INFO -  State Manager initialized
+2025-10-25 12:05:45,158 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 12:05:45,168 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 12:05:45,171 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 12:05:45,172 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 12:05:45,172 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 12:05:45,190 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:05:45,197 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:05:45,200 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:05:45,201 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 12:05:45,201 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 12:05:45,207 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:05:45,207 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 12:05:45,207 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 12:05:45,208 - src.api.main - INFO - ============================================================
+2025-10-25 12:05:45,208 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 12:05:45,209 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 12:05:45,209 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 12:05:45,209 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 12:05:45,210 - src.api.main - INFO - ============================================================
+2025-10-25 12:05:48,607 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:05:53,582 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:05:55,184 - src.api.main - INFO - Running consolidation cycle with 40 pending orders
+2025-10-25 12:05:55,191 - src.core.decision_engine - INFO - Cycle 0: 40 pending shipments
+2025-10-25 12:05:55,192 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-25 12:05:55,193 - src.core.decision_engine - INFO - Executed DISPATCH: 0 shipments, 0 vehicles, 0 routes
+2025-10-25 12:05:55,197 - src.core.reward_calculator - WARNING - DISPATCH action with no batches - treating as WAIT
+2025-10-25 12:05:55,201 - src.core.decision_engine - INFO - Cycle completed in 13.3ms
+2025-10-25 12:05:55,207 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 40 waiting
+2025-10-25 12:05:55,233 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:05:58,590 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:06:03,580 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:06:08,596 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:06:13,594 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:06:19,493 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:06:24,515 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:06:29,495 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:06:34,515 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:06:39,482 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:06:44,501 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:06:49,494 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:06:54,485 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:06:59,490 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:07:04,520 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:07:09,497 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:07:14,513 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:07:54,485 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:08:44,276 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:08:44,403 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 12:08:44,404 - src.api.main - INFO - Shutdown complete
+2025-10-25 12:08:45,086 - watchfiles.main - INFO - 2 changes detected
+2025-10-25 12:08:47,462 - watchfiles.main - INFO - 5 changes detected
+2025-10-25 12:08:49,254 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:08:49,299 - src.api.main - INFO - ============================================================
+2025-10-25 12:08:49,302 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 12:08:49,304 - src.api.main - INFO - ============================================================
+2025-10-25 12:08:49,328 - src.api.main - INFO -  Configuration loaded
+2025-10-25 12:08:49,330 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 12:08:49,343 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:08:49,349 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:08:49,353 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:08:49,354 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 12:08:49,354 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 12:08:49,359 - src.api.main - INFO -  Loaded 40 pending orders from database
+2025-10-25 12:08:49,359 - src.api.main - INFO - ============================================================
+2025-10-25 12:08:49,359 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 12:08:49,359 - src.api.main - INFO - ============================================================
+2025-10-25 12:08:49,360 - src.api.main - INFO - ============================================================
+2025-10-25 12:08:49,360 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 12:08:49,360 - src.api.main - INFO - ============================================================
+2025-10-25 12:08:49,361 - src.api.main - INFO -  Configuration loaded
+2025-10-25 12:08:49,362 - src.api.main - INFO -  State Manager initialized
+2025-10-25 12:08:49,609 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:08:49,971 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:08:50,335 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:08:50,501 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 12:08:50,508 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 12:08:50,509 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 12:08:50,510 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 12:08:50,512 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 12:08:50,525 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:08:50,529 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:08:50,532 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:08:50,533 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 12:08:50,533 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 12:08:50,541 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:08:50,541 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 12:08:50,542 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 12:08:50,542 - src.api.main - INFO - ============================================================
+2025-10-25 12:08:50,542 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 12:08:50,542 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 12:08:50,543 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 12:08:50,543 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 12:08:50,543 - src.api.main - INFO - ============================================================
+2025-10-25 12:08:50,695 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:08:51,057 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:08:51,412 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:08:51,774 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:08:52,182 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:08:52,592 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:08:53,011 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:08:53,425 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:08:53,835 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:08:54,138 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 12:08:54,138 - src.api.main - INFO - Shutdown complete
+2025-10-25 12:09:04,741 - src.api.main - INFO - ============================================================
+2025-10-25 12:09:04,744 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 12:09:04,745 - src.api.main - INFO - ============================================================
+2025-10-25 12:09:04,768 - src.api.main - INFO -  Configuration loaded
+2025-10-25 12:09:04,770 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 12:09:04,777 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:09:04,783 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:09:04,785 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:09:04,785 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 12:09:04,786 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 12:09:04,787 - src.api.main - INFO -  Loaded 40 pending orders from database
+2025-10-25 12:09:04,788 - src.api.main - INFO - ============================================================
+2025-10-25 12:09:04,788 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 12:09:04,788 - src.api.main - INFO - ============================================================
+2025-10-25 12:09:04,789 - src.api.main - INFO - ============================================================
+2025-10-25 12:09:04,789 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 12:09:04,789 - src.api.main - INFO - ============================================================
+2025-10-25 12:09:04,789 - src.api.main - INFO -  Configuration loaded
+2025-10-25 12:09:04,791 - src.api.main - INFO -  State Manager initialized
+2025-10-25 12:09:06,421 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 12:09:06,432 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 12:09:06,433 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 12:09:06,434 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 12:09:06,436 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 12:09:06,443 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:09:06,452 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:09:06,454 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:09:06,454 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 12:09:06,455 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 12:09:06,458 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:09:06,458 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 12:09:06,459 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 12:09:06,459 - src.api.main - INFO - ============================================================
+2025-10-25 12:09:06,459 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 12:09:06,460 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 12:09:06,460 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 12:09:06,460 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 12:09:06,461 - src.api.main - INFO - ============================================================
+2025-10-25 12:09:08,616 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:09:13,609 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:09:13,770 - src.api.main - INFO - Running consolidation cycle with 40 pending orders
+2025-10-25 12:09:13,773 - src.core.decision_engine - INFO - Cycle 0: 40 pending shipments
+2025-10-25 12:09:13,775 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-25 12:09:13,776 - src.core.decision_engine - INFO - Action details: {'shipments': ['ORDE5A504AF'], 'vehicle': 'VEH002'}
+2025-10-25 12:09:13,782 - src.core.decision_engine - INFO - Executed DISPATCH: 0 shipments, 0 vehicles, 0 routes
+2025-10-25 12:09:13,783 - src.core.reward_calculator - WARNING - DISPATCH action with no batches - treating as WAIT
+2025-10-25 12:09:13,787 - src.core.decision_engine - INFO - Cycle completed in 13.7ms
+2025-10-25 12:09:13,793 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 40 waiting
+2025-10-25 12:09:13,821 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:09:18,589 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:09:23,596 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:09:28,592 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:09:33,594 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:09:38,598 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:09:43,620 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:09:49,491 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:09:54,498 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:09:59,496 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:10:04,491 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:10:09,516 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:10:14,522 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:10:19,525 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:10:24,517 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:10:29,519 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:10:34,516 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:10:39,488 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:10:44,548 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:10:54,497 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:11:09,692 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:11:09,860 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 12:11:09,861 - src.api.main - INFO - Shutdown complete
+2025-10-25 12:11:10,543 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:11:12,366 - watchfiles.main - INFO - 5 changes detected
+2025-10-25 12:11:23,071 - src.api.main - INFO - ============================================================
+2025-10-25 12:11:23,074 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 12:11:23,074 - src.api.main - INFO - ============================================================
+2025-10-25 12:11:23,095 - src.api.main - INFO -  Configuration loaded
+2025-10-25 12:11:23,097 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 12:11:23,105 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:11:23,109 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:11:23,112 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:11:23,112 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 12:11:23,112 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 12:11:23,117 - src.api.main - INFO -  Loaded 40 pending orders from database
+2025-10-25 12:11:23,117 - src.api.main - INFO - ============================================================
+2025-10-25 12:11:23,118 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 12:11:23,118 - src.api.main - INFO - ============================================================
+2025-10-25 12:11:23,118 - src.api.main - INFO - ============================================================
+2025-10-25 12:11:23,119 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 12:11:23,119 - src.api.main - INFO - ============================================================
+2025-10-25 12:11:23,119 - src.api.main - INFO -  Configuration loaded
+2025-10-25 12:11:23,121 - src.api.main - INFO -  State Manager initialized
+2025-10-25 12:11:24,841 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 12:11:24,850 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 12:11:24,853 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 12:11:24,855 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 12:11:24,856 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 12:11:24,887 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:11:24,895 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:11:24,901 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:11:24,902 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 12:11:24,902 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 12:11:24,907 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:11:24,907 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 12:11:24,908 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 12:11:24,908 - src.api.main - INFO - ============================================================
+2025-10-25 12:11:24,909 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 12:11:24,909 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 12:11:24,909 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 12:11:24,910 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 12:11:24,910 - src.api.main - INFO - ============================================================
+2025-10-25 12:11:28,617 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:11:33,607 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:11:37,522 - src.api.main - INFO - Running consolidation cycle with 40 pending orders
+2025-10-25 12:11:37,525 - src.core.decision_engine - INFO - Cycle 0: 40 pending shipments
+2025-10-25 12:11:37,529 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-25 12:11:37,529 - src.core.decision_engine - INFO - Action details: {'shipments': ['ORDE5A504AF'], 'vehicle': 'VEH002'}
+2025-10-25 12:11:37,530 - src.core.decision_engine - INFO - Executed DISPATCH: 0 shipments, 0 vehicles, 0 routes
+2025-10-25 12:11:37,531 - src.core.reward_calculator - WARNING - DISPATCH action with no batches - treating as WAIT
+2025-10-25 12:11:37,533 - src.core.decision_engine - INFO - Cycle completed in 9.6ms
+2025-10-25 12:11:37,539 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 40 waiting
+2025-10-25 12:11:37,570 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:11:38,593 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:11:43,606 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:11:48,592 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:11:53,587 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:11:58,588 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:12:03,608 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:12:08,609 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:12:13,600 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:12:19,490 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:12:24,513 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:12:29,489 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:12:34,528 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:12:39,505 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:12:44,516 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:12:49,493 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:12:54,530 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:12:59,517 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:13:04,505 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:13:09,499 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:13:14,501 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:13:54,517 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:14:50,660 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:14:50,856 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 12:14:50,859 - src.api.main - INFO - Shutdown complete
+2025-10-25 12:14:51,599 - watchfiles.main - INFO - 2 changes detected
+2025-10-25 12:14:53,398 - watchfiles.main - INFO - 5 changes detected
+2025-10-25 12:14:55,110 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:14:55,165 - src.api.main - INFO - ============================================================
+2025-10-25 12:14:55,166 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 12:14:55,167 - src.api.main - INFO - ============================================================
+2025-10-25 12:14:55,184 - src.api.main - INFO -  Configuration loaded
+2025-10-25 12:14:55,186 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 12:14:55,194 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:14:55,200 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:14:55,202 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:14:55,202 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 12:14:55,203 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 12:14:55,205 - src.api.main - INFO -  Loaded 40 pending orders from database
+2025-10-25 12:14:55,205 - src.api.main - INFO - ============================================================
+2025-10-25 12:14:55,206 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 12:14:55,206 - src.api.main - INFO - ============================================================
+2025-10-25 12:14:55,206 - src.api.main - INFO - ============================================================
+2025-10-25 12:14:55,207 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 12:14:55,207 - src.api.main - INFO - ============================================================
+2025-10-25 12:14:55,207 - src.api.main - INFO -  Configuration loaded
+2025-10-25 12:14:55,209 - src.api.main - INFO -  State Manager initialized
+2025-10-25 12:14:55,469 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:14:56,383 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 12:14:56,387 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 12:14:56,388 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 12:14:56,389 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 12:14:56,389 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 12:14:56,401 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:14:56,407 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:14:56,409 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:14:56,409 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 12:14:56,410 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 12:14:56,417 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:14:56,418 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 12:14:56,418 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 12:14:56,418 - src.api.main - INFO - ============================================================
+2025-10-25 12:14:56,419 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 12:14:56,420 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 12:14:56,420 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 12:14:56,421 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 12:14:56,421 - src.api.main - INFO - ============================================================
+2025-10-25 12:14:56,525 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 12:14:56,525 - src.api.main - INFO - Shutdown complete
+2025-10-25 12:15:05,791 - src.api.main - INFO - ============================================================
+2025-10-25 12:15:05,794 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 12:15:05,794 - src.api.main - INFO - ============================================================
+2025-10-25 12:15:05,815 - src.api.main - INFO -  Configuration loaded
+2025-10-25 12:15:05,818 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 12:15:05,825 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:15:05,832 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:15:05,834 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:15:05,834 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 12:15:05,834 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 12:15:05,836 - src.api.main - INFO -  Loaded 40 pending orders from database
+2025-10-25 12:15:05,837 - src.api.main - INFO - ============================================================
+2025-10-25 12:15:05,837 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 12:15:05,837 - src.api.main - INFO - ============================================================
+2025-10-25 12:15:05,837 - src.api.main - INFO - ============================================================
+2025-10-25 12:15:05,838 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 12:15:05,838 - src.api.main - INFO - ============================================================
+2025-10-25 12:15:05,838 - src.api.main - INFO -  Configuration loaded
+2025-10-25 12:15:05,840 - src.api.main - INFO -  State Manager initialized
+2025-10-25 12:15:07,461 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 12:15:07,469 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 12:15:07,471 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 12:15:07,472 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 12:15:07,474 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 12:15:07,501 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:15:07,508 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:15:07,512 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:15:07,513 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 12:15:07,514 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 12:15:07,520 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:15:07,520 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 12:15:07,520 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 12:15:07,521 - src.api.main - INFO - ============================================================
+2025-10-25 12:15:07,521 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 12:15:07,522 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 12:15:07,522 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 12:15:07,522 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 12:15:07,523 - src.api.main - INFO - ============================================================
+2025-10-25 12:15:18,236 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:15:22,139 - src.api.main - INFO - Running consolidation cycle with 40 pending orders
+2025-10-25 12:15:22,144 - src.core.decision_engine - INFO - Cycle 0: 40 pending shipments
+2025-10-25 12:15:22,146 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-25 12:15:22,149 - src.core.decision_engine - INFO - Action details: {'shipments': ['ORDE5A504AF'], 'vehicle': 'VEH002'}
+2025-10-25 12:15:22,150 - src.core.decision_engine - INFO - Executed DISPATCH: 0 shipments, 0 vehicles, 0 routes
+2025-10-25 12:15:22,151 - src.core.reward_calculator - WARNING - DISPATCH action with no batches - treating as WAIT
+2025-10-25 12:15:22,153 - src.core.decision_engine - INFO - Cycle completed in 11.7ms
+2025-10-25 12:15:22,166 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 40 waiting
+2025-10-25 12:15:22,201 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:15:23,211 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:15:28,171 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:15:31,416 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 12:15:31,417 - src.api.main - INFO - Shutdown complete
+2025-10-25 12:32:45,960 - src.api.main - INFO - ============================================================
+2025-10-25 12:32:46,055 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 12:32:46,056 - src.api.main - INFO - ============================================================
+2025-10-25 12:32:46,117 - src.api.main - INFO -  Configuration loaded
+2025-10-25 12:32:46,121 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 12:32:46,132 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:32:46,138 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:32:46,141 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:32:46,141 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 12:32:46,142 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 12:32:46,145 - src.api.main - INFO -  Loaded 40 pending orders from database
+2025-10-25 12:32:46,145 - src.api.main - INFO - ============================================================
+2025-10-25 12:32:46,145 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 12:32:46,146 - src.api.main - INFO - ============================================================
+2025-10-25 12:32:46,146 - src.api.main - INFO - ============================================================
+2025-10-25 12:32:46,146 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 12:32:46,146 - src.api.main - INFO - ============================================================
+2025-10-25 12:32:46,147 - src.api.main - INFO -  Configuration loaded
+2025-10-25 12:32:46,148 - src.api.main - INFO -  State Manager initialized
+2025-10-25 12:32:48,221 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 12:32:48,229 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 12:32:48,230 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 12:32:48,231 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 12:32:48,232 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 12:32:48,239 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:32:48,248 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:32:48,251 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:32:48,252 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 12:32:48,252 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 12:32:48,256 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:32:48,256 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 12:32:48,257 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 12:32:48,257 - src.api.main - INFO - ============================================================
+2025-10-25 12:32:48,259 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 12:32:48,259 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 12:32:48,260 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 12:32:48,260 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 12:32:48,261 - src.api.main - INFO - ============================================================
+2025-10-25 12:32:48,635 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:32:53,601 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:32:57,205 - src.api.main - INFO - Running consolidation cycle with 40 pending orders
+2025-10-25 12:32:57,212 - src.core.decision_engine - INFO - Cycle 0: 40 pending shipments
+2025-10-25 12:32:57,213 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-25 12:32:57,214 - src.core.decision_engine - INFO - Action details: {'shipments': ['ORDE5A504AF'], 'vehicle': 'VEH002'}
+2025-10-25 12:32:57,216 - src.core.decision_engine - INFO - Executed DISPATCH: 0 shipments, 0 vehicles, 0 routes
+2025-10-25 12:32:57,216 - src.core.reward_calculator - WARNING - DISPATCH action with no batches - treating as WAIT
+2025-10-25 12:32:57,221 - src.core.decision_engine - INFO - Cycle completed in 11.0ms
+2025-10-25 12:32:57,236 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 40 waiting
+2025-10-25 12:32:57,266 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:32:58,595 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:33:03,586 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:33:09,498 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:33:14,503 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:33:19,502 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:33:24,498 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:33:29,530 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:33:34,505 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:33:39,497 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:33:44,509 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:33:49,513 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:33:54,492 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:33:59,499 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:34:04,494 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:34:54,501 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:35:54,517 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:36:54,539 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:37:54,525 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:38:54,489 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:39:54,511 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:40:54,510 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:41:54,503 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:42:54,497 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:43:54,490 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:44:54,496 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:45:54,538 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:46:54,503 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:47:54,521 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:48:54,491 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:49:54,518 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:50:32,004 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:32,191 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 12:50:32,191 - src.api.main - INFO - Shutdown complete
+2025-10-25 12:50:33,280 - watchfiles.main - INFO - 2 changes detected
+2025-10-25 12:50:35,305 - watchfiles.main - INFO - 5 changes detected
+2025-10-25 12:50:37,125 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:37,166 - src.api.main - INFO - ============================================================
+2025-10-25 12:50:37,166 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 12:50:37,167 - src.api.main - INFO - ============================================================
+2025-10-25 12:50:37,185 - src.api.main - INFO -  Configuration loaded
+2025-10-25 12:50:37,186 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 12:50:37,195 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:50:37,199 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:50:37,202 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:50:37,202 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 12:50:37,202 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 12:50:37,205 - src.api.main - INFO -  Loaded 40 pending orders from database
+2025-10-25 12:50:37,205 - src.api.main - INFO - ============================================================
+2025-10-25 12:50:37,206 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 12:50:37,206 - src.api.main - INFO - ============================================================
+2025-10-25 12:50:37,208 - src.api.main - INFO - ============================================================
+2025-10-25 12:50:37,211 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 12:50:37,213 - src.api.main - INFO - ============================================================
+2025-10-25 12:50:37,214 - src.api.main - INFO -  Configuration loaded
+2025-10-25 12:50:37,221 - src.api.main - INFO -  State Manager initialized
+2025-10-25 12:50:37,483 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:37,843 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:38,204 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:38,565 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:38,925 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:39,062 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 12:50:39,073 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 12:50:39,075 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 12:50:39,076 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 12:50:39,076 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 12:50:39,092 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:50:39,104 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:50:39,108 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:50:39,109 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 12:50:39,109 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 12:50:39,114 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 12:50:39,114 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 12:50:39,115 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 12:50:39,115 - src.api.main - INFO - ============================================================
+2025-10-25 12:50:39,115 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 12:50:39,116 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 12:50:39,116 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 12:50:39,116 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 12:50:39,117 - src.api.main - INFO - ============================================================
+2025-10-25 12:50:39,293 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:39,661 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:40,078 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:40,483 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:40,892 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:41,300 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:41,711 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:42,117 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:42,522 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:42,928 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:43,336 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:43,916 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:44,374 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:44,734 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:45,144 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:45,551 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:45,955 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:46,313 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:46,720 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:47,128 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:47,534 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:47,939 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:48,345 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:48,753 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:49,160 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:49,566 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:49,973 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:50,382 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:50,789 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:51,197 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:51,604 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:52,014 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:52,422 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:52,825 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:53,232 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:53,637 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:54,044 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:54,452 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:54,533 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:50:54,859 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:55,266 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:55,673 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:56,090 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:56,496 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:56,907 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:57,273 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:57,684 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:58,091 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:58,659 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:59,059 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:59,470 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:50:59,877 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:00,283 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:00,740 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:01,142 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:01,547 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:01,953 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:02,360 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:02,767 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:03,175 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:03,583 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:03,939 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:04,346 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:04,753 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:05,159 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:05,564 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:05,969 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:06,383 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:06,840 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:07,340 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:07,855 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:08,268 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:08,671 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:09,077 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:09,487 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:09,898 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:10,304 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:10,660 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:11,069 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:11,476 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:11,885 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:12,294 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:12,657 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:13,064 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:13,469 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:13,874 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:14,282 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:14,809 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:15,188 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:15,605 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:16,012 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:16,421 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:16,780 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:17,191 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:17,597 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:18,007 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:18,414 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:18,823 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:19,231 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:19,638 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:20,045 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:20,453 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:20,860 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:21,266 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:21,677 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:22,082 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:22,490 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:22,896 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:23,302 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:23,707 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:24,115 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:24,521 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:24,925 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:25,333 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:25,737 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:26,146 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:26,553 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:26,974 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:27,382 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:27,788 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:28,193 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:28,598 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:29,008 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:29,418 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:29,850 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:30,241 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:30,653 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:31,060 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:31,469 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:31,827 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:32,239 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:32,648 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:33,058 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:33,466 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:33,873 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:34,282 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:34,690 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:35,098 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:35,500 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:35,911 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:36,319 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:36,729 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:37,136 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:37,555 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:37,953 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:38,357 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:38,761 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:39,169 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:39,573 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:39,977 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:40,433 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:40,798 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:41,207 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:41,614 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:42,020 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:42,429 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:42,835 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:43,241 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:43,645 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:44,049 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:44,454 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:44,860 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:45,267 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:45,686 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:46,091 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:46,496 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:46,904 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:47,314 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:47,733 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:48,142 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:48,546 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:48,953 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:49,318 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:49,725 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:50,135 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:50,547 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:50,953 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:51,402 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:51,763 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:52,176 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:52,535 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:52,948 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:53,359 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:53,770 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:54,129 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:54,509 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:51:54,547 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:55,013 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:55,372 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:55,785 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:56,194 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:56,601 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:57,008 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:57,415 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:57,822 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:58,229 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:58,636 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:59,042 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:59,452 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:51:59,858 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:00,269 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:00,673 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:01,081 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:01,488 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:01,950 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:02,356 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:02,765 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:03,174 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:03,583 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:03,994 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:04,401 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:04,810 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:05,214 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:05,624 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:06,031 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:06,441 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:06,850 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:07,256 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:07,665 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:08,073 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:08,480 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:08,836 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:09,248 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:09,655 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:10,063 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:10,470 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:10,878 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:11,288 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:11,693 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:12,202 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:12,606 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:13,015 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:13,425 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:13,833 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:14,240 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:14,647 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:15,062 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:15,477 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:15,886 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:16,291 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:16,700 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:17,106 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:17,516 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:17,921 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:18,330 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:18,742 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:19,150 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:19,561 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:19,968 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:20,376 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:20,784 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:21,192 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:21,601 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:22,008 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:22,466 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:22,871 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:23,278 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:23,684 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:24,095 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:24,504 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:24,910 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:25,314 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:25,719 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:26,127 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:26,534 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:26,940 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:27,347 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:27,754 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:28,158 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:28,562 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:28,969 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:29,376 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:29,784 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:30,192 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:30,602 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:31,009 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:31,419 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:31,828 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:32,233 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:32,646 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:33,061 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:33,469 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:33,877 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:34,281 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:34,687 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:35,099 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:35,453 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:35,865 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:36,272 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:36,678 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:37,085 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:37,489 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:37,901 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:38,307 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:38,714 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:39,123 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:39,532 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:39,940 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:40,348 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:40,754 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:41,158 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:41,564 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:41,969 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:42,376 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:42,783 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:43,189 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:43,594 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:44,049 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:44,466 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:44,872 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:45,282 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:45,690 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:46,098 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:46,507 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:46,862 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:47,271 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:47,678 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:48,085 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:48,494 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:48,901 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:49,308 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:49,713 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:50,123 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:50,530 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:50,940 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:51,347 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:51,755 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:52,166 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:52,574 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:52,978 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:53,386 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:53,793 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:54,200 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:54,522 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:52:54,610 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:55,016 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:55,477 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:55,897 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:56,306 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:56,713 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:57,121 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:57,528 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:57,936 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:58,340 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:58,746 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:59,150 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:59,556 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:52:59,963 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:00,369 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:00,777 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:01,185 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:01,595 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:02,003 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:02,361 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:02,771 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:03,181 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:03,586 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:03,995 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:04,402 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:04,810 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:05,220 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:05,727 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:06,141 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:06,547 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:06,956 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:07,365 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:07,771 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:08,177 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:08,585 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:08,993 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:09,400 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:09,810 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:10,213 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:10,621 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:11,024 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:11,433 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:11,840 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:12,249 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:12,654 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:13,060 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:13,469 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:13,878 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:14,286 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:14,692 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:15,101 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:15,510 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:15,918 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:16,325 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:16,733 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:17,139 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:17,545 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:17,951 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:18,358 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:18,765 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:19,171 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:19,579 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:19,985 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:20,392 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:20,800 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:21,204 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:21,612 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:22,021 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:22,430 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:22,836 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:23,242 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:23,650 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:24,059 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:24,466 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:24,872 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:25,279 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:25,688 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:26,097 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:26,505 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:26,915 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:27,323 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:27,730 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:28,134 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:28,543 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:28,951 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:29,356 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:29,764 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:30,171 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:30,579 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:30,985 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:31,393 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:31,801 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:32,207 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:32,616 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:33,022 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:33,431 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:33,840 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:34,246 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:34,652 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:35,060 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:35,468 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:35,874 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:36,281 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:36,688 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:37,095 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:37,502 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:37,908 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:38,314 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:38,717 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:39,126 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:39,534 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:39,943 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:40,351 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:40,759 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:41,164 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:41,571 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:41,980 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:42,389 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:42,795 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:43,204 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:43,612 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:44,020 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:44,428 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:44,835 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:45,243 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:45,649 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:46,059 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:46,467 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:46,875 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:47,281 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:47,689 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:48,096 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:48,505 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:48,913 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:49,370 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:49,775 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:50,184 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:50,590 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:51,000 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:51,406 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:51,812 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:52,221 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:52,632 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:53,040 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:53,449 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:53,855 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:54,265 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:54,522 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:53:54,670 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:55,075 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:55,481 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:55,890 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:56,296 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:56,706 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:57,117 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:57,524 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:57,932 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:58,340 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:58,746 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:59,152 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:59,560 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:53:59,963 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:00,369 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:00,777 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:01,179 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:01,589 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:01,995 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:02,400 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:02,807 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:03,216 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:03,623 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:04,031 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:04,438 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:04,847 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:05,252 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:05,659 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:06,066 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:06,474 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:06,883 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:07,290 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:07,699 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:08,107 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:08,513 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:08,918 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:09,326 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:09,734 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:10,143 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:10,548 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:11,009 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:11,416 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:11,823 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:12,231 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:12,645 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:13,013 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:13,425 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:13,833 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:14,239 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:14,647 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:15,055 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:15,462 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:15,866 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:16,276 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:16,683 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:17,090 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:17,495 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:17,899 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:18,307 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:18,714 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:19,122 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:19,532 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:19,939 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:20,346 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:20,754 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:21,158 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:21,568 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:21,975 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:22,383 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:22,794 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:23,200 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:23,605 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:24,014 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:24,421 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:24,828 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:25,235 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:25,639 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:26,045 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:26,453 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:26,863 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:27,270 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:27,675 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:28,083 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:28,488 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:28,894 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:29,301 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:29,708 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:30,115 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:30,523 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:30,929 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:31,338 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:31,748 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:32,156 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:32,615 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:32,968 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:33,382 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:33,792 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:34,202 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:34,610 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:35,018 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:35,425 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:35,835 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:36,243 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:36,654 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:37,059 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:37,469 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:37,878 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:38,284 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:38,693 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:39,101 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:39,507 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:39,914 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:40,321 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:40,728 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:41,136 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:41,544 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:41,954 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:42,363 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:42,825 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:43,238 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:43,645 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:44,003 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:44,418 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:44,827 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:45,237 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:45,655 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:46,060 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:46,468 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:46,875 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:47,280 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:47,688 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:48,106 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:48,514 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:48,921 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:49,331 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:49,741 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:50,151 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:50,561 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:50,967 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:51,328 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:51,739 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:52,148 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:52,558 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:52,965 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:53,369 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:53,776 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:54,185 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:54,515 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:54:54,593 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:54,998 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:55,409 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:55,816 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:56,222 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:56,630 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:57,039 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:57,445 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:57,854 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:58,271 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:58,681 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:59,089 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:59,493 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:54:59,903 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:00,308 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:00,717 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:01,120 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:01,528 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:01,935 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:02,342 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:02,749 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:03,157 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:03,565 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:03,974 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:04,432 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:04,838 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:05,247 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:05,606 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:06,013 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:06,419 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:06,827 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:07,234 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:07,641 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:08,048 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:08,456 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:08,863 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:09,271 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:09,679 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:10,087 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:10,498 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:10,909 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:11,329 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:11,735 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:12,142 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:12,549 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:12,954 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:13,362 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:13,769 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:14,177 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:14,585 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:14,994 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:15,400 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:15,808 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:16,216 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:16,622 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:17,027 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:17,435 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:17,844 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:18,251 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:18,657 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:19,065 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:19,473 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:19,881 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:20,288 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:20,696 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:21,104 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:21,511 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:21,918 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:22,324 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:22,733 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:23,141 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:23,550 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:23,958 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:24,367 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:24,775 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:25,185 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:25,591 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:25,998 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:26,404 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:26,814 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:27,223 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:27,625 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:28,032 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:28,438 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:28,793 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:29,204 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:29,613 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:30,024 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:30,433 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:30,841 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:31,250 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:31,658 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:32,066 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:32,479 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:32,885 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:33,290 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:33,698 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:34,107 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:34,511 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:34,917 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:35,320 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:35,727 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:36,135 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:36,539 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:36,946 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:37,401 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:37,805 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:38,214 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:38,573 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:38,983 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:39,390 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:39,797 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:40,206 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:40,615 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:41,025 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:41,432 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:41,840 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:42,250 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:42,659 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:43,114 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:43,521 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:43,930 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:44,339 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:44,746 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:45,102 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:45,516 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:45,924 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:46,282 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:46,695 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:47,104 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:47,513 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:47,919 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:48,328 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:48,739 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:49,143 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:49,552 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:49,915 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:50,336 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:50,744 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:51,154 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:51,515 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:51,929 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:52,338 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:52,697 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:53,109 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:53,515 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:53,917 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:54,322 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:54,493 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:55:54,726 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:55,132 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:55,540 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:55,898 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:56,308 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:56,717 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:57,124 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:57,527 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:57,932 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:58,290 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:58,699 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:59,104 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:59,508 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:55:59,915 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:00,320 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:00,728 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:01,136 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:01,544 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:01,949 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:02,355 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:02,760 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:03,166 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:03,573 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:03,980 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:04,384 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:04,791 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:05,198 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:05,604 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:06,012 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:06,420 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:06,828 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:07,237 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:07,639 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:08,049 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:08,456 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:08,863 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:09,268 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:09,776 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:10,191 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:10,602 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:10,960 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:11,372 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:11,780 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:12,185 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:12,590 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:12,998 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:13,402 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:13,808 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:14,213 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:14,618 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:15,022 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:15,430 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:15,837 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:16,244 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:16,649 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:17,055 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:17,463 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:17,871 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:18,278 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:18,685 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:19,093 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:19,500 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:19,905 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:20,313 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:20,720 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:21,125 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:21,535 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:21,939 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:22,394 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:22,761 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:23,169 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:23,576 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:23,985 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:24,391 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:24,800 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:25,209 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:25,623 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:26,040 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:26,446 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:26,851 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:27,258 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:27,664 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:28,069 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:28,472 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:28,880 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:29,287 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:29,695 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:30,102 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:30,508 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:30,914 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:31,318 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:31,727 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:32,134 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:32,541 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:32,952 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:33,356 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:33,760 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:34,167 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:34,523 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:34,930 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:35,338 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:35,745 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:36,151 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:36,561 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:36,969 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:37,386 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:37,743 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:38,153 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:38,561 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:38,965 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:39,374 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:39,786 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:40,193 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:40,553 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:40,962 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:41,368 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:41,775 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:42,182 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:42,691 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:43,055 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:43,464 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:43,873 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:44,277 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:44,686 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:45,092 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:45,499 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:45,904 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:46,310 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:46,717 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:47,125 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:47,532 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:47,941 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:48,350 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:48,759 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:49,169 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:49,529 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:49,936 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:50,346 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:50,754 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:51,157 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:51,514 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:51,928 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:52,338 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:52,743 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:53,152 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:53,560 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:53,965 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:54,375 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:54,493 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:56:54,784 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:55,191 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:55,598 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:56,006 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:56,415 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:56,822 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:57,226 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:57,632 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:58,038 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:58,442 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:58,850 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:59,256 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:56:59,662 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:00,067 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:00,482 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:00,849 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:01,260 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:01,665 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:02,069 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:02,475 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:02,891 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:03,299 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:03,658 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:04,068 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:04,477 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:04,887 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:05,246 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:05,658 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:06,066 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:06,473 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:06,882 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:07,290 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:07,700 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:08,059 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:08,471 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:08,885 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:09,292 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:09,703 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:10,067 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:10,480 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:10,888 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:11,295 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:11,699 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:12,104 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:12,512 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:12,920 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:13,326 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:13,730 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:14,138 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:14,498 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:15,009 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:15,374 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:15,786 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:16,195 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:16,600 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:17,008 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:17,414 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:17,821 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:18,229 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:18,588 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:19,001 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:19,407 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:19,818 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:20,227 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:20,586 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:20,996 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:21,406 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:21,810 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:22,218 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:22,623 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:23,043 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:23,407 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:23,834 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:24,246 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:24,654 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:25,063 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:25,472 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:25,884 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:26,286 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:26,695 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:27,054 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:27,465 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:27,874 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:28,280 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:28,687 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:29,094 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:29,499 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:29,909 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:30,317 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:30,727 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:31,142 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:31,499 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:31,911 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:32,320 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:32,726 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:33,084 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:33,492 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:33,901 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:34,312 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:34,672 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:35,080 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:35,486 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:35,892 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:36,298 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:36,707 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:37,118 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:37,477 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:37,886 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:38,291 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:38,699 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:39,106 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:39,511 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:39,918 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:40,324 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:40,729 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:41,136 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:41,596 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:41,999 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:42,356 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:42,763 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:43,170 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:43,575 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:43,978 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:44,385 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:44,789 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:45,193 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:45,600 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:46,006 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:46,413 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:46,823 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:47,229 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:47,640 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:47,997 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:48,411 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:48,819 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:49,176 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:49,584 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:49,992 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:50,399 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:50,805 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:51,213 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:51,618 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:52,028 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:52,385 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:52,794 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:53,200 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:53,608 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:54,014 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:54,372 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:54,490 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:57:54,785 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:55,194 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:55,600 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:56,005 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:56,408 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:56,812 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:57,217 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:57,625 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:58,030 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:58,435 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:58,844 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:59,248 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:57:59,656 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:00,063 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:00,470 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:00,877 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:01,282 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:01,693 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:02,100 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:02,510 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:02,917 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:03,321 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:03,727 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:04,137 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:04,541 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:04,951 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:05,357 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:05,815 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:06,182 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:06,592 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:06,997 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:07,401 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:07,809 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:08,215 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:08,674 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:09,030 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:09,443 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:09,853 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:10,264 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:10,623 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:11,035 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:11,439 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:11,849 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:12,255 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:12,663 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:13,072 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:13,480 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:13,885 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:14,291 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:14,678 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:15,089 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:15,495 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:15,902 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:16,307 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:16,713 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:17,120 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:17,526 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:17,932 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:18,339 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:18,748 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:19,157 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:19,563 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:19,973 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:20,380 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:20,786 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:21,195 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:21,605 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:22,010 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:22,418 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:22,828 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:23,235 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:23,644 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:24,051 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:24,459 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:24,868 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:25,276 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:25,685 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:26,091 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:26,501 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:26,908 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:27,313 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:27,721 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:28,128 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:28,537 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:28,943 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:29,352 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:29,759 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:30,219 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:30,625 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:31,033 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:31,437 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:31,847 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:32,256 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:32,667 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:33,077 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:33,484 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:33,894 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:34,304 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:34,709 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:35,116 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:35,522 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:35,927 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:36,335 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:36,744 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:37,151 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:37,559 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:37,966 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:38,372 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:38,779 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:39,186 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:39,589 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:40,000 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:40,408 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:40,815 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:41,222 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:41,678 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:42,082 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:42,495 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:42,904 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:43,311 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:43,720 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:44,126 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:44,532 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:44,943 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:45,353 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:45,759 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:46,167 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:46,574 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:46,981 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:47,388 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:47,795 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:48,198 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:48,605 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:49,014 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:49,420 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:49,828 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:50,235 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:50,641 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:51,049 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:51,457 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:51,815 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:52,229 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:52,636 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:53,042 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:53,455 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:53,873 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:54,281 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:54,524 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:58:54,688 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:55,094 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:55,507 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:55,874 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:56,287 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:56,693 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:57,099 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:57,506 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:57,913 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:58,320 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:58,726 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:59,130 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:59,539 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:58:59,947 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:00,356 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:00,765 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:01,171 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:01,577 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:01,983 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:02,390 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:02,797 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:03,254 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:03,658 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:04,065 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:04,468 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:04,878 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:05,285 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:05,691 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:06,101 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:06,509 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:06,916 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:07,324 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:07,734 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:08,142 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:08,550 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:08,957 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:09,364 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:09,774 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:10,183 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:10,591 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:10,997 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:11,404 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:11,812 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:12,218 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:12,625 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:13,032 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:13,542 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:13,904 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:14,313 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:14,720 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:15,127 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:15,537 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:15,946 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:16,353 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:16,761 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:17,171 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:17,579 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:17,983 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:18,389 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:18,797 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:19,200 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:19,606 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:20,015 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:20,421 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:20,830 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:21,237 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:21,644 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:22,051 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:22,456 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:22,863 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:23,267 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:23,624 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:24,032 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:24,439 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:24,897 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:25,301 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:25,707 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:26,111 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:26,519 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:26,927 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:27,331 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:27,737 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:28,145 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:28,554 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:28,961 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:29,366 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:29,775 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:30,182 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:30,592 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:31,000 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:31,408 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:31,815 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:32,222 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:32,633 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:33,040 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:33,397 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:33,810 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:34,218 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:34,625 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:35,031 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:35,439 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:35,849 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:36,308 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:36,664 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:37,075 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:37,485 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:37,891 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:38,309 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:38,718 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:39,125 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:39,532 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:39,941 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:40,348 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:40,754 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:41,163 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:41,569 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:41,976 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:42,386 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:42,796 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:43,202 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:43,608 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:43,962 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:44,374 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:44,779 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:45,188 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:45,600 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:45,967 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:46,380 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:46,789 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:47,199 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:47,605 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:48,013 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:48,424 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:48,829 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:49,234 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:49,641 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:50,049 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:50,457 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:50,865 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:51,271 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:51,680 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:52,089 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:52,498 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:52,905 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:53,320 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:53,737 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:54,145 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:54,504 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:54,506 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 12:59:54,910 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:55,319 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:55,728 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:56,138 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:56,545 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:56,954 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:57,359 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:57,767 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:58,172 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:58,578 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:58,982 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:59,391 - watchfiles.main - INFO - 1 change detected
+2025-10-25 12:59:59,796 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:00,207 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:00,615 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:01,024 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:01,430 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:01,836 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:02,241 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:02,648 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:03,055 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:03,462 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:03,872 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:04,279 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:04,690 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:05,097 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:05,506 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:05,913 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:06,323 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:06,732 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:07,139 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:07,547 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:07,956 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:08,364 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:08,772 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:09,178 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:09,584 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:09,991 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:10,399 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:10,808 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:11,215 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:11,625 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:12,034 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:12,441 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:12,850 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:13,255 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:13,660 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:14,068 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:14,476 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:14,888 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:15,296 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:15,705 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:16,111 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:16,519 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:16,927 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:17,334 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:17,742 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:18,147 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:18,555 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:18,965 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:19,320 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:19,731 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:20,140 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:20,549 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:20,959 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:21,366 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:21,772 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:22,179 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:22,587 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:22,996 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:23,403 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:23,809 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:24,218 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:24,624 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:25,031 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:25,440 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:25,849 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:26,257 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:26,665 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:27,071 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:27,479 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:27,885 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:28,294 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:28,697 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:29,155 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:29,558 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:29,918 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:30,330 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:30,738 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:31,144 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:31,553 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:31,960 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:32,369 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:32,780 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:33,188 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:33,597 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:34,005 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:34,411 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:34,816 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:35,223 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:35,633 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:36,041 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:36,449 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:36,855 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:37,257 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:37,667 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:38,023 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:38,429 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:38,838 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:39,243 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:39,652 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:40,061 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:40,470 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:40,879 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:41,285 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:41,692 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:42,099 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:42,506 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:42,916 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:43,322 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:43,731 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:44,140 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:44,550 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:44,959 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:45,369 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:45,776 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:46,185 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:46,595 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:47,002 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:47,410 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:47,817 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:48,225 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:48,643 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:49,001 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:49,412 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:49,820 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:50,227 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:50,636 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:51,045 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:51,454 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:51,859 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:52,265 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:52,676 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:53,084 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:53,490 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:53,899 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:54,308 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:54,540 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:00:54,715 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:55,123 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:55,527 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:55,935 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:56,339 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:56,745 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:57,149 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:57,561 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:57,967 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:58,372 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:58,777 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:59,184 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:00:59,590 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:00,001 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:00,361 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:00,826 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:01,229 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:01,636 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:02,043 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:02,452 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:02,864 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:03,268 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:03,626 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:04,038 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:04,447 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:04,856 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:05,261 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:05,668 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:06,075 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:06,481 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:06,888 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:07,294 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:07,701 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:08,109 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:08,517 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:08,924 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:09,330 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:09,740 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:10,148 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:10,558 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:10,966 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:11,376 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:11,782 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:12,190 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:12,598 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:13,008 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:13,416 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:13,823 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:14,231 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:14,638 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:15,047 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:15,456 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:15,863 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:16,270 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:16,676 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:17,083 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:17,492 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:17,899 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:18,304 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:18,710 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:19,117 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:19,523 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:19,933 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:20,341 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:20,700 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:21,110 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:21,519 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:21,927 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:22,436 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:22,848 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:23,255 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:23,658 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:24,064 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:24,470 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:24,877 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:25,285 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:25,689 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:26,098 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:26,504 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:26,913 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:27,321 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:27,727 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:28,135 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:28,542 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:28,897 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:29,313 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:29,718 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:30,125 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:30,531 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:30,948 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:31,368 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:31,776 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:32,181 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:32,593 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:33,002 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:33,409 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:33,815 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:34,224 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:34,632 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:35,038 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:35,443 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:35,850 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:36,254 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:36,660 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:37,068 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:37,477 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:37,887 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:38,294 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:38,703 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:39,108 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:39,516 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:39,923 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:40,328 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:40,738 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:41,143 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:41,551 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:41,957 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:42,365 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:42,773 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:43,184 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:43,590 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:43,999 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:44,356 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:44,768 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:45,176 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:45,582 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:45,992 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:46,401 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:46,808 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:47,215 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:47,626 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:48,035 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:48,444 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:48,850 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:49,259 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:49,619 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:50,029 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:50,436 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:50,840 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:51,243 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:51,653 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:52,057 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:52,464 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:52,869 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:53,277 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:53,683 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:54,087 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:54,498 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:54,520 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:01:54,900 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:55,306 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:55,717 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:56,123 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:56,532 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:56,936 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:57,343 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:57,749 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:58,160 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:58,567 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:58,975 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:59,382 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:01:59,740 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:00,153 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:00,562 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:00,970 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:01,376 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:01,783 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:02,193 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:02,598 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:03,003 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:03,408 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:03,814 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:04,222 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:04,633 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:05,093 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:05,511 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:05,920 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:06,324 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:06,731 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:07,139 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:07,545 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:07,953 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:08,362 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:08,772 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:09,179 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:09,584 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:09,991 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:10,399 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:10,808 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:11,217 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:11,625 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:12,036 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:12,443 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:12,849 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:13,257 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:13,663 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:14,074 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:14,481 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:14,886 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:15,293 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:15,700 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:16,108 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:16,518 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:16,924 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:17,334 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:17,744 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:18,151 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:18,559 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:18,967 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:19,375 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:19,782 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:20,191 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:20,600 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:21,008 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:21,414 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:21,820 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:22,227 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:22,635 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:23,045 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:23,460 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:23,863 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:24,269 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:24,677 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:25,086 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:25,444 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:25,859 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:26,263 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:26,672 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:27,076 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:27,485 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:27,943 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:28,348 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:28,753 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:29,158 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:29,565 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:29,969 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:30,376 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:30,781 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:31,189 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:31,600 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:32,006 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:32,413 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:32,817 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:33,224 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:33,631 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:34,034 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:34,439 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:34,848 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:35,252 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:35,659 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:36,062 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:36,472 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:36,881 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:37,290 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:37,643 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:38,056 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:38,463 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:38,868 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:39,286 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:39,691 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:40,159 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:40,567 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:40,974 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:41,379 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:41,796 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:42,159 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:42,572 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:42,978 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:43,396 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:43,802 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:44,209 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:44,620 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:45,024 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:45,434 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:45,842 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:46,264 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:46,669 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:47,076 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:47,482 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:47,888 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:48,293 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:48,702 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:49,108 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:49,511 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:49,920 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:50,325 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:50,732 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:51,194 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:51,568 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:51,979 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:52,384 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:52,794 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:53,200 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:53,607 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:54,012 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:54,419 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:54,510 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:02:54,825 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:55,343 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:55,778 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:56,181 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:56,591 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:57,049 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:57,452 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:57,862 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:58,266 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:58,672 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:59,130 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:59,493 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:02:59,903 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:00,309 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:00,716 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:01,123 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:01,529 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:01,980 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:02,422 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:02,819 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:03,312 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:03,733 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:04,169 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:04,578 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:04,986 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:05,404 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:05,810 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:06,320 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:06,734 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:07,144 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:07,562 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:07,940 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:08,359 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:08,764 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:09,172 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:09,577 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:09,982 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:10,388 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:10,792 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:11,202 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:11,714 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:12,124 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:12,531 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:12,939 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:13,348 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:13,755 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:14,166 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:14,592 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:15,129 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:15,617 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:16,021 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:16,427 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:16,829 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:17,282 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:17,828 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:18,186 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:18,545 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:18,952 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:19,364 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:19,722 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:20,135 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:20,542 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:20,975 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:21,499 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:21,911 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:22,281 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:22,688 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:23,106 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:23,479 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:23,901 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:24,308 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:24,716 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:25,174 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:25,538 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:25,999 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:26,364 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:26,775 - watchfiles.main - INFO - 2 changes detected
+2025-10-25 13:03:26,955 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 13:03:26,955 - src.api.main - INFO - Shutdown complete
+2025-10-25 13:03:27,840 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:03:47,568 - src.api.main - INFO - ============================================================
+2025-10-25 13:03:47,569 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 13:03:47,570 - src.api.main - INFO - ============================================================
+2025-10-25 13:03:47,709 - src.api.main - INFO -  Configuration loaded
+2025-10-25 13:03:47,714 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 13:03:47,742 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:03:47,749 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:03:47,752 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:03:47,753 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 13:03:47,754 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 13:03:47,756 - src.api.main - INFO -  Loaded 40 pending orders from database
+2025-10-25 13:03:47,756 - src.api.main - INFO - ============================================================
+2025-10-25 13:03:47,756 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 13:03:47,757 - src.api.main - INFO - ============================================================
+2025-10-25 13:03:47,757 - src.api.main - INFO - ============================================================
+2025-10-25 13:03:47,757 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 13:03:47,757 - src.api.main - INFO - ============================================================
+2025-10-25 13:03:47,758 - src.api.main - INFO -  Configuration loaded
+2025-10-25 13:03:47,760 - src.api.main - INFO -  State Manager initialized
+2025-10-25 13:03:49,088 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 13:03:49,093 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 13:03:49,093 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 13:03:49,094 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 13:03:49,095 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 13:03:49,107 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:03:49,112 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:03:49,114 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:03:49,114 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 13:03:49,115 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 13:03:49,118 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:03:49,119 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 13:03:49,119 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 13:03:49,119 - src.api.main - INFO - ============================================================
+2025-10-25 13:03:49,120 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 13:03:49,120 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 13:03:49,120 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 13:03:49,121 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 13:03:49,121 - src.api.main - INFO - ============================================================
+2025-10-25 13:03:49,535 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:03:54,155 - src.api.main - INFO - Running consolidation cycle with 40 pending orders
+2025-10-25 13:03:54,159 - src.core.decision_engine - INFO - Cycle 0: 40 pending shipments
+2025-10-25 13:03:54,161 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-25 13:03:54,162 - src.core.decision_engine - INFO - Action details: {'shipments': ['ORDE5A504AF'], 'vehicle': 'VEH002'}
+2025-10-25 13:03:54,163 - src.core.decision_engine - INFO - Executed DISPATCH: 0 shipments, 0 vehicles, 0 routes
+2025-10-25 13:03:54,168 - src.core.reward_calculator - WARNING - DISPATCH action with no batches - treating as WAIT
+2025-10-25 13:03:54,172 - src.core.decision_engine - INFO - Cycle completed in 14.0ms
+2025-10-25 13:03:54,179 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 40 waiting
+2025-10-25 13:03:54,210 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:03:54,541 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:03:59,557 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:04:04,545 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:04:09,538 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:04:14,547 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:04:20,479 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:04:25,506 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:04:30,504 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:04:35,504 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:04:40,487 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:04:45,484 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:04:50,505 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:04:55,507 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:05:00,382 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 13:05:00,384 - src.api.main - INFO - Shutdown complete

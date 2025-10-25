@@ -15,7 +15,7 @@ from uuid import uuid4
 import sys
 from .state_manager import (
     StateManager, SystemState, Shipment, ShipmentStatus, VehicleState,
-    Route, DecisionEvent
+    Route, DecisionEvent, VehicleStatus
 )
 from .meta_controller import MetaController, MetaDecision, FunctionClass
 from .vfa import ValueFunctionApproximator
@@ -276,7 +276,6 @@ class DecisionEngine:
             routes_created = []
             
             for batch in batches:
-                # Create route
                 route = Route(
                     id=batch['id'],
                     vehicle_id=batch['vehicle'],
@@ -287,15 +286,13 @@ class DecisionEngine:
                     created_at=datetime.now()
                 )
                 
-                # Add route to state
                 self.state_manager.add_route(route)
                 routes_created.append(route)
                 
-                # Update shipment statuses
                 for shipment_id in batch['shipments']:
                     self.state_manager.update_shipment_status(
                         shipment_id,
-                        ShipmentStatus.IN_TRANSIT
+                        ShipmentStatus.EN_ROUTE  # FIX 1
                     )
                     shipments_dispatched += 1
                 
@@ -323,7 +320,24 @@ class DecisionEngine:
                 'vehicles_utilized': 0,
                 'routes_created': 0
             }
-    
+    def _dispatch_batch(self, batch: Dict, state: SystemState) -> Dict:
+        shipment_ids = batch.get('shipments', [])
+        vehicle_id = batch.get('vehicle')
+        
+        dispatched_count = 0
+        for shipment_id in shipment_ids:
+            success = self.state_manager.update_shipment_status(
+                shipment_id=shipment_id,
+                status=ShipmentStatus.EN_ROUTE  # Correct enum
+            )
+            if success:
+                dispatched_count += 1
+        
+        return {
+            'shipments': dispatched_count,
+            'vehicle': vehicle_id,
+            'route_stops': 0
+        }
     def _log_decision_event(self, cycle_result: CycleResult):
         """Log decision event to database for analysis"""
         event = DecisionEvent(

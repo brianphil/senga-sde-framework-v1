@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 import logging
 import asyncio
+import numpy as np
 from enum import Enum
 from uuid import uuid4
 import sys
@@ -17,6 +18,7 @@ from .state_manager import (
     StateManager, SystemState, Shipment, ShipmentStatus, VehicleState,
     Route, DecisionEvent, VehicleStatus
 )
+from .standard_types import StandardBatch
 from .meta_controller import MetaController, MetaDecision, FunctionClass
 from .vfa import ValueFunctionApproximator
 from .reward_calculator import RewardCalculator, RewardComponents
@@ -186,7 +188,7 @@ class DecisionEngine:
             
             # Step 6: Trigger learning update (if dispatch occurred)
             learning_updates = 0
-            if decision.action_type == 'DISPATCH':
+            if decision.action_type in ['DISPATCH', 'DISPATCH_IMMEDIATE']:
                 learning_updates = self._trigger_learning_update(
                     state_before, decision, execution_result
                 )
@@ -269,38 +271,90 @@ class DecisionEngine:
             }
         
         elif decision.action_type in ['DISPATCH', 'DISPATCH_IMMEDIATE']:
+            # Get batches or convert old PFA format
             batches = decision.action_details.get('batches', [])
             
+            # Handle old PFA format (no 'batches' key, just 'shipments' and 'vehicle')
+            if not batches and 'shipments' in decision.action_details:
+                batch_id = f"pfa_batch_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
+                pfa_batch = {
+                    'id': batch_id,
+                    'shipments': decision.action_details['shipments'],
+                    'vehicle': decision.action_details['vehicle'],
+                    'route': [],
+                    'sequence': [],
+                    'estimated_distance_km': 0.0,
+                    'estimated_duration_hours': 3.0  # Default estimate
+                }
+                batches = [pfa_batch]
+                logger.info(f"Converted old PFA format to batch: {batch_id}")
+            
+            if not batches:
+                logger.warning("No batches to execute")
+                return {
+                    'shipments_dispatched': 0,
+                    'vehicles_utilized': 0,
+                    'routes_created': 0
+                }
+            
+            # Execute batches
             shipments_dispatched = 0
-            vehicles_utilized = len(batches)
+            vehicles_utilized = 0
             routes_created = []
             
             for batch in batches:
-                route = Route(
-                    id=batch['id'],
-                    vehicle_id=batch['vehicle'],
-                    shipment_ids=batch['shipments'],
-                    sequence=batch.get('sequence', []),
-                    estimated_duration=timedelta(hours=batch.get('estimated_duration_hours', 3)),
-                    estimated_distance=batch.get('estimated_distance_km', 50.0),
-                    created_at=datetime.now()
-                )
+                # Validate batch has required fields
+                if 'shipments' not in batch or 'vehicle' not in batch:
+                    logger.error(f"Invalid batch missing required fields: {batch}")
+                    continue
                 
-                self.state_manager.add_route(route)
-                routes_created.append(route)
+                # Ensure batch has ID
+                if 'id' not in batch:
+                    batch['id'] = f"batch_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
+                    logger.warning(f"Batch missing ID, generated: {batch['id']}")
                 
-                for shipment_id in batch['shipments']:
-                    self.state_manager.update_shipment_status(
-                        shipment_id,
-                        ShipmentStatus.EN_ROUTE  
+                try:
+                    # Create route
+                    route = Route(
+                        id=batch['id'],
+                        vehicle_id=batch['vehicle'],
+                        shipment_ids=batch['shipments'],
+                        sequence=batch.get('sequence', []),
+                        estimated_duration=timedelta(hours=batch.get('estimated_duration_hours', 3.0)),
+                        estimated_distance=batch.get('estimated_distance_km', 50.0),
+                        created_at=datetime.now()
                     )
-                    shipments_dispatched += 1
+                    
+                    self.state_manager.add_route(route)
+                    routes_created.append(route)
+                    
+                    # Update shipment statuses
+                    for shipment_id in batch['shipments']:
+                        self.state_manager.update_shipment_status(
+                            shipment_id,
+                            ShipmentStatus.EN_ROUTE
+                        )
+                        shipments_dispatched += 1
+
+                    # Update vehicle state
+                    vehicle = self.state_manager.get_vehicle_state(batch['vehicle'])
+                    if vehicle:
+                        vehicle.status = VehicleStatus.EN_ROUTE
+                        self.state_manager.update_vehicle_state(vehicle)
+                    
+                    vehicles_utilized += 1
+                    
+                    logger.info(f" Batch {batch['id']}: {len(batch['shipments'])} shipments dispatched")
                 
-                # Update vehicle status
-                self.state_manager.update_vehicle_status(
-                    batch['vehicle'],
-                    'in_transit'
-                )
+                except KeyError as e:
+                    logger.error(f" Batch dispatch failed - missing key: {e}")
+                    logger.error(f"   Batch keys: {list(batch.keys())}")
+                    logger.error(f"   Batch: {batch}")
+                    continue
+                
+                except Exception as e:
+                    logger.error(f" Batch dispatch failed: {e}")
+                    continue
             
             logger.info(
                 f"Executed DISPATCH: {shipments_dispatched} shipments, "
@@ -312,7 +366,6 @@ class DecisionEngine:
                 'vehicles_utilized': vehicles_utilized,
                 'routes_created': len(routes_created)
             }
-        
         else:
             logger.warning(f"Unknown action type: {decision.action_type}")
             return {
@@ -320,6 +373,8 @@ class DecisionEngine:
                 'vehicles_utilized': 0,
                 'routes_created': 0
             }
+  
+  
     def _dispatch_batch(self, batch: Dict, state: SystemState) -> Dict:
         shipment_ids = batch.get('shipments', [])
         vehicle_id = batch.get('vehicle')

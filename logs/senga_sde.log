@@ -13951,3 +13951,1010 @@ TypeError: CycleResult.__init__() missing 5 required positional arguments: 'cycl
 2025-10-25 13:15:25,505 - src.api.main - INFO -  Retrieved 40 pending orders from database
 2025-10-25 13:15:25,761 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
 2025-10-25 13:15:25,762 - src.api.main - INFO - Shutdown complete
+2025-10-25 13:16:14,838 - src.api.main - INFO - ============================================================
+2025-10-25 13:16:14,839 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 13:16:14,840 - src.api.main - INFO - ============================================================
+2025-10-25 13:16:14,859 - src.api.main - INFO -  Configuration loaded
+2025-10-25 13:16:14,861 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 13:16:14,868 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:16:14,874 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:16:14,876 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:16:14,876 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 13:16:14,877 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 13:16:14,878 - src.api.main - INFO -  Loaded 40 pending orders from database
+2025-10-25 13:16:14,879 - src.api.main - INFO - ============================================================
+2025-10-25 13:16:14,879 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 13:16:14,879 - src.api.main - INFO - ============================================================
+2025-10-25 13:16:14,880 - src.api.main - INFO - ============================================================
+2025-10-25 13:16:14,880 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 13:16:14,880 - src.api.main - INFO - ============================================================
+2025-10-25 13:16:14,881 - src.api.main - INFO -  Configuration loaded
+2025-10-25 13:16:14,882 - src.api.main - INFO -  State Manager initialized
+2025-10-25 13:16:18,198 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 13:16:18,206 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 13:16:18,209 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 13:16:18,210 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 13:16:18,211 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 13:16:18,230 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:16:18,236 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:16:18,242 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:16:18,243 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 13:16:18,243 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 13:16:18,249 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:16:18,250 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 13:16:18,250 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 13:16:18,251 - src.api.main - INFO - ============================================================
+2025-10-25 13:16:18,251 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 13:16:18,252 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 13:16:18,252 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 13:16:18,253 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 13:16:18,253 - src.api.main - INFO - ============================================================
+2025-10-25 13:16:18,624 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:16:23,350 - src.api.main - INFO - Running consolidation cycle with 40 pending orders
+2025-10-25 13:16:23,353 - src.core.decision_engine - INFO - Cycle 0: 40 pending shipments
+2025-10-25 13:16:23,355 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-25 13:16:23,357 - src.core.decision_engine - INFO - Action details: {'shipments': ['ORDE5A504AF'], 'vehicle': 'VEH002'}
+2025-10-25 13:16:23,357 - src.core.decision_engine - INFO - Executed DISPATCH: 0 shipments, 0 vehicles, 0 routes
+2025-10-25 13:16:23,358 - src.core.reward_calculator - WARNING - DISPATCH action with no batches - treating as WAIT
+2025-10-25 13:16:23,362 - src.core.decision_engine - INFO - Cycle completed in 7.8ms
+2025-10-25 13:16:23,368 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 40 waiting
+2025-10-25 13:16:23,397 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:16:23,579 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:16:28,582 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:16:34,529 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:16:39,517 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:16:44,514 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:16:49,522 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:16:54,522 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:16:59,488 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:17:04,497 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:17:09,488 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:17:14,492 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:17:19,508 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:17:24,522 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:17:29,515 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:17:54,577 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:18:54,519 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:19:54,521 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:20:54,516 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:21:54,513 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:22:54,505 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:23:54,511 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:24:54,529 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:25:54,516 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:26:54,507 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:27:54,495 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:28:54,522 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:29:54,511 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:30:54,505 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:31:54,512 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:32:54,506 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:33:54,486 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:34:54,488 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:35:54,484 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:36:07,969 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:08,165 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 13:36:08,169 - src.api.main - INFO - Shutdown complete
+2025-10-25 13:36:09,087 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:10,590 - watchfiles.main - INFO - 5 changes detected
+2025-10-25 13:36:12,105 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:12,145 - src.api.main - INFO - ============================================================
+2025-10-25 13:36:12,146 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 13:36:12,146 - src.api.main - INFO - ============================================================
+2025-10-25 13:36:12,165 - src.api.main - INFO -  Configuration loaded
+2025-10-25 13:36:12,167 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 13:36:12,174 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:36:12,181 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:36:12,186 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:36:12,186 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 13:36:12,187 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 13:36:12,189 - src.api.main - INFO -  Loaded 40 pending orders from database
+2025-10-25 13:36:12,189 - src.api.main - INFO - ============================================================
+2025-10-25 13:36:12,190 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 13:36:12,190 - src.api.main - INFO - ============================================================
+2025-10-25 13:36:12,190 - src.api.main - INFO - ============================================================
+2025-10-25 13:36:12,191 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 13:36:12,191 - src.api.main - INFO - ============================================================
+2025-10-25 13:36:12,191 - src.api.main - INFO -  Configuration loaded
+2025-10-25 13:36:12,193 - src.api.main - INFO -  State Manager initialized
+2025-10-25 13:36:12,470 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:12,834 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:13,193 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:13,553 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:13,911 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:13,931 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 13:36:13,939 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 13:36:13,941 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 13:36:13,942 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 13:36:13,943 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 13:36:14,045 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:36:14,055 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:36:14,059 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:36:14,061 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 13:36:14,061 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 13:36:14,067 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:36:14,068 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 13:36:14,069 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 13:36:14,069 - src.api.main - INFO - ============================================================
+2025-10-25 13:36:14,069 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 13:36:14,070 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 13:36:14,070 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 13:36:14,070 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 13:36:14,071 - src.api.main - INFO - ============================================================
+2025-10-25 13:36:14,271 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:14,633 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:15,044 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:15,405 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:15,816 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:16,259 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:16,672 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:17,080 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:17,485 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:17,942 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:18,347 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:18,752 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:19,159 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:19,566 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:19,970 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:20,379 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:20,786 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:21,193 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:21,599 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:22,008 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:22,413 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:22,820 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:23,226 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:23,635 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:24,042 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:24,448 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:24,856 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:25,264 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:25,668 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:26,078 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:26,487 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:26,899 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:27,305 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:27,696 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:28,108 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:28,517 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:28,927 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:29,332 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:29,740 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:30,200 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:30,605 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:31,011 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:31,418 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:31,831 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:32,184 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:32,591 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:32,999 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:33,402 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:33,812 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:34,217 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:34,628 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:35,035 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:35,442 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:35,897 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:36,312 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:36,733 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:37,093 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:37,504 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:37,963 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:38,369 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:38,778 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:39,186 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:39,594 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:40,000 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:40,406 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:40,812 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:41,222 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:41,680 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:42,098 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:42,507 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:42,915 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:43,321 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:43,727 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:44,137 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:44,543 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:44,949 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:45,357 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:45,766 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:46,174 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:46,581 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:46,989 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:47,394 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:47,802 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:48,212 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:48,631 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:49,040 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:49,444 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:49,845 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:50,255 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:50,663 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:51,068 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:51,526 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:51,942 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:52,299 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:52,709 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:53,168 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:53,584 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:53,991 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:54,400 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:54,485 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:36:54,806 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:55,217 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:55,622 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:56,027 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:56,433 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:56,846 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:57,250 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:57,658 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:58,064 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:58,468 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:58,873 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:59,277 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:36:59,683 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:00,087 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:00,499 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:00,916 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:01,319 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:01,727 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:02,134 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:02,545 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:02,949 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:03,359 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:03,764 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:04,169 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:04,576 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:04,984 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:05,389 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:05,796 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:06,201 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:06,559 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:06,977 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:07,437 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:07,846 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:08,253 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:08,662 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:09,065 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:09,469 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:09,880 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:10,287 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:10,694 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:11,099 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:11,508 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:11,917 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:12,324 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:12,732 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:13,139 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:13,547 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:13,958 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:14,364 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:14,771 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:15,179 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:15,587 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:15,990 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:16,397 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:16,805 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:17,212 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:17,618 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:18,023 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:18,433 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:18,838 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:19,249 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:19,655 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:20,060 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:20,471 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:20,891 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:21,298 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:21,703 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:22,111 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:22,519 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:22,927 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:23,383 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:23,801 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:24,210 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:24,617 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:25,021 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:25,428 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:25,837 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:26,243 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:26,651 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:27,057 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:27,464 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:27,871 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:28,240 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:28,653 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:29,071 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:29,430 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:29,843 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:30,251 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:30,654 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:31,059 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:31,465 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:31,975 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:32,342 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:32,751 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:33,159 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:33,566 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:33,970 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:34,385 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:34,801 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:35,207 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:35,614 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:36,095 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:36,549 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:36,966 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:37,329 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:37,738 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:38,175 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:38,594 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:39,003 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:39,414 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:39,829 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:40,301 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:40,702 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:41,106 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:41,511 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:41,889 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:42,410 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:42,822 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:43,229 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:43,647 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:44,028 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:44,446 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:44,814 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:45,223 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:45,681 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:46,084 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:46,491 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:46,900 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:47,304 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:47,663 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:48,025 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:48,204 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 13:37:48,205 - src.api.main - INFO - Shutdown complete
+2025-10-25 13:37:49,044 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:50,563 - watchfiles.main - INFO - 5 changes detected
+2025-10-25 13:37:52,074 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:52,103 - src.api.main - INFO - ============================================================
+2025-10-25 13:37:52,104 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 13:37:52,104 - src.api.main - INFO - ============================================================
+2025-10-25 13:37:52,123 - src.api.main - INFO -  Configuration loaded
+2025-10-25 13:37:52,125 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 13:37:52,132 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:37:52,137 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:37:52,139 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:37:52,140 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 13:37:52,140 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 13:37:52,142 - src.api.main - INFO -  Loaded 40 pending orders from database
+2025-10-25 13:37:52,142 - src.api.main - INFO - ============================================================
+2025-10-25 13:37:52,142 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 13:37:52,143 - src.api.main - INFO - ============================================================
+2025-10-25 13:37:52,143 - src.api.main - INFO - ============================================================
+2025-10-25 13:37:52,143 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 13:37:52,144 - src.api.main - INFO - ============================================================
+2025-10-25 13:37:52,144 - src.api.main - INFO -  Configuration loaded
+2025-10-25 13:37:52,146 - src.api.main - INFO -  State Manager initialized
+2025-10-25 13:37:52,431 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:52,792 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:53,151 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:53,509 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:53,808 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 13:37:53,816 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 13:37:53,819 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 13:37:53,820 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 13:37:53,822 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 13:37:53,844 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:37:53,855 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:37:53,859 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:37:53,859 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 13:37:53,860 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 13:37:53,865 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:37:53,866 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 13:37:53,866 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 13:37:53,867 - src.api.main - INFO - ============================================================
+2025-10-25 13:37:53,867 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 13:37:53,868 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 13:37:53,868 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 13:37:53,869 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 13:37:53,869 - src.api.main - INFO - ============================================================
+2025-10-25 13:37:53,869 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:54,229 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:54,484 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:37:54,590 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:54,997 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:55,413 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:55,830 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:56,189 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:56,595 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:57,001 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:57,406 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:57,814 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:58,224 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:58,640 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:59,047 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:59,455 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:37:59,913 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:00,305 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:00,756 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:01,164 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:01,571 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:01,977 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:02,385 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:02,791 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:03,198 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:03,609 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:04,018 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:04,429 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:04,835 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:05,251 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:05,657 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:06,067 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:06,486 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:07,000 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:07,414 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:07,820 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:08,229 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:08,648 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:09,016 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:09,454 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:09,879 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:10,291 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:10,705 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:11,121 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:11,482 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:11,887 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:12,341 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:12,816 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:13,229 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:13,645 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:14,153 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:14,519 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:14,933 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:15,349 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:15,759 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:16,164 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:16,571 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:16,977 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:17,382 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:17,784 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:18,197 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:18,601 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:19,009 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:19,433 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:19,839 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:20,245 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:20,603 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:21,066 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:21,430 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:21,841 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:22,247 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:22,653 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:23,070 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:23,480 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:23,883 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:24,289 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:24,665 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:25,105 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:25,547 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:25,962 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:26,324 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:26,736 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:27,143 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:27,553 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:27,959 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:28,370 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:28,832 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:29,193 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:29,597 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:30,002 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:30,410 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:30,819 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:31,221 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:31,632 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:32,038 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:32,445 - watchfiles.main - INFO - 2 changes detected
+2025-10-25 13:38:32,627 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 13:38:32,629 - src.api.main - INFO - Shutdown complete
+2025-10-25 13:38:33,441 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:38:35,717 - watchfiles.main - INFO - 5 changes detected
+2025-10-25 13:38:54,344 - src.api.main - INFO - ============================================================
+2025-10-25 13:38:54,345 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 13:38:54,346 - src.api.main - INFO - ============================================================
+2025-10-25 13:38:54,370 - src.api.main - INFO -  Configuration loaded
+2025-10-25 13:38:54,373 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 13:38:54,382 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:38:54,388 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:38:54,391 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:38:54,391 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 13:38:54,392 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 13:38:54,395 - src.api.main - INFO -  Loaded 40 pending orders from database
+2025-10-25 13:38:54,395 - src.api.main - INFO - ============================================================
+2025-10-25 13:38:54,395 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 13:38:54,396 - src.api.main - INFO - ============================================================
+2025-10-25 13:38:54,396 - src.api.main - INFO - ============================================================
+2025-10-25 13:38:54,396 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 13:38:54,396 - src.api.main - INFO - ============================================================
+2025-10-25 13:38:54,397 - src.api.main - INFO -  Configuration loaded
+2025-10-25 13:38:54,400 - src.api.main - INFO -  State Manager initialized
+2025-10-25 13:38:56,357 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 13:38:56,368 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 13:38:56,369 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 13:38:56,370 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 13:38:56,371 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 13:38:56,388 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:38:56,400 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:38:56,403 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:38:56,403 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 13:38:56,403 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 13:38:56,408 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:38:56,409 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 13:38:56,409 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 13:38:56,409 - src.api.main - INFO - ============================================================
+2025-10-25 13:38:56,410 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 13:38:56,410 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 13:38:56,410 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 13:38:56,410 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 13:38:56,411 - src.api.main - INFO - ============================================================
+2025-10-25 13:38:58,556 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:39:02,750 - src.api.main - INFO - Running consolidation cycle with 40 pending orders
+2025-10-25 13:39:02,754 - src.core.decision_engine - INFO - Cycle 0: 40 pending shipments
+2025-10-25 13:39:02,756 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-25 13:39:02,759 - src.core.decision_engine - INFO - Action details: {'shipments': ['ORDE5A504AF'], 'vehicle': 'VEH002'}
+2025-10-25 13:39:02,759 - src.core.decision_engine - ERROR - Cycle failed: 'id'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 172, in run_cycle
+    execution_result = self._execute_decision(decision, state_before)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 287, in _execute_decision
+    id=batch['id'],
+       ~~~~~^^^^^^
+KeyError: 'id'
+2025-10-25 13:39:02,768 - src.api.main - ERROR - Consolidation cycle failed: 'id'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 831, in trigger_consolidation_cycle
+    cycle_result = decision_engine.run_cycle()
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 172, in run_cycle
+    execution_result = self._execute_decision(decision, state_before)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 287, in _execute_decision
+    id=batch['id'],
+       ~~~~~^^^^^^
+KeyError: 'id'
+2025-10-25 13:39:03,518 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:39:08,534 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:39:13,508 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:39:18,500 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:39:24,453 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:39:29,454 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:39:34,447 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:39:39,433 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:39:44,432 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:39:49,448 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:39:54,515 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:39:59,459 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:40:04,437 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:40:09,436 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:40:14,488 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:40:54,459 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:41:19,130 - watchfiles.main - INFO - 1 change detected
+2025-10-25 13:41:19,248 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 13:41:19,248 - src.api.main - INFO - Shutdown complete
+2025-10-25 13:41:19,959 - watchfiles.main - INFO - 2 changes detected
+2025-10-25 13:41:33,001 - src.api.main - INFO - ============================================================
+2025-10-25 13:41:33,003 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 13:41:33,003 - src.api.main - INFO - ============================================================
+2025-10-25 13:41:33,027 - src.api.main - INFO -  Configuration loaded
+2025-10-25 13:41:33,029 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 13:41:33,037 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:41:33,042 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:41:33,044 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:41:33,044 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 13:41:33,045 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 13:41:33,048 - src.api.main - INFO -  Loaded 40 pending orders from database
+2025-10-25 13:41:33,048 - src.api.main - INFO - ============================================================
+2025-10-25 13:41:33,048 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 13:41:33,049 - src.api.main - INFO - ============================================================
+2025-10-25 13:41:33,049 - src.api.main - INFO - ============================================================
+2025-10-25 13:41:33,049 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 13:41:33,050 - src.api.main - INFO - ============================================================
+2025-10-25 13:41:33,050 - src.api.main - INFO -  Configuration loaded
+2025-10-25 13:41:33,052 - src.api.main - INFO -  State Manager initialized
+2025-10-25 13:41:36,894 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 13:41:36,903 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 13:41:36,905 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 13:41:36,907 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 13:41:36,908 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 13:41:36,928 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:41:36,935 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:41:36,938 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:41:36,938 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 13:41:36,939 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 13:41:36,943 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:41:36,943 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 13:41:36,944 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 13:41:36,944 - src.api.main - INFO - ============================================================
+2025-10-25 13:41:36,945 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 13:41:36,946 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 13:41:36,948 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 13:41:36,948 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 13:41:36,949 - src.api.main - INFO - ============================================================
+2025-10-25 13:41:38,538 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:41:43,142 - src.api.main - INFO - Running consolidation cycle with 40 pending orders
+2025-10-25 13:41:43,152 - src.core.decision_engine - INFO - Cycle 0: 40 pending shipments
+2025-10-25 13:41:43,154 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-25 13:41:43,155 - src.core.decision_engine - INFO - Action details: {'shipments': ['ORDE5A504AF'], 'vehicle': 'VEH002'}
+2025-10-25 13:41:43,156 - src.core.decision_engine - ERROR - Cycle failed: 'id'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 172, in run_cycle
+    execution_result = self._execute_decision(decision, state_before)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 287, in _execute_decision
+    id=batch['id'],
+       ~~~~~^^^^^^
+KeyError: 'id'
+2025-10-25 13:41:43,160 - src.api.main - ERROR - Consolidation cycle failed: 'id'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 831, in trigger_consolidation_cycle
+    cycle_result = decision_engine.run_cycle()
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 172, in run_cycle
+    execution_result = self._execute_decision(decision, state_before)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 287, in _execute_decision
+    id=batch['id'],
+       ~~~~~^^^^^^
+KeyError: 'id'
+2025-10-25 13:41:43,528 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:41:48,528 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:41:53,522 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:41:59,473 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:42:04,450 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:42:09,457 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:42:14,426 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:42:19,438 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:42:24,439 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:42:29,425 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:42:34,420 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:42:39,420 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:42:44,438 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:42:49,426 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:42:54,436 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:43:54,460 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:44:54,430 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:45:52,480 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 13:45:52,481 - src.api.main - INFO - Shutdown complete
+2025-10-25 15:47:38,770 - src.api.main - INFO - ============================================================
+2025-10-25 15:47:38,800 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 15:47:38,809 - src.api.main - INFO - ============================================================
+2025-10-25 15:47:38,909 - src.api.main - INFO -  Configuration loaded
+2025-10-25 15:47:38,926 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 15:47:38,941 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:47:38,950 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:47:38,957 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:47:38,958 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 15:47:38,958 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 15:47:38,966 - src.api.main - INFO -  Loaded 40 pending orders from database
+2025-10-25 15:47:38,969 - src.api.main - INFO - ============================================================
+2025-10-25 15:47:38,970 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 15:47:38,972 - src.api.main - INFO - ============================================================
+2025-10-25 15:47:38,975 - src.api.main - INFO - ============================================================
+2025-10-25 15:47:38,976 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 15:47:38,984 - src.api.main - INFO - ============================================================
+2025-10-25 15:47:38,985 - src.api.main - INFO -  Configuration loaded
+2025-10-25 15:47:38,990 - src.api.main - INFO -  State Manager initialized
+2025-10-25 15:47:39,439 - watchfiles.main - INFO - 32 changes detected
+2025-10-25 15:47:43,100 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 15:47:43,104 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 15:47:43,105 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 15:47:43,106 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 15:47:43,108 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 15:47:43,120 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:47:43,125 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:47:43,128 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:47:43,129 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 15:47:43,129 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 15:47:43,133 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:47:43,133 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 15:47:43,134 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 15:47:43,134 - src.api.main - INFO - ============================================================
+2025-10-25 15:47:43,134 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 15:47:43,135 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 15:47:43,135 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 15:47:43,135 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 15:47:43,136 - src.api.main - INFO - ============================================================
+2025-10-25 15:47:48,293 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 15:47:52,337 - src.api.main - INFO - Running consolidation cycle with 40 pending orders
+2025-10-25 15:47:52,341 - src.core.decision_engine - INFO - Cycle 0: 40 pending shipments
+2025-10-25 15:47:52,343 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-25 15:47:52,344 - src.core.decision_engine - INFO - Action details: {'shipments': ['ORDE5A504AF'], 'vehicle': 'VEH002'}
+2025-10-25 15:47:52,345 - src.core.decision_engine - INFO - Converted old PFA format to batch: pfa_batch_20251025154752345108
+2025-10-25 15:47:52,405 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:47:52,756 - watchfiles.main - INFO - 4 changes detected
+2025-10-25 15:47:53,128 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:47:53,200 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 0 vehicles, 1 routes
+2025-10-25 15:47:53,203 - src.core.reward_calculator - WARNING - DISPATCH action with no batches - treating as WAIT
+2025-10-25 15:47:53,204 - src.core.decision_engine - ERROR - Cycle failed: 'DecisionEngine' object has no attribute '_trigger_learning_update'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 192, in run_cycle
+    learning_updates = self._trigger_learning_update(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DecisionEngine' object has no attribute '_trigger_learning_update'
+2025-10-25 15:47:53,205 - src.api.main - ERROR - Consolidation cycle failed: 'DecisionEngine' object has no attribute '_trigger_learning_update'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 831, in trigger_consolidation_cycle
+    cycle_result = decision_engine.run_cycle()
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 192, in run_cycle
+    learning_updates = self._trigger_learning_update(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DecisionEngine' object has no attribute '_trigger_learning_update'
+2025-10-25 15:47:53,259 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:47:58,253 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:48:03,260 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:48:08,280 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:48:13,281 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:48:18,265 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:48:23,274 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:48:28,272 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:48:33,264 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:48:38,285 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:48:43,273 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:48:48,280 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:48:53,256 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:48:58,250 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:49:03,254 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:49:08,257 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:49:14,188 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:49:19,187 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:49:24,192 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:49:29,221 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:49:34,333 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:49:39,245 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:49:44,208 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:49:48,263 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:48,473 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 15:49:48,483 - src.api.main - INFO - Shutdown complete
+2025-10-25 15:49:49,772 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:51,969 - watchfiles.main - INFO - 5 changes detected
+2025-10-25 15:49:53,558 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:53,649 - src.api.main - INFO - ============================================================
+2025-10-25 15:49:53,650 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 15:49:53,650 - src.api.main - INFO - ============================================================
+2025-10-25 15:49:53,688 - src.api.main - INFO -  Configuration loaded
+2025-10-25 15:49:53,692 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 15:49:53,707 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:49:53,716 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:49:53,719 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:49:53,719 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 15:49:53,720 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 15:49:53,723 - src.api.main - INFO -  Loaded 39 pending orders from database
+2025-10-25 15:49:53,724 - src.api.main - INFO - ============================================================
+2025-10-25 15:49:53,724 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 15:49:53,725 - src.api.main - INFO - ============================================================
+2025-10-25 15:49:53,725 - src.api.main - INFO - ============================================================
+2025-10-25 15:49:53,726 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 15:49:53,726 - src.api.main - INFO - ============================================================
+2025-10-25 15:49:53,726 - src.api.main - INFO -  Configuration loaded
+2025-10-25 15:49:53,730 - src.api.main - INFO -  State Manager initialized
+2025-10-25 15:49:53,918 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:54,280 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:54,642 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:55,005 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:55,364 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:55,679 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 15:49:55,689 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 15:49:55,693 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 15:49:55,697 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 15:49:55,699 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 15:49:55,715 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:49:55,732 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:55,735 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:49:55,751 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:49:55,754 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 15:49:55,756 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 15:49:55,774 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:49:55,776 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 15:49:55,783 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 15:49:55,790 - src.api.main - INFO - ============================================================
+2025-10-25 15:49:55,798 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 15:49:55,801 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 15:49:55,803 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 15:49:55,817 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 15:49:55,826 - src.api.main - INFO - ============================================================
+2025-10-25 15:49:56,207 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:56,273 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:49:56,297 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:49:56,566 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:56,976 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:57,383 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:57,791 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:58,197 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:58,603 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:59,009 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:59,192 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:49:59,417 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:49:59,823 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:50:00,230 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:50:00,636 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:50:01,054 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:50:01,480 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:50:01,884 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:50:02,170 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 15:50:02,170 - src.api.main - INFO - Shutdown complete
+2025-10-25 15:50:12,971 - src.api.main - INFO - ============================================================
+2025-10-25 15:50:12,973 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 15:50:12,974 - src.api.main - INFO - ============================================================
+2025-10-25 15:50:13,001 - src.api.main - INFO -  Configuration loaded
+2025-10-25 15:50:13,004 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 15:50:13,014 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:50:13,020 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:50:13,023 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:50:13,024 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 15:50:13,025 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 15:50:13,027 - src.api.main - INFO -  Loaded 39 pending orders from database
+2025-10-25 15:50:13,027 - src.api.main - INFO - ============================================================
+2025-10-25 15:50:13,027 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 15:50:13,027 - src.api.main - INFO - ============================================================
+2025-10-25 15:50:13,028 - src.api.main - INFO - ============================================================
+2025-10-25 15:50:13,028 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 15:50:13,028 - src.api.main - INFO - ============================================================
+2025-10-25 15:50:13,028 - src.api.main - INFO -  Configuration loaded
+2025-10-25 15:50:13,030 - src.api.main - INFO -  State Manager initialized
+2025-10-25 15:50:14,755 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 15:50:14,759 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 15:50:14,761 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 15:50:14,761 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 15:50:14,762 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 15:50:14,776 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:50:14,781 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:50:14,784 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:50:14,784 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 15:50:14,785 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 15:50:14,790 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:50:14,790 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 15:50:14,790 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 15:50:14,791 - src.api.main - INFO - ============================================================
+2025-10-25 15:50:14,791 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 15:50:14,791 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 15:50:14,792 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 15:50:14,792 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 15:50:14,792 - src.api.main - INFO - ============================================================
+2025-10-25 15:50:18,195 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:50:23,176 - src.api.main - INFO -  Retrieved 39 pending orders from database
+2025-10-25 15:50:25,813 - src.api.main - INFO - Running consolidation cycle with 39 pending orders
+2025-10-25 15:50:25,817 - src.core.decision_engine - INFO - Cycle 0: 39 pending shipments
+2025-10-25 15:50:25,818 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-25 15:50:25,819 - src.core.decision_engine - INFO - Action details: {'shipments': ['ORDD96434B8'], 'vehicle': 'VEH002'}
+2025-10-25 15:50:25,820 - src.core.decision_engine - INFO - Converted old PFA format to batch: pfa_batch_20251025155025819807
+2025-10-25 15:50:25,877 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:50:26,160 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 0 vehicles, 1 routes
+2025-10-25 15:50:26,162 - src.core.reward_calculator - WARNING - DISPATCH action with no batches - treating as WAIT
+2025-10-25 15:50:26,162 - src.core.decision_engine - ERROR - Cycle failed: 'DecisionEngine' object has no attribute '_trigger_learning_update'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 192, in run_cycle
+    learning_updates = self._trigger_learning_update(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DecisionEngine' object has no attribute '_trigger_learning_update'
+2025-10-25 15:50:26,164 - src.api.main - ERROR - Consolidation cycle failed: 'DecisionEngine' object has no attribute '_trigger_learning_update'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 831, in trigger_consolidation_cycle
+    cycle_result = decision_engine.run_cycle()
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 192, in run_cycle
+    learning_updates = self._trigger_learning_update(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DecisionEngine' object has no attribute '_trigger_learning_update'
+2025-10-25 15:50:26,240 - watchfiles.main - INFO - 5 changes detected
+2025-10-25 15:50:26,610 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:50:28,179 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:50:33,173 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:50:38,173 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:50:43,174 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:50:48,162 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:50:53,172 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:50:58,170 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:51:03,224 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:51:08,192 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:51:13,193 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:51:18,215 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:51:23,217 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:51:28,208 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:51:33,235 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:51:38,209 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:51:43,206 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:51:48,202 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:51:53,205 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:51:58,214 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:52:54,188 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:53:53,651 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:53:58,192 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:54:03,249 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:54:08,197 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:54:13,192 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:54:18,206 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:54:23,176 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:54:28,200 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:54:33,194 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:54:38,215 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:54:43,210 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:54:48,207 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:54:53,197 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:55:01,370 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:55:03,207 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:55:08,249 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:55:13,193 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:55:18,192 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:55:39,615 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:56:08,063 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:57:30,233 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:57:30,366 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 15:57:30,366 - src.api.main - INFO - Shutdown complete
+2025-10-25 15:57:31,332 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:57:43,508 - src.api.main - INFO - ============================================================
+2025-10-25 15:57:43,509 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 15:57:43,510 - src.api.main - INFO - ============================================================
+2025-10-25 15:57:43,628 - src.api.main - INFO -  Configuration loaded
+2025-10-25 15:57:43,632 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 15:57:43,639 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:57:43,644 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:57:43,647 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:57:43,648 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 15:57:43,648 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 15:57:43,650 - src.api.main - INFO -  Loaded 38 pending orders from database
+2025-10-25 15:57:43,650 - src.api.main - INFO - ============================================================
+2025-10-25 15:57:43,650 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 15:57:43,651 - src.api.main - INFO - ============================================================
+2025-10-25 15:57:43,651 - src.api.main - INFO - ============================================================
+2025-10-25 15:57:43,651 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 15:57:43,652 - src.api.main - INFO - ============================================================
+2025-10-25 15:57:43,652 - src.api.main - INFO -  Configuration loaded
+2025-10-25 15:57:43,654 - src.api.main - INFO -  State Manager initialized
+2025-10-25 15:57:45,440 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 15:57:45,445 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 15:57:45,447 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 15:57:45,449 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 15:57:45,449 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 15:57:45,461 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:57:45,470 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:57:45,473 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:57:45,474 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 15:57:45,474 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 15:57:45,478 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 15:57:45,478 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 15:57:45,479 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 15:57:45,479 - src.api.main - INFO - ============================================================
+2025-10-25 15:57:45,480 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 15:57:45,480 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 15:57:45,480 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 15:57:45,481 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 15:57:45,481 - src.api.main - INFO - ============================================================
+2025-10-25 15:57:48,222 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:57:53,181 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:57:58,170 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:58:03,181 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:58:08,171 - src.api.main - INFO -  Retrieved 38 pending orders from database
+2025-10-25 15:58:10,480 - src.api.main - INFO - Running consolidation cycle with 38 pending orders
+2025-10-25 15:58:10,485 - src.core.decision_engine - INFO - Cycle 0: 38 pending shipments
+2025-10-25 15:58:10,486 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-25 15:58:10,487 - src.core.decision_engine - INFO - Action details: {'shipments': ['ORDCCC563DE'], 'vehicle': 'VEH002'}
+2025-10-25 15:58:10,487 - src.core.decision_engine - INFO - Converted old PFA format to batch: pfa_batch_20251025155810487684
+2025-10-25 15:58:10,589 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:58:10,867 - src.core.decision_engine - INFO -  Batch pfa_batch_20251025155810487684: 1 shipments dispatched
+2025-10-25 15:58:10,870 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 1 vehicles, 1 routes
+2025-10-25 15:58:10,882 - src.core.reward_calculator - WARNING - DISPATCH action with no batches - treating as WAIT
+2025-10-25 15:58:10,882 - src.core.decision_engine - ERROR - Cycle failed: 'DecisionEngine' object has no attribute '_trigger_learning_update'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 192, in run_cycle
+    learning_updates = self._trigger_learning_update(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DecisionEngine' object has no attribute '_trigger_learning_update'
+2025-10-25 15:58:10,887 - src.api.main - ERROR - Consolidation cycle failed: 'DecisionEngine' object has no attribute '_trigger_learning_update'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 831, in trigger_consolidation_cycle
+    cycle_result = decision_engine.run_cycle()
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 192, in run_cycle
+    learning_updates = self._trigger_learning_update(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DecisionEngine' object has no attribute '_trigger_learning_update'
+2025-10-25 15:58:10,953 - watchfiles.main - INFO - 5 changes detected
+2025-10-25 15:58:11,315 - watchfiles.main - INFO - 1 change detected
+2025-10-25 15:58:13,177 - src.api.main - INFO -  Retrieved 37 pending orders from database
+2025-10-25 15:58:18,186 - src.api.main - INFO -  Retrieved 37 pending orders from database
+2025-10-25 15:58:23,190 - src.api.main - INFO -  Retrieved 37 pending orders from database
+2025-10-25 15:58:25,061 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 15:58:25,063 - src.api.main - INFO - Shutdown complete

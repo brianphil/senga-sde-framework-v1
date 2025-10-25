@@ -292,7 +292,7 @@ class DecisionEngine:
                 for shipment_id in batch['shipments']:
                     self.state_manager.update_shipment_status(
                         shipment_id,
-                        ShipmentStatus.EN_ROUTE  # FIX 1
+                        ShipmentStatus.EN_ROUTE  
                     )
                     shipments_dispatched += 1
                 

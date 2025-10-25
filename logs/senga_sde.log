@@ -13897,3 +13897,57 @@ TypeError: CycleResult.__init__() missing 5 required positional arguments: 'cycl
 2025-10-25 13:04:55,507 - src.api.main - INFO -  Retrieved 40 pending orders from database
 2025-10-25 13:05:00,382 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
 2025-10-25 13:05:00,384 - src.api.main - INFO - Shutdown complete
+2025-10-25 13:14:59,121 - src.api.main - INFO - ============================================================
+2025-10-25 13:14:59,124 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 13:14:59,125 - src.api.main - INFO - ============================================================
+2025-10-25 13:14:59,277 - src.api.main - INFO -  Configuration loaded
+2025-10-25 13:14:59,280 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-25 13:14:59,289 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:14:59,296 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:14:59,299 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:14:59,299 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 13:14:59,300 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 13:14:59,375 - src.api.main - INFO -  Loaded 40 pending orders from database
+2025-10-25 13:14:59,375 - src.api.main - INFO - ============================================================
+2025-10-25 13:14:59,376 - src.api.main - INFO - Senga SDE Ready
+2025-10-25 13:14:59,376 - src.api.main - INFO - ============================================================
+2025-10-25 13:14:59,377 - src.api.main - INFO - ============================================================
+2025-10-25 13:14:59,377 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-25 13:14:59,378 - src.api.main - INFO - ============================================================
+2025-10-25 13:14:59,378 - src.api.main - INFO -  Configuration loaded
+2025-10-25 13:14:59,382 - src.api.main - INFO -  State Manager initialized
+2025-10-25 13:15:03,072 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-25 13:15:03,080 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 13:15:03,082 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-25 13:15:03,084 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-25 13:15:03,085 - src.api.main - INFO -  Integration Manager initialized
+2025-10-25 13:15:03,109 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:15:03,116 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:15:03,120 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:15:03,120 - src.core.decision_engine - INFO - Enhanced Decision Engine initialized with learning loop
+2025-10-25 13:15:03,121 - src.api.main - INFO -  Decision Engine initialized
+2025-10-25 13:15:03,129 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-25 13:15:03,130 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-25 13:15:03,130 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-25 13:15:03,131 - src.api.main - INFO - ============================================================
+2025-10-25 13:15:03,131 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-25 13:15:03,132 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-25 13:15:03,132 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-25 13:15:03,133 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-25 13:15:03,133 - src.api.main - INFO - ============================================================
+2025-10-25 13:15:04,550 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:15:09,002 - src.api.main - INFO - Running consolidation cycle with 40 pending orders
+2025-10-25 13:15:09,006 - src.core.decision_engine - INFO - Cycle 0: 40 pending shipments
+2025-10-25 13:15:09,010 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-25 13:15:09,011 - src.core.decision_engine - INFO - Action details: {'shipments': ['ORDE5A504AF'], 'vehicle': 'VEH002'}
+2025-10-25 13:15:09,012 - src.core.decision_engine - INFO - Executed DISPATCH: 0 shipments, 0 vehicles, 0 routes
+2025-10-25 13:15:09,012 - src.core.reward_calculator - WARNING - DISPATCH action with no batches - treating as WAIT
+2025-10-25 13:15:09,016 - src.core.decision_engine - INFO - Cycle completed in 9.6ms
+2025-10-25 13:15:09,029 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 40 waiting
+2025-10-25 13:15:09,063 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:15:09,579 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:15:14,563 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:15:20,525 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:15:25,505 - src.api.main - INFO -  Retrieved 40 pending orders from database
+2025-10-25 13:15:25,761 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-25 13:15:25,762 - src.api.main - INFO - Shutdown complete

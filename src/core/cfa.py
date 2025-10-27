@@ -513,186 +513,229 @@ class CostFunctionApproximator:
         return batch_assignments, batch_status
     
     def _solve_route_sequencing_vrp(
-        self,
-        vehicle: VehicleState,
-        shipments: List[Shipment],
-        state: SystemState
-    ) -> Optional[Tuple[Batch, str]]:
-        """
-        Solve VRP for a single batch using OR-Tools Routing
-        
-        Handles:
-        - Multi-destination shipments (1 pickup, N deliveries)
-        - Pickup before delivery constraints
-        - Time windows
-        - Real distance matrix
-        
-        Returns:
-            (Batch object, routing_status) or None if infeasible
-        """
-        # Build location graph
-        locations = [vehicle.current_location]  # Index 0: depot
-        location_to_index = {self._location_key(vehicle.current_location): 0}
-        index_to_location = {0: vehicle.current_location}
-        
-        # Shipment structure: pickup_index → [delivery_indices]
-        shipment_pickup_delivery = {}
-        
-        current_idx = 1
-        for shipment in shipments:
-            # Add pickup location
-            pickup_key = self._location_key(shipment.origin)
-            if pickup_key not in location_to_index:
-                location_to_index[pickup_key] = current_idx
-                index_to_location[current_idx] = shipment.origin
-                pickup_idx = current_idx
-                current_idx += 1
-            else:
-                pickup_idx = location_to_index[pickup_key]
-            
-            # Add delivery locations
-            delivery_indices = []
-            for dest in shipment.destinations:
-                dest_key = self._location_key(dest)
-                if dest_key not in location_to_index:
-                    location_to_index[dest_key] = current_idx
-                    index_to_location[current_idx] = dest
-                    delivery_idx = current_idx
+            self,
+            vehicle: VehicleState,
+            shipments: List[Shipment],
+            state: SystemState
+        ) -> Optional[Tuple[Batch, str]]:
+            """
+            Solve VRP for a single batch using OR-Tools Routing
+
+            Handles:
+            - Multi-destination shipments (1 pickup, N deliveries)
+            - Pickup before delivery constraints
+            - Capacity constraints (unit demand model)
+            - Real distance matrix
+            - Time dimension with relaxed upper bound
+
+            Returns:
+                (Batch object, routing_status) or None if infeasible
+            """
+            # Build location graph
+            locations = [vehicle.current_location]  # depot index = 0
+            location_to_index = {self._location_key(vehicle.current_location): 0}
+            index_to_location = {0: vehicle.current_location}
+
+            shipment_pickup_delivery = {}
+            current_idx = 1
+
+            for shipment in shipments:
+                # Add pickup
+                pickup_key = self._location_key(shipment.origin)
+                if pickup_key not in location_to_index:
+                    location_to_index[pickup_key] = current_idx
+                    index_to_location[current_idx] = shipment.origin
+                    pickup_idx = current_idx
                     current_idx += 1
                 else:
-                    delivery_idx = location_to_index[dest_key]
-                delivery_indices.append(delivery_idx)
-            
-            shipment_pickup_delivery[shipment.id] = (pickup_idx, delivery_indices)
-        
-        num_locations = len(index_to_location)
-        
-        # Trivial case: only depot + 1 location
-        if num_locations <= 2:
-            sequence = [index_to_location[i] for i in sorted(index_to_location.keys())]
-            distance = self._calculate_sequence_distance(sequence)
-            duration = distance / 40.0  # Assume 40 km/h average
-            
-            return self._create_batch_object(
-                vehicle, shipments, sequence, distance, duration, 'TRIVIAL'
-            )
-        
-        # Build distance matrix using real calculator
-        distance_matrix = self._build_distance_matrix(index_to_location)
-        
-        # Create OR-Tools routing model
-        manager = pywrapcp.RoutingIndexManager(num_locations, 1, 0)
-        routing = pywrapcp.RoutingModel(manager)
-        
-        # Distance callback
-        def distance_callback(from_index, to_index):
-            from_node = manager.IndexToNode(from_index)
-            to_node = manager.IndexToNode(to_index)
-            return distance_matrix[from_node][to_node]
-        
-        transit_callback_index = routing.RegisterTransitCallback(distance_callback)
-        routing.SetArcCostEvaluatorOfAllVehicles(transit_callback_index)
-        
-        # Add pickup-delivery constraints
-        for shipment_id, (pickup_idx, delivery_indices) in shipment_pickup_delivery.items():
-            pickup_index = manager.NodeToIndex(pickup_idx)
-            
-            for delivery_idx in delivery_indices:
-                delivery_index = manager.NodeToIndex(delivery_idx)
-                
-                # Pickup before delivery constraint
-                routing.AddPickupAndDelivery(pickup_index, delivery_index)
-                
-                # Capacity dimension (simplified: unit demand per shipment segment)
-                routing.solver().Add(
-                    routing.VehicleVar(pickup_index) == routing.VehicleVar(delivery_index)
+                    pickup_idx = location_to_index[pickup_key]
+
+                # Add deliveries
+                delivery_indices = []
+                for dest in shipment.destinations:
+                    dest_key = self._location_key(dest)
+                    if dest_key not in location_to_index:
+                        location_to_index[dest_key] = current_idx
+                        index_to_location[current_idx] = dest
+                        delivery_idx = current_idx
+                        current_idx += 1
+                    else:
+                        delivery_idx = location_to_index[dest_key]
+                    delivery_indices.append(delivery_idx)
+
+                shipment_pickup_delivery[shipment.id] = (pickup_idx, delivery_indices)
+
+            num_locations = len(index_to_location)
+
+            # Handle trivial route
+            if num_locations <= 2:
+                sequence = [index_to_location[i] for i in sorted(index_to_location.keys())]
+                distance = self._calculate_sequence_distance(sequence)
+                duration = distance / 40.0
+                return self._create_batch_object(
+                    vehicle, shipments, sequence, distance, duration, 'TRIVIAL'
                 )
-        
-        # Add time dimension
-        routing.AddDimension(
-            transit_callback_index,
-            30,  # Allow 30 min slack at each location
-            int(8 * 60),  # Max 8 hours total route time (in minutes)
-            False,
-            'time'
-        )
-        
-        # Search parameters
-        search_parameters = pywrapcp.DefaultRoutingSearchParameters()
-        search_parameters.first_solution_strategy = (
-            routing_enums_pb2.FirstSolutionStrategy.PATH_CHEAPEST_ARC
-        )
-        search_parameters.local_search_metaheuristic = (
-            routing_enums_pb2.LocalSearchMetaheuristic.GUIDED_LOCAL_SEARCH
-        )
-        search_parameters.time_limit.seconds = self.route_solver_time_limit
-        
-        # Solve
-        logger.debug(f"Solving VRP for {len(shipments)} shipments, {num_locations} locations")
-        solution = routing.SolveWithParameters(search_parameters)
-        
-        if solution:
-            # Extract route
-            sequence = []
-            total_distance_m = 0
-            index = routing.Start(0)
-            
-            while not routing.IsEnd(index):
-                node = manager.IndexToNode(index)
-                sequence.append(index_to_location[node])
-                
-                next_index = solution.Value(routing.NextVar(index))
-                if not routing.IsEnd(next_index):
-                    next_node = manager.IndexToNode(next_index)
-                    total_distance_m += distance_matrix[node][next_node]
-                
-                index = next_index
-            
-            # Add final return to depot
-            final_node = manager.IndexToNode(index)
-            sequence.append(index_to_location[final_node])
-            
-            distance_km = total_distance_m / 1000.0
-            duration_hours = distance_km / 40.0  # 40 km/h average
-            
-            routing_status = 'OPTIMAL' if solution.status() == routing.OPTIMAL() else 'FEASIBLE'
-            
-            return self._create_batch_object(
-                vehicle, shipments, sequence, distance_km, duration_hours, routing_status
+
+            # Build distance matrix (meters)
+            distance_matrix = self._build_distance_matrix(index_to_location)
+
+            # Create routing model
+            manager = pywrapcp.RoutingIndexManager(num_locations, 1, 0)
+            routing = pywrapcp.RoutingModel(manager)
+
+            # Distance callback
+            def distance_callback(from_index, to_index):
+                from_node = manager.IndexToNode(from_index)
+                to_node = manager.IndexToNode(to_index)
+                return distance_matrix[from_node][to_node]
+
+            transit_callback_index = routing.RegisterTransitCallback(distance_callback)
+            routing.SetArcCostEvaluatorOfAllVehicles(transit_callback_index)
+
+            # Capacity demand callback (unit demand per pickup, -1 per delivery)
+            def demand_callback(from_index):
+                from_node = manager.IndexToNode(from_index)
+                for (pickup_idx, delivery_indices) in shipment_pickup_delivery.values():
+                    if from_node == pickup_idx:
+                        return 1
+                    if from_node in delivery_indices:
+                        return -1
+                return 0
+
+            demand_callback_index = routing.RegisterUnaryTransitCallback(demand_callback)
+            routing.AddDimensionWithVehicleCapacity(
+                demand_callback_index,
+                0,  # No slack
+                [len(shipments)],  # Vehicle capacity: max concurrent pickups
+                True,
+                "Capacity"
             )
-        
-        else:
-            # Routing failed - try greedy fallback
-            logger.warning("OR-Tools routing failed, attempting greedy fallback")
+            capacity_dim = routing.GetDimensionOrDie("Capacity")
+
+            # Add pickup–delivery constraints
+            for shipment_id, (pickup_idx, delivery_indices) in shipment_pickup_delivery.items():
+                for delivery_idx in delivery_indices:
+                    pickup_index = manager.NodeToIndex(pickup_idx)
+                    delivery_index = manager.NodeToIndex(delivery_idx)
+                    routing.AddPickupAndDelivery(pickup_index, delivery_index)
+                    routing.solver().Add(
+                        routing.VehicleVar(pickup_index) == routing.VehicleVar(delivery_index)
+                    )
+                    routing.solver().Add(
+                        capacity_dim.CumulVar(pickup_index) <= capacity_dim.CumulVar(delivery_index)
+                    )
+
+            # Add relaxed time dimension (minutes)
+            routing.AddDimension(
+                transit_callback_index,
+                300,  # 5-hour slack
+                int(24 * 60),  # Max 24-hour route
+                True,
+                'Time'
+            )
+
+            # Search parameters
+            search_parameters = pywrapcp.DefaultRoutingSearchParameters()
+            search_parameters.first_solution_strategy = routing_enums_pb2.FirstSolutionStrategy.PATH_CHEAPEST_ARC
+            search_parameters.local_search_metaheuristic = routing_enums_pb2.LocalSearchMetaheuristic.GUIDED_LOCAL_SEARCH
+            search_parameters.time_limit.seconds = self.route_solver_time_limit
+
+            logger.debug(f"Solving VRP for {len(shipments)} shipments, {num_locations} locations")
+            solution = routing.SolveWithParameters(search_parameters)
+
+            if solution:
+                # Extract route
+                sequence = []
+                total_distance_m = 0
+                index = routing.Start(0)
+
+                while not routing.IsEnd(index):
+                    node = manager.IndexToNode(index)
+                    sequence.append(index_to_location[node])
+                    next_index = solution.Value(routing.NextVar(index))
+                    if not routing.IsEnd(next_index):
+                        next_node = manager.IndexToNode(next_index)
+                        total_distance_m += distance_matrix[node][next_node]
+                    index = next_index
+
+                final_node = manager.IndexToNode(index)
+                sequence.append(index_to_location[final_node])
+
+                distance_km = total_distance_m / 1000.0
+                duration_hours = distance_km / 40.0
+
+                routing_status = 'OPTIMAL'
+                logger.info(f"OR-Tools routing SUCCESS: {distance_km:.1f} km, {len(sequence)} stops")
+                return self._create_batch_object(
+                    vehicle, shipments, sequence, distance_km, duration_hours, routing_status
+                )
+
+            # --- Fallback ---
+            logger.warning(f"OR-Tools routing FAILED: {len(shipments)} shipments, {num_locations} locations - using greedy fallback")
             return self._greedy_route_fallback(vehicle, shipments, index_to_location)
-    
+
     def _greedy_route_fallback(
         self,
         vehicle: VehicleState,
         shipments: List[Shipment],
         index_to_location: Dict
     ) -> Optional[Tuple[Batch, str]]:
-        """
-        Greedy nearest-neighbor TSP fallback
-        """
-        # Simple strategy: visit all pickups first, then all deliveries
+        """Greedy nearest-neighbor TSP fallback"""
         sequence = [vehicle.current_location]
         
-        # Collect all unique locations
-        pickup_locs = [s.origin for s in shipments]
-        delivery_locs = []
+        # Collect unique pickup locations
+        pickup_locs = []
+        pickup_keys_seen = set()
         for s in shipments:
-            delivery_locs.extend(s.destinations)
+            key = self._location_key(s.origin)
+            if key not in pickup_keys_seen:
+                pickup_locs.append(s.origin)
+                pickup_keys_seen.add(key)
         
-        # Remove duplicates
-        unique_pickups = list({self._location_key(loc): loc for loc in pickup_locs}.values())
-        unique_deliveries = list({self._location_key(loc): loc for loc in delivery_locs}.values())
+        # Collect unique delivery locations
+        delivery_locs = []
+        delivery_keys_seen = set()
+        for s in shipments:
+            for dest in s.destinations:
+                key = self._location_key(dest)
+                if key not in delivery_keys_seen:
+                    delivery_locs.append(dest)
+                    delivery_keys_seen.add(key)
         
-        # Add pickups in order
-        sequence.extend(unique_pickups)
+        # Greedy nearest-neighbor for pickups
+        current_loc = vehicle.current_location
+        while pickup_locs:
+            nearest_idx = 0
+            min_dist = float('inf')
+            for idx, loc in enumerate(pickup_locs):
+                dist = self.distance_calc.calculate_distance_km(
+                    current_loc.lat, current_loc.lng,
+                    loc.lat, loc.lng
+                )
+                if dist < min_dist:
+                    min_dist = dist
+                    nearest_idx = idx
+            
+            nearest_loc = pickup_locs.pop(nearest_idx)
+            sequence.append(nearest_loc)
+            current_loc = nearest_loc
         
-        # Add deliveries in order
-        sequence.extend(unique_deliveries)
+        # Greedy nearest-neighbor for deliveries
+        while delivery_locs:
+            nearest_idx = 0
+            min_dist = float('inf')
+            for idx, loc in enumerate(delivery_locs):
+                dist = self.distance_calc.calculate_distance_km(
+                    current_loc.lat, current_loc.lng,
+                    loc.lat, loc.lng
+                )
+                if dist < min_dist:
+                    min_dist = dist
+                    nearest_idx = idx
+            
+            nearest_loc = delivery_locs.pop(nearest_idx)
+            sequence.append(nearest_loc)
+            current_loc = nearest_loc
         
         # Return to depot
         sequence.append(vehicle.current_location)
@@ -700,10 +743,11 @@ class CostFunctionApproximator:
         distance = self._calculate_sequence_distance(sequence)
         duration = distance / 40.0
         
+        logger.info(f"Greedy fallback: {len(sequence)} stops, {distance:.1f} km")
+        
         return self._create_batch_object(
             vehicle, shipments, sequence, distance, duration, 'GREEDY_FALLBACK'
         )
-    
     def _create_batch_object(
         self,
         vehicle: VehicleState,

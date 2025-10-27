@@ -253,14 +253,8 @@ class NeuralVFA:
     
     def _extract_features(self, state: SystemState) -> np.ndarray:
         """
-        Extract 50-dimensional feature vector - FIXED for correct data structures
+        Extract 50-dimensional feature vector 
         
-        SystemState has:
-        - fleet_state (not vehicle_states)
-        
-        Shipment has:
-        - destinations (list of Location, not dest_address string)
-        - origin (Location object)
         """
         features = np.zeros(50)
         

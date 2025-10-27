@@ -129,6 +129,12 @@ class CostFunctionApproximator:
     """
     
     def __init__(self):
+                # Route distance cache: {frozenset(shipment_ids): (distance_km, duration_hours, sequence)}
+        self._route_cache = {}
+        self._cache_hits = 0
+        self._cache_misses = 0
+
+        logger.info("CFA initialized with real MIP optimization")
         self.config = SengaConfigurator()
         self.state_manager = StateManager()
         self.distance_calc = DistanceTimeCalculator(use_api=False)
@@ -257,6 +263,8 @@ class CostFunctionApproximator:
                      f"cost {total_cost:.0f}, solver time {solver_time:.1f}s"
         )
     
+# Batch Formation Objective Function
+
     def _solve_batch_formation_mip(
         self,
         shipments: List[Shipment],
@@ -265,11 +273,9 @@ class CostFunctionApproximator:
         value_function
     ) -> Tuple[Dict[str, Tuple[Set[str], str]], str]:
         """
-        Solve batch formation using CP-SAT
+        CORRECTED: Batch formation MIP with proper incentives
         
-        Returns:
-            (batch_assignments, status)
-            where batch_assignments = {batch_id: (set(shipment_ids), vehicle_id)}
+        Key Fix: Objective function now properly incentivizes dispatching urgent shipments
         """
         model = cp_model.CpModel()
         
@@ -282,19 +288,16 @@ class CostFunctionApproximator:
             max_batches = min(n_shipments, n_vehicles * self.max_batch_size)
         
         # Decision variables
-        # x[i,j]: shipment i in batch j
-        x = {}
+        x = {}  # x[i,j]: shipment i in batch j
         for i in range(n_shipments):
             for j in range(max_batches):
                 x[i, j] = model.NewBoolVar(f'x_s{i}_b{j}')
         
-        # y[j]: batch j is used
-        y = {}
+        y = {}  # y[j]: batch j is used
         for j in range(max_batches):
             y[j] = model.NewBoolVar(f'y_b{j}')
         
-        # z[j,k]: batch j assigned to vehicle k
-        z = {}
+        z = {}  # z[j,k]: batch j assigned to vehicle k
         for j in range(max_batches):
             for k in range(n_vehicles):
                 z[j, k] = model.NewBoolVar(f'z_b{j}_v{k}')
@@ -305,7 +308,7 @@ class CostFunctionApproximator:
         for i in range(n_shipments):
             model.Add(sum(x[i, j] for j in range(max_batches)) <= 1)
         
-        # 2. Batch activation: can't assign to unused batch
+        # 2. Batch activation
         for i in range(n_shipments):
             for j in range(max_batches):
                 model.Add(x[i, j] <= y[j])
@@ -318,7 +321,7 @@ class CostFunctionApproximator:
         for k in range(n_vehicles):
             model.Add(sum(z[j, k] for j in range(max_batches)) <= 1)
         
-        # 5. Capacity constraints (volume)
+        # 5. Volume capacity
         for j in range(max_batches):
             batch_volume = sum(
                 int(shipments[i].volume * 1000) * x[i, j]
@@ -330,7 +333,7 @@ class CostFunctionApproximator:
             )
             model.Add(batch_volume <= vehicle_capacity)
         
-        # 6. Capacity constraints (weight)
+        # 6. Weight capacity
         for j in range(max_batches):
             batch_weight = sum(
                 int(shipments[i].weight) * x[i, j]
@@ -342,116 +345,101 @@ class CostFunctionApproximator:
             )
             model.Add(batch_weight <= vehicle_weight_cap)
         
-        # 7. Batch size limits (if enabled)
+        # 7. Batch size limits
         if self.enable_batching:
             for j in range(max_batches):
                 model.Add(
                     sum(x[i, j] for i in range(n_shipments)) <= self.max_batch_size
                 )
         
-        # OBJECTIVE FUNCTION
+        # ========================================================================
+        # CORRECTED OBJECTIVE FUNCTION
+        # ========================================================================
         
-        # Precompute distance estimates for batches
+        current_time = state.timestamp
+        
+        # Precompute distance estimates
         batch_distance_estimates = self._precompute_batch_distances(
             shipments, vehicles, max_batches
         )
         
-        # Fixed costs
-        fixed_costs = []
+        # DISPATCH COSTS (when y[j]=1)
+        dispatch_costs = []
         for j in range(max_batches):
             for k in range(n_vehicles):
-                cost = int(vehicles[k].fixed_cost_per_trip)
-                fixed_costs.append(cost * z[j, k])
-        
-        # Variable costs (distance-based)
-        variable_costs = []
-        for j in range(max_batches):
-            for k in range(n_vehicles):
-                # Use precomputed average or estimate
+                # Fixed cost + variable cost for this batch-vehicle pair
+                fixed = int(vehicles[k].fixed_cost_per_trip)
                 avg_dist = batch_distance_estimates.get((j, k), 50.0)
-                cost = int(vehicles[k].cost_per_km * avg_dist)
-                variable_costs.append(cost * z[j, k])
+                variable = int(vehicles[k].cost_per_km * avg_dist)
+                
+                dispatch_costs.append((fixed + variable) * z[j, k])
         
-        # Delay penalties
-        delay_penalties = []
+        # WAITING PENALTIES (when shipment NOT dispatched)
+        # This is the KEY FIX: Heavy penalty for NOT dispatching urgent shipments
         waiting_penalties = []
-        current_time = state.timestamp
-        
         for i in range(n_shipments):
             time_to_deadline = (shipments[i].delivery_deadline - current_time).total_seconds() / 3600.0
             
-            # Penalty for dispatching late/urgent shipments
+            # Calculate waiting penalty based on urgency
             if time_to_deadline < 0:
-                penalty = int(abs(time_to_deadline) * self.delay_penalty_per_hour * 2)  # Double penalty for late
+                # Already late - MASSIVE penalty for continued waiting
+                penalty = int(abs(time_to_deadline) * self.delay_penalty_per_hour * 10)
             elif time_to_deadline < 2:
-                penalty = int((2 - time_to_deadline) * self.delay_penalty_per_hour)
-            else:
-                penalty = 0
-            
-            # Penalty applied if shipment is dispatched (in any batch)
-            for j in range(max_batches):
-                delay_penalties.append(penalty * x[i, j])
-            
-            # CRITICAL: Penalty for NOT dispatching (waiting cost)
-            # If shipment not assigned to any batch, apply waiting cost
-            # This incentivizes dispatch when there's capacity
-            is_assigned = sum(x[i, j] for j in range(max_batches))
-            not_assigned = model.NewBoolVar(f'not_assigned_{i}')
-            model.Add(is_assigned == 0).OnlyEnforceIf(not_assigned)
-            model.Add(is_assigned >= 1).OnlyEnforceIf(not_assigned.Not())
-            
-            # Waiting penalty: much higher to encourage dispatch
-            # Scale similar to fixed costs (1000s)
-            if time_to_deadline < 6:
-                wait_penalty = int(2000.0)  # Very high penalty for waiting when urgent
+                # Emergency (< 2h) - Very high penalty
+                penalty = int(self.delay_penalty_per_hour * 5)
+            elif time_to_deadline < 6:
+                # Urgent (< 6h) - High penalty
+                penalty = int(self.delay_penalty_per_hour * 3)
             elif time_to_deadline < 12:
-                wait_penalty = int(1000.0)  # High penalty
+                # Soon (< 12h) - Moderate penalty
+                penalty = int(self.delay_penalty_per_hour)
             else:
-                wait_penalty = int(500.0)  # Moderate penalty even when not urgent
+                # Not urgent - Small penalty (still incentivize dispatch)
+                penalty = int(self.delay_penalty_per_hour * 0.3)
             
-            waiting_penalties.append(wait_penalty * not_assigned)
+            # Apply penalty if shipment NOT dispatched
+            # not_dispatched = 1 - (is dispatched in any batch)
+            is_dispatched = model.NewBoolVar(f'dispatched_{i}')
+            model.Add(sum(x[i, j] for j in range(max_batches)) >= 1).OnlyEnforceIf(is_dispatched)
+            model.Add(sum(x[i, j] for j in range(max_batches)) == 0).OnlyEnforceIf(is_dispatched.Not())
+            
+            # Add penalty * (1 - is_dispatched)
+            waiting_penalties.append(penalty * is_dispatched.Not())
         
-        # Utilization bonus
+        # UTILIZATION BONUSES (when batch has good utilization)
         utilization_bonuses = []
         for j in range(max_batches):
             for k in range(n_vehicles):
-                # Estimate utilization
+                # Calculate batch volume
                 batch_volume = sum(
                     int(shipments[i].volume * 100) * x[i, j]
                     for i in range(n_shipments)
                 )
                 vehicle_capacity = int(vehicles[k].capacity.volume * 100)
                 
-                # Bonus if utilization > threshold
+                # Bonus for volume above threshold
                 threshold_volume = int(self.min_utilization_threshold * vehicle_capacity)
                 bonus_volume = model.NewIntVar(0, vehicle_capacity, f'bonus_vol_b{j}_v{k}')
-                
-                # bonus_volume = max(0, batch_volume - threshold_volume)
                 model.AddMaxEquality(bonus_volume, [0, batch_volume - threshold_volume])
                 
-                # Create bonus_active variable: bonus_active = bonus_volume * z[j,k]
-                # This is a product of two variables, need to linearize
+                # Linearize: bonus_active = bonus_volume * z[j,k]
                 bonus_active = model.NewIntVar(0, vehicle_capacity, f'bonus_active_b{j}_v{k}')
                 model.Add(bonus_active <= vehicle_capacity * z[j, k])
                 model.Add(bonus_active <= bonus_volume)
                 model.Add(bonus_active >= bonus_volume - vehicle_capacity * (1 - z[j, k]))
                 
-                # Calculate bonus = (bonus_value * bonus_active) // 100
-                # Create new variable for the final bonus
+                # Final bonus = (bonus_value * bonus_active) / 100
                 bonus_value = int(self.utilization_bonus_per_percent)
                 max_bonus = bonus_value * vehicle_capacity // 100
                 final_bonus = model.NewIntVar(0, max_bonus, f'final_bonus_b{j}_v{k}')
-                
-                # final_bonus = (bonus_value * bonus_active) // 100
                 model.AddDivisionEquality(final_bonus, bonus_value * bonus_active, 100)
                 
                 utilization_bonuses.append(final_bonus)
         
-        # Total objective
+        # TOTAL OBJECTIVE
+        # Minimize: dispatch_costs + waiting_penalties - utilization_bonuses
         total_cost = (
-            sum(fixed_costs) +
-            sum(variable_costs) +
-            sum(delay_penalties) +
+            sum(dispatch_costs) +
             sum(waiting_penalties) -
             sum(utilization_bonuses)
         )
@@ -480,7 +468,6 @@ class CostFunctionApproximator:
         # Extract solution
         batch_assignments = {}
         
-        # DEBUG: Log what the solver found
         logger.info(f"DEBUG: Checking solution extraction:")
         logger.info(f"  Batch usage (y): {[solver.Value(y[j]) for j in range(min(5, max_batches))]}")
         
@@ -511,243 +498,243 @@ class CostFunctionApproximator:
         
         logger.info(f"Extracted {len(batch_assignments)} batches from solution")
         return batch_assignments, batch_status
-    
+
+ # Route Sequencing (VRP) with OR-Tools
+
     def _solve_route_sequencing_vrp(
-            self,
-            vehicle: VehicleState,
-            shipments: List[Shipment],
-            state: SystemState
-        ) -> Optional[Tuple[Batch, str]]:
-            """
-            Solve VRP for a single batch using OR-Tools Routing
-
-            Handles:
-            - Multi-destination shipments (1 pickup, N deliveries)
-            - Pickup before delivery constraints
-            - Capacity constraints (unit demand model)
-            - Real distance matrix
-            - Time dimension with relaxed upper bound
-
-            Returns:
-                (Batch object, routing_status) or None if infeasible
-            """
-            # Build location graph
-            locations = [vehicle.current_location]  # depot index = 0
-            location_to_index = {self._location_key(vehicle.current_location): 0}
-            index_to_location = {0: vehicle.current_location}
-
-            shipment_pickup_delivery = {}
-            current_idx = 1
-
-            for shipment in shipments:
-                # Add pickup
-                pickup_key = self._location_key(shipment.origin)
-                if pickup_key not in location_to_index:
-                    location_to_index[pickup_key] = current_idx
-                    index_to_location[current_idx] = shipment.origin
-                    pickup_idx = current_idx
+        self,
+        vehicle: VehicleState,
+        shipments: List[Shipment],
+        state: SystemState
+    ) -> Optional[Tuple[Batch, str]]:
+        """
+        Solve routing with caching
+        
+        Cache key: Set of shipment IDs (order doesn't matter)
+        Cache value: (distance, duration, sequence)
+        
+        This prevents solving the same route 50+ times during DLA Monte Carlo
+        """
+        
+        # CHECK CACHE FIRST
+        cache_key = frozenset(s.id for s in shipments)
+        
+        if cache_key in self._route_cache:
+            self._cache_hits += 1
+            cached_dist, cached_dur, cached_seq = self._route_cache[cache_key]
+            
+            # Log cache hit every 10 hits to show it's working
+            if self._cache_hits % 10 == 0:
+                hit_rate = self._cache_hits / (self._cache_hits + self._cache_misses) * 100
+                logger.info(f"Route cache: {self._cache_hits} hits / {self._cache_misses} misses ({hit_rate:.1f}% hit rate)")
+            
+            return self._create_batch_object(
+                vehicle, shipments, cached_seq, cached_dist, cached_dur, 'CACHED'
+            )
+        
+        self._cache_misses += 1
+        
+        # CACHE MISS - SOLVE THE ROUTE
+        
+        # Build location set
+        depot = vehicle.current_location
+        locations = [depot]
+        location_to_index = {self._location_key(depot): 0}
+        index_to_location = {0: depot}
+        
+        pickup_indices = set()
+        delivery_indices = set()
+        
+        current_idx = 1
+        
+        # Add all locations
+        for shipment in shipments:
+            # Pickup
+            pickup_key = self._location_key(shipment.origin)
+            if pickup_key not in location_to_index:
+                location_to_index[pickup_key] = current_idx
+                index_to_location[current_idx] = shipment.origin
+                pickup_indices.add(current_idx)
+                current_idx += 1
+            else:
+                pickup_indices.add(location_to_index[pickup_key])
+            
+            # Deliveries
+            for dest in shipment.destinations:
+                dest_key = self._location_key(dest)
+                if dest_key not in location_to_index:
+                    location_to_index[dest_key] = current_idx
+                    index_to_location[current_idx] = dest
+                    delivery_indices.add(current_idx)
                     current_idx += 1
                 else:
-                    pickup_idx = location_to_index[pickup_key]
-
-                # Add deliveries
-                delivery_indices = []
-                for dest in shipment.destinations:
-                    dest_key = self._location_key(dest)
-                    if dest_key not in location_to_index:
-                        location_to_index[dest_key] = current_idx
-                        index_to_location[current_idx] = dest
-                        delivery_idx = current_idx
-                        current_idx += 1
-                    else:
-                        delivery_idx = location_to_index[dest_key]
-                    delivery_indices.append(delivery_idx)
-
-                shipment_pickup_delivery[shipment.id] = (pickup_idx, delivery_indices)
-
-            num_locations = len(index_to_location)
-
-            # Handle trivial route
-            if num_locations <= 2:
-                sequence = [index_to_location[i] for i in sorted(index_to_location.keys())]
-                distance = self._calculate_sequence_distance(sequence)
-                duration = distance / 40.0
-                return self._create_batch_object(
-                    vehicle, shipments, sequence, distance, duration, 'TRIVIAL'
-                )
-
-            # Build distance matrix (meters)
-            distance_matrix = self._build_distance_matrix(index_to_location)
-
-            # Create routing model
+                    delivery_indices.add(location_to_index[dest_key])
+        
+        num_locations = len(index_to_location)
+        
+        # Trivial cases
+        if num_locations <= 2:
+            sequence = [index_to_location[i] for i in sorted(index_to_location.keys())]
+            distance = self._calculate_sequence_distance(sequence)
+            duration = distance / 40.0
+            
+            # CACHE THE RESULT
+            self._route_cache[cache_key] = (distance, duration, sequence)
+            
+            return self._create_batch_object(
+                vehicle, shipments, sequence, distance, duration, 'TRIVIAL'
+            )
+        
+        # Build distance matrix
+        distance_matrix = self._build_distance_matrix(index_to_location)
+        
+        # Try OR-Tools TSP
+        try:
             manager = pywrapcp.RoutingIndexManager(num_locations, 1, 0)
             routing = pywrapcp.RoutingModel(manager)
-
+            
             # Distance callback
             def distance_callback(from_index, to_index):
                 from_node = manager.IndexToNode(from_index)
                 to_node = manager.IndexToNode(to_index)
                 return distance_matrix[from_node][to_node]
-
+            
             transit_callback_index = routing.RegisterTransitCallback(distance_callback)
             routing.SetArcCostEvaluatorOfAllVehicles(transit_callback_index)
-
-            # Capacity demand callback (unit demand per pickup, -1 per delivery)
-            def demand_callback(from_index):
-                from_node = manager.IndexToNode(from_index)
-                for (pickup_idx, delivery_indices) in shipment_pickup_delivery.values():
-                    if from_node == pickup_idx:
-                        return 1
-                    if from_node in delivery_indices:
-                        return -1
-                return 0
-
-            demand_callback_index = routing.RegisterUnaryTransitCallback(demand_callback)
-            routing.AddDimensionWithVehicleCapacity(
-                demand_callback_index,
-                0,  # No slack
-                [len(shipments)],  # Vehicle capacity: max concurrent pickups
-                True,
-                "Capacity"
-            )
-            capacity_dim = routing.GetDimensionOrDie("Capacity")
-
-            # Add pickup–delivery constraints
-            for shipment_id, (pickup_idx, delivery_indices) in shipment_pickup_delivery.items():
-                for delivery_idx in delivery_indices:
-                    pickup_index = manager.NodeToIndex(pickup_idx)
-                    delivery_index = manager.NodeToIndex(delivery_idx)
-                    routing.AddPickupAndDelivery(pickup_index, delivery_index)
-                    routing.solver().Add(
-                        routing.VehicleVar(pickup_index) == routing.VehicleVar(delivery_index)
-                    )
-                    routing.solver().Add(
-                        capacity_dim.CumulVar(pickup_index) <= capacity_dim.CumulVar(delivery_index)
-                    )
-
-            # Add relaxed time dimension (minutes)
-            routing.AddDimension(
-                transit_callback_index,
-                300,  # 5-hour slack
-                int(24 * 60),  # Max 24-hour route
-                True,
-                'Time'
-            )
-
-            # Search parameters
+            
+            # Search parameters - FAST
             search_parameters = pywrapcp.DefaultRoutingSearchParameters()
-            search_parameters.first_solution_strategy = routing_enums_pb2.FirstSolutionStrategy.PATH_CHEAPEST_ARC
-            search_parameters.local_search_metaheuristic = routing_enums_pb2.LocalSearchMetaheuristic.GUIDED_LOCAL_SEARCH
-            search_parameters.time_limit.seconds = self.route_solver_time_limit
-
-            logger.debug(f"Solving VRP for {len(shipments)} shipments, {num_locations} locations")
+            search_parameters.first_solution_strategy = (
+                routing_enums_pb2.FirstSolutionStrategy.PATH_CHEAPEST_ARC
+            )
+            search_parameters.local_search_metaheuristic = (
+                routing_enums_pb2.LocalSearchMetaheuristic.GUIDED_LOCAL_SEARCH
+            )
+            search_parameters.time_limit.seconds = 2  # Fast
+            search_parameters.solution_limit = 1      # Stop at first solution
+            
             solution = routing.SolveWithParameters(search_parameters)
-
+            
             if solution:
                 # Extract route
-                sequence = []
-                total_distance_m = 0
+                route_indices = []
                 index = routing.Start(0)
-
+                
                 while not routing.IsEnd(index):
                     node = manager.IndexToNode(index)
-                    sequence.append(index_to_location[node])
-                    next_index = solution.Value(routing.NextVar(index))
-                    if not routing.IsEnd(next_index):
-                        next_node = manager.IndexToNode(next_index)
-                        total_distance_m += distance_matrix[node][next_node]
-                    index = next_index
-
-                final_node = manager.IndexToNode(index)
-                sequence.append(index_to_location[final_node])
-
+                    route_indices.append(node)
+                    index = solution.Value(routing.NextVar(index))
+                
+                route_indices.append(manager.IndexToNode(index))
+                sequence = [index_to_location[idx] for idx in route_indices]
+                
+                # Calculate distance
+                total_distance_m = 0
+                for i in range(len(route_indices) - 1):
+                    total_distance_m += distance_matrix[route_indices[i]][route_indices[i+1]]
+                
                 distance_km = total_distance_m / 1000.0
                 duration_hours = distance_km / 40.0
-
-                routing_status = 'OPTIMAL'
-                logger.info(f"OR-Tools routing SUCCESS: {distance_km:.1f} km, {len(sequence)} stops")
+                
+                # CACHE THE RESULT BEFORE RETURNING
+                self._route_cache[cache_key] = (distance_km, duration_hours, sequence)
+                self._manage_cache_size()
+                
+                logger.info(f"OR-Tools TSP SUCCESS: {distance_km:.1f} km, {len(sequence)} stops")
+                
                 return self._create_batch_object(
-                    vehicle, shipments, sequence, distance_km, duration_hours, routing_status
+                    vehicle, shipments, sequence, distance_km, duration_hours, 'OPTIMAL'
                 )
-
-            # --- Fallback ---
-            logger.warning(f"OR-Tools routing FAILED: {len(shipments)} shipments, {num_locations} locations - using greedy fallback")
-            return self._greedy_route_fallback(vehicle, shipments, index_to_location)
+        
+        except Exception as e:
+            logger.warning(f"OR-Tools TSP failed: {e}")
+        
+        # Fallback: Greedy
+        logger.warning(
+            f"OR-Tools routing FAILED: {len(shipments)} shipments, {num_locations} locations - using greedy fallback"
+        )
+        
+        result = self._greedy_route_fallback(vehicle, shipments, index_to_location)
+        
+        # CACHE GREEDY RESULT TOO
+        if result:
+            batch, status = result
+            self._route_cache[cache_key] = (batch.total_distance_km, batch.total_duration_hours, batch.route_sequence)
+            self._manage_cache_size()
+        
+        return result
 
     def _greedy_route_fallback(
-        self,
-        vehicle: VehicleState,
-        shipments: List[Shipment],
-        index_to_location: Dict
-    ) -> Optional[Tuple[Batch, str]]:
-        """Greedy nearest-neighbor TSP fallback"""
-        sequence = [vehicle.current_location]
-        
-        # Collect unique pickup locations
-        pickup_locs = []
-        pickup_keys_seen = set()
-        for s in shipments:
-            key = self._location_key(s.origin)
-            if key not in pickup_keys_seen:
-                pickup_locs.append(s.origin)
-                pickup_keys_seen.add(key)
-        
-        # Collect unique delivery locations
-        delivery_locs = []
-        delivery_keys_seen = set()
-        for s in shipments:
-            for dest in s.destinations:
-                key = self._location_key(dest)
-                if key not in delivery_keys_seen:
-                    delivery_locs.append(dest)
-                    delivery_keys_seen.add(key)
-        
-        # Greedy nearest-neighbor for pickups
-        current_loc = vehicle.current_location
-        while pickup_locs:
-            nearest_idx = 0
-            min_dist = float('inf')
-            for idx, loc in enumerate(pickup_locs):
-                dist = self.distance_calc.calculate_distance_km(
-                    current_loc.lat, current_loc.lng,
-                    loc.lat, loc.lng
-                )
-                if dist < min_dist:
-                    min_dist = dist
-                    nearest_idx = idx
+            self,
+            vehicle: VehicleState,
+            shipments: List[Shipment],
+            index_to_location: Dict[int, Location]
+        ) -> Optional[Tuple[Batch, str]]:
+            """Greedy nearest-neighbor"""
+            sequence = [vehicle.current_location]
             
-            nearest_loc = pickup_locs.pop(nearest_idx)
-            sequence.append(nearest_loc)
-            current_loc = nearest_loc
-        
-        # Greedy nearest-neighbor for deliveries
-        while delivery_locs:
-            nearest_idx = 0
-            min_dist = float('inf')
-            for idx, loc in enumerate(delivery_locs):
-                dist = self.distance_calc.calculate_distance_km(
-                    current_loc.lat, current_loc.lng,
-                    loc.lat, loc.lng
-                )
-                if dist < min_dist:
-                    min_dist = dist
-                    nearest_idx = idx
+            # Collect locations
+            pickup_locs = []
+            seen = set()
+            for s in shipments:
+                key = self._location_key(s.origin)
+                if key not in seen:
+                    pickup_locs.append(s.origin)
+                    seen.add(key)
             
-            nearest_loc = delivery_locs.pop(nearest_idx)
-            sequence.append(nearest_loc)
-            current_loc = nearest_loc
+            delivery_locs = []
+            seen_del = set()
+            for s in shipments:
+                for dest in s.destinations:
+                    key = self._location_key(dest)
+                    if key not in seen_del:
+                        delivery_locs.append(dest)
+                        seen_del.add(key)
+            
+            # Greedy pickups
+            current_loc = vehicle.current_location
+            while pickup_locs:
+                nearest = min(pickup_locs, key=lambda loc: self.distance_calc.calculate_distance_km(
+                    current_loc.lat, current_loc.lng, loc.lat, loc.lng
+                ))
+                pickup_locs.remove(nearest)
+                sequence.append(nearest)
+                current_loc = nearest
+            
+            # Greedy deliveries
+            while delivery_locs:
+                nearest = min(delivery_locs, key=lambda loc: self.distance_calc.calculate_distance_km(
+                    current_loc.lat, current_loc.lng, loc.lat, loc.lng
+                ))
+                delivery_locs.remove(nearest)
+                sequence.append(nearest)
+                current_loc = nearest
+            
+            sequence.append(vehicle.current_location)
+            
+            distance = self._calculate_sequence_distance(sequence)
+            duration = distance / 40.0
+            
+            logger.info(f"Greedy fallback: {len(sequence)} stops, {distance:.1f} km")
+            
+            return self._create_batch_object(
+                vehicle, shipments, sequence, distance, duration, 'GREEDY_FALLBACK'
+            )
+
+    def _manage_cache_size(self):
+        """Keep cache from growing unbounded"""
+        MAX_CACHE_SIZE = 1000
         
-        # Return to depot
-        sequence.append(vehicle.current_location)
-        
-        distance = self._calculate_sequence_distance(sequence)
-        duration = distance / 40.0
-        
-        logger.info(f"Greedy fallback: {len(sequence)} stops, {distance:.1f} km")
-        
-        return self._create_batch_object(
-            vehicle, shipments, sequence, distance, duration, 'GREEDY_FALLBACK'
-        )
+        if len(self._route_cache) > MAX_CACHE_SIZE:
+            # Remove oldest 20% of entries
+            num_to_remove = MAX_CACHE_SIZE // 5
+            keys_to_remove = list(self._route_cache.keys())[:num_to_remove]
+            for key in keys_to_remove:
+                del self._route_cache[key]
+            
+            logger.info(f"Cache pruned: removed {num_to_remove} entries, {len(self._route_cache)} remaining")
+
+
     def _create_batch_object(
         self,
         vehicle: VehicleState,

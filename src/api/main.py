@@ -713,7 +713,7 @@ async def startup_event():
         logger.info("Senga SDE started successfully!")
         logger.info("API available at http://localhost:8000")
         logger.info("Docs available at http://localhost:8000/docs")
-        logger.info("Streamlit UI: streamlit run streamlit_app_complete.py")
+        # logger.info("Streamlit UI: streamlit run streamlit_app_complete.py")
         logger.info("=" * 60)
         
     except Exception as e:

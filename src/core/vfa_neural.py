@@ -154,6 +154,7 @@ class NeuralVFA:
         features_normalized = self._normalize_features(features)
         features_tensor = torch.FloatTensor(features_normalized).unsqueeze(0).to(self.device)
         
+        self.value_net.eval()  # Set to eval mode to disable BatchNorm
         with torch.no_grad():
             value = self.value_net(features_tensor).item()
         
@@ -200,6 +201,8 @@ class NeuralVFA:
     
     def _update_from_batch(self):
         """Perform batch gradient update"""
+        self.value_net.train()  # Set to training mode for BatchNorm
+        
         # Sample batch
         states, rewards, next_states = self.replay_buffer.sample(self.batch_size)
         
@@ -250,15 +253,14 @@ class NeuralVFA:
     
     def _extract_features(self, state: SystemState) -> np.ndarray:
         """
-        Extract 50-dimensional feature vector
+        Extract 50-dimensional feature vector - FIXED for correct data structures
         
-        Features:
-        [0-4]   Time features
-        [5-14]  Shipment features (10)
-        [15-24] Fleet features (10)
-        [25-34] Geographic features (10)
-        [35-44] Consolidation features (10)
-        [45-49] Network features (5)
+        SystemState has:
+        - fleet_state (not vehicle_states)
+        
+        Shipment has:
+        - destinations (list of Location, not dest_address string)
+        - origin (Location object)
         """
         features = np.zeros(50)
         
@@ -285,7 +287,7 @@ class NeuralVFA:
             features[10] = len([s for s in pending if s.priority >= 2.0]) / len(pending)
             
             # Time to deadlines
-            deadlines = [(s.delivery_deadline - state.timestamp).total_seconds() / 3600 for s in pending]
+            deadlines = [(s.deadline - state.timestamp).total_seconds() / 3600 for s in pending]
             features[11] = np.mean(deadlines) if deadlines else 24.0
             features[12] = np.min(deadlines) if deadlines else 24.0
             features[13] = np.max(deadlines) if deadlines else 24.0
@@ -294,8 +296,8 @@ class NeuralVFA:
         # Fleet features [15-24]
         available = state.get_available_vehicles()
         features[15] = len(available)
-        features[16] = len(state.vehicle_states)
-        features[17] = len(available) / max(len(state.vehicle_states), 1)
+        features[16] = len(state.fleet_state)
+        features[17] = len(available) / max(len(state.fleet_state), 1)
         
         if available:
             features[18] = np.mean([v.capacity.volume for v in available])
@@ -313,23 +315,28 @@ class NeuralVFA:
         
         # Geographic features [25-34]
         if pending:
-            # Destination diversity
-            unique_dests = len(set(s.dest_address for s in pending))
-            features[25] = unique_dests / len(pending)
+            # Shipment has destinations (list), get first destination's formatted_address
+            dest_addresses = []
+            for s in pending:
+                if s.destinations:
+                    dest_addresses.append(s.destinations[0].formatted_address)
             
-            # Route complexity indicators
-            features[26] = unique_dests
-            features[27] = len(pending) / max(unique_dests, 1)  # Orders per destination
+            if dest_addresses:
+                unique_dests = len(set(dest_addresses))
+                features[25] = unique_dests / len(pending)
+                features[26] = unique_dests
+                features[27] = len(pending) / max(unique_dests, 1)
         
         # Consolidation potential [35-44]
         if pending:
-            # Group by destination
+            # Group by destination (using first destination's address)
             dest_groups = {}
             for s in pending:
-                dest = s.dest_address
-                if dest not in dest_groups:
-                    dest_groups[dest] = []
-                dest_groups[dest].append(s)
+                if s.destinations:
+                    dest = s.destinations[0].formatted_address
+                    if dest not in dest_groups:
+                        dest_groups[dest] = []
+                    dest_groups[dest].append(s)
             
             if dest_groups:
                 group_sizes = [len(g) for g in dest_groups.values()]
@@ -349,16 +356,7 @@ class NeuralVFA:
             return features
         
         return (features - self.feature_means) / (self.feature_stds + 1e-8)
-    def get_learning_metrics(self) -> Dict:
-        """Get learning metrics - alias for get_convergence_metrics"""
-        metrics = self.get_convergence_metrics()
-        
-        # Add additional metrics expected by API
-        metrics['learning_rate'] = self.optimizer.param_groups[0]['lr']
-        metrics['buffer_size'] = len(self.replay_buffer)
-        metrics['epsilon'] = 0.0  # Not using epsilon-greedy in VFA
-        
-        return metrics
+    
     def _normalize_tensor(self, tensor: torch.Tensor) -> torch.Tensor:
         """Normalize tensor batch"""
         if self.feature_means is None:
@@ -406,14 +404,98 @@ class NeuralVFA:
         self.update_count = checkpoint['update_count']
         logger.info(f"Loaded VFA model from {path}")
     
+    def get_learning_metrics(self) -> Dict:
+        """
+        Get learning metrics matching API expectations
+        
+        Returns all fields expected by /learning/vfa-metrics endpoint
+        """
+        if len(self.td_errors) < 10:
+            recent_td = [0.0]
+        else:
+            recent_td = list(self.td_errors)[-100:]
+        
+        # Calculate weight norm (L2 norm of network parameters)
+        total_norm = 0.0
+        for param in self.value_net.parameters():
+            total_norm += param.data.norm(2).item() ** 2
+        weight_norm = total_norm ** 0.5
+        
+        return {
+            'num_updates': self.update_count,
+            'learning_rate': self.optimizer.param_groups[0]['lr'],
+            'epsilon': 0.0,  # Neural VFA doesn't use epsilon-greedy
+            'avg_td_error': np.mean(recent_td),
+            'max_td_error': np.max(recent_td),
+            'weight_norm': weight_norm,
+            'feature_importance': self.get_feature_importance()
+        }
+    
+    def get_feature_importance(self) -> Dict[str, float]:
+        """
+        Get feature importance from first layer weights
+        
+        Returns dictionary of feature names to importance scores
+        """
+        # Feature names (50 features)
+        feature_names = [
+            # Time features [0-4]
+            "hour_sin", "hour_cos", "is_weekend", "hour_normalized", "day_of_week",
+            
+            # Shipment features [5-14]
+            "pending_count", "avg_volume", "avg_weight", "avg_priority",
+            "urgency_ratio", "high_priority_ratio", "avg_time_to_deadline",
+            "min_time_to_deadline", "max_time_to_deadline", "time_to_deadline_std",
+            
+            # Fleet features [15-24]
+            "available_vehicles", "total_vehicles", "availability_ratio",
+            "avg_vehicle_volume_cap", "avg_vehicle_weight_cap",
+            "volume_utilization_potential", "weight_utilization_potential",
+            "fleet_feature_18", "fleet_feature_19", "fleet_feature_20",
+            
+            # Geographic features [25-34]
+            "destination_diversity", "unique_destinations", "orders_per_destination",
+            "geo_feature_28", "geo_feature_29", "geo_feature_30",
+            "geo_feature_31", "geo_feature_32", "geo_feature_33", "geo_feature_34",
+            
+            # Consolidation features [35-44]
+            "avg_group_size", "max_group_size", "groups_with_2plus",
+            "groups_with_5plus", "consol_feature_39", "consol_feature_40",
+            "consol_feature_41", "consol_feature_42", "consol_feature_43", "consol_feature_44",
+            
+            # Network features [45-49]
+            "active_routes_count", "network_feature_46", "network_feature_47",
+            "network_feature_48", "network_feature_49"
+        ]
+        
+        # Get first layer weights
+        first_layer = self.value_net.network[0]  # First Linear layer
+        weights = first_layer.weight.data.cpu().numpy()  # Shape: [128, 50]
+        
+        # Calculate importance as L2 norm of weights for each input feature
+        importance_scores = np.linalg.norm(weights, axis=0)  # Shape: [50]
+        
+        # Normalize to sum to 1
+        importance_scores = importance_scores / (importance_scores.sum() + 1e-8)
+        
+        # Create dictionary
+        importance = {}
+        for i, name in enumerate(feature_names[:50]):  # Ensure we don't exceed array size
+            importance[name] = float(importance_scores[i])
+        
+        # Return top 10 for readability
+        sorted_features = sorted(importance.items(), key=lambda x: x[1], reverse=True)
+        return dict(sorted_features[:10])
+    
     def get_convergence_metrics(self) -> Dict:
-        """Get learning convergence metrics"""
+        """Get convergence metrics (enhanced version)"""
         if len(self.td_errors) < 10:
             return {
                 'converged': False, 
                 'updates': self.update_count,
-                'num_updates': self.update_count,  
+                'num_updates': self.update_count,
                 'avg_td_error': 0.0,
+                'max_td_error': 0.0,
                 'avg_loss': 0.0,
                 'td_error_std': 0.0
             }
@@ -424,8 +506,9 @@ class NeuralVFA:
         return {
             'converged': np.mean(recent_td) < 50.0,
             'updates': self.update_count,
-            'num_updates': self.update_count,  
+            'num_updates': self.update_count,
             'avg_td_error': np.mean(recent_td),
+            'max_td_error': np.max(recent_td),
             'avg_loss': np.mean(recent_loss),
             'td_error_std': np.std(recent_td)
         }

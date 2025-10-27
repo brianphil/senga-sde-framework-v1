@@ -22,7 +22,6 @@ from .state_manager import (
 )
 from .standard_types import StandardBatch
 from .meta_controller import MetaController, MetaDecision, FunctionClass
-# from .vfa import ValueFunctionApproximator
 from .vfa_neural import NeuralVFA as ValueFunctionApproximator
 from .reward_calculator import RewardCalculator, RewardComponents
 from ..config.senga_config import SengaConfigurator
@@ -135,17 +134,28 @@ class DecisionEngine:
             # FIX: Normalize action structure to include batches
             normalized_action = self._normalize_action(decision, execution_result)
             
-            reward_components = self.reward_calculator.calculate_reward(
+            reward_dict = self.reward_calculator.calculate_reward(
                 state_before,
                 normalized_action,
                 state_after
+            )
+            
+            # Convert dict to RewardComponents
+            reward_components = RewardComponents(
+                utilization_reward=reward_dict.get('utilization_bonus', 0.0),
+                on_time_reward=reward_dict.get('timeliness_bonus', 0.0),
+                cost_penalty=reward_dict.get('operational_cost', 0.0),
+                late_penalty=reward_dict.get('delay_penalty', 0.0),
+                efficiency_bonus=0.0,
+                total_reward=reward_dict.get('total', 0.0),
+                reasoning=""
             )
             
             # Step 6: Trigger learning update
             learning_result = self._trigger_learning_update(
                 state_before=state_before,
                 action=normalized_action,
-                reward=reward_components['total'],
+                reward=reward_components.total_reward,
                 state_after=state_after
             )
             
@@ -157,15 +167,7 @@ class DecisionEngine:
                 timestamp=current_time,
                 state_before=state_before,
                 decision=decision,
-                reward_components=RewardComponents(
-                                utilization_reward=reward_components['utilization_bonus'],
-                                on_time_reward=reward_components['timeliness_bonus'],
-                                cost_penalty=reward_components['operational_cost'],
-                                late_penalty=reward_components['delay_penalty'],
-                                efficiency_bonus=0.0,
-                                total_reward=reward_components['total'],
-                                reasoning=""
-                            ),
+                reward_components=reward_components,
                 state_after=state_after,
                 execution_time_ms=execution_time,
                 shipments_dispatched=execution_result['shipments_dispatched'],

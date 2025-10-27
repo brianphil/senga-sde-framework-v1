@@ -15581,3 +15581,957 @@ KeyError: 'max_td_error'
 2025-10-25 16:58:12,822 - src.api.main - INFO -  Retrieved 35 pending orders from database
 2025-10-25 16:58:17,413 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
 2025-10-25 16:58:17,414 - src.api.main - INFO - Shutdown complete
+2025-10-27 12:26:06,477 - src.api.main - INFO - ============================================================
+2025-10-27 12:26:06,478 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:26:06,478 - src.api.main - INFO - ============================================================
+2025-10-27 12:26:06,683 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:26:06,688 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-27 12:26:06,715 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:26:06,721 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:26:09,996 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:26:09,997 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:26:09,997 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:26:10,001 - src.api.main - INFO -  Loaded 35 pending orders from database
+2025-10-27 12:26:10,001 - src.api.main - INFO - ============================================================
+2025-10-27 12:26:10,002 - src.api.main - INFO - Senga SDE Ready
+2025-10-27 12:26:10,002 - src.api.main - INFO - ============================================================
+2025-10-27 12:26:10,003 - src.api.main - INFO - ============================================================
+2025-10-27 12:26:10,003 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:26:10,004 - src.api.main - INFO - ============================================================
+2025-10-27 12:26:10,004 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:26:10,006 - src.api.main - INFO -  State Manager initialized
+2025-10-27 12:26:11,747 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-27 12:26:11,752 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:26:11,753 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:26:11,753 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-27 12:26:11,754 - src.api.main - INFO -  Integration Manager initialized
+2025-10-27 12:26:11,765 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:26:11,772 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:26:11,783 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:26:11,783 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:26:11,785 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:26:11,790 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:26:11,790 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-27 12:26:11,790 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-27 12:26:11,791 - src.api.main - INFO - ============================================================
+2025-10-27 12:26:11,791 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-27 12:26:11,791 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-27 12:26:11,792 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-27 12:26:11,792 - src.api.main - INFO - Streamlit UI: streamlit run streamlit_app_complete.py
+2025-10-27 12:26:11,793 - src.api.main - INFO - ============================================================
+2025-10-27 12:26:16,376 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:26:16,390 - src.api.main - ERROR - Error getting VFA metrics: 'max_td_error'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 485, in get_vfa_metrics
+    "max_td_error": vfa_metrics['max_td_error'],
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'max_td_error'
+2025-10-27 12:26:21,392 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:26:26,380 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:26:31,377 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:26:36,377 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:26:41,395 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:26:46,370 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:26:51,786 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:26:56,811 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:27:01,808 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:27:06,783 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:27:11,818 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:27:16,813 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:27:21,786 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:27:26,813 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:27:31,797 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:27:36,796 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:27:41,795 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:27:42,093 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:27:42,271 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-27 12:27:42,273 - src.api.main - INFO - Shutdown complete
+2025-10-27 12:27:44,133 - watchfiles.main - INFO - 6 changes detected
+2025-10-27 12:27:50,751 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:27:50,776 - src.api.main - INFO - ============================================================
+2025-10-27 12:27:50,777 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:27:50,777 - src.api.main - INFO - ============================================================
+2025-10-27 12:27:50,799 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:27:50,801 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-27 12:27:50,811 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:27:50,816 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:27:51,116 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:27:51,480 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:27:51,841 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:27:52,205 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:27:52,568 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:27:52,932 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:27:53,284 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:27:53,284 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:27:53,285 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:27:53,289 - src.api.main - INFO -  Loaded 35 pending orders from database
+2025-10-27 12:27:53,290 - src.api.main - INFO - ============================================================
+2025-10-27 12:27:53,290 - src.api.main - INFO - Senga SDE Ready
+2025-10-27 12:27:53,290 - src.api.main - INFO - ============================================================
+2025-10-27 12:27:53,291 - src.api.main - INFO - ============================================================
+2025-10-27 12:27:53,291 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:27:53,291 - src.api.main - INFO - ============================================================
+2025-10-27 12:27:53,291 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:27:53,293 - src.api.main - INFO -  State Manager initialized
+2025-10-27 12:27:53,315 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:27:53,722 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:27:54,131 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:27:54,612 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-27 12:27:54,621 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:27:54,625 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:27:54,626 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-27 12:27:54,628 - src.api.main - INFO -  Integration Manager initialized
+2025-10-27 12:27:54,646 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:27:54,656 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:27:54,663 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:27:54,663 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:27:54,664 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:27:54,667 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:27:54,668 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-27 12:27:54,669 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-27 12:27:54,671 - src.api.main - INFO - ============================================================
+2025-10-27 12:27:54,671 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-27 12:27:54,672 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-27 12:27:54,672 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-27 12:27:54,673 - src.api.main - INFO - ============================================================
+2025-10-27 12:27:54,675 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-27 12:27:54,675 - src.api.main - INFO - Shutdown complete
+2025-10-27 12:31:25,206 - src.api.main - INFO - ============================================================
+2025-10-27 12:31:25,208 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:31:25,209 - src.api.main - INFO - ============================================================
+2025-10-27 12:31:25,248 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:31:25,251 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-27 12:31:25,258 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:31:25,263 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:31:27,546 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:31:27,546 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:31:27,546 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:31:27,550 - src.api.main - INFO -  Loaded 35 pending orders from database
+2025-10-27 12:31:27,552 - src.api.main - INFO - ============================================================
+2025-10-27 12:31:27,553 - src.api.main - INFO - Senga SDE Ready
+2025-10-27 12:31:27,553 - src.api.main - INFO - ============================================================
+2025-10-27 12:31:27,554 - src.api.main - INFO - ============================================================
+2025-10-27 12:31:27,554 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:31:27,554 - src.api.main - INFO - ============================================================
+2025-10-27 12:31:27,554 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:31:27,556 - src.api.main - INFO -  State Manager initialized
+2025-10-27 12:31:28,682 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-27 12:31:28,693 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:31:28,694 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:31:28,695 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-27 12:31:28,695 - src.api.main - INFO -  Integration Manager initialized
+2025-10-27 12:31:28,707 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:31:28,713 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:31:28,722 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:31:28,723 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:31:28,724 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:31:28,727 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:31:28,727 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-27 12:31:28,728 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-27 12:31:28,728 - src.api.main - INFO - ============================================================
+2025-10-27 12:31:28,728 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-27 12:31:28,728 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-27 12:31:28,729 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-27 12:31:28,729 - src.api.main - INFO - ============================================================
+2025-10-27 12:31:32,788 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:31:32,807 - src.api.main - ERROR - Error getting VFA metrics: 'weight_norm'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 486, in get_vfa_metrics
+    "weight_norm": vfa_metrics['weight_norm'],
+                   ~~~~~~~~~~~^^^^^^^^^^^^^^^
+KeyError: 'weight_norm'
+2025-10-27 12:31:37,800 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:31:42,806 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:31:47,811 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:31:52,785 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:31:57,802 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:32:02,777 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:32:08,799 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:32:13,780 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:32:18,782 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:32:23,788 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:32:28,912 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:32:33,778 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:32:38,795 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:32:43,810 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:32:48,798 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:32:53,788 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:32:58,797 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:33:10,801 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:34:10,792 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:35:10,794 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:35:33,657 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:35:33,842 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-27 12:35:33,846 - src.api.main - INFO - Shutdown complete
+2025-10-27 12:35:36,100 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:35:55,154 - src.api.main - INFO - ============================================================
+2025-10-27 12:35:55,156 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:35:55,156 - src.api.main - INFO - ============================================================
+2025-10-27 12:35:55,179 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:35:55,181 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-27 12:35:55,192 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:35:55,198 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:35:57,713 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:35:57,713 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:35:57,714 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:35:57,717 - src.api.main - INFO -  Loaded 35 pending orders from database
+2025-10-27 12:35:57,717 - src.api.main - INFO - ============================================================
+2025-10-27 12:35:57,717 - src.api.main - INFO - Senga SDE Ready
+2025-10-27 12:35:57,718 - src.api.main - INFO - ============================================================
+2025-10-27 12:35:57,718 - src.api.main - INFO - ============================================================
+2025-10-27 12:35:57,718 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:35:57,718 - src.api.main - INFO - ============================================================
+2025-10-27 12:35:57,719 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:35:57,722 - src.api.main - INFO -  State Manager initialized
+2025-10-27 12:35:59,131 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-27 12:35:59,139 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:35:59,141 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:35:59,142 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-27 12:35:59,142 - src.api.main - INFO -  Integration Manager initialized
+2025-10-27 12:35:59,161 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:35:59,168 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:35:59,178 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:35:59,178 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:35:59,179 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:35:59,184 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:35:59,184 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-27 12:35:59,185 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-27 12:35:59,185 - src.api.main - INFO - ============================================================
+2025-10-27 12:35:59,186 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-27 12:35:59,186 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-27 12:35:59,187 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-27 12:35:59,188 - src.api.main - INFO - ============================================================
+2025-10-27 12:36:10,811 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:36:24,356 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:36:27,786 - src.api.main - INFO -  Retrieved 35 pending orders from database
+2025-10-27 12:36:32,158 - src.api.main - INFO - Running consolidation cycle with 35 pending orders
+2025-10-27 12:36:32,162 - src.core.decision_engine - INFO - Cycle 0: 35 pending shipments
+2025-10-27 12:36:32,163 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-27 12:36:32,163 - src.core.decision_engine - INFO - Converted old PFA format to batch: pfa_batch_20251027123632163494
+2025-10-27 12:36:32,334 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:36:32,691 - watchfiles.main - INFO - 3 changes detected
+2025-10-27 12:36:32,930 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 1 vehicles, 1 routes
+2025-10-27 12:36:32,939 - src.core.decision_engine - ERROR - Cycle failed: 'SystemState' object has no attribute 'vehicle_states'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 145, in run_cycle
+    learning_result = self._trigger_learning_update(
+        state_before=state_before,
+    ...<2 lines>...
+        state_after=state_after
+    )
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 395, in _trigger_learning_update
+    vfa_eval_before = self.vfa.evaluate(state_before)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 153, in evaluate
+    features = self._extract_features(state)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 297, in _extract_features
+    features[16] = len(state.vehicle_states)
+                       ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SystemState' object has no attribute 'vehicle_states'
+2025-10-27 12:36:32,953 - src.api.main - ERROR - Consolidation cycle failed: 'SystemState' object has no attribute 'vehicle_states'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 831, in trigger_consolidation_cycle
+    cycle_result = decision_engine.run_cycle()
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 145, in run_cycle
+    learning_result = self._trigger_learning_update(
+        state_before=state_before,
+    ...<2 lines>...
+        state_after=state_after
+    )
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 395, in _trigger_learning_update
+    vfa_eval_before = self.vfa.evaluate(state_before)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 153, in evaluate
+    features = self._extract_features(state)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 297, in _extract_features
+    features[16] = len(state.vehicle_states)
+                       ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SystemState' object has no attribute 'vehicle_states'
+2025-10-27 12:36:33,019 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:36:37,782 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:36:42,786 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:36:47,789 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:36:52,779 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:36:55,466 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:36:58,782 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:37:03,782 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:37:08,784 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:37:14,263 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:37:19,067 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:37:23,792 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:37:28,776 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:37:33,789 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:37:38,792 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:37:43,797 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:37:48,799 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:37:53,798 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:38:10,847 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:39:10,807 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:40:10,808 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:40:37,048 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:40:37,226 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-27 12:40:37,226 - src.api.main - INFO - Shutdown complete
+2025-10-27 12:40:38,863 - watchfiles.main - INFO - 2 changes detected
+2025-10-27 12:41:06,437 - src.api.main - INFO - ============================================================
+2025-10-27 12:41:06,438 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:41:06,438 - src.api.main - INFO - ============================================================
+2025-10-27 12:41:06,457 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:41:06,459 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-27 12:41:06,467 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:41:06,472 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:41:09,327 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:41:09,328 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:41:09,328 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:41:09,331 - src.api.main - INFO -  Loaded 34 pending orders from database
+2025-10-27 12:41:09,331 - src.api.main - INFO - ============================================================
+2025-10-27 12:41:09,332 - src.api.main - INFO - Senga SDE Ready
+2025-10-27 12:41:09,332 - src.api.main - INFO - ============================================================
+2025-10-27 12:41:09,333 - src.api.main - INFO - ============================================================
+2025-10-27 12:41:09,334 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:41:09,335 - src.api.main - INFO - ============================================================
+2025-10-27 12:41:09,335 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:41:09,337 - src.api.main - INFO -  State Manager initialized
+2025-10-27 12:41:11,022 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-27 12:41:11,036 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:41:11,039 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:41:11,040 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-27 12:41:11,040 - src.api.main - INFO -  Integration Manager initialized
+2025-10-27 12:41:11,052 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:41:11,059 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:41:11,070 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:41:11,071 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:41:11,071 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:41:11,074 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:41:11,075 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-27 12:41:11,075 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-27 12:41:11,075 - src.api.main - INFO - ============================================================
+2025-10-27 12:41:11,075 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-27 12:41:11,076 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-27 12:41:11,076 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-27 12:41:11,076 - src.api.main - INFO - ============================================================
+2025-10-27 12:41:11,285 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:41:16,295 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:41:21,312 - src.api.main - INFO -  Retrieved 34 pending orders from database
+2025-10-27 12:41:24,795 - src.api.main - INFO - Running consolidation cycle with 34 pending orders
+2025-10-27 12:41:24,800 - src.core.decision_engine - INFO - Cycle 0: 34 pending shipments
+2025-10-27 12:41:24,801 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-27 12:41:24,802 - src.core.decision_engine - INFO - Converted old PFA format to batch: pfa_batch_20251027124124802234
+2025-10-27 12:41:24,904 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:41:25,003 - src.core.decision_engine - INFO - Batch pfa_batch_20251027124124802234: 1 shipments dispatched
+2025-10-27 12:41:25,004 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 1 vehicles, 1 routes
+2025-10-27 12:41:25,013 - src.core.decision_engine - ERROR - Cycle failed: 'SystemState' object has no attribute 'vehicle_states'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 145, in run_cycle
+    learning_result = self._trigger_learning_update(
+        state_before=state_before,
+    ...<2 lines>...
+        state_after=state_after
+    )
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 395, in _trigger_learning_update
+    vfa_eval_before = self.vfa.evaluate(state_before)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 153, in evaluate
+    features = self._extract_features(state)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 297, in _extract_features
+    features[16] = len(state.vehicle_states)
+                       ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SystemState' object has no attribute 'vehicle_states'
+2025-10-27 12:41:25,020 - src.api.main - ERROR - Consolidation cycle failed: 'SystemState' object has no attribute 'vehicle_states'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 831, in trigger_consolidation_cycle
+    cycle_result = decision_engine.run_cycle()
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 145, in run_cycle
+    learning_result = self._trigger_learning_update(
+        state_before=state_before,
+    ...<2 lines>...
+        state_after=state_after
+    )
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 395, in _trigger_learning_update
+    vfa_eval_before = self.vfa.evaluate(state_before)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 153, in evaluate
+    features = self._extract_features(state)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 297, in _extract_features
+    features[16] = len(state.vehicle_states)
+                       ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SystemState' object has no attribute 'vehicle_states'
+2025-10-27 12:41:25,269 - watchfiles.main - INFO - 3 changes detected
+2025-10-27 12:41:26,296 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:41:31,290 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:41:36,290 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:41:41,784 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:41:46,815 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:41:52,031 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:41:56,803 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:42:01,791 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:42:06,798 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:42:11,790 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:42:16,787 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:42:21,779 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:42:26,800 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:42:31,814 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:42:35,384 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:42:36,785 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:42:43,730 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:42:43,875 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-27 12:42:43,875 - src.api.main - INFO - Shutdown complete
+2025-10-27 12:42:45,284 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:42:48,632 - watchfiles.main - INFO - 5 changes detected
+2025-10-27 12:43:06,780 - src.api.main - INFO - ============================================================
+2025-10-27 12:43:06,781 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:43:06,781 - src.api.main - INFO - ============================================================
+2025-10-27 12:43:06,799 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:43:06,804 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-27 12:43:06,810 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:43:06,815 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:43:09,007 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:43:09,008 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:43:09,008 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:43:09,011 - src.api.main - INFO -  Loaded 33 pending orders from database
+2025-10-27 12:43:09,011 - src.api.main - INFO - ============================================================
+2025-10-27 12:43:09,012 - src.api.main - INFO - Senga SDE Ready
+2025-10-27 12:43:09,012 - src.api.main - INFO - ============================================================
+2025-10-27 12:43:09,013 - src.api.main - INFO - ============================================================
+2025-10-27 12:43:09,013 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:43:09,013 - src.api.main - INFO - ============================================================
+2025-10-27 12:43:09,014 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:43:09,015 - src.api.main - INFO -  State Manager initialized
+2025-10-27 12:43:10,642 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-27 12:43:10,650 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:43:10,653 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:43:10,654 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-27 12:43:10,655 - src.api.main - INFO -  Integration Manager initialized
+2025-10-27 12:43:10,673 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:43:10,679 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:43:10,690 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:43:10,691 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:43:10,691 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:43:10,696 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:43:10,697 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-27 12:43:10,697 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-27 12:43:10,697 - src.api.main - INFO - ============================================================
+2025-10-27 12:43:10,698 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-27 12:43:10,698 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-27 12:43:10,699 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-27 12:43:10,699 - src.api.main - INFO - ============================================================
+2025-10-27 12:43:10,793 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:43:14,744 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:43:16,300 - src.api.main - INFO -  Retrieved 33 pending orders from database
+2025-10-27 12:43:20,678 - src.api.main - INFO - Running consolidation cycle with 33 pending orders
+2025-10-27 12:43:20,682 - src.core.decision_engine - INFO - Cycle 0: 33 pending shipments
+2025-10-27 12:43:20,685 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-27 12:43:20,686 - src.core.decision_engine - INFO - Converted old PFA format to batch: pfa_batch_20251027124320686116
+2025-10-27 12:43:20,767 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:43:20,863 - src.core.decision_engine - INFO - Batch pfa_batch_20251027124320686116: 1 shipments dispatched
+2025-10-27 12:43:20,864 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 1 vehicles, 1 routes
+2025-10-27 12:43:20,876 - src.core.decision_engine - ERROR - Cycle failed: 'Shipment' object has no attribute 'dest_address'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 145, in run_cycle
+    learning_result = self._trigger_learning_update(
+        state_before=state_before,
+    ...<2 lines>...
+        state_after=state_after
+    )
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 395, in _trigger_learning_update
+    vfa_eval_before = self.vfa.evaluate(state_before)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 153, in evaluate
+    features = self._extract_features(state)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 317, in _extract_features
+    unique_dests = len(set(s.dest_address for s in pending))
+                       ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 317, in <genexpr>
+    unique_dests = len(set(s.dest_address for s in pending))
+                           ^^^^^^^^^^^^^^
+AttributeError: 'Shipment' object has no attribute 'dest_address'
+2025-10-27 12:43:20,890 - src.api.main - ERROR - Consolidation cycle failed: 'Shipment' object has no attribute 'dest_address'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 831, in trigger_consolidation_cycle
+    cycle_result = decision_engine.run_cycle()
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 145, in run_cycle
+    learning_result = self._trigger_learning_update(
+        state_before=state_before,
+    ...<2 lines>...
+        state_after=state_after
+    )
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 395, in _trigger_learning_update
+    vfa_eval_before = self.vfa.evaluate(state_before)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 153, in evaluate
+    features = self._extract_features(state)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 317, in _extract_features
+    unique_dests = len(set(s.dest_address for s in pending))
+                       ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 317, in <genexpr>
+    unique_dests = len(set(s.dest_address for s in pending))
+                           ^^^^^^^^^^^^^^
+AttributeError: 'Shipment' object has no attribute 'dest_address'
+2025-10-27 12:43:21,126 - watchfiles.main - INFO - 3 changes detected
+2025-10-27 12:43:21,291 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:43:26,297 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:43:31,295 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:43:36,309 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:43:41,292 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:43:44,765 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:43:46,787 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:43:51,792 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:43:56,795 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:44:01,794 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:44:06,799 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:44:11,823 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:44:16,783 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:44:21,792 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:44:26,800 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:44:31,795 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:44:36,785 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:44:41,808 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:45:10,815 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:45:44,438 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:45:47,369 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:45:51,821 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:45:56,798 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:46:01,804 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:46:06,824 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:46:11,797 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:46:16,808 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:46:21,802 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:46:26,844 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:46:31,795 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:46:36,780 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:46:41,781 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:47:10,792 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:48:10,807 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:48:15,238 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:48:15,370 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-27 12:48:15,371 - src.api.main - INFO - Shutdown complete
+2025-10-27 12:48:17,978 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:48:20,252 - watchfiles.main - INFO - 5 changes detected
+2025-10-27 12:48:37,489 - src.api.main - INFO - ============================================================
+2025-10-27 12:48:37,490 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:48:37,491 - src.api.main - INFO - ============================================================
+2025-10-27 12:48:37,510 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:48:37,513 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-27 12:48:37,520 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:48:37,526 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:48:39,734 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:48:39,734 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:48:39,735 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:48:39,737 - src.api.main - INFO -  Loaded 32 pending orders from database
+2025-10-27 12:48:39,738 - src.api.main - INFO - ============================================================
+2025-10-27 12:48:39,738 - src.api.main - INFO - Senga SDE Ready
+2025-10-27 12:48:39,738 - src.api.main - INFO - ============================================================
+2025-10-27 12:48:39,739 - src.api.main - INFO - ============================================================
+2025-10-27 12:48:39,739 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:48:39,739 - src.api.main - INFO - ============================================================
+2025-10-27 12:48:39,740 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:48:39,741 - src.api.main - INFO -  State Manager initialized
+2025-10-27 12:48:42,827 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-27 12:48:42,835 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:48:42,837 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:48:42,838 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-27 12:48:42,839 - src.api.main - INFO -  Integration Manager initialized
+2025-10-27 12:48:42,854 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:48:42,860 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:48:42,866 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:48:42,866 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:48:42,867 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:48:42,872 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:48:42,874 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-27 12:48:42,874 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-27 12:48:42,874 - src.api.main - INFO - ============================================================
+2025-10-27 12:48:42,875 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-27 12:48:42,876 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-27 12:48:42,876 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-27 12:48:42,877 - src.api.main - INFO - ============================================================
+2025-10-27 12:48:51,245 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:48:56,281 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:49:01,287 - src.api.main - INFO -  Retrieved 32 pending orders from database
+2025-10-27 12:49:03,201 - src.api.main - INFO - Running consolidation cycle with 32 pending orders
+2025-10-27 12:49:03,205 - src.core.decision_engine - INFO - Cycle 0: 32 pending shipments
+2025-10-27 12:49:03,206 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-27 12:49:03,207 - src.core.decision_engine - INFO - Converted old PFA format to batch: pfa_batch_20251027124903207507
+2025-10-27 12:49:03,280 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:49:03,389 - src.core.decision_engine - INFO - Batch pfa_batch_20251027124903207507: 1 shipments dispatched
+2025-10-27 12:49:03,390 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 1 vehicles, 1 routes
+2025-10-27 12:49:03,458 - src.core.decision_engine - ERROR - Cycle failed: Expected more than 1 value per channel when training, got input size torch.Size([1, 128])
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 145, in run_cycle
+    learning_result = self._trigger_learning_update(
+        state_before=state_before,
+    ...<2 lines>...
+        state_after=state_after
+    )
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 395, in _trigger_learning_update
+    vfa_eval_before = self.vfa.evaluate(state_before)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 158, in evaluate
+    value = self.value_net(features_tensor).item()
+            ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 60, in forward
+    return self.network(x).squeeze()
+           ~~~~~~~~~~~~^^^
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\container.py", line 250, in forward
+    input = module(input)
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\batchnorm.py", line 193, in forward
+    return F.batch_norm(
+           ~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+    ...<11 lines>...
+        self.eps,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\functional.py", line 2811, in batch_norm
+    _verify_batch_size(input.size())
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\functional.py", line 2777, in _verify_batch_size
+    raise ValueError(
+        f"Expected more than 1 value per channel when training, got input size {size}"
+    )
+ValueError: Expected more than 1 value per channel when training, got input size torch.Size([1, 128])
+2025-10-27 12:49:03,539 - src.api.main - ERROR - Consolidation cycle failed: Expected more than 1 value per channel when training, got input size torch.Size([1, 128])
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 831, in trigger_consolidation_cycle
+    cycle_result = decision_engine.run_cycle()
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 145, in run_cycle
+    learning_result = self._trigger_learning_update(
+        state_before=state_before,
+    ...<2 lines>...
+        state_after=state_after
+    )
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 395, in _trigger_learning_update
+    vfa_eval_before = self.vfa.evaluate(state_before)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 158, in evaluate
+    value = self.value_net(features_tensor).item()
+            ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\vfa_neural.py", line 60, in forward
+    return self.network(x).squeeze()
+           ~~~~~~~~~~~~^^^
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\container.py", line 250, in forward
+    input = module(input)
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\batchnorm.py", line 193, in forward
+    return F.batch_norm(
+           ~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+    ...<11 lines>...
+        self.eps,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\functional.py", line 2811, in batch_norm
+    _verify_batch_size(input.size())
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\USER PC\AppData\Roaming\Python\Python313\site-packages\torch\nn\functional.py", line 2777, in _verify_batch_size
+    raise ValueError(
+        f"Expected more than 1 value per channel when training, got input size {size}"
+    )
+ValueError: Expected more than 1 value per channel when training, got input size torch.Size([1, 128])
+2025-10-27 12:49:03,646 - watchfiles.main - INFO - 3 changes detected
+2025-10-27 12:49:06,296 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:49:11,309 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:49:16,296 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:49:21,291 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:49:26,296 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:49:31,790 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:49:36,807 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:49:41,780 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:49:46,808 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:49:51,785 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:49:56,790 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:50:01,789 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:50:06,779 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:50:11,792 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:50:16,793 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:50:21,777 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:50:26,788 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:51:10,800 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:52:10,816 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:52:43,935 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:52:47,676 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:52:47,891 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-27 12:52:47,891 - src.api.main - INFO - Shutdown complete
+2025-10-27 12:52:50,281 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:52:53,022 - watchfiles.main - INFO - 5 changes detected
+2025-10-27 12:52:54,460 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:53:15,878 - src.api.main - INFO - ============================================================
+2025-10-27 12:53:15,879 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:53:15,879 - src.api.main - INFO - ============================================================
+2025-10-27 12:53:15,900 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:53:15,904 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-27 12:53:15,911 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:53:15,916 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:53:18,171 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:53:18,172 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:53:18,172 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:53:18,175 - src.api.main - INFO -  Loaded 31 pending orders from database
+2025-10-27 12:53:18,176 - src.api.main - INFO - ============================================================
+2025-10-27 12:53:18,176 - src.api.main - INFO - Senga SDE Ready
+2025-10-27 12:53:18,177 - src.api.main - INFO - ============================================================
+2025-10-27 12:53:18,178 - src.api.main - INFO - ============================================================
+2025-10-27 12:53:18,178 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:53:18,179 - src.api.main - INFO - ============================================================
+2025-10-27 12:53:18,179 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:53:18,181 - src.api.main - INFO -  State Manager initialized
+2025-10-27 12:53:19,829 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-27 12:53:19,838 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:53:19,841 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:53:19,843 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-27 12:53:19,844 - src.api.main - INFO -  Integration Manager initialized
+2025-10-27 12:53:19,865 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:53:19,871 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:53:19,879 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:53:19,879 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:53:19,880 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:53:19,884 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:53:19,884 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-27 12:53:19,885 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-27 12:53:19,885 - src.api.main - INFO - ============================================================
+2025-10-27 12:53:19,886 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-27 12:53:19,886 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-27 12:53:19,886 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-27 12:53:19,887 - src.api.main - INFO - ============================================================
+2025-10-27 12:53:21,288 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:53:26,300 - src.api.main - INFO -  Retrieved 31 pending orders from database
+2025-10-27 12:53:26,392 - src.api.main - INFO - Running consolidation cycle with 31 pending orders
+2025-10-27 12:53:26,396 - src.core.decision_engine - INFO - Cycle 0: 31 pending shipments
+2025-10-27 12:53:26,397 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-27 12:53:26,398 - src.core.decision_engine - INFO - Converted old PFA format to batch: pfa_batch_20251027125326398643
+2025-10-27 12:53:26,491 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:53:26,570 - src.core.decision_engine - INFO - Batch pfa_batch_20251027125326398643: 1 shipments dispatched
+2025-10-27 12:53:26,570 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 1 vehicles, 1 routes
+2025-10-27 12:53:26,592 - src.core.decision_engine - ERROR - Cycle failed: 'dict' object has no attribute 'total_reward'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 185, in run_cycle
+    f"Reward: {reward_components.total_reward:.1f} | "
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'total_reward'
+2025-10-27 12:53:26,593 - src.api.main - ERROR - Consolidation cycle failed: 'dict' object has no attribute 'total_reward'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 831, in trigger_consolidation_cycle
+    cycle_result = decision_engine.run_cycle()
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 185, in run_cycle
+    f"Reward: {reward_components.total_reward:.1f} | "
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'total_reward'
+2025-10-27 12:53:26,854 - watchfiles.main - INFO - 3 changes detected
+2025-10-27 12:53:31,293 - src.api.main - INFO -  Retrieved 30 pending orders from database
+2025-10-27 12:53:36,283 - src.api.main - INFO -  Retrieved 30 pending orders from database
+2025-10-27 12:53:41,289 - src.api.main - INFO -  Retrieved 30 pending orders from database
+2025-10-27 12:53:46,921 - src.api.main - INFO -  Retrieved 30 pending orders from database
+2025-10-27 12:53:51,783 - src.api.main - INFO -  Retrieved 30 pending orders from database
+2025-10-27 12:53:56,791 - src.api.main - INFO -  Retrieved 30 pending orders from database
+2025-10-27 12:54:01,786 - src.api.main - INFO -  Retrieved 30 pending orders from database
+2025-10-27 12:54:06,794 - src.api.main - INFO -  Retrieved 30 pending orders from database
+2025-10-27 12:54:11,801 - src.api.main - INFO -  Retrieved 30 pending orders from database
+2025-10-27 12:54:16,810 - src.api.main - INFO -  Retrieved 30 pending orders from database
+2025-10-27 12:54:21,786 - src.api.main - INFO -  Retrieved 30 pending orders from database
+2025-10-27 12:54:26,807 - src.api.main - INFO -  Retrieved 30 pending orders from database
+2025-10-27 12:54:30,779 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:54:31,782 - src.api.main - INFO -  Retrieved 30 pending orders from database
+2025-10-27 12:54:36,779 - src.api.main - INFO -  Retrieved 30 pending orders from database
+2025-10-27 12:54:38,450 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:54:38,610 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-27 12:54:38,611 - src.api.main - INFO - Shutdown complete
+2025-10-27 12:54:40,039 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:54:41,264 - watchfiles.main - INFO - 5 changes detected
+2025-10-27 12:54:52,743 - src.api.main - INFO - ============================================================
+2025-10-27 12:54:52,744 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:54:52,745 - src.api.main - INFO - ============================================================
+2025-10-27 12:54:52,763 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:54:52,768 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-27 12:54:52,775 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:54:52,780 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:54:52,783 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:54:52,783 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:54:52,784 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:54:52,786 - src.api.main - INFO -  Loaded 30 pending orders from database
+2025-10-27 12:54:52,786 - src.api.main - INFO - ============================================================
+2025-10-27 12:54:52,786 - src.api.main - INFO - Senga SDE Ready
+2025-10-27 12:54:52,787 - src.api.main - INFO - ============================================================
+2025-10-27 12:54:52,787 - src.api.main - INFO - ============================================================
+2025-10-27 12:54:52,787 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:54:52,788 - src.api.main - INFO - ============================================================
+2025-10-27 12:54:52,788 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:54:52,789 - src.api.main - INFO -  State Manager initialized
+2025-10-27 12:54:54,430 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-27 12:54:54,437 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:54:54,439 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:54:54,440 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-27 12:54:54,441 - src.api.main - INFO -  Integration Manager initialized
+2025-10-27 12:54:54,452 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:54:54,458 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:54:54,461 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:54:54,461 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:54:54,462 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:54:54,468 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:54:54,469 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-27 12:54:54,470 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-27 12:54:54,470 - src.api.main - INFO - ============================================================
+2025-10-27 12:54:54,471 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-27 12:54:54,471 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-27 12:54:54,471 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-27 12:54:54,472 - src.api.main - INFO - ============================================================
+2025-10-27 12:55:02,382 - src.api.main - INFO -  Retrieved 30 pending orders from database
+2025-10-27 12:55:07,368 - src.api.main - INFO -  Retrieved 30 pending orders from database
+2025-10-27 12:55:09,784 - src.api.main - INFO - Running consolidation cycle with 30 pending orders
+2025-10-27 12:55:09,787 - src.core.decision_engine - INFO - Cycle 0: 30 pending shipments
+2025-10-27 12:55:09,788 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-27 12:55:09,788 - src.core.decision_engine - INFO - Converted old PFA format to batch: pfa_batch_20251027125509788504
+2025-10-27 12:55:09,848 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:55:10,209 - watchfiles.main - INFO - 3 changes detected
+2025-10-27 12:55:10,322 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 1 vehicles, 1 routes
+2025-10-27 12:55:10,324 - src.core.decision_engine - ERROR - Cycle failed: 'ValueFunctionApproximator' object has no attribute 'td_update'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 155, in run_cycle
+    learning_result = self._trigger_learning_update(
+        state_before=state_before,
+    ...<2 lines>...
+        state_after=state_after
+    )
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 408, in _trigger_learning_update
+    self.vfa.td_update(
+    ^^^^^^^^^^^^^^^^^^
+AttributeError: 'ValueFunctionApproximator' object has no attribute 'td_update'. Did you mean: 'update'?
+2025-10-27 12:55:10,326 - src.api.main - ERROR - Consolidation cycle failed: 'ValueFunctionApproximator' object has no attribute 'td_update'
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 831, in trigger_consolidation_cycle
+    cycle_result = decision_engine.run_cycle()
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 155, in run_cycle
+    learning_result = self._trigger_learning_update(
+        state_before=state_before,
+    ...<2 lines>...
+        state_after=state_after
+    )
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 408, in _trigger_learning_update
+    self.vfa.td_update(
+    ^^^^^^^^^^^^^^^^^^
+AttributeError: 'ValueFunctionApproximator' object has no attribute 'td_update'. Did you mean: 'update'?
+2025-10-27 12:55:12,367 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:55:17,370 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:55:22,368 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:55:24,322 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:55:27,806 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:55:32,809 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:55:37,779 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:55:42,798 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:55:47,794 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:55:52,797 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:55:57,789 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:56:02,794 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:56:07,795 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:56:12,955 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:56:17,788 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:56:22,796 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:57:09,029 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:57:09,187 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-27 12:57:09,188 - src.api.main - INFO - Shutdown complete
+2025-10-27 12:57:09,906 - watchfiles.main - INFO - 2 changes detected
+2025-10-27 12:57:34,569 - src.api.main - INFO - ============================================================
+2025-10-27 12:57:34,570 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:57:34,570 - src.api.main - INFO - ============================================================
+2025-10-27 12:57:34,596 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:57:34,600 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-27 12:57:34,607 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:57:34,614 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:57:37,649 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:57:37,649 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:57:37,650 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:57:37,654 - src.api.main - INFO -  Loaded 29 pending orders from database
+2025-10-27 12:57:37,654 - src.api.main - INFO - ============================================================
+2025-10-27 12:57:37,655 - src.api.main - INFO - Senga SDE Ready
+2025-10-27 12:57:37,655 - src.api.main - INFO - ============================================================
+2025-10-27 12:57:37,656 - src.api.main - INFO - ============================================================
+2025-10-27 12:57:37,656 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-27 12:57:37,656 - src.api.main - INFO - ============================================================
+2025-10-27 12:57:37,657 - src.api.main - INFO -  Configuration loaded
+2025-10-27 12:57:37,662 - src.api.main - INFO -  State Manager initialized
+2025-10-27 12:57:38,991 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-27 12:57:38,998 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:57:39,001 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-27 12:57:39,002 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-27 12:57:39,003 - src.api.main - INFO -  Integration Manager initialized
+2025-10-27 12:57:39,024 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:57:39,029 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:57:39,037 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-27 12:57:39,037 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-27 12:57:39,038 - src.api.main - INFO -  Decision Engine initialized
+2025-10-27 12:57:39,042 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-27 12:57:39,043 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-27 12:57:39,043 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-27 12:57:39,044 - src.api.main - INFO - ============================================================
+2025-10-27 12:57:39,045 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-27 12:57:39,045 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-27 12:57:39,046 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-27 12:57:39,047 - src.api.main - INFO - ============================================================
+2025-10-27 12:57:41,310 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:57:46,295 - src.api.main - INFO -  Retrieved 29 pending orders from database
+2025-10-27 12:57:48,943 - src.api.main - INFO - Running consolidation cycle with 29 pending orders
+2025-10-27 12:57:48,947 - src.core.decision_engine - INFO - Cycle 0: 29 pending shipments
+2025-10-27 12:57:48,948 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-27 12:57:48,948 - src.core.decision_engine - INFO - Converted old PFA format to batch: pfa_batch_20251027125748948821
+2025-10-27 12:57:49,009 - watchfiles.main - INFO - 1 change detected
+2025-10-27 12:57:49,145 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 1 vehicles, 1 routes
+2025-10-27 12:57:49,151 - src.core.decision_engine - INFO - Cycle completed in 207.3ms | Reward: 3800.0 | TD Error: 3801.59
+2025-10-27 12:57:49,155 - src.api.main - INFO -  Consolidation cycle complete: 1 dispatched, 28 waiting
+2025-10-27 12:57:49,190 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:57:49,365 - watchfiles.main - INFO - 3 changes detected
+2025-10-27 12:57:51,304 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:57:56,308 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:58:01,303 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:58:06,296 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:58:11,300 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:58:14,838 - src.api.main - INFO - Running consolidation cycle with 28 pending orders
+2025-10-27 12:58:14,843 - src.core.decision_engine - INFO - Cycle 1: 28 pending shipments
+2025-10-27 12:58:15,575 - src.core.decision_engine - INFO - Decision: dla -> WAIT (confidence: 0.90)
+2025-10-27 12:58:15,581 - src.core.decision_engine - INFO - Cycle completed in 738.0ms | Reward: -10.0 | TD Error: -8.29
+2025-10-27 12:58:15,590 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 28 waiting
+2025-10-27 12:58:15,616 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:58:16,304 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:58:21,287 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:58:26,302 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:58:31,296 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:58:36,313 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:58:41,308 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:58:46,307 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:58:51,787 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:58:56,775 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:59:01,807 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:59:06,785 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:59:11,777 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:59:16,809 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:59:21,799 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:59:26,799 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:59:31,800 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:59:36,791 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:59:41,801 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 12:59:46,782 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 13:00:10,849 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 13:01:10,806 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 13:02:10,804 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-27 13:02:32,424 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
+2025-10-27 13:02:32,424 - src.api.main - INFO - Shutdown complete

@@ -193,7 +193,46 @@ class DecisionEngine:
             self.status = EngineStatus.ERROR
             logger.error(f"Cycle failed: {str(e)}", exc_info=True)
             raise
-    
+    def _trigger_pfa_learning(self, state_before, decision, reward, state_after):
+        """
+        Trigger PFA learning update after cycle
+        
+        Called when decision was made by PFA to update policy parameters
+        
+        Args:
+            state_before: State when decision was made
+            decision: MetaDecision from meta_controller
+            reward: Observed reward
+            state_after: Resulting state
+        """
+        if decision.function_class != FunctionClass.PFA:
+            return
+        
+        # Get the original PFA action (need to store this in meta_controller)
+        # For now, reconstruct basic PFAAction from decision
+        from .pfa import PFAAction
+        
+        pfa_action = self.meta_controller._last_pfa_action
+        if pfa_action and pfa_action.feature_vector is not None:
+            self.meta_controller.pfa.update_from_experience(
+                state=state_before,
+                action=pfa_action,
+                reward=reward,
+                next_value=next_value
+            )
+        # Get next state value from VFA
+        next_value = self.vfa.value(state_after) if hasattr(self.vfa, 'value') else 0.0
+        
+        # Trigger learning update
+        self.meta_controller.pfa.update_from_experience(
+            state=state_before,
+            action=pfa_action,
+            reward=reward,
+            next_value=next_value
+        )
+        
+        logger.debug(f"PFA learning update: reward={reward:.2f}, next_value={next_value:.2f}")
+
     def _normalize_action(self, decision: MetaDecision, execution_result: Dict) -> dict:
         """
         Normalize action structure for reward calculation

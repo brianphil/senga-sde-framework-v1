@@ -68,7 +68,7 @@ class MetaController:
         self.cfa = CostFunctionApproximator()
         self.vfa = ValueFunctionApproximator()
         self.dla = DirectLookaheadApproximator()
-    
+        self._last_pfa_action = None
     def decide(self, state: SystemState) -> MetaDecision:
         """
         Main decision coordination logic
@@ -82,7 +82,7 @@ class MetaController:
         
         # Step 1: Check PFA (emergencies and simple cases)
         pfa_action = self.pfa.decide(state)
-        
+        self._last_pfa_action = pfa_action
         if pfa_action.action_type.startswith('EMERGENCY'):
             # Emergency: always use PFA
             return MetaDecision(

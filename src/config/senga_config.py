@@ -1,6 +1,6 @@
 # src/config/senga_config.py
 
-from typing import Any, Optional
+from typing import Any, Optional, Dict
 from .business_config import BusinessConfigurator
 from .model_config import ModelConfigurator
 from datetime import datetime
@@ -99,7 +99,15 @@ class SengaConfigurator:
     def fleet(self) -> list:
         """Get active fleet configuration"""
         return self.business.get_fleet()
-    
+    @property
+    def learning_config(self) -> Dict:
+        """Learning configuration parameters"""
+        return {
+            'discount_factor': self.get('vfa.learning.discount_factor', 0.95),
+            'learning_rate': self.get('vfa.learning.initial_learning_rate', 0.01),
+            'lambda_trace': self.get('vfa.learning.lambda_trace', 0.7),
+            'epsilon': self.get('vfa.exploration.initial_epsilon', 0.1)
+        }
     def get_customer_priority(self, customer_id: str) -> float:
         """Get customer priority multiplier"""
         customer_config = self.business.get_customer_config(customer_id)

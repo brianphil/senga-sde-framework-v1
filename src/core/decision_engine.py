@@ -15,7 +15,7 @@ import logging
 import asyncio
 from enum import Enum
 from uuid import uuid4
-
+import numpy as np
 from .state_manager import (
     StateManager, SystemState, Shipment, ShipmentStatus, VehicleState,
     Route, DecisionEvent, VehicleStatus
@@ -334,6 +334,90 @@ class DecisionEngine:
                 'executed_batches': []
             }
     
+    def _trigger_learning_update(self, state_before: SystemState, action: Dict,
+                             reward: float, state_after: SystemState) -> Dict:
+            """
+            Trigger tactical VFA learning update
+            Week 5 addition for tactical learning
+            """
+            # Extract features from state
+            features_before = self._extract_state_features(state_before)
+            features_after = self._extract_state_features(state_after)
+            
+            # Get VFA value estimates
+            value_before = self.vfa.evaluate(features_before)
+            value_after = self.vfa.evaluate(features_after)
+            
+            # Compute TD error: δ = r + γV(s') - V(s)
+            gamma = self.config.learning_config.get('discount_factor', 0.95)
+            td_error = reward + gamma * value_after - value_before
+            
+            # FIX: Update VFA with correct signature (state, actual_outcome only)
+            target = reward + gamma * value_after
+            self.vfa.update(
+                state=features_before,
+                actual_outcome=target
+            )
+            
+            # Log for multi-scale coordinator
+            try:
+                self.state_manager.log_learning_update(
+                    update_type='tactical_td',
+                    state_features=features_before,
+                    td_error=td_error,
+                    actual_reward=reward,
+                    predicted_reward=value_before
+                )
+            except Exception as e:
+                logger.warning(f"Failed to log learning update: {e}")
+            
+            return {
+                'updated': True,
+                'value_before': value_before,
+                'value_after': value_after,
+                'td_error': td_error
+            }
+    
+    def _extract_state_features(self, state: SystemState) -> Dict:
+        """Extract VFA features from state"""
+        try:
+            urgent_count = len(state.get_urgent_shipments(24))
+            avg_urgency = 0
+            if state.pending_shipments:
+                urgencies = [s.urgency_score for s in state.pending_shipments if hasattr(s, 'urgency_score')]
+                avg_urgency = np.mean(urgencies) if urgencies else 0
+            
+            return {
+                'pending_count': len(state.pending_shipments),
+                'fleet_available': len(state.get_available_vehicles()),
+                'avg_urgency': avg_urgency,
+                'urgent_count': urgent_count,
+                'total_volume': state.total_pending_volume(),
+                'total_weight': state.total_pending_weight(),
+                'fleet_utilization': state.fleet_utilization()
+            }
+        except Exception as e:
+            logger.warning(f"Error extracting features: {e}")
+            return {
+                'pending_count': len(state.pending_shipments),
+                'fleet_available': 0,
+                'avg_urgency': 0,
+                'urgent_count': 0,
+                'total_volume': 0,
+                'total_weight': 0,
+                'fleet_utilization': 0
+            }
+    def _extract_state_features(self, state: SystemState) -> Dict:
+        """Extract VFA features from state"""
+        return {
+            'pending_count': len(state.pending_shipments),
+            'fleet_available': len(state.get_available_vehicles()),
+            'avg_urgency': np.mean([s.urgency_score for s in state.pending_shipments]) if state.pending_shipments else 0,
+            'total_volume': state.total_pending_volume(),
+            'total_weight': state.total_pending_weight(),
+            'fleet_utilization': state.fleet_utilization()
+        }
+
     def _dispatch_batch(self, batch: Dict, state: SystemState) -> Dict:
         """
         Dispatch a single batch by updating shipment statuses
@@ -343,26 +427,55 @@ class DecisionEngine:
             state: Current state
             
         Returns:
-            Dict with dispatch results
+            Dict with dispatch results and state_snapshot for learning
         """
-        shipment_ids = batch.get('shipments', [])
-        vehicle_id = batch.get('vehicle')
+        shipments = batch.get('shipments', [])
+        vehicle_id = batch.get('vehicle_id') or batch.get('vehicle')
+        route = batch.get('route_stops', batch.get('route', []))
         
-        dispatched_count = 0
-        for shipment_id in shipment_ids:
+        if not shipments:
+            return {'shipments': 0, 'vehicle': None, 'state_snapshot': {}}
+        
+        # Create route
+        route_id = batch.get('id', f"route_{uuid4().hex[:8]}")
+        
+        # Update each shipment status - FIX: use correct signature
+        for shipment_id in shipments:
             success = self.state_manager.update_shipment_status(
                 shipment_id=shipment_id,
-                status=ShipmentStatus.EN_ROUTE
+                status=ShipmentStatus.EN_ROUTE,  # FIX: not 'new_status'
+                batch_id=batch.get('id'),
+                route_id=route_id
             )
-            if success:
-                dispatched_count += 1
+            
+            if not success:
+                logger.warning(f"Failed to update shipment {shipment_id}")
+        
+        # Create state snapshot for Week 5 learning
+        state_snapshot = {
+            'pending_count': len(state.pending_shipments),
+            'fleet_available': len(state.get_available_vehicles()),
+            'batch_id': batch.get('id'),
+            'vehicle_id': vehicle_id,
+            'shipment_count': len(shipments),
+            'estimated_cost': batch.get('estimated_cost', 0),
+            'estimated_duration_hours': batch.get('estimated_duration_hours', 0),
+            'utilization_volume': batch.get('utilization_volume', 0),
+            'origin_lat': route[0]['lat'] if route and len(route) > 0 else 0,
+            'origin_lon': route[0]['lon'] if route and len(route) > 0 else 0,
+            'dest_lat': route[-1]['lat'] if route and len(route) > 1 else 0,
+            'dest_lon': route[-1]['lon'] if route and len(route) > 1 else 0,
+        }
+        
+        logger.info(f"Dispatched batch {route_id}: {len(shipments)} shipments via {vehicle_id}")
         
         return {
-            'shipments': dispatched_count,
+            'shipments': len(shipments),
             'vehicle': vehicle_id,
-            'route_stops': 0
+            'route_id': route_id,
+            'state_snapshot': state_snapshot  # Week 5: for learning
         }
-    
+        
     def _trigger_learning_update(
         self,
         state_before: SystemState,

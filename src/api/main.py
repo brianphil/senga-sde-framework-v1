@@ -497,8 +497,74 @@ async def get_vfa_metrics():
     except Exception as e:
         logger.error(f"Error getting VFA metrics: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
-
-
+    
+#========== Learning Feedback =======================
+@app.post("/route/complete")
+async def complete_route(
+    route_id: str,
+    actual_cost: float,
+    actual_duration_hours: float,
+    shipments_delivered: int,
+    total_shipments: int,
+    sla_compliant: bool,
+    delays: List[Dict] = [],
+    issues: List[str] = []
+):
+    """
+    Driver app reports route completion - triggers Week 5 tactical learning
+    
+    This is the CRITICAL Week 5 integration point
+    """
+    global multi_scale_coordinator
+    
+    if not state_manager or not multi_scale_coordinator:
+        raise HTTPException(status_code=503, detail="System not initialized")
+    
+    try:
+        # Get the dispatched batch info
+        # Note: You'll need to add a method to StateManager to retrieve this
+        batch_info = state_manager.get_route_info(route_id)
+        
+        if not batch_info:
+            raise HTTPException(status_code=404, detail=f"Route {route_id} not found")
+        
+        # Create RouteOutcome from actual data
+        from src.core.multi_scale_coordinator import RouteOutcome
+        
+        outcome = RouteOutcome(
+            route_id=route_id,
+            completed_at=datetime.now(),
+            initial_state=batch_info.get('state_snapshot', {}),
+            shipments_delivered=shipments_delivered,
+            total_shipments=total_shipments,
+            actual_cost=actual_cost,
+            predicted_cost=batch_info.get('estimated_cost', actual_cost),
+            actual_duration_hours=actual_duration_hours,
+            predicted_duration_hours=batch_info.get('estimated_duration_hours', actual_duration_hours),
+            utilization=batch_info.get('utilization_volume', 0.0),
+            sla_compliance=sla_compliant,
+            delays=delays,
+            issues=issues
+        )
+        
+        # Save outcome to database
+        state_manager.save_route_outcome(outcome)
+        
+        # Trigger tactical learning (Week 5)
+        multi_scale_coordinator.process_completed_route(outcome)
+        
+        return {
+            "status": "success",
+            "route_id": route_id,
+            "learning_triggered": True,
+            "message": "Route outcome recorded and VFA updated"
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Route completion failed: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
 # ============= Analytics Endpoints =============
 
 @app.get("/analytics/function-class-distribution")

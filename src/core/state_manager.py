@@ -13,9 +13,10 @@ import sqlite3
 import json
 import uuid
 from pathlib import Path
-
+import logging
 from ..config.senga_config import SengaConfigurator
-
+from .state_manager_extensions import StateManagerExtensions
+logger = logging.getLogger(__name__)
 # ============= State Space Definitions =============
 
 class ShipmentStatus(Enum):
@@ -58,7 +59,7 @@ class Shipment:
     priority: float = 1.0
     batch_id: Optional[str] = None
     route_id: Optional[str] = None
-    
+    urgency_score: Optional[int]= None
     # Additional fields needed for proper SDE functionality:
     declared_value: float = 0.0  # For cost calculations and prioritization
     
@@ -408,6 +409,8 @@ class StateManager:
         self._current_state: Optional[SystemState] = None
         self._state_cache_time: Optional[datetime] = None
         self._cache_ttl = timedelta(seconds=30)
+        # manage learning feedback
+        self.extensions = StateManagerExtensions(db_path)
     
     def _init_tables(self):
         """Initialize database schema"""
@@ -483,6 +486,22 @@ class StateManager:
                 FOREIGN KEY (decision_id) REFERENCES decision_log(id)
             )
         """)
+        self.conn.execute("""
+                CREATE TABLE IF NOT EXISTS learning_updates (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    update_type TEXT NOT NULL,
+                    state_features TEXT NOT NULL,
+                    td_error REAL NOT NULL,
+                    actual_reward REAL NOT NULL,
+                    predicted_reward REAL NOT NULL,
+                    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+
+        self.conn.execute("""
+                CREATE INDEX IF NOT EXISTS idx_learning_updates_timestamp 
+                ON learning_updates(timestamp)
+            """)
         
         # Outcome tracking for learning
         self.conn.execute("""
@@ -504,7 +523,71 @@ class StateManager:
         """)
         
         self.conn.commit()
+    #====== Learning Management==================
+    def log_learning_update(self, update_type: str, state_features: Dict,
+                        td_error: float, actual_reward: float,
+                        predicted_reward: float) -> bool:
+        """
+        Log learning update for analytics (Week 5)
+        
+        Args:
+            update_type: Type of update ('tactical_td', 'batch_update', etc)
+            state_features: State feature dict
+            td_error: TD error value
+            actual_reward: Actual observed reward
+            predicted_reward: Predicted reward
+        """
+        try:
+            self.conn.execute("""
+                INSERT INTO learning_updates 
+                (update_type, state_features, td_error, actual_reward, predicted_reward, timestamp)
+                VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+            """, (
+                update_type,
+                json.dumps(state_features),
+                td_error,
+                actual_reward,
+                predicted_reward
+            ))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            logger.warning(f"Failed to log learning update: {e}")
+            return False
+    def save_route_outcome(self, outcome):
+        """Save completed route outcome"""
+        return self.extensions.save_route_outcome(outcome)
     
+    def get_completed_routes(self, date):
+        """Get routes for a date"""
+        return self.extensions.get_completed_routes(date)
+    
+    def get_routes_for_period(self, start, end):
+        """Get routes for period"""
+        return self.extensions.get_routes_for_period(start, end)
+    
+    def save_daily_analytics(self, analytics):
+        """Save daily analytics"""
+        return self.extensions.save_daily_analytics(analytics)
+    
+    def save_weekly_insights(self, insights):
+        """Save weekly insights"""
+        return self.extensions.save_weekly_insights(insights)
+
+    def get_route_info(self, route_id: str) -> Optional[Dict]:
+        """
+        Get dispatched route information for learning
+        """
+        cursor = self.conn.execute("""
+            SELECT data FROM routes WHERE id = ?
+        """, (route_id,))
+        
+        row = cursor.fetchone()
+        if not row:
+            return None
+        
+        route_data = json.loads(row[0])
+        return route_data
     # ============= Shipment Management =============
     
     def add_shipment(self, shipment: Shipment) -> bool:

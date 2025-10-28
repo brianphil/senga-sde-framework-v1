@@ -29205,3 +29205,2136 @@ UnboundLocalError: cannot access local variable 'routing_status' where it is not
 2025-10-27 23:32:34,202 - src.api.main - INFO -  Retrieved 28 pending orders from database
 2025-10-27 23:32:39,233 - src.api.main - INFO -  Retrieved 28 pending orders from database
 2025-10-27 23:32:44,209 - src.api.main - INFO -  Retrieved 28 pending orders from database
+2025-10-28 12:42:48,120 - src.api.main - INFO - ============================================================
+2025-10-28 12:42:48,220 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-28 12:42:48,221 - src.api.main - INFO - ============================================================
+2025-10-28 12:42:48,314 - src.api.main - INFO -  Configuration loaded
+2025-10-28 12:42:48,520 - watchfiles.main - INFO - 4 changes detected
+2025-10-28 12:42:48,564 - src.api.main - ERROR - Failed to start Senga SDE: no such column: completed_at
+Traceback (most recent call last):
+  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 145, in startup_event
+    state_manager = StateManager()
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\state_manager.py", line 413, in __init__
+    self.extensions = StateManagerExtensions(db_path)
+                      ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\state_manager_extensions.py", line 22, in __init__
+    self._init_outcome_tables()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\work\senga-sde-framework-v1.0.0\src\core\state_manager_extensions.py", line 46, in _init_outcome_tables
+    self.conn.execute("""
+    ~~~~~~~~~~~~~~~~~^^^^
+        CREATE INDEX IF NOT EXISTS idx_route_outcomes_date
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        ON route_outcomes(completed_at)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """)
+    ^^^^
+sqlite3.OperationalError: no such column: completed_at
+2025-10-28 12:42:48,875 - watchfiles.main - INFO - 3 changes detected
+2025-10-28 12:42:49,590 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:49,943 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:50,306 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:50,719 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:51,123 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:51,533 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:51,942 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:52,347 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:52,754 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:53,113 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:53,522 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:53,933 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:54,339 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:54,749 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:55,156 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:55,564 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:55,971 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:56,377 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:56,786 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:57,194 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:57,552 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:57,966 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:58,375 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:58,782 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:59,191 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:42:59,600 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:00,009 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:00,416 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:00,824 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:01,232 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:01,642 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:02,052 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:02,459 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:02,868 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:03,274 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:03,681 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:04,096 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:04,460 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:04,867 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:05,278 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:05,687 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:06,098 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:06,455 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:06,868 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:07,274 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:07,685 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:08,093 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:08,600 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:09,016 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:09,424 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:09,829 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:10,237 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:10,600 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:11,010 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:11,420 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:11,828 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:12,235 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:12,641 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:13,049 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:13,456 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:13,866 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:14,271 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:14,675 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:15,077 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:15,484 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:15,893 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:16,299 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:16,707 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:17,116 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:17,522 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:17,926 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:18,331 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:18,739 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:19,146 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:19,551 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:20,008 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:20,413 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:20,819 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:21,226 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:21,586 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:21,996 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:22,413 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:22,826 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:23,237 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:23,641 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:24,048 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:24,480 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:24,897 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:25,257 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:25,672 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:26,083 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:26,496 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:26,872 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:27,349 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:27,753 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:28,158 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:28,564 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:28,970 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:29,377 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:29,785 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:30,193 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:30,600 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:31,007 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:31,413 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:31,821 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:32,229 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:32,635 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:33,043 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:33,451 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:33,856 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:34,260 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:34,667 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:35,070 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:35,476 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:35,881 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:36,288 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:36,718 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:37,082 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:37,489 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:37,900 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:38,308 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:38,712 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:39,072 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:39,481 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:39,886 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:40,291 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:40,701 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:41,116 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:41,622 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:42,032 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:42,439 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:42,798 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:43,252 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:43,614 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:44,023 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:44,432 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:44,835 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:45,285 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:45,697 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:46,106 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:46,515 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:46,923 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:47,304 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:47,737 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:48,148 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:48,554 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:48,966 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:49,421 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:49,835 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:50,194 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:50,605 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:51,016 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:51,424 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:51,784 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:52,198 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:52,608 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:53,070 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:53,422 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:53,837 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:54,247 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:54,659 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:55,017 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:55,430 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:55,838 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:56,265 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:56,702 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:57,113 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:43:57,476 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:45:13,048 - src.api.main - INFO - ============================================================
+2025-10-28 12:45:13,049 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-28 12:45:13,050 - src.api.main - INFO - ============================================================
+2025-10-28 12:45:13,067 - src.api.main - INFO -  Configuration loaded
+2025-10-28 12:45:13,070 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:13,168 - watchfiles.main - INFO - 1 change detected
+2025-10-28 12:45:13,333 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:13,334 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-10-28 12:45:13,342 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:13,343 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:13,347 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:13,348 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:13,352 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:13,353 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:13,354 - src.core.cfa - INFO - CFA initialized with real MIP optimization
+2025-10-28 12:45:13,359 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:13,360 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:13,360 - src.core.cfa - INFO - CFA initialized with real MIP optimization
+2025-10-28 12:45:13,364 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:13,365 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:13,387 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-28 12:45:13,394 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:13,394 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:13,395 - src.core.cfa - INFO - CFA initialized with real MIP optimization
+2025-10-28 12:45:13,399 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:13,400 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:13,401 - src.core.cfa - INFO - CFA initialized with real MIP optimization
+2025-10-28 12:45:13,405 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:13,406 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:13,408 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-28 12:45:13,532 - watchfiles.main - INFO - 5 changes detected
+2025-10-28 12:45:17,467 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-28 12:45:17,467 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-28 12:45:17,468 - src.api.main - INFO -  Decision Engine initialized
+2025-10-28 12:45:17,473 - src.api.main - INFO -  Loaded 28 pending orders from database
+2025-10-28 12:45:17,474 - src.api.main - INFO - ============================================================
+2025-10-28 12:45:17,474 - src.api.main - INFO - Senga SDE Ready
+2025-10-28 12:45:17,475 - src.api.main - INFO - ============================================================
+2025-10-28 12:45:17,475 - src.api.main - INFO - ============================================================
+2025-10-28 12:45:17,475 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-10-28 12:45:17,475 - src.api.main - INFO - ============================================================
+2025-10-28 12:45:17,476 - src.api.main - INFO -  Configuration loaded
+2025-10-28 12:45:17,478 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:17,479 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:17,479 - src.api.main - INFO -  State Manager initialized
+2025-10-28 12:45:18,654 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-10-28 12:45:18,659 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-28 12:45:18,661 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-10-28 12:45:18,662 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-10-28 12:45:18,662 - src.api.main - INFO -  Integration Manager initialized
+2025-10-28 12:45:18,666 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:18,667 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:18,673 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:18,675 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:18,680 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:18,681 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:18,681 - src.core.cfa - INFO - CFA initialized with real MIP optimization
+2025-10-28 12:45:18,685 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:18,686 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:18,687 - src.core.cfa - INFO - CFA initialized with real MIP optimization
+2025-10-28 12:45:18,692 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:18,694 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:18,696 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-28 12:45:18,698 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:18,699 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:18,699 - src.core.cfa - INFO - CFA initialized with real MIP optimization
+2025-10-28 12:45:18,702 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:18,703 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:18,703 - src.core.cfa - INFO - CFA initialized with real MIP optimization
+2025-10-28 12:45:18,709 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:18,709 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:18,711 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-28 12:45:18,717 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-10-28 12:45:18,717 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-28 12:45:18,719 - src.api.main - INFO -  Decision Engine initialized
+2025-10-28 12:45:18,723 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:18,725 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:18,730 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-28 12:45:18,730 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-28 12:45:18,731 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-28 12:45:18,731 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-28 12:45:18,732 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-28 12:45:18,732 - src.api.main - INFO - ============================================================
+2025-10-28 12:45:18,732 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-28 12:45:18,733 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-28 12:45:18,733 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-28 12:45:18,733 - src.api.main - INFO - ============================================================
+2025-10-28 12:47:07,718 - src.api.main - INFO - Running consolidation cycle with 28 pending orders
+2025-10-28 12:47:07,725 - src.core.decision_engine - INFO - Cycle 0: 28 pending shipments
+2025-10-28 12:47:07,729 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:07,768 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:07,914 - src.core.cfa - INFO - Optimal solution found: objective = 7062941.0
+2025-10-28 12:47:07,915 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:07,915 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:07,915 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:07,916 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:07,916 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:07,917 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:07,956 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1540.6 km, 9 stops
+2025-10-28 12:47:07,971 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:08,016 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:08,072 - src.core.cfa - INFO - Optimal solution found: objective = 7177099.0
+2025-10-28 12:47:08,072 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:08,073 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:08,073 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:08,074 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:08,074 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:08,075 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:08,081 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1545.8 km, 9 stops
+2025-10-28 12:47:08,082 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:08,112 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:08,151 - src.core.cfa - INFO - Optimal solution found: objective = 7292249.0
+2025-10-28 12:47:08,151 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:08,152 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:08,153 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:08,153 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:08,153 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:08,154 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:08,162 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:08,185 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:08,228 - src.core.cfa - INFO - Optimal solution found: objective = 7186473.0
+2025-10-28 12:47:08,229 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:08,229 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:08,230 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:08,230 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:08,231 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:08,231 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:08,236 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1457.6 km, 8 stops
+2025-10-28 12:47:08,236 - src.core.cfa - INFO - Stage 1: Batch formation with 33 shipments, 1 vehicles
+2025-10-28 12:47:08,261 - src.core.cfa - INFO - Solving batch formation MIP: 33 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:08,291 - src.core.cfa - INFO - Optimal solution found: objective = 7301923.0
+2025-10-28 12:47:08,292 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:08,292 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:08,293 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:08,294 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:08,294 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:08,295 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:08,301 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:08,327 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:08,386 - src.core.cfa - INFO - Optimal solution found: objective = 7195827.0
+2025-10-28 12:47:08,387 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:08,387 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:08,388 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:08,388 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:08,388 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:08,389 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:08,394 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1534.8 km, 8 stops
+2025-10-28 12:47:08,395 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:08,419 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:08,465 - src.core.cfa - INFO - Optimal solution found: objective = 7291949.0
+2025-10-28 12:47:08,465 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:08,466 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:08,467 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:08,467 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:08,467 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:08,468 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:08,475 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:08,499 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:08,528 - src.core.cfa - INFO - Optimal solution found: objective = 7186473.0
+2025-10-28 12:47:08,528 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:08,529 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:08,529 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:08,530 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:08,530 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:08,531 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:08,532 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:08,557 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:08,591 - src.core.cfa - INFO - Optimal solution found: objective = 7301623.0
+2025-10-28 12:47:08,592 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:08,592 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:08,593 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:08,593 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:08,594 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:08,595 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:08,600 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:08,624 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:08,670 - src.core.cfa - INFO - Optimal solution found: objective = 7185922.0
+2025-10-28 12:47:08,671 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:08,671 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:08,672 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:08,672 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:08,672 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:08,673 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:08,677 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1457.6 km, 8 stops
+2025-10-28 12:47:08,678 - src.core.cfa - INFO - Stage 1: Batch formation with 33 shipments, 1 vehicles
+2025-10-28 12:47:08,703 - src.core.cfa - INFO - Solving batch formation MIP: 33 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:08,733 - src.core.cfa - INFO - Optimal solution found: objective = 7301923.0
+2025-10-28 12:47:08,734 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:08,734 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:08,735 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:08,735 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:08,736 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:08,736 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:08,742 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:08,766 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:08,811 - src.core.cfa - INFO - Optimal solution found: objective = 7176949.0
+2025-10-28 12:47:08,811 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:08,812 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:08,812 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:08,812 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:08,813 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:08,813 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:08,814 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:08,837 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:08,874 - src.core.cfa - INFO - Optimal solution found: objective = 7292099.0
+2025-10-28 12:47:08,874 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:08,875 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:08,875 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:08,876 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:08,876 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:08,877 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:08,882 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:08,902 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:08,938 - src.core.cfa - INFO - Optimal solution found: objective = 7186323.0
+2025-10-28 12:47:08,938 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:08,938 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:08,939 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:08,939 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:08,940 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:08,940 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:08,941 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:08,962 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:08,999 - src.core.cfa - INFO - Optimal solution found: objective = 7301473.0
+2025-10-28 12:47:09,000 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:09,000 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:09,001 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:09,001 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:09,001 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:09,002 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:09,003 - src.core.cfa - INFO - Route cache: 10 hits / 4 misses (71.4% hit rate)
+2025-10-28 12:47:09,009 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:09,032 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:09,062 - src.core.cfa - INFO - Optimal solution found: objective = 7186623.0
+2025-10-28 12:47:09,062 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:09,063 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:09,063 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:09,064 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:09,064 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:09,065 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:09,065 - src.core.cfa - INFO - Stage 1: Batch formation with 34 shipments, 1 vehicles
+2025-10-28 12:47:09,090 - src.core.cfa - INFO - Solving batch formation MIP: 34 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:09,124 - src.core.cfa - INFO - Optimal solution found: objective = 7302073.0
+2025-10-28 12:47:09,125 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:09,125 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:09,126 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:09,126 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:09,126 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:09,127 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:09,133 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:09,155 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:09,202 - src.core.cfa - INFO - Optimal solution found: objective = 7177452.0
+2025-10-28 12:47:09,203 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:09,203 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:09,204 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:09,204 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:09,205 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:09,205 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:09,210 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1540.6 km, 9 stops
+2025-10-28 12:47:09,211 - src.core.cfa - INFO - Stage 1: Batch formation with 34 shipments, 1 vehicles
+2025-10-28 12:47:09,240 - src.core.cfa - INFO - Solving batch formation MIP: 34 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:09,281 - src.core.cfa - INFO - Optimal solution found: objective = 7311577.0
+2025-10-28 12:47:09,282 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:09,282 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:09,283 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:09,283 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:09,284 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:09,285 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:09,295 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:09,337 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:09,376 - src.core.cfa - INFO - Optimal solution found: objective = 7177603.0
+2025-10-28 12:47:09,376 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:09,377 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:09,378 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:09,378 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:09,379 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:09,379 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:09,384 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1502.7 km, 8 stops
+2025-10-28 12:47:09,385 - src.core.cfa - INFO - Stage 1: Batch formation with 36 shipments, 1 vehicles
+2025-10-28 12:47:09,412 - src.core.cfa - INFO - Solving batch formation MIP: 36 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:09,469 - src.core.cfa - INFO - Optimal solution found: objective = 7293829.0
+2025-10-28 12:47:09,470 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:09,470 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:09,471 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:09,471 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:09,471 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:09,472 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:09,476 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1540.6 km, 8 stops
+2025-10-28 12:47:09,483 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:09,506 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:09,563 - src.core.cfa - INFO - Optimal solution found: objective = 7177099.0
+2025-10-28 12:47:09,564 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:09,564 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:09,565 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:09,565 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:09,566 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:09,566 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:09,567 - src.core.cfa - INFO - Stage 1: Batch formation with 34 shipments, 1 vehicles
+2025-10-28 12:47:09,591 - src.core.cfa - INFO - Solving batch formation MIP: 34 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:09,641 - src.core.cfa - INFO - Optimal solution found: objective = 7302157.0
+2025-10-28 12:47:09,641 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:09,642 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:09,642 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:09,643 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:09,643 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:09,644 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:09,648 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1534.8 km, 8 stops
+2025-10-28 12:47:09,653 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:09,675 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:09,704 - src.core.cfa - INFO - Optimal solution found: objective = 7186473.0
+2025-10-28 12:47:09,704 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:09,705 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:09,705 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:09,706 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:09,706 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:09,707 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:09,707 - src.core.cfa - INFO - Stage 1: Batch formation with 33 shipments, 1 vehicles
+2025-10-28 12:47:09,731 - src.core.cfa - INFO - Solving batch formation MIP: 33 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:09,765 - src.core.cfa - INFO - Optimal solution found: objective = 7301923.0
+2025-10-28 12:47:09,765 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:09,766 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:09,766 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:09,767 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:09,767 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:09,768 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:09,774 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:09,796 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:09,843 - src.core.cfa - INFO - Optimal solution found: objective = 7176799.0
+2025-10-28 12:47:09,843 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:09,844 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:09,844 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:09,845 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:09,845 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:09,846 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:09,847 - src.core.cfa - INFO - Stage 1: Batch formation with 33 shipments, 1 vehicles
+2025-10-28 12:47:09,870 - src.core.cfa - INFO - Solving batch formation MIP: 33 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:09,906 - src.core.cfa - INFO - Optimal solution found: objective = 7301923.0
+2025-10-28 12:47:09,906 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:09,906 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:09,907 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:09,907 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:09,908 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:09,908 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:09,915 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:09,938 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:09,970 - src.core.cfa - INFO - Optimal solution found: objective = 7186773.0
+2025-10-28 12:47:09,970 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:09,971 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:09,971 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:09,971 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:09,972 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:09,972 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:09,973 - src.core.cfa - INFO - Stage 1: Batch formation with 37 shipments, 1 vehicles
+2025-10-28 12:47:09,999 - src.core.cfa - INFO - Solving batch formation MIP: 37 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:10,048 - src.core.cfa - INFO - Optimal solution found: objective = 7302523.0
+2025-10-28 12:47:10,048 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:10,049 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:10,049 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:10,050 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:10,050 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:10,051 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:10,052 - src.core.cfa - INFO - Route cache: 20 hits / 8 misses (71.4% hit rate)
+2025-10-28 12:47:10,058 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:10,082 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:10,128 - src.core.cfa - INFO - Optimal solution found: objective = 7195677.0
+2025-10-28 12:47:10,128 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:10,129 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:10,129 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:10,130 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:10,130 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:10,131 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:10,131 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:10,154 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:10,190 - src.core.cfa - INFO - Optimal solution found: objective = 7301473.0
+2025-10-28 12:47:10,191 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:10,191 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:10,192 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:10,192 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:10,192 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:10,193 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:10,198 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:10,219 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:10,268 - src.core.cfa - INFO - Optimal solution found: objective = 7176949.0
+2025-10-28 12:47:10,268 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:10,269 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:10,269 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:10,270 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:10,270 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:10,271 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:10,271 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:10,294 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:10,330 - src.core.cfa - INFO - Optimal solution found: objective = 7302415.0
+2025-10-28 12:47:10,331 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:10,331 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:10,332 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:10,332 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:10,333 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:10,333 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:10,337 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1477.7 km, 8 stops
+2025-10-28 12:47:10,341 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:10,362 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:10,393 - src.core.cfa - INFO - Optimal solution found: objective = 7186323.0
+2025-10-28 12:47:10,393 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:10,394 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:10,394 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:10,395 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:10,395 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:10,396 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:10,397 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:10,420 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:10,454 - src.core.cfa - INFO - Optimal solution found: objective = 7301623.0
+2025-10-28 12:47:10,454 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:10,455 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:10,455 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:10,455 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:10,456 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:10,456 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:10,461 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:10,486 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:10,531 - src.core.cfa - INFO - Optimal solution found: objective = 7186773.0
+2025-10-28 12:47:10,531 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:10,531 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:10,532 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:10,532 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:10,533 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:10,533 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:10,534 - src.core.cfa - INFO - Stage 1: Batch formation with 35 shipments, 1 vehicles
+2025-10-28 12:47:10,559 - src.core.cfa - INFO - Solving batch formation MIP: 35 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:10,593 - src.core.cfa - INFO - Optimal solution found: objective = 7302223.0
+2025-10-28 12:47:10,593 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:10,594 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:10,594 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:10,595 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:10,595 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:10,596 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:10,602 - src.core.cfa - INFO - Stage 1: Batch formation with 33 shipments, 1 vehicles
+2025-10-28 12:47:10,625 - src.core.cfa - INFO - Solving batch formation MIP: 33 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:10,672 - src.core.cfa - INFO - Optimal solution found: objective = 7177399.0
+2025-10-28 12:47:10,673 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:10,673 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:10,674 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:10,674 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:10,675 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:10,675 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:10,676 - src.core.cfa - INFO - Stage 1: Batch formation with 35 shipments, 1 vehicles
+2025-10-28 12:47:10,702 - src.core.cfa - INFO - Solving batch formation MIP: 35 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:10,750 - src.core.cfa - INFO - Optimal solution found: objective = 7292699.0
+2025-10-28 12:47:11,211 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:11,213 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:11,215 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:11,216 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:11,218 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:11,220 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:11,237 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:11,275 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:11,316 - src.core.cfa - INFO - Optimal solution found: objective = 7186623.0
+2025-10-28 12:47:11,316 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:11,316 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:11,317 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:11,317 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:11,318 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:11,318 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:11,319 - src.core.cfa - INFO - Route cache: 30 hits / 9 misses (76.9% hit rate)
+2025-10-28 12:47:11,320 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:11,343 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:11,379 - src.core.cfa - INFO - Optimal solution found: objective = 7292249.0
+2025-10-28 12:47:11,380 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:11,380 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:11,380 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:11,381 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:11,381 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:11,382 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:11,388 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:11,410 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:11,456 - src.core.cfa - INFO - Optimal solution found: objective = 7177099.0
+2025-10-28 12:47:11,456 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:11,457 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:11,457 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:11,458 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:11,458 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:11,459 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:11,460 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:11,484 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:11,520 - src.core.cfa - INFO - Optimal solution found: objective = 7292249.0
+2025-10-28 12:47:11,520 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:11,520 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:11,521 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:11,521 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:11,522 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:11,523 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:11,529 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:11,551 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:11,582 - src.core.cfa - INFO - Optimal solution found: objective = 7186623.0
+2025-10-28 12:47:11,582 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:11,582 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:11,583 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:11,583 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:11,584 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:11,585 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:11,585 - src.core.cfa - INFO - Stage 1: Batch formation with 35 shipments, 1 vehicles
+2025-10-28 12:47:11,611 - src.core.cfa - INFO - Solving batch formation MIP: 35 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:11,645 - src.core.cfa - INFO - Optimal solution found: objective = 7302223.0
+2025-10-28 12:47:11,646 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:11,646 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:11,646 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:11,647 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:11,647 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:11,648 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:11,653 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:11,675 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:11,724 - src.core.cfa - INFO - Optimal solution found: objective = 7195677.0
+2025-10-28 12:47:11,724 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:11,725 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:11,725 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:11,726 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:11,726 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:11,727 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:11,727 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:11,749 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:11,787 - src.core.cfa - INFO - Optimal solution found: objective = 7310677.0
+2025-10-28 12:47:11,787 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:11,787 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:11,788 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:11,788 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:11,789 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:11,790 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:11,796 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:11,817 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:11,864 - src.core.cfa - INFO - Optimal solution found: objective = 7186473.0
+2025-10-28 12:47:11,865 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:11,865 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:11,866 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:11,866 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:11,866 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:11,867 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:11,868 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:11,891 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:11,928 - src.core.cfa - INFO - Optimal solution found: objective = 7301773.0
+2025-10-28 12:47:11,928 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:11,929 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:11,929 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:11,930 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:11,930 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:11,931 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:11,937 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:11,959 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:12,006 - src.core.cfa - INFO - Optimal solution found: objective = 7177099.0
+2025-10-28 12:47:12,007 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:12,007 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:12,007 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:12,008 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:12,008 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:12,009 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:12,009 - src.core.cfa - INFO - Route cache: 40 hits / 9 misses (81.6% hit rate)
+2025-10-28 12:47:12,010 - src.core.cfa - INFO - Stage 1: Batch formation with 33 shipments, 1 vehicles
+2025-10-28 12:47:12,034 - src.core.cfa - INFO - Solving batch formation MIP: 33 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:12,070 - src.core.cfa - INFO - Optimal solution found: objective = 7292399.0
+2025-10-28 12:47:12,070 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:12,070 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:12,071 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:12,071 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:12,072 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:12,073 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:12,079 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:12,099 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:12,147 - src.core.cfa - INFO - Optimal solution found: objective = 7195677.0
+2025-10-28 12:47:12,148 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:12,148 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:12,149 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:12,149 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:12,150 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:12,151 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:12,151 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:12,174 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:12,211 - src.core.cfa - INFO - Optimal solution found: objective = 7310677.0
+2025-10-28 12:47:12,211 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:12,211 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:12,212 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:12,212 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:12,213 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:12,213 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:12,220 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:12,243 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:12,288 - src.core.cfa - INFO - Optimal solution found: objective = 7186773.0
+2025-10-28 12:47:12,289 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:12,289 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:12,290 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:12,290 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:12,291 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:12,291 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:12,292 - src.core.cfa - INFO - Stage 1: Batch formation with 35 shipments, 1 vehicles
+2025-10-28 12:47:12,319 - src.core.cfa - INFO - Solving batch formation MIP: 35 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:12,351 - src.core.cfa - INFO - Optimal solution found: objective = 7302223.0
+2025-10-28 12:47:12,351 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:12,352 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:12,352 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:12,353 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:12,353 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:12,354 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:12,360 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:12,384 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:12,429 - src.core.cfa - INFO - Optimal solution found: objective = 7186623.0
+2025-10-28 12:47:12,430 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:12,430 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:12,430 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:12,431 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:12,431 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:12,432 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:12,433 - src.core.cfa - INFO - Stage 1: Batch formation with 33 shipments, 1 vehicles
+2025-10-28 12:47:12,456 - src.core.cfa - INFO - Solving batch formation MIP: 33 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:12,492 - src.core.cfa - INFO - Optimal solution found: objective = 7301923.0
+2025-10-28 12:47:12,492 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:12,493 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:12,493 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:12,494 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:12,494 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:12,495 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:12,500 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:12,521 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:12,571 - src.core.cfa - INFO - Optimal solution found: objective = 7176799.0
+2025-10-28 12:47:12,572 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:12,572 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:12,572 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:12,573 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:12,573 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:12,574 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:12,575 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:12,596 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:12,634 - src.core.cfa - INFO - Optimal solution found: objective = 7291949.0
+2025-10-28 12:47:12,635 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:12,635 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:12,636 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:12,636 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:12,637 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:12,637 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:12,644 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:12,667 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:12,712 - src.core.cfa - INFO - Optimal solution found: objective = 7176949.0
+2025-10-28 12:47:12,713 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:12,713 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:12,714 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:12,714 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:12,715 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:12,715 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:12,716 - src.core.cfa - INFO - Route cache: 50 hits / 9 misses (84.7% hit rate)
+2025-10-28 12:47:12,716 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:12,739 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:12,775 - src.core.cfa - INFO - Optimal solution found: objective = 7292249.0
+2025-10-28 12:47:12,775 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:12,776 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:12,776 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:12,777 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:12,777 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:12,778 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:12,783 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:12,804 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:12,838 - src.core.cfa - INFO - Optimal solution found: objective = 7195677.0
+2025-10-28 12:47:12,839 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:12,839 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:12,840 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:12,840 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:12,841 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:12,841 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:12,842 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:12,865 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:12,901 - src.core.cfa - INFO - Optimal solution found: objective = 7291949.0
+2025-10-28 12:47:12,901 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:12,902 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:12,902 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:12,902 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:12,903 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:12,904 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:12,908 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:12,928 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:12,964 - src.core.cfa - INFO - Optimal solution found: objective = 7195677.0
+2025-10-28 12:47:12,964 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:12,965 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:12,965 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:12,966 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:12,966 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:12,967 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:12,967 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:12,989 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:13,042 - src.core.cfa - INFO - Optimal solution found: objective = 7301323.0
+2025-10-28 12:47:13,042 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:13,042 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:13,043 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:13,043 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:13,044 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:13,044 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:13,049 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:13,070 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:13,121 - src.core.cfa - INFO - Optimal solution found: objective = 7185902.0
+2025-10-28 12:47:13,121 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:13,121 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:13,122 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:13,122 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:13,123 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:13,123 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:13,127 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1457.6 km, 8 stops
+2025-10-28 12:47:13,128 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:13,149 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:13,200 - src.core.cfa - INFO - Optimal solution found: objective = 7291949.0
+2025-10-28 12:47:13,200 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:13,201 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:13,201 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:13,201 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:13,202 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:13,202 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:13,206 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:13,228 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:13,261 - src.core.cfa - INFO - Optimal solution found: objective = 7186473.0
+2025-10-28 12:47:13,261 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:13,262 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:13,262 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:13,263 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:13,263 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:13,264 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:13,264 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:13,288 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:13,323 - src.core.cfa - INFO - Optimal solution found: objective = 7301473.0
+2025-10-28 12:47:13,324 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:13,324 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:13,325 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:13,325 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:13,325 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:13,326 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:13,332 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:13,355 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:13,401 - src.core.cfa - INFO - Optimal solution found: objective = 7195977.0
+2025-10-28 12:47:13,402 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:13,402 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:13,403 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:13,403 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:13,404 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:13,404 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:13,405 - src.core.cfa - INFO - Stage 1: Batch formation with 35 shipments, 1 vehicles
+2025-10-28 12:47:13,430 - src.core.cfa - INFO - Solving batch formation MIP: 35 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:13,481 - src.core.cfa - INFO - Optimal solution found: objective = 7292699.0
+2025-10-28 12:47:13,482 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:13,482 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:13,483 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:13,483 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:13,483 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:13,484 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:13,485 - src.core.cfa - INFO - Route cache: 60 hits / 10 misses (85.7% hit rate)
+2025-10-28 12:47:13,490 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:13,512 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:13,575 - src.core.cfa - INFO - Optimal solution found: objective = 7186473.0
+2025-10-28 12:47:13,575 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:13,576 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:13,576 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:13,577 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:13,577 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:13,578 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:13,579 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:13,611 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:13,653 - src.core.cfa - INFO - Optimal solution found: objective = 7292249.0
+2025-10-28 12:47:13,653 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:13,654 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:13,654 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:13,655 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:13,655 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:13,656 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:13,661 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:13,683 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:13,731 - src.core.cfa - INFO - Optimal solution found: objective = 7187495.0
+2025-10-28 12:47:13,731 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:13,732 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:13,732 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:13,733 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:13,733 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:13,734 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:13,737 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1457.6 km, 8 stops
+2025-10-28 12:47:13,738 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:13,759 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:13,809 - src.core.cfa - INFO - Optimal solution found: objective = 7291949.0
+2025-10-28 12:47:13,809 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:13,810 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:13,810 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:13,810 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:13,811 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:13,812 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:13,817 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:13,839 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:13,888 - src.core.cfa - INFO - Optimal solution found: objective = 7185902.0
+2025-10-28 12:47:13,889 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:13,889 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:13,890 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:13,890 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:13,891 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:13,891 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:13,892 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:13,916 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:13,951 - src.core.cfa - INFO - Optimal solution found: objective = 7292249.0
+2025-10-28 12:47:13,951 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:13,951 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:13,952 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:13,952 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:13,953 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:13,954 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:13,960 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:13,984 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:14,030 - src.core.cfa - INFO - Optimal solution found: objective = 7177099.0
+2025-10-28 12:47:14,031 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:14,031 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:14,032 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:14,032 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:14,033 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:14,033 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:14,034 - src.core.cfa - INFO - Stage 1: Batch formation with 34 shipments, 1 vehicles
+2025-10-28 12:47:14,059 - src.core.cfa - INFO - Solving batch formation MIP: 34 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:14,094 - src.core.cfa - INFO - Optimal solution found: objective = 7302073.0
+2025-10-28 12:47:14,095 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:14,095 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:14,096 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:14,096 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:14,096 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:14,097 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:14,103 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:14,124 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:14,157 - src.core.cfa - INFO - Optimal solution found: objective = 7177099.0
+2025-10-28 12:47:14,157 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:14,158 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:14,158 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:14,159 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:14,159 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:14,160 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:14,161 - src.core.cfa - INFO - Stage 1: Batch formation with 33 shipments, 1 vehicles
+2025-10-28 12:47:14,185 - src.core.cfa - INFO - Solving batch formation MIP: 33 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:14,221 - src.core.cfa - INFO - Optimal solution found: objective = 7292399.0
+2025-10-28 12:47:14,221 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:14,221 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:14,222 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:14,222 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:14,223 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:14,224 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:14,230 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:14,249 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:14,298 - src.core.cfa - INFO - Optimal solution found: objective = 7186173.0
+2025-10-28 12:47:14,299 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:14,299 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:14,300 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:14,300 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:14,300 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:14,301 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:14,302 - src.core.cfa - INFO - Route cache: 70 hits / 11 misses (86.4% hit rate)
+2025-10-28 12:47:14,302 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:14,324 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:14,361 - src.core.cfa - INFO - Optimal solution found: objective = 7301473.0
+2025-10-28 12:47:14,362 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:14,362 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:14,363 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:14,363 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:14,363 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:14,364 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:14,370 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:14,392 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:14,439 - src.core.cfa - INFO - Optimal solution found: objective = 7177099.0
+2025-10-28 12:47:14,440 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:14,440 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:14,441 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:14,441 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:14,441 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:14,442 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:14,443 - src.core.cfa - INFO - Stage 1: Batch formation with 34 shipments, 1 vehicles
+2025-10-28 12:47:14,468 - src.core.cfa - INFO - Solving batch formation MIP: 34 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:14,518 - src.core.cfa - INFO - Optimal solution found: objective = 7292549.0
+2025-10-28 12:47:14,519 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:14,519 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:14,520 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:14,520 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:14,521 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:14,521 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:14,528 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:14,549 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:14,597 - src.core.cfa - INFO - Optimal solution found: objective = 7176799.0
+2025-10-28 12:47:14,598 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:14,598 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:14,599 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:14,599 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:14,599 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:14,600 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:14,601 - src.core.cfa - INFO - Stage 1: Batch formation with 35 shipments, 1 vehicles
+2025-10-28 12:47:14,625 - src.core.cfa - INFO - Solving batch formation MIP: 35 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:14,675 - src.core.cfa - INFO - Optimal solution found: objective = 7293363.0
+2025-10-28 12:47:14,675 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:14,676 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:14,676 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:14,676 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:14,677 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:14,678 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:14,682 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1492.4 km, 8 stops
+2025-10-28 12:47:14,686 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:14,708 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:14,752 - src.core.cfa - INFO - Optimal solution found: objective = 7186664.0
+2025-10-28 12:47:14,752 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:14,753 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:14,753 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:14,754 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:14,754 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:14,755 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:14,759 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1540.6 km, 9 stops
+2025-10-28 12:47:14,760 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:14,782 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:14,831 - src.core.cfa - INFO - Optimal solution found: objective = 7301664.0
+2025-10-28 12:47:14,831 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:14,832 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:14,832 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:14,832 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:14,833 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:14,834 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:14,840 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:14,862 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:14,911 - src.core.cfa - INFO - Optimal solution found: objective = 7176799.0
+2025-10-28 12:47:14,912 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:14,913 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:14,914 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:14,914 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:14,915 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:14,916 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:14,917 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:14,944 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:14,989 - src.core.cfa - INFO - Optimal solution found: objective = 7301623.0
+2025-10-28 12:47:14,990 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:14,990 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:14,990 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:14,991 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:14,991 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:14,992 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:14,998 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:15,020 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:15,066 - src.core.cfa - INFO - Optimal solution found: objective = 7176799.0
+2025-10-28 12:47:15,066 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:15,067 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:15,067 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:15,068 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:15,068 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:15,069 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:15,069 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:15,092 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:15,128 - src.core.cfa - INFO - Optimal solution found: objective = 7292099.0
+2025-10-28 12:47:15,128 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:15,129 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:15,129 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:15,130 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:15,130 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:15,131 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:15,136 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:15,158 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:15,206 - src.core.cfa - INFO - Optimal solution found: objective = 7176799.0
+2025-10-28 12:47:15,206 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:15,207 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:15,207 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:15,208 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:15,208 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:15,209 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:15,210 - src.core.cfa - INFO - Route cache: 80 hits / 13 misses (86.0% hit rate)
+2025-10-28 12:47:15,212 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:15,264 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:15,301 - src.core.cfa - INFO - Optimal solution found: objective = 7301773.0
+2025-10-28 12:47:15,301 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:15,301 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:15,302 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:15,302 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:15,303 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:15,303 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:15,310 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:15,335 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:15,396 - src.core.cfa - INFO - Optimal solution found: objective = 7176799.0
+2025-10-28 12:47:15,398 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:15,398 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:15,399 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:15,399 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:15,400 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:15,400 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:15,401 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:15,428 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:15,473 - src.core.cfa - INFO - Optimal solution found: objective = 7300992.0
+2025-10-28 12:47:15,474 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:15,474 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:15,475 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:15,476 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:15,476 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:15,477 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:15,482 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1545.8 km, 9 stops
+2025-10-28 12:47:15,487 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:15,508 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:15,552 - src.core.cfa - INFO - Optimal solution found: objective = 7186173.0
+2025-10-28 12:47:15,552 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:15,553 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:15,553 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:15,553 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:15,554 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:15,554 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:15,555 - src.core.cfa - INFO - Stage 1: Batch formation with 34 shipments, 1 vehicles
+2025-10-28 12:47:15,580 - src.core.cfa - INFO - Solving batch formation MIP: 34 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:15,615 - src.core.cfa - INFO - Optimal solution found: objective = 7293005.0
+2025-10-28 12:47:15,616 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:15,616 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:15,617 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:15,617 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:15,617 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:15,618 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:15,622 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1457.6 km, 8 stops
+2025-10-28 12:47:15,628 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:15,651 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:15,694 - src.core.cfa - INFO - Optimal solution found: objective = 7176799.0
+2025-10-28 12:47:15,694 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:15,695 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:15,695 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:15,696 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:15,696 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:15,697 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:15,698 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:15,721 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:15,756 - src.core.cfa - INFO - Optimal solution found: objective = 7292099.0
+2025-10-28 12:47:15,757 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:15,757 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:15,758 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:15,758 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:15,759 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:15,760 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:15,766 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:15,788 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:15,833 - src.core.cfa - INFO - Optimal solution found: objective = 7176949.0
+2025-10-28 12:47:15,834 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:15,834 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:15,835 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:15,835 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:15,836 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:15,836 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:15,837 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:15,861 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:15,896 - src.core.cfa - INFO - Optimal solution found: objective = 7292249.0
+2025-10-28 12:47:15,896 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:15,897 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:15,897 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:15,898 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:15,898 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:15,899 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:15,905 - src.core.cfa - INFO - Stage 1: Batch formation with 33 shipments, 1 vehicles
+2025-10-28 12:47:15,929 - src.core.cfa - INFO - Solving batch formation MIP: 33 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:15,973 - src.core.cfa - INFO - Optimal solution found: objective = 7186923.0
+2025-10-28 12:47:15,974 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:15,974 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:15,975 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:15,975 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:15,976 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:15,977 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:15,977 - src.core.cfa - INFO - Stage 1: Batch formation with 35 shipments, 1 vehicles
+2025-10-28 12:47:16,005 - src.core.cfa - INFO - Solving batch formation MIP: 35 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:16,050 - src.core.cfa - INFO - Optimal solution found: objective = 7302223.0
+2025-10-28 12:47:16,051 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:16,051 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:16,052 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:16,052 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:16,053 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:16,054 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:16,060 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:16,085 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:16,128 - src.core.cfa - INFO - Optimal solution found: objective = 7186773.0
+2025-10-28 12:47:16,129 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:16,129 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:16,130 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:16,130 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:16,131 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:16,131 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:16,132 - src.core.cfa - INFO - Route cache: 90 hits / 15 misses (85.7% hit rate)
+2025-10-28 12:47:16,133 - src.core.cfa - INFO - Stage 1: Batch formation with 34 shipments, 1 vehicles
+2025-10-28 12:47:16,159 - src.core.cfa - INFO - Solving batch formation MIP: 34 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:16,192 - src.core.cfa - INFO - Optimal solution found: objective = 7302073.0
+2025-10-28 12:47:16,192 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:16,193 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:16,193 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:16,194 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:16,194 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:16,195 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:16,200 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:16,223 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:16,255 - src.core.cfa - INFO - Optimal solution found: objective = 7186473.0
+2025-10-28 12:47:16,256 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:16,256 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:16,257 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:16,257 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:16,257 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:16,258 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:16,259 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:16,282 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:16,319 - src.core.cfa - INFO - Optimal solution found: objective = 7301473.0
+2025-10-28 12:47:16,319 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:16,319 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:16,320 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:16,320 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:16,321 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:16,322 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:16,327 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:16,347 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:16,396 - src.core.cfa - INFO - Optimal solution found: objective = 7195677.0
+2025-10-28 12:47:16,396 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:16,397 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:16,397 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:16,398 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:16,398 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:16,399 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:16,399 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:16,420 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:16,459 - src.core.cfa - INFO - Optimal solution found: objective = 7310677.0
+2025-10-28 12:47:16,459 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:16,459 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:16,460 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:16,460 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:16,461 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:16,462 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:16,468 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:16,490 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:16,521 - src.core.cfa - INFO - Optimal solution found: objective = 7186773.0
+2025-10-28 12:47:16,522 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:16,522 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:16,522 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:16,523 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:16,523 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:16,524 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:16,524 - src.core.cfa - INFO - Stage 1: Batch formation with 33 shipments, 1 vehicles
+2025-10-28 12:47:16,549 - src.core.cfa - INFO - Solving batch formation MIP: 33 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:16,585 - src.core.cfa - INFO - Optimal solution found: objective = 7301923.0
+2025-10-28 12:47:16,585 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:16,586 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:16,586 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:16,587 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:16,587 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:16,588 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:16,593 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:16,615 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:16,662 - src.core.cfa - INFO - Optimal solution found: objective = 7186222.0
+2025-10-28 12:47:16,663 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:16,663 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:16,664 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:16,664 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:16,665 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:16,665 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:16,666 - src.core.cfa - INFO - Stage 1: Batch formation with 33 shipments, 1 vehicles
+2025-10-28 12:47:16,690 - src.core.cfa - INFO - Solving batch formation MIP: 33 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:16,726 - src.core.cfa - INFO - Optimal solution found: objective = 7292399.0
+2025-10-28 12:47:16,727 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:16,727 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:16,728 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:16,728 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:16,728 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:16,729 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:16,735 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:16,755 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:16,789 - src.core.cfa - INFO - Optimal solution found: objective = 7186173.0
+2025-10-28 12:47:16,789 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:16,790 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:16,790 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:16,791 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:16,791 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:16,792 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:16,792 - src.core.cfa - INFO - Route cache: 100 hits / 15 misses (87.0% hit rate)
+2025-10-28 12:47:16,793 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:16,815 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:16,852 - src.core.cfa - INFO - Optimal solution found: objective = 7301323.0
+2025-10-28 12:47:16,852 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:16,852 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:16,853 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:16,853 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:16,854 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:16,855 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:16,860 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:16,882 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:16,931 - src.core.cfa - INFO - Optimal solution found: objective = 7186514.0
+2025-10-28 12:47:16,931 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:16,932 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:16,932 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:16,933 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:16,933 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:16,934 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:16,935 - src.core.cfa - INFO - Stage 1: Batch formation with 34 shipments, 1 vehicles
+2025-10-28 12:47:16,959 - src.core.cfa - INFO - Solving batch formation MIP: 34 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:17,009 - src.core.cfa - INFO - Optimal solution found: objective = 7292549.0
+2025-10-28 12:47:17,009 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:17,009 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:17,010 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:17,010 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:17,011 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:17,011 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:17,017 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:17,037 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:17,087 - src.core.cfa - INFO - Optimal solution found: objective = 7195677.0
+2025-10-28 12:47:17,088 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:17,088 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:17,089 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:17,089 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:17,089 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:17,090 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:17,091 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:17,113 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:17,166 - src.core.cfa - INFO - Optimal solution found: objective = 7301323.0
+2025-10-28 12:47:17,166 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:17,167 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:17,167 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:17,168 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:17,168 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:17,169 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:17,175 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:17,198 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:17,245 - src.core.cfa - INFO - Optimal solution found: objective = 7176949.0
+2025-10-28 12:47:17,245 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:17,246 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:17,246 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:17,247 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:17,247 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:17,248 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:17,249 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:17,272 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:17,309 - src.core.cfa - INFO - Optimal solution found: objective = 7292249.0
+2025-10-28 12:47:17,309 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:17,310 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:17,310 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:17,311 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:17,311 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:17,312 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:17,317 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:17,339 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:17,372 - src.core.cfa - INFO - Optimal solution found: objective = 7177099.0
+2025-10-28 12:47:17,373 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:17,373 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:17,374 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:17,374 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:17,374 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:17,375 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:17,376 - src.core.cfa - INFO - Stage 1: Batch formation with 33 shipments, 1 vehicles
+2025-10-28 12:47:17,400 - src.core.cfa - INFO - Solving batch formation MIP: 33 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:17,434 - src.core.cfa - INFO - Optimal solution found: objective = 7292399.0
+2025-10-28 12:47:17,434 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:17,435 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:17,435 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:17,436 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:17,436 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:17,437 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:17,443 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:17,466 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:17,512 - src.core.cfa - INFO - Optimal solution found: objective = 7177941.0
+2025-10-28 12:47:17,513 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:17,513 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:17,514 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:17,514 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:17,515 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:17,515 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:17,519 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1540.6 km, 9 stops
+2025-10-28 12:47:17,520 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:17,542 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:17,590 - src.core.cfa - INFO - Optimal solution found: objective = 7310535.0
+2025-10-28 12:47:17,591 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:17,591 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:17,591 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:17,592 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:17,592 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:17,593 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:17,596 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1451.8 km, 7 stops
+2025-10-28 12:47:17,601 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:17,623 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:17,669 - src.core.cfa - INFO - Optimal solution found: objective = 7176799.0
+2025-10-28 12:47:17,669 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:17,669 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:17,670 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:17,670 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:17,671 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:17,671 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:17,672 - src.core.cfa - INFO - Route cache: 110 hits / 17 misses (86.6% hit rate)
+2025-10-28 12:47:17,672 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:17,695 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:17,732 - src.core.cfa - INFO - Optimal solution found: objective = 7301773.0
+2025-10-28 12:47:17,732 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:17,733 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:17,733 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:17,733 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:17,734 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:17,734 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:17,739 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:17,760 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:17,794 - src.core.cfa - INFO - Optimal solution found: objective = 7186173.0
+2025-10-28 12:47:17,794 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:17,795 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:17,795 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:17,796 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:17,796 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:17,797 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:17,798 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:17,819 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:17,857 - src.core.cfa - INFO - Optimal solution found: objective = 7291799.0
+2025-10-28 12:47:17,857 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:17,858 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:17,858 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:17,859 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:17,859 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:17,860 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:17,866 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:17,887 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:17,934 - src.core.cfa - INFO - Optimal solution found: objective = 7186468.0
+2025-10-28 12:47:17,934 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:17,935 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:17,935 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:17,936 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:17,936 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:17,937 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:17,941 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 1540.6 km, 9 stops
+2025-10-28 12:47:17,942 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:17,967 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:18,029 - src.core.cfa - INFO - Optimal solution found: objective = 7292249.0
+2025-10-28 12:47:18,030 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:18,030 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:18,031 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:18,032 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:18,032 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:18,033 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:18,039 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:18,063 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:18,108 - src.core.cfa - INFO - Optimal solution found: objective = 7186323.0
+2025-10-28 12:47:18,109 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:18,109 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:18,110 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:18,110 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:18,110 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:18,111 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:18,112 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:18,134 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:18,186 - src.core.cfa - INFO - Optimal solution found: objective = 7291949.0
+2025-10-28 12:47:18,186 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:18,187 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:18,187 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:18,188 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:18,188 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:18,189 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:18,194 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:18,213 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:18,250 - src.core.cfa - INFO - Optimal solution found: objective = 7195677.0
+2025-10-28 12:47:18,250 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:18,251 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:18,251 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:18,252 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:18,252 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:18,253 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:18,253 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:18,276 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:18,312 - src.core.cfa - INFO - Optimal solution found: objective = 7310677.0
+2025-10-28 12:47:18,312 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:18,313 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:18,313 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:18,313 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:18,314 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:18,314 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:18,321 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:18,344 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:18,376 - src.core.cfa - INFO - Optimal solution found: objective = 7186773.0
+2025-10-28 12:47:18,376 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:18,376 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:18,377 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:18,378 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:18,378 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:18,379 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:18,379 - src.core.cfa - INFO - Stage 1: Batch formation with 33 shipments, 1 vehicles
+2025-10-28 12:47:18,403 - src.core.cfa - INFO - Solving batch formation MIP: 33 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:18,438 - src.core.cfa - INFO - Optimal solution found: objective = 7301923.0
+2025-10-28 12:47:18,438 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:18,439 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:18,439 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:18,440 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:18,440 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:18,441 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:18,441 - src.core.cfa - INFO - Route cache: 120 hits / 18 misses (87.0% hit rate)
+2025-10-28 12:47:18,447 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:18,469 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:18,502 - src.core.cfa - INFO - Optimal solution found: objective = 7176949.0
+2025-10-28 12:47:18,502 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:18,503 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:18,503 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:18,504 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:18,504 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:18,505 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:18,505 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:18,527 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:18,562 - src.core.cfa - INFO - Optimal solution found: objective = 7291949.0
+2025-10-28 12:47:18,563 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:18,563 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:18,564 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:18,564 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:18,565 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:18,565 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:18,571 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:18,593 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:18,639 - src.core.cfa - INFO - Optimal solution found: objective = 7186473.0
+2025-10-28 12:47:18,640 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:18,640 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:18,641 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:18,641 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:18,641 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:18,642 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:18,643 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:18,666 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:18,718 - src.core.cfa - INFO - Optimal solution found: objective = 7292249.0
+2025-10-28 12:47:18,718 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:18,719 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:18,719 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:18,720 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:18,720 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:18,721 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:18,727 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:18,749 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:18,795 - src.core.cfa - INFO - Optimal solution found: objective = 7186473.0
+2025-10-28 12:47:18,795 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:18,796 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:18,796 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:18,797 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:18,797 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:18,798 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:18,798 - src.core.cfa - INFO - Stage 1: Batch formation with 34 shipments, 1 vehicles
+2025-10-28 12:47:18,822 - src.core.cfa - INFO - Solving batch formation MIP: 34 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:18,859 - src.core.cfa - INFO - Optimal solution found: objective = 7292549.0
+2025-10-28 12:47:18,859 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:18,859 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:18,860 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:18,860 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:18,861 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:18,861 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:18,867 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:18,888 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:18,922 - src.core.cfa - INFO - Optimal solution found: objective = 7186623.0
+2025-10-28 12:47:18,922 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:18,922 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:18,923 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:18,923 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:18,924 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:18,924 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:18,925 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:18,948 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:18,985 - src.core.cfa - INFO - Optimal solution found: objective = 7301623.0
+2025-10-28 12:47:18,986 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:18,986 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:18,987 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:18,987 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:18,988 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:18,988 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:18,994 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:19,017 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:19,063 - src.core.cfa - INFO - Optimal solution found: objective = 7186473.0
+2025-10-28 12:47:19,064 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:19,064 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:19,065 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:19,065 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:19,066 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:19,066 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:19,067 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:19,089 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:19,126 - src.core.cfa - INFO - Optimal solution found: objective = 7310977.0
+2025-10-28 12:47:19,127 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:19,127 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:19,128 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:19,128 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:19,128 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:19,129 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:19,130 - src.core.cfa - INFO - Route cache: 130 hits / 18 misses (87.8% hit rate)
+2025-10-28 12:47:19,135 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:19,159 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:19,188 - src.core.cfa - INFO - Optimal solution found: objective = 7186773.0
+2025-10-28 12:47:19,188 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:19,189 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:19,189 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:19,190 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:19,190 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:19,191 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:19,191 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:19,215 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:19,251 - src.core.cfa - INFO - Optimal solution found: objective = 7301773.0
+2025-10-28 12:47:19,251 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:19,251 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:19,252 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:19,252 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:19,253 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:19,253 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:19,259 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:19,281 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:19,329 - src.core.cfa - INFO - Optimal solution found: objective = 7186173.0
+2025-10-28 12:47:19,329 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:19,330 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:19,330 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:19,331 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:19,331 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:19,332 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:19,332 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:19,354 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:19,390 - src.core.cfa - INFO - Optimal solution found: objective = 7301323.0
+2025-10-28 12:47:19,391 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:19,391 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:19,392 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:19,392 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:19,393 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:19,393 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:19,399 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:19,420 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:19,468 - src.core.cfa - INFO - Optimal solution found: objective = 7176799.0
+2025-10-28 12:47:19,468 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:19,468 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:19,469 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:19,469 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:19,470 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:19,471 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:19,471 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:19,494 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:19,530 - src.core.cfa - INFO - Optimal solution found: objective = 7292249.0
+2025-10-28 12:47:19,531 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:19,531 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:19,531 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:19,532 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:19,532 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:19,533 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:19,539 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:19,562 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:19,609 - src.core.cfa - INFO - Optimal solution found: objective = 7187495.0
+2025-10-28 12:47:19,609 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:19,609 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:19,610 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:19,610 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:19,611 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:19,612 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:19,612 - src.core.cfa - INFO - Stage 1: Batch formation with 33 shipments, 1 vehicles
+2025-10-28 12:47:19,636 - src.core.cfa - INFO - Solving batch formation MIP: 33 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:19,671 - src.core.cfa - INFO - Optimal solution found: objective = 7311427.0
+2025-10-28 12:47:19,671 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:19,672 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:19,672 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:19,673 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:19,673 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:19,674 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:19,679 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:19,700 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:19,749 - src.core.cfa - INFO - Optimal solution found: objective = 7176799.0
+2025-10-28 12:47:19,749 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:19,749 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:19,750 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:19,750 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:19,751 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:19,752 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:19,752 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:19,775 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:19,811 - src.core.cfa - INFO - Optimal solution found: objective = 7301473.0
+2025-10-28 12:47:19,812 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:19,812 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:19,813 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:19,813 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:19,814 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:19,814 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:19,815 - src.core.cfa - INFO - Route cache: 140 hits / 18 misses (88.6% hit rate)
+2025-10-28 12:47:19,820 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:19,840 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:19,874 - src.core.cfa - INFO - Optimal solution found: objective = 7186173.0
+2025-10-28 12:47:19,874 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:19,875 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:19,875 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:19,875 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:19,876 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:19,877 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:19,877 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:19,901 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:19,935 - src.core.cfa - INFO - Optimal solution found: objective = 7292685.0
+2025-10-28 12:47:19,936 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:19,936 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:19,936 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:19,937 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:19,937 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:19,938 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:19,942 - src.core.cfa - INFO - OR-Tools TSP SUCCESS: 669.1 km, 9 stops
+2025-10-28 12:47:19,946 - src.core.cfa - INFO - Stage 1: Batch formation with 28 shipments, 1 vehicles
+2025-10-28 12:47:19,967 - src.core.cfa - INFO - Solving batch formation MIP: 28 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:20,015 - src.core.cfa - INFO - Optimal solution found: objective = 7195677.0
+2025-10-28 12:47:20,015 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:20,015 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:20,016 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:20,016 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:20,017 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:20,018 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:20,018 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:20,061 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:20,108 - src.core.cfa - INFO - Optimal solution found: objective = 7301473.0
+2025-10-28 12:47:20,109 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:20,109 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:20,110 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:20,110 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:20,111 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:20,112 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:20,120 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:20,143 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:20,186 - src.core.cfa - INFO - Optimal solution found: objective = 7186623.0
+2025-10-28 12:47:20,187 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:20,187 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:20,188 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:20,188 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:20,189 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:20,189 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:20,190 - src.core.cfa - INFO - Stage 1: Batch formation with 34 shipments, 1 vehicles
+2025-10-28 12:47:20,218 - src.core.cfa - INFO - Solving batch formation MIP: 34 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:20,250 - src.core.cfa - INFO - Optimal solution found: objective = 7302073.0
+2025-10-28 12:47:20,251 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:20,251 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:20,252 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:20,252 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:20,252 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:20,253 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:20,260 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:20,284 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:20,328 - src.core.cfa - INFO - Optimal solution found: objective = 7177099.0
+2025-10-28 12:47:20,329 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:20,329 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:20,330 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:20,330 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:20,330 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:20,331 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:20,332 - src.core.cfa - INFO - Stage 1: Batch formation with 34 shipments, 1 vehicles
+2025-10-28 12:47:20,357 - src.core.cfa - INFO - Solving batch formation MIP: 34 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:20,407 - src.core.cfa - INFO - Optimal solution found: objective = 7292549.0
+2025-10-28 12:47:20,408 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:20,408 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:20,409 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:20,409 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:20,410 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:20,410 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:20,416 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:20,437 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:20,486 - src.core.cfa - INFO - Optimal solution found: objective = 7176949.0
+2025-10-28 12:47:20,486 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:20,487 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:20,487 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:20,488 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:20,488 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:20,489 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:20,489 - src.core.cfa - INFO - Stage 1: Batch formation with 33 shipments, 1 vehicles
+2025-10-28 12:47:20,514 - src.core.cfa - INFO - Solving batch formation MIP: 33 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:20,549 - src.core.cfa - INFO - Optimal solution found: objective = 7311427.0
+2025-10-28 12:47:20,550 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:20,550 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:20,551 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:20,551 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:20,552 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:20,553 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:20,559 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:20,583 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:20,627 - src.core.cfa - INFO - Optimal solution found: objective = 7177099.0
+2025-10-28 12:47:20,628 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:20,628 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:20,629 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:20,629 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:20,629 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:20,630 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:20,631 - src.core.cfa - INFO - Route cache: 150 hits / 19 misses (88.8% hit rate)
+2025-10-28 12:47:20,631 - src.core.cfa - INFO - Stage 1: Batch formation with 34 shipments, 1 vehicles
+2025-10-28 12:47:20,655 - src.core.cfa - INFO - Solving batch formation MIP: 34 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:20,690 - src.core.cfa - INFO - Optimal solution found: objective = 7302073.0
+2025-10-28 12:47:20,691 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:20,691 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:20,691 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:20,692 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:20,692 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:20,693 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:20,698 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:20,722 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:20,768 - src.core.cfa - INFO - Optimal solution found: objective = 7176949.0
+2025-10-28 12:47:20,768 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:20,769 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:20,769 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:20,770 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:20,770 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:20,771 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:20,772 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:20,793 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:20,832 - src.core.cfa - INFO - Optimal solution found: objective = 7301623.0
+2025-10-28 12:47:20,832 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:20,832 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:20,833 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:20,833 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:20,834 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:20,835 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:20,840 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:20,863 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:20,910 - src.core.cfa - INFO - Optimal solution found: objective = 7176799.0
+2025-10-28 12:47:20,911 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:20,911 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:20,912 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:20,912 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:20,912 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:20,913 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:20,914 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:20,935 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:20,972 - src.core.cfa - INFO - Optimal solution found: objective = 7291799.0
+2025-10-28 12:47:20,973 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:20,973 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:20,974 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:20,974 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:20,974 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:20,975 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:20,981 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:21,004 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:21,036 - src.core.cfa - INFO - Optimal solution found: objective = 7177555.0
+2025-10-28 12:47:21,036 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:21,037 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:21,037 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:21,037 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:21,038 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:21,038 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:21,039 - src.core.cfa - INFO - Stage 1: Batch formation with 34 shipments, 1 vehicles
+2025-10-28 12:47:21,064 - src.core.cfa - INFO - Solving batch formation MIP: 34 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:21,115 - src.core.cfa - INFO - Optimal solution found: objective = 7292549.0
+2025-10-28 12:47:21,116 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:21,116 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:21,117 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:21,118 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:21,118 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:21,121 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:21,129 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:21,151 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:21,193 - src.core.cfa - INFO - Optimal solution found: objective = 7177099.0
+2025-10-28 12:47:21,194 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:21,194 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:21,195 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:21,195 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:21,195 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:21,196 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:21,197 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:21,220 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:21,256 - src.core.cfa - INFO - Optimal solution found: objective = 7292249.0
+2025-10-28 12:47:21,256 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:21,256 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:21,257 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:21,257 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:21,258 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:21,258 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:21,264 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:21,287 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:21,334 - src.core.cfa - INFO - Optimal solution found: objective = 7177099.0
+2025-10-28 12:47:21,335 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:21,335 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:21,336 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:21,336 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:21,336 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:21,337 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:21,338 - src.core.cfa - INFO - Route cache: 160 hits / 19 misses (89.4% hit rate)
+2025-10-28 12:47:21,338 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:21,361 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:21,397 - src.core.cfa - INFO - Optimal solution found: objective = 7301773.0
+2025-10-28 12:47:21,397 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:21,398 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:21,398 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:21,399 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:21,399 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:21,400 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:21,405 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:21,426 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:21,462 - src.core.cfa - INFO - Optimal solution found: objective = 7186473.0
+2025-10-28 12:47:21,462 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:21,463 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:21,463 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:21,463 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:21,464 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:21,464 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:21,465 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:21,486 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:21,522 - src.core.cfa - INFO - Optimal solution found: objective = 7301623.0
+2025-10-28 12:47:21,523 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:21,523 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:21,524 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:21,524 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:21,525 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:21,525 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:21,530 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:21,552 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:21,601 - src.core.cfa - INFO - Optimal solution found: objective = 7176949.0
+2025-10-28 12:47:21,601 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:21,601 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:21,602 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:21,602 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:21,603 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:21,604 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:21,604 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:21,626 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:21,664 - src.core.cfa - INFO - Optimal solution found: objective = 7292099.0
+2025-10-28 12:47:21,664 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:21,665 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:21,665 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:21,666 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:21,666 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:21,667 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:21,673 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:21,697 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:21,741 - src.core.cfa - INFO - Optimal solution found: objective = 7186473.0
+2025-10-28 12:47:21,741 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:21,742 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:21,742 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:21,743 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:21,743 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:21,744 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:21,745 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:21,768 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:21,804 - src.core.cfa - INFO - Optimal solution found: objective = 7292099.0
+2025-10-28 12:47:21,805 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:21,805 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:21,806 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:21,806 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:21,806 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:21,807 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:21,813 - src.core.cfa - INFO - Stage 1: Batch formation with 34 shipments, 1 vehicles
+2025-10-28 12:47:21,837 - src.core.cfa - INFO - Solving batch formation MIP: 34 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:21,866 - src.core.cfa - INFO - Optimal solution found: objective = 7187073.0
+2025-10-28 12:47:21,867 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:21,867 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:21,868 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:21,868 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:21,869 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:21,869 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:21,870 - src.core.cfa - INFO - Stage 1: Batch formation with 36 shipments, 1 vehicles
+2025-10-28 12:47:21,896 - src.core.cfa - INFO - Solving batch formation MIP: 36 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:21,929 - src.core.cfa - INFO - Optimal solution found: objective = 7302373.0
+2025-10-28 12:47:21,929 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:21,930 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:21,930 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:21,930 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:21,931 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:21,932 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:21,937 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:21,960 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:21,991 - src.core.cfa - INFO - Optimal solution found: objective = 7186473.0
+2025-10-28 12:47:21,992 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:21,992 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:21,993 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:21,993 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:21,994 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:21,995 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:21,996 - src.core.cfa - INFO - Route cache: 170 hits / 19 misses (89.9% hit rate)
+2025-10-28 12:47:21,996 - src.core.cfa - INFO - Stage 1: Batch formation with 33 shipments, 1 vehicles
+2025-10-28 12:47:22,021 - src.core.cfa - INFO - Solving batch formation MIP: 33 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:22,053 - src.core.cfa - INFO - Optimal solution found: objective = 7301923.0
+2025-10-28 12:47:22,054 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:22,054 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:22,055 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:22,055 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:22,056 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:22,056 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:22,062 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:22,086 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:22,132 - src.core.cfa - INFO - Optimal solution found: objective = 7177249.0
+2025-10-28 12:47:22,132 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:22,133 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:22,133 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:22,134 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:22,134 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:22,135 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:22,136 - src.core.cfa - INFO - Stage 1: Batch formation with 35 shipments, 1 vehicles
+2025-10-28 12:47:22,162 - src.core.cfa - INFO - Solving batch formation MIP: 35 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:22,194 - src.core.cfa - INFO - Optimal solution found: objective = 7302223.0
+2025-10-28 12:47:22,195 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:22,195 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:22,196 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:22,196 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:22,197 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:22,197 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:22,202 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:22,223 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:22,273 - src.core.cfa - INFO - Optimal solution found: objective = 7176799.0
+2025-10-28 12:47:22,273 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:22,274 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:22,274 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:22,275 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:22,275 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:22,276 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:22,277 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:22,298 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:22,335 - src.core.cfa - INFO - Optimal solution found: objective = 7301473.0
+2025-10-28 12:47:22,335 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:22,336 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:22,336 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:22,336 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:22,337 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:22,338 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:22,343 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:22,365 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:22,413 - src.core.cfa - INFO - Optimal solution found: objective = 7186323.0
+2025-10-28 12:47:22,414 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:22,414 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:22,414 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:22,415 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:22,415 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:22,416 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:22,416 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:22,439 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:22,476 - src.core.cfa - INFO - Optimal solution found: objective = 7301473.0
+2025-10-28 12:47:22,477 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:22,477 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:22,478 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:22,478 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:22,478 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:22,479 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:22,485 - src.core.cfa - INFO - Stage 1: Batch formation with 30 shipments, 1 vehicles
+2025-10-28 12:47:22,506 - src.core.cfa - INFO - Solving batch formation MIP: 30 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:22,539 - src.core.cfa - INFO - Optimal solution found: objective = 7176949.0
+2025-10-28 12:47:22,540 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:22,540 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:22,541 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:22,541 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:22,541 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:22,542 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:22,543 - src.core.cfa - INFO - Stage 1: Batch formation with 32 shipments, 1 vehicles
+2025-10-28 12:47:22,566 - src.core.cfa - INFO - Solving batch formation MIP: 32 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:22,602 - src.core.cfa - INFO - Optimal solution found: objective = 7292249.0
+2025-10-28 12:47:22,602 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:22,603 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:22,603 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:22,604 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:22,604 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:22,605 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:22,610 - src.core.cfa - INFO - Stage 1: Batch formation with 29 shipments, 1 vehicles
+2025-10-28 12:47:22,631 - src.core.cfa - INFO - Solving batch formation MIP: 29 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:22,665 - src.core.cfa - INFO - Optimal solution found: objective = 7186323.0
+2025-10-28 12:47:22,666 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:22,666 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:22,667 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:22,667 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:22,667 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:22,668 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:22,668 - src.core.cfa - INFO - Route cache: 180 hits / 19 misses (90.5% hit rate)
+2025-10-28 12:47:22,669 - src.core.cfa - INFO - Stage 1: Batch formation with 31 shipments, 1 vehicles
+2025-10-28 12:47:22,692 - src.core.cfa - INFO - Solving batch formation MIP: 31 shipments, 1 vehicles, 5 max batches
+2025-10-28 12:47:22,728 - src.core.cfa - INFO - Optimal solution found: objective = 7301623.0
+2025-10-28 12:47:22,729 - src.core.cfa - INFO - DEBUG: Checking solution extraction:
+2025-10-28 12:47:22,729 - src.core.cfa - INFO -   Batch usage (y): [0, 0, 0, 0, 1]
+2025-10-28 12:47:22,730 - src.core.cfa - INFO -   Batch 4: found 5 shipments
+2025-10-28 12:47:22,731 - src.core.cfa - INFO -   Batch 4: assigned to vehicle VEH003
+2025-10-28 12:47:22,731 - src.core.cfa - INFO - Extracted 1 batches from solution
+2025-10-28 12:47:22,732 - src.core.cfa - INFO - Stage 2: Route sequencing for 1 batches
+2025-10-28 12:47:22,735 - src.core.decision_engine - INFO - Decision: dla -> WAIT (confidence: 0.90)
+2025-10-28 12:47:22,831 - src.core.decision_engine - INFO - Cycle completed in 15111.5ms | Reward: -10.0 | TD Error: -21.51
+2025-10-28 12:47:22,839 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 28 waiting

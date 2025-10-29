@@ -11,49 +11,259 @@ import {
   Clock,
   TrendingUp,
   Activity,
-  Settings,
+  MapPin,
+  ArrowRight,
 } from "lucide-react";
 import "./App.css";
 
 const API_BASE = "/api";
 
 // ============================================================================
-// KENYAN LOCATIONS FOR TESTING
+// REALISTIC SENGA LOCATIONS - NAIROBI PICKUPS + NATIONWIDE DESTINATIONS
 // ============================================================================
-const KENYAN_LOCATIONS = [
-  { name: "Nairobi CBD", lat: -1.286389, lon: 36.817223 },
-  { name: "Westlands", lat: -1.266667, lon: 36.805 },
-  { name: "Industrial Area", lat: -1.322, lon: 36.847 },
-  { name: "Nakuru", lat: -0.303099, lon: 36.066667 },
-  { name: "Eldoret", lat: 0.514277, lon: 35.269779 },
-  { name: "Kisumu", lat: -0.091702, lon: 34.767956 },
-  { name: "Mombasa", lat: -4.04374, lon: 39.668207 },
-  { name: "Thika", lat: -1.033333, lon: 37.083333 },
+
+const NAIROBI_PICKUP_HUBS = [
+  {
+    id: "NBO_CBD",
+    name: "CBD - Kenyatta Avenue",
+    lat: -1.2864,
+    lon: 36.8172,
+    type: "commercial",
+  },
+  {
+    id: "NBO_WEST",
+    name: "Westlands - Sarit Centre",
+    lat: -1.2636,
+    lon: 36.8053,
+    type: "commercial",
+  },
+  {
+    id: "NBO_IND",
+    name: "Industrial Area - Enterprise Rd",
+    lat: -1.3229,
+    lon: 36.8467,
+    type: "warehouse",
+  },
+  {
+    id: "NBO_UPPER",
+    name: "Upperhill - Britam Tower",
+    lat: -1.2921,
+    lon: 36.8219,
+    type: "commercial",
+  },
+  {
+    id: "NBO_EAST",
+    name: "Eastleigh - 1st Avenue",
+    lat: -1.2816,
+    lon: 36.8469,
+    type: "commercial",
+  },
+  {
+    id: "NBO_KILIM",
+    name: "Kilimani - Yaya Centre",
+    lat: -1.2896,
+    lon: 36.7823,
+    type: "commercial",
+  },
+];
+
+const KENYA_DESTINATIONS = [
+  // Coastal Lane (Mombasa Road)
+  {
+    id: "MSA_NYA",
+    name: "Mombasa - Nyali",
+    lat: -4.0435,
+    lon: 39.7292,
+    distance_km: 480,
+    lane: "coastal",
+  },
+  {
+    id: "MSA_CBD",
+    name: "Mombasa - CBD",
+    lat: -4.0435,
+    lon: 39.6682,
+    distance_km: 480,
+    lane: "coastal",
+  },
+  {
+    id: "MSA_LIK",
+    name: "Mombasa - Likoni",
+    lat: -4.0832,
+    lon: 39.6668,
+    distance_km: 490,
+    lane: "coastal",
+  },
+  {
+    id: "VOI",
+    name: "Voi",
+    lat: -3.3967,
+    lon: 38.5564,
+    distance_km: 340,
+    lane: "coastal",
+  },
+  {
+    id: "MAR",
+    name: "Mariakani",
+    lat: -3.8572,
+    lon: 39.4748,
+    distance_km: 400,
+    lane: "coastal",
+  },
+  {
+    id: "MAL",
+    name: "Malindi",
+    lat: -3.2175,
+    lon: 40.1169,
+    distance_km: 550,
+    lane: "coastal",
+  },
+
+  // Western Lane (Nakuru-Eldoret-Kisumu)
+  {
+    id: "NAK_TWN",
+    name: "Nakuru - Town",
+    lat: -0.3031,
+    lon: 36.08,
+    distance_km: 160,
+    lane: "western",
+  },
+  {
+    id: "NAK_IND",
+    name: "Nakuru - Industrial",
+    lat: -0.2827,
+    lon: 36.0664,
+    distance_km: 165,
+    lane: "western",
+  },
+  {
+    id: "NAI",
+    name: "Naivasha",
+    lat: -0.7167,
+    lon: 36.4333,
+    distance_km: 90,
+    lane: "western",
+  },
+  {
+    id: "ELD_TWN",
+    name: "Eldoret - Town",
+    lat: 0.5143,
+    lon: 35.2698,
+    distance_km: 310,
+    lane: "western",
+  },
+  {
+    id: "ELD_IND",
+    name: "Eldoret - Industrial",
+    lat: 0.5287,
+    lon: 35.2415,
+    distance_km: 315,
+    lane: "western",
+  },
+  {
+    id: "KIS_TWN",
+    name: "Kisumu - Town",
+    lat: -0.0917,
+    lon: 34.768,
+    distance_km: 350,
+    lane: "western",
+  },
+  {
+    id: "KIT",
+    name: "Kitale",
+    lat: 1.0157,
+    lon: 35.0062,
+    distance_km: 380,
+    lane: "western",
+  },
+
+  // Northern Lane (Thika-Nanyuki-Isiolo)
+  {
+    id: "THK",
+    name: "Thika",
+    lat: -1.0332,
+    lon: 37.069,
+    distance_km: 42,
+    lane: "northern",
+  },
+  {
+    id: "MUR",
+    name: "Murang'a",
+    lat: -0.7167,
+    lon: 37.15,
+    distance_km: 75,
+    lane: "northern",
+  },
+  {
+    id: "NYE",
+    name: "Nyeri",
+    lat: -0.4167,
+    lon: 36.95,
+    distance_km: 150,
+    lane: "northern",
+  },
+  {
+    id: "NAN",
+    name: "Nanyuki",
+    lat: -0.0167,
+    lon: 37.0667,
+    distance_km: 200,
+    lane: "northern",
+  },
+  {
+    id: "ISI",
+    name: "Isiolo",
+    lat: 0.3542,
+    lon: 37.5833,
+    distance_km: 285,
+    lane: "northern",
+  },
+  {
+    id: "MER",
+    name: "Meru",
+    lat: 0.05,
+    lon: 37.65,
+    distance_km: 230,
+    lane: "northern",
+  },
+  {
+    id: "EMB",
+    name: "Embu",
+    lat: -0.5333,
+    lon: 37.45,
+    distance_km: 120,
+    lane: "northern",
+  },
 ];
 
 // ============================================================================
 // MAIN APP COMPONENT
 // ============================================================================
+
 export default function App() {
   // System state
   const [systemStatus, setSystemStatus] = useState(null);
   const [apiOnline, setApiOnline] = useState(false);
 
-  // Simulation state
-  const [simulatorRunning, setSimulatorRunning] = useState(false);
-  const [orderRate, setOrderRate] = useState(2); // orders per minute
-  const [cycleInterval, setCycleInterval] = useState(10); // minutes
-
-  // Data state
+  // Workflow state
   const [pendingOrders, setPendingOrders] = useState([]);
-  const [activeRoutes, setActiveRoutes] = useState([]);
-  const [recentCycles, setRecentCycles] = useState([]);
+  const [consolidationQueue, setConsolidationQueue] = useState([]);
+  const [dispatchedRoutes, setDispatchedRoutes] = useState([]);
+  const [inTransitRoutes, setInTransitRoutes] = useState([]);
+  const [completedRoutes, setCompletedRoutes] = useState([]);
+
+  // Learning state
   const [learningMetrics, setLearningMetrics] = useState(null);
-  const [eventLog, setEventLog] = useState([]);
+  const [performanceHistory, setPerformanceHistory] = useState([]);
+
+  // Simulation controls
+  const [simulatorRunning, setSimulatorRunning] = useState(false);
+  const [orderRate, setOrderRate] = useState(3); // orders per minute
+  const [consolidationInterval, setConsolidationInterval] = useState(5); // minutes
+  const [transitSimSpeed, setTransitSimSpeed] = useState(10); // seconds per hour simulated
 
   // UI state
-  const [activeTab, setActiveTab] = useState("simulator");
-  const [showOrderForm, setShowOrderForm] = useState(false);
+  const [activeTab, setActiveTab] = useState("workflow");
+  const [eventLog, setEventLog] = useState([]);
 
   // ============================================================================
   // API CALLS
@@ -87,6 +297,7 @@ export default function App() {
       const response = await fetch(`${API_BASE}/orders/pending`);
       if (response.ok) {
         const data = await response.json();
+        // Backend returns array of OrderResponse objects directly
         setPendingOrders(Array.isArray(data) ? data : []);
       }
     } catch (error) {
@@ -99,7 +310,8 @@ export default function App() {
       const response = await fetch(`${API_BASE}/routes/active`);
       if (response.ok) {
         const data = await response.json();
-        setActiveRoutes(data.routes || []);
+        // Backend returns array directly
+        setInTransitRoutes(Array.isArray(data) ? data : []);
       }
     } catch (error) {
       console.error("Failed to fetch active routes:", error);
@@ -112,16 +324,23 @@ export default function App() {
       if (response.ok) {
         const data = await response.json();
         setLearningMetrics(data);
+
+        // Track performance history
+        if (data.avg_reward) {
+          setPerformanceHistory((prev) => [
+            ...prev.slice(-99),
+            data.avg_reward,
+          ]);
+        }
       }
     } catch (error) {
       console.error("Failed to fetch learning metrics:", error);
     }
   }, []);
 
-  // Event logging - Memoized to prevent re-renders breaking intervals
   const addEvent = useCallback((type, message, level = "info") => {
     const event = {
-      id: Date.now(),
+      id: Date.now() + Math.random(),
       timestamp: new Date().toISOString(),
       type,
       message,
@@ -130,10 +349,87 @@ export default function App() {
     setEventLog((prev) => [event, ...prev].slice(0, 100));
   }, []);
 
-  // CREATE ORDER
+  // ============================================================================
+  // ORDER GENERATION - REALISTIC SENGA PATTERNS
+  // ============================================================================
+
+  const generateRealisticOrder = useCallback(() => {
+    // Pick random Nairobi pickup hub
+    const pickup =
+      NAIROBI_PICKUP_HUBS[
+        Math.floor(Math.random() * NAIROBI_PICKUP_HUBS.length)
+      ];
+
+    // Pick destination - weighted towards common lanes
+    const laneWeights = {
+      coastal: 0.4, // 40% to coast (Mombasa is major destination)
+      western: 0.35, // 35% to western (Nakuru/Eldoret corridor)
+      northern: 0.25, // 25% to north (Thika/Nyeri/Meru)
+    };
+
+    const rand = Math.random();
+    let selectedLane;
+    if (rand < 0.4) selectedLane = "coastal";
+    else if (rand < 0.75) selectedLane = "western";
+    else selectedLane = "northern";
+
+    const laneDestinations = KENYA_DESTINATIONS.filter(
+      (d) => d.lane === selectedLane
+    );
+    const destination =
+      laneDestinations[Math.floor(Math.random() * laneDestinations.length)];
+
+    // Realistic package weights - weighted towards common sizes
+    const weights = [50, 100, 150, 200, 250, 300, 500, 750, 1000];
+    const weightProbs = [0.15, 0.2, 0.15, 0.15, 0.1, 0.1, 0.08, 0.05, 0.02];
+
+    let cumProb = 0;
+    const randWeight = Math.random();
+    let selectedWeight = weights[0];
+
+    for (let i = 0; i < weights.length; i++) {
+      cumProb += weightProbs[i];
+      if (randWeight <= cumProb) {
+        selectedWeight = weights[i];
+        break;
+      }
+    }
+
+    // Priority distribution - mostly standard
+    const priorities = [
+      "standard",
+      "standard",
+      "standard",
+      "urgent",
+      "emergency",
+    ];
+    const priority = priorities[Math.floor(Math.random() * priorities.length)];
+
+    return {
+      customer_name: `Customer ${Math.floor(Math.random() * 1000)}`,
+      customer_phone: `+254${Math.floor(
+        Math.random() * 900000000 + 100000000
+      )}`,
+      pickup_location: {
+        address: pickup.name,
+        latitude: pickup.lat,
+        longitude: pickup.lon,
+      },
+      delivery_location: {
+        address: destination.name,
+        latitude: destination.lat,
+        longitude: destination.lon,
+      },
+      package_weight: selectedWeight,
+      volume_m3: parseFloat(
+        (selectedWeight / 200 + Math.random() * 0.5).toFixed(2)
+      ),
+      priority: priority,
+    };
+  }, []);
+
   const createOrder = useCallback(
     async (orderData) => {
-      console.log("Creating order:", orderData);
       try {
         const response = await fetch(`${API_BASE}/orders`, {
           method: "POST",
@@ -145,27 +441,33 @@ export default function App() {
           const result = await response.json();
           addEvent(
             "order_created",
-            `Order ${result.order_id} created`,
+            `Order ${result.order_id} created: ${orderData.pickup_location.address} → ${orderData.delivery_location.address}`,
             "success"
           );
           await fetchPendingOrders();
           return result;
         } else {
-          const errorText = await response.text();
-          addEvent("error", `Failed to create order: ${errorText}`, "error");
+          const error = await response.text();
+          addEvent("order_failed", `Failed to create order: ${error}`, "error");
         }
       } catch (error) {
-        addEvent("error", `API Error: ${error.message}`, "error");
+        addEvent(
+          "order_error",
+          `Order creation error: ${error.message}`,
+          "error"
+        );
       }
     },
-    [fetchPendingOrders, addEvent]
+    [addEvent, fetchPendingOrders]
   );
 
-  // TRIGGER CONSOLIDATION CYCLE
-  const triggerConsolidationCycle = useCallback(async () => {
-    console.log("Triggering consolidation cycle");
+  // ============================================================================
+  // CONSOLIDATION & DISPATCH
+  // ============================================================================
+
+  const triggerConsolidation = useCallback(async () => {
     try {
-      addEvent("cycle_start", "Triggering consolidation cycle...", "info");
+      addEvent("consolidation_start", "Running consolidation cycle...", "info");
 
       const response = await fetch(
         `${API_BASE}/decisions/consolidation-cycle`,
@@ -181,106 +483,106 @@ export default function App() {
 
       if (response.ok) {
         const result = await response.json();
-
         addEvent(
-          "cycle_complete",
-          `Cycle completed: ${result.function_class_used} - ${result.orders_dispatched} dispatched`,
+          "consolidation_complete",
+          `Consolidated: ${result.orders_dispatched || 0} orders, ${
+            result.batches_created || 0
+          } batches, Function: ${result.function_class_used || "N/A"}`,
           "success"
         );
 
-        setRecentCycles((prev) =>
-          [
-            {
-              timestamp: result.timestamp,
-              function_class: result.function_class_used,
-              orders_dispatched: result.orders_dispatched,
-              batches_created: result.batches_created,
-            },
-            ...prev,
-          ].slice(0, 10)
-        );
-
-        await Promise.all([
-          fetchPendingOrders(),
-          fetchActiveRoutes(),
-          fetchLearningMetrics(),
-        ]);
+        // Update queues
+        await fetchPendingOrders();
+        await fetchActiveRoutes();
+        await fetchLearningMetrics();
 
         return result;
       } else {
-        const errorText = await response.text();
-        addEvent("error", `Cycle failed: ${errorText}`, "error");
+        const error = await response.text();
+        addEvent(
+          "consolidation_failed",
+          `Consolidation failed: ${error}`,
+          "error"
+        );
       }
     } catch (error) {
-      addEvent("error", `Cycle error: ${error.message}`, "error");
+      addEvent(
+        "consolidation_error",
+        `Consolidation error: ${error.message}`,
+        "error"
+      );
     }
-  }, [fetchPendingOrders, fetchActiveRoutes, fetchLearningMetrics, addEvent]);
+  }, [addEvent, fetchPendingOrders, fetchActiveRoutes, fetchLearningMetrics]);
 
   // ============================================================================
-  // SIMULATION LOGIC
+  // ROUTE COMPLETION SIMULATION
   // ============================================================================
 
-  const generateRandomOrder = useCallback(() => {
-    let pickup, delivery;
-    let attempts = 0;
-    do {
-      pickup =
-        KENYAN_LOCATIONS[Math.floor(Math.random() * KENYAN_LOCATIONS.length)];
-      delivery =
-        KENYAN_LOCATIONS[Math.floor(Math.random() * KENYAN_LOCATIONS.length)];
-      attempts++;
-    } while (pickup.name === delivery.name && attempts < 10);
+  const simulateRouteCompletion = useCallback(
+    async (route) => {
+      // Simulate route completion with realistic outcomes
+      const baseDeliveryTime = route.estimated_duration_hours || 5;
+      const actualTime = baseDeliveryTime * (0.9 + Math.random() * 0.3);
 
-    if (pickup.name === delivery.name) {
-      pickup = KENYAN_LOCATIONS[0];
-      delivery = KENYAN_LOCATIONS[1];
-    }
+      const baseCost = route.estimated_cost || route.total_cost || 15000;
+      const actualCost = baseCost * (0.85 + Math.random() * 0.25);
 
-    const weights = [100, 250, 500, 750, 1000];
-    const priorities = ["standard", "standard", "urgent"];
+      const shipmentCount = route.shipment_ids?.length || 0;
+      const successRate = 0.9 + Math.random() * 0.1;
 
-    return {
-      customer_name: `Customer ${Math.floor(Math.random() * 100)}`,
-      customer_phone: `+254${Math.floor(
-        Math.random() * 900000000 + 100000000
-      )}`,
-      pickup_location: {
-        address: pickup.name,
-        latitude: pickup.lat,
-        longitude: pickup.lon,
-      },
-      delivery_location: {
-        address: delivery.name,
-        latitude: delivery.lat,
-        longitude: delivery.lon,
-      },
-      package_weight: weights[Math.floor(Math.random() * weights.length)],
-      volume_m3: parseFloat((Math.random() * 2 + 0.5).toFixed(2)),
-      priority: priorities[Math.floor(Math.random() * priorities.length)],
-    };
-  }, []);
+      const outcome = {
+        route_id: route.id,
+        completed_at: new Date().toISOString(),
+        shipments_delivered: Math.floor(shipmentCount * successRate),
+        total_shipments: shipmentCount,
+        actual_cost: actualCost,
+        predicted_cost: baseCost,
+        actual_duration_hours: actualTime,
+        predicted_duration_hours: baseDeliveryTime,
+        utilization: route.utilization_weight || 0.75,
+        sla_compliance: successRate >= 0.95,
+        delays: [],
+        issues: [],
+      };
 
-  const startSimulator = () => {
-    setSimulatorRunning(true);
-    addEvent("simulator_start", "Simulator started", "info");
-  };
+      try {
+        const response = await fetch(
+          `${API_BASE}/routes/${route.id}/complete`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(outcome),
+          }
+        );
 
-  const stopSimulator = () => {
-    setSimulatorRunning(false);
-    addEvent("simulator_stop", "Simulator stopped", "info");
-  };
+        if (response.ok) {
+          addEvent(
+            "route_completed",
+            `Route ${route.id} completed: ${outcome.shipments_delivered}/${outcome.total_shipments} delivered`,
+            outcome.sla_compliance ? "success" : "warning"
+          );
 
-  const resetSimulation = async () => {
-    stopSimulator();
-    setPendingOrders([]);
-    setActiveRoutes([]);
-    setRecentCycles([]);
-    setEventLog([]);
-    addEvent("simulator_reset", "Simulation reset", "info");
-  };
+          setInTransitRoutes((prev) => prev.filter((r) => r.id !== route.id));
+          setCompletedRoutes((prev) => [
+            ...prev.slice(-19),
+            { ...route, ...outcome },
+          ]);
+
+          await fetchLearningMetrics();
+        }
+      } catch (error) {
+        addEvent(
+          "route_completion_error",
+          `Failed to complete route ${route.id}: ${error.message}`,
+          "error"
+        );
+      }
+    },
+    [addEvent, fetchLearningMetrics]
+  );
 
   // ============================================================================
-  // SIMULATION LOOPS (FIXED)
+  // SIMULATION LOOPS
   // ============================================================================
 
   // Order generation loop
@@ -290,8 +592,7 @@ export default function App() {
     const intervalMs = (60 / orderRate) * 1000;
 
     const generate = async () => {
-      console.log("Generating order...");
-      const order = generateRandomOrder();
+      const order = generateRealisticOrder();
       await createOrder(order);
     };
 
@@ -299,22 +600,70 @@ export default function App() {
 
     const interval = setInterval(generate, intervalMs);
     return () => clearInterval(interval);
-  }, [simulatorRunning, orderRate, generateRandomOrder, createOrder]);
+  }, [simulatorRunning, orderRate, generateRealisticOrder, createOrder]);
 
-  // Auto-consolidation loop
+  // Consolidation loop
   useEffect(() => {
     if (!simulatorRunning) return;
 
+    const intervalMs = consolidationInterval * 60 * 1000;
+
     const consolidate = async () => {
-      console.log("Running auto consolidation...");
-      await triggerConsolidationCycle();
+      await triggerConsolidation();
     };
 
-    consolidate(); // Immediate first cycle
+    consolidate(); // Immediate first consolidation
 
-    const interval = setInterval(consolidate, cycleInterval * 60 * 1000);
+    const interval = setInterval(consolidate, intervalMs);
     return () => clearInterval(interval);
-  }, [simulatorRunning, cycleInterval, triggerConsolidationCycle]);
+  }, [simulatorRunning, consolidationInterval, triggerConsolidation]);
+
+  // Route transit simulation loop
+  useEffect(() => {
+    if (!simulatorRunning || inTransitRoutes.length === 0) return;
+
+    const interval = setInterval(() => {
+      // Randomly complete routes (simulate transit)
+      if (inTransitRoutes.length > 0 && Math.random() < 0.3) {
+        const routeToComplete =
+          inTransitRoutes[Math.floor(Math.random() * inTransitRoutes.length)];
+        simulateRouteCompletion(routeToComplete);
+      }
+    }, transitSimSpeed * 1000);
+
+    return () => clearInterval(interval);
+  }, [
+    simulatorRunning,
+    inTransitRoutes,
+    transitSimSpeed,
+    simulateRouteCompletion,
+  ]);
+
+  // ============================================================================
+  // SIMULATION CONTROLS
+  // ============================================================================
+
+  const startSimulator = () => {
+    setSimulatorRunning(true);
+    addEvent("simulator_start", "Workflow simulator started", "info");
+  };
+
+  const stopSimulator = () => {
+    setSimulatorRunning(false);
+    addEvent("simulator_stop", "Workflow simulator stopped", "info");
+  };
+
+  const resetSimulation = async () => {
+    stopSimulator();
+    setPendingOrders([]);
+    setConsolidationQueue([]);
+    setDispatchedRoutes([]);
+    setInTransitRoutes([]);
+    setCompletedRoutes([]);
+    setEventLog([]);
+    setPerformanceHistory([]);
+    addEvent("simulator_reset", "Simulation reset", "info");
+  };
 
   // ============================================================================
   // INITIALIZATION
@@ -337,9 +686,16 @@ export default function App() {
         fetchSystemStatus();
         fetchPendingOrders();
         fetchActiveRoutes();
-      }, 5000);
+      }, 3000);
 
-      return () => clearInterval(refreshInterval);
+      const metricsInterval = setInterval(() => {
+        fetchLearningMetrics();
+      }, 10000);
+
+      return () => {
+        clearInterval(refreshInterval);
+        clearInterval(metricsInterval);
+      };
     }
   }, [
     apiOnline,
@@ -360,7 +716,6 @@ export default function App() {
         <h1>API Offline</h1>
         <p>Cannot connect to Senga SDE backend</p>
         <p>Please ensure the API is running at http://localhost:8000</p>
-        <code>python src/api/main.py</code>
       </div>
     );
   }
@@ -373,13 +728,13 @@ export default function App() {
           <div className="header-left">
             <TruckIcon size={32} />
             <div>
-              <h1>Senga Operations</h1>
-              <p>Real-time freight consolidation & routing</p>
+              <h1>Senga SDE - Learning Engine</h1>
+              <p>Real-time consolidation with closed-loop learning</p>
             </div>
           </div>
 
           <div className="header-status">
-            <StatusBadge status={systemStatus?.engine_status} />
+            <StatusBadge status={systemStatus?.engine_status || "idle"} />
             <span className="cycle-count">
               Cycle #{systemStatus?.current_cycle || 0}
             </span>
@@ -392,12 +747,6 @@ export default function App() {
         {/* Tabs */}
         <div className="tabs">
           <button
-            className={`tab ${activeTab === "simulator" ? "active" : ""}`}
-            onClick={() => setActiveTab("simulator")}
-          >
-            <Play size={16} /> Simulator
-          </button>
-          <button
             className={`tab ${activeTab === "workflow" ? "active" : ""}`}
             onClick={() => setActiveTab("workflow")}
           >
@@ -407,418 +756,465 @@ export default function App() {
             className={`tab ${activeTab === "learning" ? "active" : ""}`}
             onClick={() => setActiveTab("learning")}
           >
-            <TrendingUp size={16} /> Learning
+            <TrendingUp size={16} /> Learning Metrics
+          </button>
+          <button
+            className={`tab ${activeTab === "locations" ? "active" : ""}`}
+            onClick={() => setActiveTab("locations")}
+          >
+            <MapPin size={16} /> Locations
           </button>
         </div>
 
         {/* Tab Content */}
         <div className="tab-content">
-          {activeTab === "simulator" && (
-            <SimulatorTab
+          {activeTab === "workflow" && (
+            <WorkflowTab
               simulatorRunning={simulatorRunning}
               orderRate={orderRate}
-              cycleInterval={cycleInterval}
+              consolidationInterval={consolidationInterval}
+              transitSimSpeed={transitSimSpeed}
               onStart={startSimulator}
               onStop={stopSimulator}
               onReset={resetSimulation}
               onOrderRateChange={setOrderRate}
-              onCycleIntervalChange={setCycleInterval}
-              onCreateOrder={() => setShowOrderForm(true)}
-              onTriggerCycle={triggerConsolidationCycle}
+              onConsolidationIntervalChange={setConsolidationInterval}
+              onTransitSimSpeedChange={setTransitSimSpeed}
+              onTriggerConsolidation={triggerConsolidation}
               pendingOrders={pendingOrders}
+              inTransitRoutes={inTransitRoutes}
+              completedRoutes={completedRoutes}
               eventLog={eventLog}
-            />
-          )}
-
-          {activeTab === "workflow" && (
-            <WorkflowTab
               systemStatus={systemStatus}
-              pendingOrders={pendingOrders}
-              activeRoutes={activeRoutes}
-              recentCycles={recentCycles}
             />
           )}
 
           {activeTab === "learning" && (
             <LearningTab
               metrics={learningMetrics}
-              recentCycles={recentCycles}
+              performanceHistory={performanceHistory}
+              completedRoutes={completedRoutes}
             />
           )}
+
+          {activeTab === "locations" && <LocationsTab />}
         </div>
       </div>
-
-      {/* Manual Order Form Modal */}
-      {showOrderForm && (
-        <OrderFormModal
-          onClose={() => setShowOrderForm(false)}
-          onSubmit={createOrder}
-          locations={KENYAN_LOCATIONS}
-        />
-      )}
     </div>
   );
 }
 
 // ============================================================================
-// TAB COMPONENTS
+// WORKFLOW TAB
 // ============================================================================
 
-function SimulatorTab({
+function WorkflowTab({
   simulatorRunning,
   orderRate,
-  cycleInterval,
+  consolidationInterval,
+  transitSimSpeed,
   onStart,
   onStop,
   onReset,
   onOrderRateChange,
-  onCycleIntervalChange,
-  onCreateOrder,
-  onTriggerCycle,
+  onConsolidationIntervalChange,
+  onTransitSimSpeedChange,
+  onTriggerConsolidation,
   pendingOrders,
+  inTransitRoutes,
+  completedRoutes,
   eventLog,
-}) {
-  return (
-    <div className="simulator-tab">
-      <div className="card">
-        <h2>Simulation Controls</h2>
-
-        <div className="control-row">
-          {!simulatorRunning ? (
-            <button className="btn btn-primary btn-large" onClick={onStart}>
-              <Play size={20} /> Start Simulator
-            </button>
-          ) : (
-            <button className="btn btn-secondary btn-large" onClick={onStop}>
-              <Pause size={20} /> Stop Simulator
-            </button>
-          )}
-
-          <button
-            className="btn btn-danger"
-            onClick={onReset}
-            disabled={simulatorRunning}
-          >
-            <RotateCcw size={16} /> Reset
-          </button>
-        </div>
-
-        <div className="settings-grid">
-          <div className="setting">
-            <label>Order Generation Rate</label>
-            <div className="range-input">
-              <input
-                type="range"
-                min="1"
-                max="10"
-                value={orderRate}
-                onChange={(e) => onOrderRateChange(Number(e.target.value))}
-                disabled={simulatorRunning}
-              />
-              <span>{orderRate} orders/min</span>
-            </div>
-          </div>
-
-          <div className="setting">
-            <label>Consolidation Interval</label>
-            <div className="range-input">
-              <input
-                type="range"
-                min="1"
-                max="60"
-                value={cycleInterval}
-                onChange={(e) => onCycleIntervalChange(Number(e.target.value))}
-                disabled={simulatorRunning}
-              />
-              <span>{cycleInterval} minutes</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="manual-controls">
-          <button className="btn btn-outline" onClick={onCreateOrder}>
-            <Plus size={16} /> Create Manual Order
-          </button>
-          <button className="btn btn-outline" onClick={onTriggerCycle}>
-            <Activity size={16} /> Trigger Cycle Now
-          </button>
-        </div>
-      </div>
-
-      <div className="stats-grid">
-        <StatCard
-          icon={<PackageIcon />}
-          label="Pending Orders"
-          value={pendingOrders.length}
-          color="blue"
-        />
-        <StatCard
-          icon={<Clock />}
-          label="Avg Order Age"
-          value={calculateAvgAge(pendingOrders)}
-          suffix=" hrs"
-          color="orange"
-        />
-        <StatCard
-          icon={<TruckIcon />}
-          label="Total Weight"
-          value={calculateTotalWeight(pendingOrders)}
-          suffix=" kg"
-          color="green"
-        />
-      </div>
-
-      <div className="card">
-        <h2>Live Event Log</h2>
-        <div className="event-log">
-          {eventLog.length === 0 ? (
-            <div className="empty-state">
-              No events yet. Start the simulator to begin.
-            </div>
-          ) : (
-            eventLog.map((event) => (
-              <div key={event.id} className={`event event-${event.level}`}>
-                <span className="event-time">
-                  {new Date(event.timestamp).toLocaleTimeString()}
-                </span>
-                <span className="event-message">{event.message}</span>
-              </div>
-            ))
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function WorkflowTab({
   systemStatus,
-  pendingOrders,
-  activeRoutes,
-  recentCycles,
 }) {
   return (
     <div className="workflow-tab">
-      <div className="metrics-grid">
-        <MetricCard
-          label="Pending Shipments"
-          value={systemStatus?.pending_shipments || 0}
-        />
-        <MetricCard
-          label="Available Vehicles"
-          value={systemStatus?.available_vehicles || 0}
-        />
-        <MetricCard
-          label="Fleet Utilization"
-          value="0.0%"
-          subtitle="Capacity available"
-        />
-        <MetricCard
-          label="SLA Compliance"
-          value="0.0%"
-          subtitle="On-time deliveries"
-        />
+      {/* Simulation Controls */}
+      <div className="card">
+        <h2>Workflow Simulator</h2>
+
+        <div className="control-row">
+          {!simulatorRunning ? (
+            <button className="btn btn-success" onClick={onStart}>
+              <Play size={16} /> Start Simulator
+            </button>
+          ) : (
+            <button className="btn btn-warning" onClick={onStop}>
+              <Pause size={16} /> Stop Simulator
+            </button>
+          )}
+          <button className="btn btn-secondary" onClick={onReset}>
+            <RotateCcw size={16} /> Reset
+          </button>
+          <button className="btn btn-primary" onClick={onTriggerConsolidation}>
+            <TruckIcon size={16} /> Trigger Consolidation
+          </button>
+        </div>
+
+        <div className="controls-grid">
+          <div className="control-group">
+            <label>Order Rate (orders/min)</label>
+            <input
+              type="range"
+              min="1"
+              max="10"
+              value={orderRate}
+              onChange={(e) => onOrderRateChange(Number(e.target.value))}
+            />
+            <span>{orderRate}</span>
+          </div>
+
+          <div className="control-group">
+            <label>Consolidation Interval (min)</label>
+            <input
+              type="range"
+              min="1"
+              max="15"
+              value={consolidationInterval}
+              onChange={(e) =>
+                onConsolidationIntervalChange(Number(e.target.value))
+              }
+            />
+            <span>{consolidationInterval}</span>
+          </div>
+
+          <div className="control-group">
+            <label>Transit Speed (sec/hour)</label>
+            <input
+              type="range"
+              min="5"
+              max="30"
+              value={transitSimSpeed}
+              onChange={(e) => onTransitSimSpeedChange(Number(e.target.value))}
+            />
+            <span>{transitSimSpeed}</span>
+          </div>
+        </div>
       </div>
 
-      <div className="card">
-        <h2>Pending Shipments</h2>
-        {pendingOrders.length === 0 ? (
-          <div className="empty-state">
-            <PackageIcon size={48} />
-            <p>No pending shipments</p>
+      {/* Workflow Stages */}
+      <div className="workflow-stages">
+        <div className="stage-card">
+          <div className="stage-header">
+            <PackageIcon size={20} />
+            <h3>Pending Orders</h3>
+            <span className="stage-count">{pendingOrders.length}</span>
           </div>
-        ) : (
-          <div className="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Order ID</th>
-                  <th>Origin → Destination</th>
-                  <th>Weight</th>
-                  <th>Age</th>
-                  <th>Deadline</th>
-                  <th>Priority</th>
-                </tr>
-              </thead>
-              <tbody>
-                {pendingOrders.map((order) => {
-                  const ageHours = order.created_at
-                    ? (new Date() - new Date(order.created_at)) /
-                      (1000 * 60 * 60)
-                    : 0;
-
-                  return (
-                    <tr key={order.order_id}>
-                      <td>
-                        <code>{order.order_id?.substring(0, 8)}</code>
-                      </td>
-                      <td className="route-cell">
-                        {order.pickup_location?.address?.substring(0, 15) ||
-                          "–"}{" "}
-                        →{" "}
-                        {order.delivery_location?.address?.substring(0, 15) ||
-                          "–"}
-                      </td>
-                      <td>{order.package_weight || 0} kg</td>
-                      <td>{ageHours.toFixed(1)} hrs</td>
-                      <td>
-                        {order.deadline
-                          ? new Date(order.deadline).toLocaleDateString()
-                          : "–"}
-                      </td>
-                      <td>
-                        <span className={`badge badge-${order.priority}`}>
-                          {order.priority?.toUpperCase() || "STANDARD"}
-                        </span>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
-
-      <div className="card">
-        <h2>Recent Decisions</h2>
-        <div className="subtitle">Last 10 consolidation cycles</div>
-
-        {recentCycles.length === 0 ? (
-          <div className="empty-state">
-            <Clock size={48} />
-            <p>No cycles yet</p>
-          </div>
-        ) : (
-          <div className="decisions-list">
-            {recentCycles.map((cycle, idx) => (
-              <div key={idx} className="decision-item">
-                <div className="decision-header">
-                  <span className="decision-time">
-                    {new Date(cycle.timestamp).toLocaleTimeString()}
+          <div className="stage-content">
+            {pendingOrders.slice(0, 5).map((order) => (
+              <div key={order.order_id} className="order-item">
+                <div className="order-route">
+                  <span className="location-from">
+                    {order.pickup_location.address || "Nairobi"}
                   </span>
-                  <span className={`function-badge fc-${cycle.function_class}`}>
-                    {cycle.function_class}
+                  <ArrowRight size={14} />
+                  <span className="location-to">
+                    {order.delivery_location.address || "Destination"}
                   </span>
                 </div>
-                <div className="decision-body">
-                  <strong>{cycle.orders_dispatched}</strong> orders dispatched
-                </div>
-                <div className="decision-footer">
-                  {cycle.batches_created} batches created
+                <div className="order-meta">
+                  {order.package_weight}kg • {order.priority}
                 </div>
               </div>
             ))}
+            {pendingOrders.length > 5 && (
+              <div className="more-items">+{pendingOrders.length - 5} more</div>
+            )}
           </div>
-        )}
+        </div>
+
+        <div className="stage-card">
+          <div className="stage-header">
+            <Clock size={20} />
+            <h3>Consolidation Queue</h3>
+            <span className="stage-count">
+              {Math.min(pendingOrders.length, 8)}
+            </span>
+          </div>
+          <div className="stage-content">
+            <div className="consolidation-info">
+              Waiting for consolidation cycle...
+            </div>
+          </div>
+        </div>
+
+        <div className="stage-card">
+          <div className="stage-header">
+            <TruckIcon size={20} />
+            <h3>In Transit</h3>
+            <span className="stage-count">{inTransitRoutes.length}</span>
+          </div>
+          <div className="stage-content">
+            {inTransitRoutes.slice(0, 5).map((route) => (
+              <div key={route.id} className="route-item">
+                <div className="route-id">Route {route.id}</div>
+                <div className="route-meta">
+                  {route.shipment_ids?.length || 0} orders • Vehicle{" "}
+                  {route.vehicle_id}
+                </div>
+              </div>
+            ))}
+            {inTransitRoutes.length > 5 && (
+              <div className="more-items">
+                +{inTransitRoutes.length - 5} more
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="stage-card">
+          <div className="stage-header">
+            <CheckCircle size={20} />
+            <h3>Completed</h3>
+            <span className="stage-count">{completedRoutes.length}</span>
+          </div>
+          <div className="stage-content">
+            {completedRoutes
+              .slice(-5)
+              .reverse()
+              .map((route) => (
+                <div
+                  key={route.route_id || route.id}
+                  className="completed-item"
+                >
+                  <div className="route-id">
+                    Route {route.route_id || route.id}
+                  </div>
+                  <div className="completion-meta">
+                    {route.shipments_delivered ||
+                      route.shipment_ids?.length ||
+                      0}{" "}
+                    delivered
+                    {route.sla_compliance && (
+                      <span className="success-badge">✓ On-time</span>
+                    )}
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
       </div>
 
+      {/* Event Log */}
       <div className="card">
-        <h2>Fleet Status</h2>
-        <div className="subtitle">0 vehicles</div>
-        <div className="empty-state">
-          <TruckIcon size={48} />
-          <p>No vehicles</p>
+        <h2>Event Log</h2>
+        <div className="event-log">
+          {eventLog.slice(0, 20).map((event) => (
+            <div key={event.id} className={`event event-${event.level}`}>
+              <span className="event-time">
+                {new Date(event.timestamp).toLocaleTimeString()}
+              </span>
+              <span className="event-message">{event.message}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 }
 
-function LearningTab({ metrics, recentCycles }) {
+// ============================================================================
+// LEARNING TAB
+// ============================================================================
+
+function LearningTab({ metrics, performanceHistory, completedRoutes }) {
   if (!metrics) {
     return (
       <div className="learning-tab">
         <div className="card">
-          <div className="empty-state">
-            <TrendingUp size={48} />
-            <p>No learning metrics available yet</p>
-            <p className="subtitle">Make some routing decisions first</p>
-          </div>
+          <p>Loading learning metrics...</p>
         </div>
       </div>
     );
   }
 
+  const avgUtilization =
+    completedRoutes.length > 0
+      ? completedRoutes.reduce((sum, r) => sum + (r.utilization || 0), 0) /
+        completedRoutes.length
+      : 0;
+
+  const avgOnTimeRate =
+    completedRoutes.length > 0
+      ? completedRoutes.filter((r) => r.sla_compliance).length /
+        completedRoutes.length
+      : 0;
+
   return (
     <div className="learning-tab">
+      {/* Key Learning Indicators */}
+      <div className="metrics-grid">
+        <MetricCard
+          label="VFA Updates"
+          value={metrics.num_updates || 0}
+          subtitle="Learning iterations"
+        />
+        <MetricCard
+          label="Avg TD Error"
+          value={(metrics.avg_error || 0).toFixed(3)}
+          subtitle="Prediction accuracy"
+        />
+        <MetricCard
+          label="Convergence"
+          value={`${((metrics.convergence_score || 0) * 100).toFixed(1)}%`}
+          subtitle="Learning stability"
+        />
+        <MetricCard
+          label="Routes Completed"
+          value={completedRoutes.length}
+          subtitle="Training samples"
+        />
+      </div>
+
+      {/* Performance Metrics */}
       <div className="card">
-        <h2>Value Function Approximation (VFA)</h2>
-        <div className="metrics-row">
-          <div className="metric-box">
-            <div className="metric-label">Updates</div>
-            <div className="metric-value">{metrics.num_updates || 0}</div>
-          </div>
-          <div className="metric-box">
-            <div className="metric-label">Learning Rate</div>
-            <div className="metric-value">
-              {metrics.learning_rate?.toFixed(4) || "0.0000"}
-            </div>
-          </div>
-          <div className="metric-box">
-            <div className="metric-label">Avg TD Error</div>
-            <div className="metric-value">
-              {metrics.recent_avg_error?.toFixed(2) || "0.00"}
-            </div>
-          </div>
-          <div className="metric-box">
-            <div className="metric-label">Convergence</div>
-            <div className="metric-value">
-              {metrics.convergence_score
-                ? (metrics.convergence_score * 100).toFixed(1) + "%"
-                : "0.0%"}
-            </div>
-          </div>
+        <h2>Operational Performance</h2>
+        <div className="metrics-grid">
+          <MetricCard
+            label="Avg Utilization"
+            value={`${(avgUtilization * 100).toFixed(1)}%`}
+            subtitle="Vehicle capacity usage"
+          />
+          <MetricCard
+            label="On-Time Rate"
+            value={`${(avgOnTimeRate * 100).toFixed(1)}%`}
+            subtitle="SLA compliance"
+          />
         </div>
       </div>
-      {/* Feature Weights */}
-      {metrics.feature_weights && (
-        <div className="card">
-          <h2>Top Feature Weights</h2>
-          <div className="feature-weights">
-            {Object.entries(metrics.feature_weights)
-              .sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]))
-              .slice(0, 10)
-              .map(([feature, weight]) => (
-                <div key={feature} className="feature-row">
-                  <span className="feature-name">{feature}</span>
-                  <div className="feature-bar-container">
-                    <div
-                      className={`feature-bar ${
-                        weight >= 0 ? "positive" : "negative"
-                      }`}
-                      style={{
-                        width: `${Math.min(Math.abs(weight) * 10, 100)}%`,
-                      }}
-                    />
-                  </div>
-                  <span className="feature-weight">{weight.toFixed(3)}</span>
-                </div>
-              ))}
-          </div>
-        </div>
-      )}
 
       {/* TD Error History */}
       {metrics.td_error_history && metrics.td_error_history.length > 0 && (
         <div className="card">
           <h2>TD Error Convergence</h2>
-          <SimpleLineChart data={metrics.td_error_history} label="TD Error" />
+          <SimpleLineChart
+            data={metrics.td_error_history}
+            label="TD Error"
+            color="#dc3545"
+          />
         </div>
       )}
 
       {/* Performance History */}
-      {metrics.performance_history &&
-        metrics.performance_history.length > 0 && (
+      {performanceHistory.length > 0 && (
+        <div className="card">
+          <h2>Reward Trend</h2>
+          <SimpleLineChart
+            data={performanceHistory}
+            label="Avg Reward"
+            color="#28a745"
+          />
+        </div>
+      )}
+
+      {/* Feature Weights */}
+      {metrics.feature_weights &&
+        Object.keys(metrics.feature_weights).length > 0 && (
           <div className="card">
-            <h2>Average Reward Trend</h2>
-            <SimpleLineChart
-              data={metrics.performance_history}
-              label="Avg Reward"
-              color="#28a745"
-            />
+            <h2>Top Feature Weights (VFA)</h2>
+            <div className="feature-weights">
+              {Object.entries(metrics.feature_weights)
+                .sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]))
+                .slice(0, 10)
+                .map(([feature, weight]) => (
+                  <div key={feature} className="feature-row">
+                    <span className="feature-name">{feature}</span>
+                    <div className="feature-bar-container">
+                      <div
+                        className={`feature-bar ${
+                          weight >= 0 ? "positive" : "negative"
+                        }`}
+                        style={{
+                          width: `${Math.min(Math.abs(weight) * 10, 100)}%`,
+                        }}
+                      />
+                    </div>
+                    <span className="feature-weight">{weight.toFixed(3)}</span>
+                  </div>
+                ))}
+            </div>
           </div>
         )}
+    </div>
+  );
+}
+
+// ============================================================================
+// LOCATIONS TAB
+// ============================================================================
+
+function LocationsTab() {
+  return (
+    <div className="locations-tab">
+      <div className="card">
+        <h2>Nairobi Pickup Hubs</h2>
+        <div className="location-list">
+          {NAIROBI_PICKUP_HUBS.map((loc) => (
+            <div key={loc.id} className="location-item">
+              <MapPin size={16} />
+              <div className="location-details">
+                <div className="location-name">{loc.name}</div>
+                <div className="location-coords">
+                  {loc.lat.toFixed(4)}, {loc.lon.toFixed(4)} • {loc.type}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="card">
+        <h2>Kenya-wide Destinations</h2>
+
+        <h3>Coastal Lane (Mombasa Road)</h3>
+        <div className="location-list">
+          {KENYA_DESTINATIONS.filter((d) => d.lane === "coastal").map((loc) => (
+            <div key={loc.id} className="location-item">
+              <MapPin size={16} />
+              <div className="location-details">
+                <div className="location-name">{loc.name}</div>
+                <div className="location-coords">
+                  {loc.distance_km}km from Nairobi • {loc.lat.toFixed(4)},{" "}
+                  {loc.lon.toFixed(4)}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <h3>Western Lane (Nakuru-Eldoret-Kisumu)</h3>
+        <div className="location-list">
+          {KENYA_DESTINATIONS.filter((d) => d.lane === "western").map((loc) => (
+            <div key={loc.id} className="location-item">
+              <MapPin size={16} />
+              <div className="location-details">
+                <div className="location-name">{loc.name}</div>
+                <div className="location-coords">
+                  {loc.distance_km}km from Nairobi • {loc.lat.toFixed(4)},{" "}
+                  {loc.lon.toFixed(4)}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <h3>Northern Lane (Thika-Nyeri-Meru)</h3>
+        <div className="location-list">
+          {KENYA_DESTINATIONS.filter((d) => d.lane === "northern").map(
+            (loc) => (
+              <div key={loc.id} className="location-item">
+                <MapPin size={16} />
+                <div className="location-details">
+                  <div className="location-name">{loc.name}</div>
+                  <div className="location-coords">
+                    {loc.distance_km}km from Nairobi • {loc.lat.toFixed(4)},{" "}
+                    {loc.lon.toFixed(4)}
+                  </div>
+                </div>
+              </div>
+            )
+          )}
+        </div>
+      </div>
     </div>
   );
 }
@@ -831,6 +1227,7 @@ function StatusBadge({ status }) {
   const statusConfig = {
     idle: { color: "yellow", label: "IDLE" },
     running: { color: "green", label: "RUNNING" },
+    autonomous: { color: "blue", label: "AUTONOMOUS" },
     paused: { color: "orange", label: "PAUSED" },
     error: { color: "red", label: "ERROR" },
   };
@@ -841,21 +1238,6 @@ function StatusBadge({ status }) {
     <span className={`status-badge status-${config.color}`}>
       {config.label}
     </span>
-  );
-}
-
-function StatCard({ icon, label, value, suffix = "", color = "blue" }) {
-  return (
-    <div className={`stat-card stat-${color}`}>
-      <div className="stat-icon">{icon}</div>
-      <div className="stat-content">
-        <div className="stat-label">{label}</div>
-        <div className="stat-value">
-          {value}
-          {suffix && <span className="stat-suffix">{suffix}</span>}
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -895,220 +1277,4 @@ function SimpleLineChart({ data, label, color = "#007bff" }) {
       <div className="chart-label">{label} over time</div>
     </div>
   );
-}
-
-function OrderFormModal({ onClose, onSubmit, locations }) {
-  const [formData, setFormData] = useState({
-    customer_id: `CUST-${Math.floor(Math.random() * 1000)}`,
-    pickup_location: "",
-    delivery_location: "",
-    weight_kg: 500,
-    volume_m3: 1.5,
-    declared_value: 25000,
-    priority: "standard",
-    deadline_hours: 48,
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const now = new Date();
-    const deadline = new Date(
-      now.getTime() + formData.deadline_hours * 3600 * 1000
-    );
-
-    const order = {
-      order_id: `ORD-${Date.now()}`,
-      customer_id: formData.customer_id,
-      pickup_location: formData.pickup_location,
-      delivery_location: formData.delivery_location,
-      weight_kg: formData.weight_kg,
-      volume_m3: formData.volume_m3,
-      declared_value: formData.declared_value,
-      delivery_deadline: deadline.toISOString(),
-      priority: formData.priority,
-    };
-
-    onSubmit(order);
-    onClose();
-  };
-
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <h2>Create Manual Order</h2>
-
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Customer ID</label>
-            <input
-              type="text"
-              value={formData.customer_id}
-              onChange={(e) =>
-                setFormData({ ...formData, customer_id: e.target.value })
-              }
-              required
-            />
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label>Pickup Location</label>
-              <select
-                value={formData.pickup_location}
-                onChange={(e) =>
-                  setFormData({ ...formData, pickup_location: e.target.value })
-                }
-                required
-              >
-                <option value="">Select location...</option>
-                {locations.map((loc) => (
-                  <option key={loc.name} value={loc.name}>
-                    {loc.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label>Delivery Location</label>
-              <select
-                value={formData.delivery_location}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    delivery_location: e.target.value,
-                  })
-                }
-                required
-              >
-                <option value="">Select location...</option>
-                {locations.map((loc) => (
-                  <option key={loc.name} value={loc.name}>
-                    {loc.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label>Weight (kg)</label>
-              <input
-                type="number"
-                value={formData.weight_kg}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    weight_kg: Number(e.target.value),
-                  })
-                }
-                min="1"
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Volume (m³)</label>
-              <input
-                type="number"
-                step="0.1"
-                value={formData.volume_m3}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    volume_m3: Number(e.target.value),
-                  })
-                }
-                min="0.1"
-                required
-              />
-            </div>
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label>Declared Value (KES)</label>
-              <input
-                type="number"
-                value={formData.declared_value}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    declared_value: Number(e.target.value),
-                  })
-                }
-                min="1"
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Deadline (hours)</label>
-              <input
-                type="number"
-                value={formData.deadline_hours}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    deadline_hours: Number(e.target.value),
-                  })
-                }
-                min="1"
-                required
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label>Priority</label>
-            <select
-              value={formData.priority}
-              onChange={(e) =>
-                setFormData({ ...formData, priority: e.target.value })
-              }
-            >
-              <option value="standard">Standard</option>
-              <option value="express">Express</option>
-              <option value="emergency">Emergency</option>
-            </select>
-          </div>
-
-          <div className="form-actions">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={onClose}
-            >
-              Cancel
-            </button>
-            <button type="submit" className="btn btn-primary">
-              Create Order
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-}
-
-// ============================================================================
-// UTILITY FUNCTIONS
-// ============================================================================
-
-function calculateAvgAge(orders) {
-  if (orders.length === 0) return 0;
-  // Calculate age from created_at
-  const now = new Date();
-  const sum = orders.reduce((acc, order) => {
-    const createdAt = new Date(order.created_at);
-    const ageHours = (now - createdAt) / (1000 * 60 * 60);
-    return acc + ageHours;
-  }, 0);
-  return (sum / orders.length).toFixed(1);
-}
-
-function calculateTotalWeight(orders) {
-  return orders.reduce((acc, order) => acc + (order.package_weight || 0), 0);
 }

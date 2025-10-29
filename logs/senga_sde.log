@@ -1,97 +1,331 @@
-2025-10-29 14:31:33,238 - src.api.main - INFO - ============================================================
-2025-10-29 14:31:33,241 - src.api.main - INFO - Starting Senga Sequential Decision Engine
-2025-10-29 14:31:33,242 - src.api.main - INFO - ============================================================
-2025-10-29 14:31:33,262 - src.api.main - INFO -  Configuration loaded
-2025-10-29 14:31:33,265 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:33,266 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:33,266 - src.api.main - INFO -  State Manager initialized with persistent storage
-2025-10-29 14:31:33,269 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:33,269 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:33,272 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:33,273 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:33,276 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:33,276 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:33,277 - src.core.pfa - INFO - Initialized fresh PFA weights (theta shape: (35,))
-2025-10-29 14:31:33,277 - src.core.pfa - INFO - PFA initialized with 35 features
-2025-10-29 14:31:33,277 - src.core.pfa - INFO - Policy parameters theta shape: (35,)
-2025-10-29 14:31:33,278 - src.core.cfa - INFO - CFA initialized with real MIP optimization
-2025-10-29 14:31:33,281 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:33,282 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:33,283 - src.core.cfa - INFO - CFA initialized with real MIP optimization
-2025-10-29 14:31:33,286 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:33,286 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:33,287 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
-2025-10-29 14:31:33,290 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:33,290 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:33,291 - src.core.cfa - INFO - CFA initialized with real MIP optimization
-2025-10-29 14:31:33,293 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:33,294 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:33,294 - src.core.cfa - INFO - CFA initialized with real MIP optimization
-2025-10-29 14:31:33,297 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:33,297 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:33,299 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
-2025-10-29 14:31:36,768 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
-2025-10-29 14:31:36,770 - src.core.decision_engine - INFO - Decision Engine initialized
-2025-10-29 14:31:36,771 - src.api.main - INFO -  Decision Engine initialized
-2025-10-29 14:31:36,772 - src.api.main - INFO -  Loaded 5 pending orders from database
-2025-10-29 14:31:36,772 - src.api.main - INFO - ============================================================
-2025-10-29 14:31:36,773 - src.api.main - INFO - Senga SDE Ready
-2025-10-29 14:31:36,773 - src.api.main - INFO - ============================================================
-2025-10-29 14:31:36,773 - src.api.main - INFO - ============================================================
-2025-10-29 14:31:36,774 - src.api.main - INFO - Starting Senga Sequential Decision Engine
-2025-10-29 14:31:36,774 - src.api.main - INFO - ============================================================
-2025-10-29 14:31:36,774 - src.api.main - INFO -  Configuration loaded
-2025-10-29 14:31:36,777 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:36,778 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:36,778 - src.api.main - INFO -  State Manager initialized
-2025-10-29 14:31:38,456 - src.integrations.external_systems - INFO - Google Places API: Online
-2025-10-29 14:31:38,467 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
-2025-10-29 14:31:38,469 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
-2025-10-29 14:31:38,471 - src.integrations.external_systems - INFO - Integration Manager initialized
-2025-10-29 14:31:38,472 - src.api.main - INFO -  Integration Manager initialized
-2025-10-29 14:31:38,478 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:38,479 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:38,485 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:38,486 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:38,492 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:38,493 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:38,495 - src.core.pfa - INFO - Initialized fresh PFA weights (theta shape: (35,))
-2025-10-29 14:31:38,495 - src.core.pfa - INFO - PFA initialized with 35 features
-2025-10-29 14:31:38,496 - src.core.pfa - INFO - Policy parameters theta shape: (35,)
-2025-10-29 14:31:38,498 - src.core.cfa - INFO - CFA initialized with real MIP optimization
-2025-10-29 14:31:38,502 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:38,503 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:38,504 - src.core.cfa - INFO - CFA initialized with real MIP optimization
-2025-10-29 14:31:38,507 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:38,507 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:38,508 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
-2025-10-29 14:31:38,511 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:38,512 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:38,512 - src.core.cfa - INFO - CFA initialized with real MIP optimization
-2025-10-29 14:31:38,518 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:38,518 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:38,518 - src.core.cfa - INFO - CFA initialized with real MIP optimization
-2025-10-29 14:31:38,521 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:38,522 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:38,522 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
-2025-10-29 14:31:38,527 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
-2025-10-29 14:31:38,528 - src.core.decision_engine - INFO - Decision Engine initialized
-2025-10-29 14:31:38,528 - src.api.main - INFO -  Decision Engine initialized
-2025-10-29 14:31:38,534 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:38,535 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:38,539 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-29 14:31:38,540 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-29 14:31:38,541 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
-2025-10-29 14:31:38,541 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
-2025-10-29 14:31:38,542 - src.api.main - INFO -  Multi-Scale Coordinator initialized
-2025-10-29 14:31:38,542 - src.api.main - INFO - ============================================================
-2025-10-29 14:31:38,542 - src.api.main - INFO - Senga SDE started successfully!
-2025-10-29 14:31:38,542 - src.api.main - INFO - API available at http://localhost:8000
-2025-10-29 14:31:38,543 - src.api.main - INFO - Docs available at http://localhost:8000/docs
-2025-10-29 14:31:38,543 - src.api.main - INFO - ============================================================
-2025-10-29 14:31:42,933 - src.api.main - INFO -  Retrieved 5 pending orders from database
-2025-10-29 14:31:45,919 - src.api.main - INFO -  Retrieved 5 pending orders from database
-2025-10-29 14:31:48,945 - src.api.main - INFO -  Retrieved 5 pending orders from database
-2025-10-29 14:31:51,929 - src.api.main - INFO -  Retrieved 5 pending orders from database
-2025-10-29 14:31:52,644 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
-2025-10-29 14:31:52,646 - src.api.main - INFO - Shutdown complete
+
+2025-10-29 15:27:26,728 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-10-29 15:27:26,728 - src.api.main - INFO -  Decision Engine initialized
+2025-10-29 15:27:26,737 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-29 15:27:26,738 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-29 15:27:26,743 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-10-29 15:27:26,744 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-10-29 15:27:26,746 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
+2025-10-29 15:27:26,746 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-10-29 15:27:26,747 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-10-29 15:27:26,747 - src.api.main - INFO - ============================================================
+2025-10-29 15:27:26,747 - src.api.main - INFO - Senga SDE started successfully!
+2025-10-29 15:27:26,748 - src.api.main - INFO - API available at http://localhost:8000
+2025-10-29 15:27:26,748 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-10-29 15:27:26,750 - src.api.main - INFO - ============================================================
+2025-10-29 15:27:32,481 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:27:35,306 - src.api.main - INFO - Running consolidation cycle with 7 pending orders
+2025-10-29 15:27:35,307 - src.core.decision_engine - INFO - Cycle 0: 7 pending shipments
+2025-10-29 15:27:35,425 - src.core.cfa - INFO - MIP solved: OPTIMAL, 0 batches
+2025-10-29 15:27:35,425 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
+2025-10-29 15:27:35,432 - src.core.decision_engine - INFO - Cycle completed in 125.9ms | Reward: -10.0 | TD Error: -10.00
+2025-10-29 15:27:35,434 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 7 waiting
+2025-10-29 15:27:35,446 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:27:35,461 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:27:38,401 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:27:38,540 - src.api.main - INFO - Running consolidation cycle with 7 pending orders
+2025-10-29 15:27:38,542 - src.core.decision_engine - INFO - Cycle 1: 7 pending shipments
+2025-10-29 15:27:38,560 - src.core.cfa - INFO - MIP solved: OPTIMAL, 0 batches
+2025-10-29 15:27:38,560 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
+2025-10-29 15:27:38,570 - src.core.decision_engine - INFO - Cycle completed in 27.9ms | Reward: -10.0 | TD Error: -10.00
+2025-10-29 15:27:38,572 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 7 waiting
+2025-10-29 15:27:38,589 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:27:41,142 - src.api.main - INFO - Running consolidation cycle with 7 pending orders
+2025-10-29 15:27:41,142 - src.core.decision_engine - INFO - Cycle 2: 7 pending shipments
+2025-10-29 15:27:41,166 - src.core.cfa - INFO - MIP solved: OPTIMAL, 0 batches
+2025-10-29 15:27:41,166 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
+2025-10-29 15:27:41,172 - src.core.decision_engine - INFO - Cycle completed in 30.3ms | Reward: -10.0 | TD Error: -10.00
+2025-10-29 15:27:41,174 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 7 waiting
+2025-10-29 15:27:41,189 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:27:41,421 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:27:43,966 - src.api.main - INFO - Running consolidation cycle with 7 pending orders
+2025-10-29 15:27:43,966 - src.core.decision_engine - INFO - Cycle 3: 7 pending shipments
+2025-10-29 15:27:43,981 - src.core.cfa - INFO - MIP solved: OPTIMAL, 0 batches
+2025-10-29 15:27:43,982 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
+2025-10-29 15:27:43,987 - src.core.decision_engine - INFO - Cycle completed in 21.2ms | Reward: -10.0 | TD Error: -10.00
+2025-10-29 15:27:43,989 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 7 waiting
+2025-10-29 15:27:44,007 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:27:44,406 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:27:47,422 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:27:50,404 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:27:53,412 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:27:54,500 - src.api.main - INFO - Running consolidation cycle with 7 pending orders
+2025-10-29 15:27:54,500 - src.core.decision_engine - INFO - Cycle 4: 7 pending shipments
+2025-10-29 15:27:54,525 - src.core.cfa - INFO - MIP solved: OPTIMAL, 0 batches
+2025-10-29 15:27:54,525 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
+2025-10-29 15:27:54,537 - src.core.decision_engine - INFO - Cycle completed in 36.3ms | Reward: -10.0 | TD Error: -10.00
+2025-10-29 15:27:54,539 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 7 waiting
+2025-10-29 15:27:54,553 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:27:56,424 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:27:59,774 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:02,779 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:05,823 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:09,418 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:11,848 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:14,860 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:17,799 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:20,766 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:23,783 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:26,784 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:29,789 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:32,782 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:35,806 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:38,791 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:41,780 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:44,410 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:46,228 - src.api.main - INFO - Running consolidation cycle with 7 pending orders
+2025-10-29 15:28:46,232 - src.core.decision_engine - INFO - Cycle 5: 7 pending shipments
+2025-10-29 15:28:46,254 - src.core.cfa - INFO - MIP solved: OPTIMAL, 0 batches
+2025-10-29 15:28:46,254 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
+2025-10-29 15:28:46,261 - src.core.decision_engine - INFO - Cycle completed in 32.3ms | Reward: -10.0 | TD Error: -10.00
+2025-10-29 15:28:46,263 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 7 waiting
+2025-10-29 15:28:46,286 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:47,410 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:50,417 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:53,408 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:56,419 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:28:59,411 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:02,423 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:05,466 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:08,413 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:11,414 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:14,410 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:17,433 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:20,414 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:23,417 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:26,418 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:29,433 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:32,422 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:35,433 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:37,663 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:29:38,021 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:29:38,380 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:29:38,415 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:41,412 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:44,415 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:47,431 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:50,417 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:53,407 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:56,421 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:29:59,407 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:30:02,410 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:30:05,409 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:30:08,406 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:30:10,996 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:30:11,426 - watchfiles.main - INFO - 3 changes detected
+2025-10-29 15:30:11,491 - src.api.main - INFO -  Retrieved 0 pending orders from database
+2025-10-29 15:30:11,830 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:30:14,404 - src.api.main - INFO -  Retrieved 0 pending orders from database
+2025-10-29 15:30:15,562 - src.api.main - INFO - Running consolidation cycle with 0 pending orders
+2025-10-29 15:30:15,564 - src.core.decision_engine - INFO - Cycle 6: 0 pending shipments
+2025-10-29 15:30:15,566 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
+2025-10-29 15:30:15,573 - src.core.decision_engine - INFO - Cycle completed in 9.8ms | Reward: -10.0 | TD Error: -11.80
+2025-10-29 15:30:15,574 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 0 waiting
+2025-10-29 15:30:15,590 - src.api.main - INFO -  Retrieved 0 pending orders from database
+2025-10-29 15:30:17,408 - src.api.main - INFO -  Retrieved 0 pending orders from database
+2025-10-29 15:30:20,332 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:30:20,387 - src.api.main - INFO -  Order ORD761E1D18 created and persisted to database
+2025-10-29 15:30:20,400 - src.api.main - INFO - Running consolidation cycle with 1 pending orders
+2025-10-29 15:30:20,405 - src.core.decision_engine - INFO - Cycle 7: 0 pending shipments
+2025-10-29 15:30:20,405 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
+2025-10-29 15:30:20,414 - src.core.decision_engine - INFO - Cycle completed in 9.7ms | Reward: -10.0 | TD Error: -10.77
+2025-10-29 15:30:20,420 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 1 waiting
+2025-10-29 15:30:20,446 - src.api.main - INFO -  Retrieved 1 pending orders from database
+2025-10-29 15:30:20,486 - src.api.main - INFO -  Retrieved 1 pending orders from database
+2025-10-29 15:30:20,508 - src.api.main - INFO -  Retrieved 1 pending orders from database
+2025-10-29 15:30:20,697 - watchfiles.main - INFO - 3 changes detected
+2025-10-29 15:30:21,056 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:30:23,413 - src.api.main - INFO -  Retrieved 1 pending orders from database
+2025-10-29 15:30:26,778 - src.api.main - INFO -  Retrieved 1 pending orders from database
+2025-10-29 15:30:29,799 - src.api.main - INFO -  Retrieved 1 pending orders from database
+2025-10-29 15:30:32,803 - src.api.main - INFO -  Retrieved 1 pending orders from database
+2025-10-29 15:30:35,800 - src.api.main - INFO -  Retrieved 1 pending orders from database
+2025-10-29 15:30:38,812 - src.api.main - INFO -  Retrieved 1 pending orders from database
+2025-10-29 15:30:40,844 - src.api.main - INFO -  Order ORDD302799C created and persisted to database
+2025-10-29 15:30:40,870 - src.api.main - INFO -  Retrieved 2 pending orders from database
+2025-10-29 15:30:40,907 - watchfiles.main - INFO - 3 changes detected
+2025-10-29 15:30:41,465 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:30:41,766 - src.api.main - INFO -  Retrieved 2 pending orders from database
+2025-10-29 15:30:44,775 - src.api.main - INFO -  Retrieved 2 pending orders from database
+2025-10-29 15:30:47,790 - src.api.main - INFO -  Retrieved 2 pending orders from database
+2025-10-29 15:30:50,776 - src.api.main - INFO -  Retrieved 2 pending orders from database
+2025-10-29 15:30:53,778 - src.api.main - INFO -  Retrieved 2 pending orders from database
+2025-10-29 15:30:56,778 - src.api.main - INFO -  Retrieved 2 pending orders from database
+2025-10-29 15:30:59,778 - src.api.main - INFO -  Retrieved 2 pending orders from database
+2025-10-29 15:31:00,872 - src.api.main - INFO -  Order ORD822FAB15 created and persisted to database
+2025-10-29 15:31:00,894 - src.api.main - INFO -  Retrieved 3 pending orders from database
+2025-10-29 15:31:00,953 - watchfiles.main - INFO - 3 changes detected
+2025-10-29 15:31:01,508 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:31:02,805 - src.api.main - INFO -  Retrieved 3 pending orders from database
+2025-10-29 15:31:05,799 - src.api.main - INFO -  Retrieved 3 pending orders from database
+2025-10-29 15:31:08,785 - src.api.main - INFO -  Retrieved 3 pending orders from database
+2025-10-29 15:31:11,789 - src.api.main - INFO -  Retrieved 3 pending orders from database
+2025-10-29 15:31:14,779 - src.api.main - INFO -  Retrieved 3 pending orders from database
+2025-10-29 15:31:17,784 - src.api.main - INFO -  Retrieved 3 pending orders from database
+2025-10-29 15:31:20,835 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:31:20,947 - src.api.main - INFO -  Order ORDCCF027AA created and persisted to database
+2025-10-29 15:31:20,961 - src.api.main - INFO -  Retrieved 4 pending orders from database
+2025-10-29 15:31:20,971 - src.api.main - INFO -  Retrieved 4 pending orders from database
+2025-10-29 15:31:21,201 - watchfiles.main - INFO - 3 changes detected
+2025-10-29 15:31:21,560 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:31:23,782 - src.api.main - INFO -  Retrieved 4 pending orders from database
+2025-10-29 15:31:40,825 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:31:40,932 - src.api.main - INFO -  Order ORDD1A5EF5A created and persisted to database
+2025-10-29 15:31:40,950 - src.api.main - INFO -  Retrieved 5 pending orders from database
+2025-10-29 15:31:41,189 - watchfiles.main - INFO - 3 changes detected
+2025-10-29 15:31:41,553 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:31:58,789 - src.api.main - INFO -  Retrieved 5 pending orders from database
+2025-10-29 15:32:00,822 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:32:00,936 - src.api.main - INFO -  Order ORDAFEA47FF created and persisted to database
+2025-10-29 15:32:00,954 - src.api.main - INFO -  Retrieved 6 pending orders from database
+2025-10-29 15:32:01,185 - watchfiles.main - INFO - 3 changes detected
+2025-10-29 15:32:01,546 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:32:20,865 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:32:20,927 - src.api.main - INFO -  Order ORD24055565 created and persisted to database
+2025-10-29 15:32:20,937 - src.api.main - INFO - Running consolidation cycle with 7 pending orders
+2025-10-29 15:32:20,939 - src.core.decision_engine - INFO - Cycle 8: 7 pending shipments
+2025-10-29 15:32:20,965 - src.core.cfa - INFO - MIP solved: OPTIMAL, 0 batches
+2025-10-29 15:32:20,966 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
+2025-10-29 15:32:20,970 - src.core.decision_engine - INFO - Cycle completed in 32.5ms | Reward: -10.0 | TD Error: -10.32
+2025-10-29 15:32:20,972 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 7 waiting
+2025-10-29 15:32:20,976 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:32:20,992 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:32:21,219 - watchfiles.main - INFO - 3 changes detected
+2025-10-29 15:32:21,577 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:32:58,794 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:32:58,895 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:32:59,242 - src.api.main - INFO -  Order ORD3043605C created and persisted to database
+2025-10-29 15:32:59,274 - src.api.main - INFO -  Retrieved 8 pending orders from database
+2025-10-29 15:32:59,303 - watchfiles.main - INFO - 3 changes detected
+2025-10-29 15:32:59,807 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:33:58,830 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:33:59,194 - src.api.main - INFO -  Order ORD9089F4C5 created and persisted to database
+2025-10-29 15:33:59,229 - src.api.main - INFO -  Retrieved 9 pending orders from database
+2025-10-29 15:33:59,257 - src.api.main - INFO -  Retrieved 9 pending orders from database
+2025-10-29 15:33:59,294 - watchfiles.main - INFO - 3 changes detected
+2025-10-29 15:33:59,759 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:34:20,776 - src.api.main - INFO - Running consolidation cycle with 9 pending orders
+2025-10-29 15:34:20,779 - src.core.decision_engine - INFO - Cycle 9: 9 pending shipments
+2025-10-29 15:34:20,781 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-29 15:34:20,784 - src.core.decision_engine - INFO - Converted old PFA format to batch: pfa_batch_20251029153420784706
+2025-10-29 15:34:20,887 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:34:20,968 - src.core.decision_engine - INFO - Dispatched batch pfa_batch_20251029153420784706: 1 shipments via VEH003
+2025-10-29 15:34:21,031 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 1 vehicles, 1 routes
+2025-10-29 15:34:21,038 - src.core.decision_engine - INFO - Cycle completed in 261.8ms | Reward: 3813.7 | TD Error: 3813.38
+2025-10-29 15:34:21,041 - src.api.main - INFO -  Consolidation cycle complete: 1 dispatched, 8 waiting
+2025-10-29 15:34:21,057 - src.api.main - INFO -  Retrieved 8 pending orders from database
+2025-10-29 15:34:21,246 - watchfiles.main - INFO - 3 changes detected
+2025-10-29 15:34:21,605 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:34:32,519 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:34:32,557 - src.api.main - INFO -  Order ORD1799EECA created and persisted to database
+2025-10-29 15:34:32,635 - src.api.main - INFO -  Retrieved 9 pending orders from database
+2025-10-29 15:34:32,653 - src.api.main - INFO -  Retrieved 9 pending orders from database
+2025-10-29 15:34:32,875 - watchfiles.main - INFO - 2 changes detected
+2025-10-29 15:34:33,235 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:34:35,402 - src.api.main - INFO -  Retrieved 9 pending orders from database
+2025-10-29 15:34:38,410 - src.api.main - INFO -  Retrieved 9 pending orders from database
+2025-10-29 15:34:41,434 - src.api.main - INFO -  Retrieved 9 pending orders from database
+2025-10-29 15:34:44,409 - src.api.main - INFO -  Retrieved 9 pending orders from database
+2025-10-29 15:34:47,098 - src.api.main - INFO - Running consolidation cycle with 9 pending orders
+2025-10-29 15:34:47,099 - src.core.decision_engine - INFO - Cycle 10: 8 pending shipments
+2025-10-29 15:34:47,099 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-29 15:34:47,100 - src.core.decision_engine - INFO - Converted old PFA format to batch: pfa_batch_20251029153447100432
+2025-10-29 15:34:47,192 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:34:47,280 - src.core.decision_engine - INFO - Dispatched batch pfa_batch_20251029153447100432: 1 shipments via VEH003
+2025-10-29 15:34:47,296 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 1 vehicles, 1 routes
+2025-10-29 15:34:47,302 - src.core.decision_engine - INFO - Cycle completed in 202.8ms | Reward: 3813.8 | TD Error: 3813.53
+2025-10-29 15:34:47,304 - src.api.main - INFO -  Consolidation cycle complete: 1 dispatched, 8 waiting
+2025-10-29 15:34:47,321 - src.api.main - INFO -  Retrieved 8 pending orders from database
+2025-10-29 15:34:47,414 - src.api.main - INFO -  Retrieved 8 pending orders from database
+2025-10-29 15:34:47,552 - watchfiles.main - INFO - 3 changes detected
+2025-10-29 15:34:47,913 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:34:50,402 - src.api.main - INFO -  Retrieved 8 pending orders from database
+2025-10-29 15:34:53,403 - src.api.main - INFO -  Retrieved 8 pending orders from database
+2025-10-29 15:34:54,117 - src.api.main - INFO - Running consolidation cycle with 8 pending orders
+2025-10-29 15:34:54,117 - src.core.decision_engine - INFO - Cycle 11: 8 pending shipments
+2025-10-29 15:34:54,118 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH_IMMEDIATE (confidence: 1.00)
+2025-10-29 15:34:54,119 - src.core.decision_engine - INFO - Converted old PFA format to batch: pfa_batch_20251029153454118868
+2025-10-29 15:34:54,199 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:34:54,302 - src.core.decision_engine - INFO - Dispatched batch pfa_batch_20251029153454118868: 1 shipments via VEH003
+2025-10-29 15:34:54,331 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 1 vehicles, 1 routes
+2025-10-29 15:34:54,338 - src.core.decision_engine - INFO - Cycle completed in 220.6ms | Reward: 3813.9 | TD Error: 3813.88
+2025-10-29 15:34:54,341 - src.api.main - INFO -  Consolidation cycle complete: 1 dispatched, 7 waiting
+2025-10-29 15:34:54,367 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:34:54,554 - watchfiles.main - INFO - 3 changes detected
+2025-10-29 15:34:54,912 - watchfiles.main - INFO - 1 change detected
+2025-10-29 15:34:56,420 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:34:59,767 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:02,774 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:05,789 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:08,787 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:11,768 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:14,767 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:17,778 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:20,783 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:23,785 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:26,781 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:29,779 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:32,775 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:35,781 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:38,841 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:41,776 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:44,793 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:47,784 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:50,784 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:53,379 - src.api.main - INFO - Running consolidation cycle with 7 pending orders
+2025-10-29 15:35:53,380 - src.core.decision_engine - INFO - Cycle 12: 7 pending shipments
+2025-10-29 15:35:53,398 - src.core.cfa - INFO - MIP solved: OPTIMAL, 0 batches
+2025-10-29 15:35:53,399 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
+2025-10-29 15:35:53,408 - src.core.decision_engine - INFO - Cycle completed in 28.3ms | Reward: -10.0 | TD Error: -10.08
+2025-10-29 15:35:53,415 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 7 waiting
+2025-10-29 15:35:53,421 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:53,445 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:56,402 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:57,261 - src.api.main - INFO - Running consolidation cycle with 7 pending orders
+2025-10-29 15:35:57,262 - src.core.decision_engine - INFO - Cycle 13: 7 pending shipments
+2025-10-29 15:35:57,276 - src.core.cfa - INFO - MIP solved: OPTIMAL, 0 batches
+2025-10-29 15:35:57,277 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
+2025-10-29 15:35:57,284 - src.core.decision_engine - INFO - Cycle completed in 22.6ms | Reward: -10.0 | TD Error: -10.07
+2025-10-29 15:35:57,286 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 7 waiting
+2025-10-29 15:35:57,305 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:59,433 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:35:59,650 - src.api.main - INFO - Running consolidation cycle with 7 pending orders
+2025-10-29 15:35:59,669 - src.core.decision_engine - INFO - Cycle 14: 7 pending shipments
+2025-10-29 15:35:59,696 - src.core.cfa - INFO - MIP solved: OPTIMAL, 0 batches
+2025-10-29 15:35:59,697 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
+2025-10-29 15:35:59,701 - src.core.decision_engine - INFO - Cycle completed in 31.5ms | Reward: -10.0 | TD Error: -10.05
+2025-10-29 15:35:59,703 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 7 waiting
+2025-10-29 15:35:59,718 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:01,591 - src.api.main - INFO - Running consolidation cycle with 7 pending orders
+2025-10-29 15:36:01,592 - src.core.decision_engine - INFO - Cycle 15: 7 pending shipments
+2025-10-29 15:36:01,618 - src.core.cfa - INFO - MIP solved: OPTIMAL, 0 batches
+2025-10-29 15:36:01,619 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
+2025-10-29 15:36:01,624 - src.core.decision_engine - INFO - Cycle completed in 32.8ms | Reward: -10.0 | TD Error: -10.04
+2025-10-29 15:36:01,626 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 7 waiting
+2025-10-29 15:36:01,641 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:02,428 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:03,250 - src.api.main - INFO - Running consolidation cycle with 7 pending orders
+2025-10-29 15:36:03,251 - src.core.decision_engine - INFO - Cycle 16: 7 pending shipments
+2025-10-29 15:36:03,272 - src.core.cfa - INFO - MIP solved: OPTIMAL, 0 batches
+2025-10-29 15:36:03,273 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
+2025-10-29 15:36:03,278 - src.core.decision_engine - INFO - Cycle completed in 27.8ms | Reward: -10.0 | TD Error: -10.04
+2025-10-29 15:36:03,280 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 7 waiting
+2025-10-29 15:36:03,301 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:05,413 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:08,689 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:11,991 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:14,773 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:17,782 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:21,769 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:23,782 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:26,782 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:29,765 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:32,778 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:35,768 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:39,358 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:41,771 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:44,782 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:47,775 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:50,770 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:53,773 - src.api.main - INFO -  Retrieved 7 pending orders from database
+2025-10-29 15:36:56,780 - src.api.main - INFO -  Retrieved 7 pending orders from database

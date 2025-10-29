@@ -13,7 +13,7 @@ from enum import Enum
 from .state_manager import StateManager, SystemState, DecisionEvent
 from .pfa import PolicyFunctionApproximator, PFAAction
 from .cfa import CostFunctionApproximator, CFASolution
-from .vfa import ValueFunctionApproximator
+from .vfa_neural import NeuralVFA as ValueFunctionApproximator
 from .dla import DirectLookaheadApproximator, LookaheadResult
 from ..config.senga_config import SengaConfigurator
 

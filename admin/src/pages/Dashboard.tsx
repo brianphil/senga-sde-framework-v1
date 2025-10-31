@@ -13,7 +13,7 @@ import { useStore } from "../store/useStore";
 import { formatDistanceToNow } from "date-fns";
 
 import MetricsCard from "../components/MetricsCard";
-import ShipmentsTable from "../components/ShipmentsTable";
+import ShipmentsTable from "../components/OrdersTable";
 import CycleHistory from "../components/CycleHistory";
 import FleetStatus from "../components/FleetStatus";
 

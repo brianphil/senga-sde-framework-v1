@@ -1,130 +1,118 @@
 // src/services/api.ts
-
-import axios, { AxiosError } from 'axios';
-import type {
-  SystemStatus,
-  Shipment,
-  Vehicle,
+import axios, { AxiosInstance } from 'axios';
+import {
+  OrderCreateRequest,
+  OrderResponse,
+  ConsolidationCycleResponse,
+  SystemStatusResponse,
+  HealthResponse,
+  CycleHistory,
   Route,
-  ConsolidationCycle,
-  PerformanceMetrics,
-  DecisionLog,
-  NewOrderRequest
+  Vehicle
 } from '../types';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+class SengaAPI {
+  private client: AxiosInstance;
 
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+  constructor(baseURL: string = '/api') {
+    this.client = axios.create({
+      baseURL,
+      timeout: 30000,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
 
-// Error handling interceptor
-api.interceptors.response.use(
-  (response) => response,
-  (error: AxiosError) => {
-    const message = error.response?.data 
-      ? (error.response.data as any).detail || 'API Error'
-      : error.message;
-    console.error('API Error:', message);
-    throw new Error(message);
+    // Response interceptor for error handling
+    this.client.interceptors.response.use(
+      response => response,
+      error => {
+        console.error('API Error:', error.response?.data || error.message);
+        throw error;
+      }
+    );
   }
-);
 
-export const apiService = {
-  // System Status
-  async getHealth(): Promise<{ status: string }> {
-    const { data } = await api.get('/health');
+  // ============= Health & Status =============
+  async checkHealth(): Promise<HealthResponse> {
+    const { data } = await this.client.get<HealthResponse>('/health');
     return data;
-  },
+  }
 
-  async getStatus(): Promise<SystemStatus> {
-    const { data } = await api.get('/status');
+  async getSystemStatus(): Promise<SystemStatusResponse> {
+    const { data } = await this.client.get<SystemStatusResponse>('/status');
     return data;
-  },
+  }
 
-  // Orders & Shipments
-  async getPendingShipments(): Promise<Shipment[]> {
-    const { data } = await api.get('/shipments/pending');
+  // ============= Order Management =============
+  async createOrder(order: OrderCreateRequest): Promise<OrderResponse> {
+    const { data } = await this.client.post<OrderResponse>('/orders', order);
     return data;
-  },
+  }
 
-  async getShipmentById(id: string): Promise<Shipment> {
-    const { data } = await api.get(`/shipments/${id}`);
+  async getPendingOrders(): Promise<OrderResponse[]> {
+    const { data } = await this.client.get<OrderResponse[]>('/orders/pending');
     return data;
-  },
+  }
 
-  async createOrder(order: NewOrderRequest): Promise<{ shipment_id: string }> {
-    const { data } = await api.post('/orders/ingest', order);
+  async getOrderById(orderId: string): Promise<OrderResponse> {
+    const { data } = await this.client.get<OrderResponse>(`/orders/${orderId}`);
     return data;
-  },
+  }
 
-  // Fleet Management
-  async getFleet(): Promise<Vehicle[]> {
-    const { data } = await api.get('/fleet');
+  // ============= Consolidation & Decisions =============
+  async triggerConsolidationCycle(forceDispatch: boolean = false): Promise<ConsolidationCycleResponse> {
+    const { data } = await this.client.post<ConsolidationCycleResponse>(
+      '/decisions/consolidation-cycle',
+      { force_dispatch: forceDispatch, context: null }
+    );
     return data;
-  },
+  }
 
-  async getAvailableVehicles(): Promise<Vehicle[]> {
-    const { data } = await api.get('/fleet/available');
+  async getRecentCycles(limit: number = 20): Promise<CycleHistory[]> {
+    const { data } = await this.client.get<CycleHistory[]>(`/cycles/recent?n=${limit}`);
     return data;
-  },
+  }
 
-  // Routes
+  async getCycleById(cycleNumber: number): Promise<CycleHistory> {
+    const { data } = await this.client.get<CycleHistory>(`/cycles/${cycleNumber}`);
+    return data;
+  }
+
+  // ============= Routes =============
   async getActiveRoutes(): Promise<Route[]> {
-    const { data } = await api.get('/routes/active');
+    const { data } = await this.client.get<Route[]>('/routes/active');
     return data;
-  },
-
-  async getRouteById(id: string): Promise<Route> {
-    const { data } = await api.get(`/routes/${id}`);
-    return data;
-  },
+  }
 
   async getCompletedRoutes(limit: number = 50): Promise<Route[]> {
-    const { data } = await api.get(`/routes/completed?limit=${limit}`);
+    const { data } = await this.client.get<Route[]>(`/routes/completed?limit=${limit}`);
     return data;
-  },
+  }
 
-  // Decision Engine
-  async triggerConsolidationCycle(): Promise<ConsolidationCycle> {
-    const { data } = await api.post('/decisions/consolidation-cycle');
+  async completeRoute(routeId: string, outcome: any): Promise<any> {
+    const { data } = await this.client.post(`/routes/${routeId}/complete`, outcome);
     return data;
-  },
+  }
 
-  async getRecentCycles(limit: number = 20): Promise<ConsolidationCycle[]> {
-    const { data } = await api.get(`/cycles/recent?n=${limit}`);
+  // ============= Fleet Management =============
+  async getFleet(): Promise<Vehicle[]> {
+    const { data } = await this.client.get<Vehicle[]>('/fleet');
     return data;
-  },
+  }
 
-  async getCycleById(cycleNumber: number): Promise<ConsolidationCycle> {
-    const { data } = await api.get(`/cycles/${cycleNumber}`);
+  async getAvailableVehicles(): Promise<Vehicle[]> {
+    const { data } = await this.client.get<Vehicle[]>('/fleet/available');
     return data;
-  },
+  }
 
-  // Analytics & Performance
-  async getPerformanceMetrics(): Promise<PerformanceMetrics> {
-    const { data } = await api.get('/analytics/performance');
+  // ============= Demo Data =============
+  async initializeDemoData(): Promise<{success: boolean; message: string}> {
+    const { data } = await this.client.post('/demo/initialize');
     return data;
-  },
+  }
+}
 
-  async getDecisionHistory(limit: number = 100): Promise<DecisionLog[]> {
-    const { data } = await api.get(`/analytics/decisions?limit=${limit}`);
-    return data;
-  },
-
-  // Configuration (if exposed)
-  async getBusinessConfig(): Promise<Record<string, any>> {
-    const { data } = await api.get('/config/business');
-    return data;
-  },
-
-  async updateBusinessConfig(config: Record<string, any>): Promise<void> {
-    await api.put('/config/business', config);
-  },
-};
-
-export default apiService;
+// Export singleton instance
+export const api = new SengaAPI();
+export default api;

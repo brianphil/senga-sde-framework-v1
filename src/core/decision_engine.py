@@ -459,61 +459,230 @@ class DecisionEngine:
 
     def _dispatch_batch(self, batch: Dict, state: SystemState) -> Dict:
         """
-        Dispatch a single batch by updating shipment statuses
+        Dispatch a single batch with complete state persistence.
+        
+        This implements the complete state transition function:
+        δ(S_t, a_dispatch) → S_{t+1}
+        
+        Updates:
+        1. Shipment statuses → EN_ROUTE
+        2. Vehicle status → EN_ROUTE (CRITICAL FIX)
+        3. Vehicle route assignment (CRITICAL FIX)  
+        4. Route record creation (CRITICAL FIX)
         
         Args:
-            batch: Batch dict with shipments and vehicle
-            state: Current state
+            batch: Dict containing:
+                - shipments: List[str] - shipment IDs
+                - vehicle_id or vehicle: str - assigned vehicle
+                - route_stops: List[Dict] - route sequence (optional)
+                - estimated_duration_hours: float (default: 2.0)
+                - estimated_distance_km: float (default: 50.0)
+            state: Current system state S_t
             
         Returns:
-            Dict with dispatch results and state_snapshot for learning
+            Dict with:
+                - shipments: int - count of dispatched shipments
+                - vehicle: str - vehicle ID (if assigned)
+                - route_id: str - route ID (if created)
+                - state_snapshot: Dict - state features for learning
         """
+        from datetime import datetime, timedelta
+        from uuid import uuid4
+        import numpy as np
+        
+        # Extract batch data
         shipments = batch.get('shipments', [])
         vehicle_id = batch.get('vehicle_id') or batch.get('vehicle')
-        route = batch.get('route_stops', batch.get('route', []))
+        route_stops = batch.get('route_stops', batch.get('route', []))
         
+        # Validate
         if not shipments:
+            logger.warning("_dispatch_batch: Empty shipment list")
             return {'shipments': 0, 'vehicle': None, 'state_snapshot': {}}
         
-        # Create route
-        route_id = batch.get('id', f"route_{uuid4().hex[:8]}")
+        if not vehicle_id:
+            logger.error(f"_dispatch_batch: Batch {batch.get('id', 'unknown')} missing vehicle")
+            return {'shipments': 0, 'vehicle': None, 'state_snapshot': {}}
         
-        # Update each shipment status - FIX: use correct signature
+        # Generate IDs
+        route_id = batch.get('id', f"route_{uuid4().hex[:8]}")
+        batch_id = batch.get('id', f"batch_{uuid4().hex[:8]}")
+        
+        logger.info(f"Dispatching batch {batch_id}: {len(shipments)} shipments → {vehicle_id}")
+        
+        # ================================================================
+        # STEP 1: Update Shipment Statuses
+        # ================================================================
+        shipments_updated = 0
+        
         for shipment_id in shipments:
-            success = self.state_manager.update_shipment_status(
-                shipment_id=shipment_id,
-                status=ShipmentStatus.EN_ROUTE,  # FIX: not 'new_status'
-                batch_id=batch.get('id'),
-                route_id=route_id
+            try:
+                success = self.state_manager.update_shipment_status(
+                    shipment_id=shipment_id,
+                    status=ShipmentStatus.EN_ROUTE,
+                    batch_id=batch_id,
+                    route_id=route_id
+                )
+                
+                if success:
+                    shipments_updated += 1
+                else:
+                    logger.warning(f"Failed to update shipment {shipment_id}")
+                    
+            except Exception as e:
+                logger.error(f"Error updating shipment {shipment_id}: {e}")
+        
+        logger.info(f" Updated {shipments_updated}/{len(shipments)} shipments to EN_ROUTE")
+        
+        # ================================================================
+        # STEP 2: Update Vehicle State (CRITICAL FIX)
+        # ================================================================
+        vehicle_assigned = False
+        
+        try:
+            # Get current vehicle state from database
+            vehicle_state = self.state_manager.get_vehicle_state(vehicle_id)
+            
+            if not vehicle_state:
+                logger.error(f"Vehicle {vehicle_id} not found in database")
+            else:
+                # Update vehicle state
+                old_status = vehicle_state.status
+                vehicle_state.status = VehicleStatus.EN_ROUTE
+                vehicle_state.current_route_id = route_id
+                
+                # Calculate availability time
+                estimated_duration_hours = batch.get('estimated_duration_hours', 2.0)
+                vehicle_state.availability_time = datetime.now() + timedelta(
+                    hours=estimated_duration_hours
+                )
+                
+                # PERSIST to database
+                success = self.state_manager.update_vehicle_state(vehicle_state)
+                
+                if success:
+                    vehicle_assigned = True
+                    logger.info(
+                        f" Vehicle {vehicle_id}: {old_status.value} → EN_ROUTE "
+                        f"(route={route_id}, available in {estimated_duration_hours:.1f}h)"
+                    )
+                else:
+                    logger.error(f"Failed to persist vehicle {vehicle_id} state update")
+        
+        except Exception as e:
+            logger.error(f"Vehicle assignment error for {vehicle_id}: {e}", exc_info=True)
+        
+        # ================================================================
+        # STEP 3: Create Route Record (CRITICAL FIX)
+        # ================================================================
+        route_created = False
+        from .state_manager import Location
+        try:
+            # Build route sequence
+            sequence_locations = []
+            
+            # Convert route stops to Location objects
+            for stop in route_stops:
+                if isinstance(stop, Location):
+                    sequence_locations.append(stop)
+                elif isinstance(stop, dict):
+                    sequence_locations.append(
+                        Location(
+                            place_id=stop.get('place_id', ''),
+                            lat=float(stop.get('lat', 0.0)),
+                            lng=float(stop.get('lng', 0.0)),
+                            formatted_address=stop.get('address', 'Unknown'),
+                            zone_id=stop.get('zone_id')
+                        )
+                    )
+            
+            # If no stops provided, build from shipment destinations
+            if not sequence_locations and shipments:
+                logger.debug(f"Building route sequence from {len(shipments)} shipments")
+                for shipment_id in shipments:
+                    shipment = state.get_shipment(shipment_id)
+                    if shipment and shipment.destinations:
+                        sequence_locations.extend(shipment.destinations)
+            
+            # Create Route object
+            route = Route(
+                id=route_id,
+                vehicle_id=vehicle_id,
+                shipment_ids=shipments,
+                sequence=sequence_locations,
+                estimated_duration=timedelta(
+                    hours=batch.get('estimated_duration_hours', 2.0)
+                ),
+                estimated_distance=batch.get('estimated_distance_km', 50.0),
+                created_at=datetime.now(),
+                started_at=datetime.now()
             )
             
-            if not success:
-                logger.warning(f"Failed to update shipment {shipment_id}")
+            # PERSIST to database
+            success = self.state_manager.add_route(route)
+            
+            if success:
+                route_created = True
+                logger.info(
+                    f" Route {route_id} created: {len(shipments)} shipments, "
+                    f"{len(sequence_locations)} stops, "
+                    f"{route.estimated_distance:.1f}km"
+                )
+            else:
+                logger.error(f"Failed to persist route {route_id}")
         
-        # Create state snapshot for Week 5 learning
+        except Exception as e:
+            logger.error(f"Route creation error for {route_id}: {e}", exc_info=True)
+        
+        # ================================================================
+        # STEP 4: Build State Snapshot for Learning
+        # ================================================================
         state_snapshot = {
             'pending_count': len(state.pending_shipments),
             'fleet_available': len(state.get_available_vehicles()),
-            'batch_id': batch.get('id'),
+            'batch_size': len(shipments),
             'vehicle_id': vehicle_id,
-            'shipment_count': len(shipments),
-            'estimated_cost': batch.get('estimated_cost', 0),
-            'estimated_duration_hours': batch.get('estimated_duration_hours', 0),
-            'utilization_volume': batch.get('utilization_volume', 0),
-            'origin_lat': route[0]['lat'] if route and len(route) > 0 else 0,
-            'origin_lon': route[0]['lon'] if route and len(route) > 0 else 0,
-            'dest_lat': route[-1]['lat'] if route and len(route) > 1 else 0,
-            'dest_lon': route[-1]['lon'] if route and len(route) > 1 else 0,
+            'route_id': route_id,
+            'vehicle_assigned': vehicle_assigned,
+            'route_created': route_created,
+            'urgency_avg': 0.0
         }
         
-        logger.info(f"Dispatched batch {route_id}: {len(shipments)} shipments via {vehicle_id}")
+        # Calculate average urgency
+        try:
+            urgency_scores = []
+            for sid in shipments:
+                shipment = state.get_shipment(sid)
+                if shipment and hasattr(shipment, 'urgency_score'):
+                    urgency_scores.append(shipment.urgency_score)
+            
+            if urgency_scores:
+                state_snapshot['urgency_avg'] = float(np.mean(urgency_scores))
+        except Exception as e:
+            logger.debug(f"Could not calculate urgency: {e}")
+        
+        # ================================================================
+        # STEP 5: Log Summary and Return
+        # ================================================================
+        if shipments_updated > 0 and vehicle_assigned and route_created:
+            logger.info(
+                f" Dispatch complete: {shipments_updated} shipments, "
+                f"vehicle {vehicle_id}, route {route_id}"
+            )
+        else:
+            logger.warning(
+                f" Partial dispatch: shipments={shipments_updated}/{len(shipments)}, "
+                f"vehicle_assigned={vehicle_assigned}, route_created={route_created}"
+            )
         
         return {
-            'shipments': len(shipments),
-            'vehicle': vehicle_id,
-            'route_id': route_id,
-            'state_snapshot': state_snapshot  # Week 5: for learning
+            'shipments': shipments_updated,
+            'vehicle': vehicle_id if vehicle_assigned else None,
+            'route_id': route_id if route_created else None,
+            'state_snapshot': state_snapshot
         }
+
+
         
     def _trigger_learning_update(
         self,

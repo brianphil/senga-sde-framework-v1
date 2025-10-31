@@ -554,6 +554,15 @@ class StateManager:
         except Exception as e:
             logger.warning(f"Failed to log learning update: {e}")
             return False
+        
+
+    def get_shipment(self, shipment_id: str) -> Optional[Shipment]:
+        """Get shipment by ID from pending shipments"""
+        for shipment in self.pending_shipments:
+            if shipment.id == shipment_id:
+                return shipment
+        return None
+    
     def save_route_outcome(self, outcome):
         """Save completed route outcome"""
         return self.extensions.save_route_outcome(outcome)

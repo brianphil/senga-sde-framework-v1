@@ -93,8 +93,8 @@ export default function OrderCreationPanel({ onOrderCreated }: Props) {
     ];
     const randomName = names[Math.floor(Math.random() * names.length)];
 
-    const pickups = KENYAN_LOCATIONS.slice(0, 5);
-    const deliveries = KENYAN_LOCATIONS.slice(5);
+    const pickups = KENYAN_LOCATIONS.slice(0, 2);
+    const deliveries = KENYAN_LOCATIONS.slice(3, 5);
 
     const pickup = pickups[Math.floor(Math.random() * pickups.length)];
     const delivery = deliveries[Math.floor(Math.random() * deliveries.length)];

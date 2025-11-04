@@ -1017,7 +1017,64 @@ class StateManager:
 
         return [VehicleState.from_dict(json.loads(row[0])) for row in cursor.fetchall()]
 
-    # ============= System State =============
+    def complete_state_transition(
+        self, transition_id: int, reward: float, state_after: SystemState
+    ) -> bool:
+        """
+        Complete a state transition with reward and next state
+        Critical for Powell's TD learning
+        """
+        try:
+            self.conn.execute(
+                """
+                UPDATE state_transitions 
+                SET reward = ?, state_after = ?, completed_at = ?
+                WHERE id = ?
+                """,
+                (
+                    reward,
+                    json.dumps(state_after.to_dict()),
+                    datetime.now(),
+                    transition_id,
+                ),
+            )
+            self.conn.commit()
+            return True
+        except Exception as e:
+            self.conn.rollback()
+            raise RuntimeError(f"Failed to complete state transition: {e}")
+
+    def log_learning_update(
+        self,
+        update_type: str,
+        state_features: dict,
+        td_error: float,
+        actual_reward: float,
+        predicted_reward: float,
+    ) -> bool:
+        """Log learning update for monitoring"""
+        try:
+            self.conn.execute(
+                """
+                INSERT INTO learning_updates 
+                (update_type, state_features, td_error, actual_reward, predicted_reward, timestamp)
+                VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    update_type,
+                    json.dumps(state_features),
+                    td_error,
+                    actual_reward,
+                    predicted_reward,
+                    datetime.now(),
+                ),
+            )
+            self.conn.commit()
+            return True
+        except Exception as e:
+            self.conn.rollback()
+            logger.error(f"Failed to log learning update: {e}")
+            return False
 
     def get_current_state(self, force_refresh: bool = False) -> SystemState:
         """

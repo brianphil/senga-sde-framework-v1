@@ -1,5 +1,4 @@
 # src/core/decision_engine.py
-"""Decision Engine - FINAL FIX for all data structure issues"""
 
 from typing import List, Dict, Optional
 from dataclasses import dataclass
@@ -7,6 +6,7 @@ from datetime import datetime, timedelta
 import logging
 from enum import Enum
 from uuid import uuid4
+import asyncio
 
 from .state_manager import (
     StateManager,
@@ -88,14 +88,15 @@ class DecisionEngine:
                 f"Cycle {self.current_cycle}: {len(state_before.pending_shipments)} pending shipments"
             )
 
+            vfa_estimate_before = self.vfa.estimate_value(state_before)
+            vfa_value_before = vfa_estimate_before.value
+
             decision = self.meta_controller.decide(state_before)
 
-            # FIX: action_type might be a dict instead of string (bug in meta_controller)
             action_type = decision.action_type
             if isinstance(action_type, dict):
                 action_type = action_type.get("action_type", "WAIT")
 
-            # Extract confidence (might be ValueEstimate or float)
             conf = decision.confidence
             if hasattr(conf, "value"):
                 conf = conf.value
@@ -104,15 +105,34 @@ class DecisionEngine:
                 f"Decision: {decision.function_class.value} -> {action_type} (confidence: {conf:.2f})"
             )
 
+            decision_event = DecisionEvent(
+                id=str(uuid4()),
+                timestamp=current_time,
+                state_snapshot=state_before,
+                decision_type=str(action_type),
+                function_class=decision.function_class.value,
+                action_details=decision.action_details,
+                reasoning=decision.reasoning,
+                confidence=conf,
+                vfa_value_before=vfa_value_before,
+            )
+            self.state_manager.log_decision(decision_event)
+
+            normalized_action = self._normalize_action_for_transition(decision)
+            transition_id = self.state_manager.log_state_transition(
+                decision_id=decision_event.id,
+                state_before=state_before,
+                action=normalized_action,
+            )
+
             execution_result = self._execute_decision(decision, state_before)
             state_after = self.state_manager.get_current_state()
 
-            normalized_action = self._normalize_action(decision, execution_result)
+            normalized_action_full = self._normalize_action(decision, execution_result)
             reward_dict = self.reward_calculator.calculate_reward(
-                state_before, normalized_action, state_after
+                state_before, normalized_action_full, state_after
             )
 
-            # Convert IMMEDIATELY
             reward_components = RewardComponents(
                 utilization_reward=reward_dict.get("utilization_bonus", 0.0),
                 on_time_reward=reward_dict.get("timeliness_bonus", 0.0),
@@ -123,11 +143,34 @@ class DecisionEngine:
                 reasoning="",
             )
 
-            learning_result = self._trigger_learning_update(
-                state_before=state_before,
-                action=normalized_action,
+            vfa_estimate_after = self.vfa.estimate_value(state_after)
+            vfa_value_after = vfa_estimate_after.value
+
+            discount_factor = self.config.get("vfa.learning.discount_factor", 0.95)
+            td_error = (
+                reward_components.total_reward
+                + discount_factor * vfa_value_after
+                - vfa_value_before
+            )
+
+            self.state_manager.complete_state_transition(
+                transition_id=transition_id,
                 reward=reward_components.total_reward,
                 state_after=state_after,
+            )
+
+            self.vfa.td_update(
+                state_before,
+                normalized_action_full,
+                reward_components.total_reward,
+                state_after,
+            )
+
+            self.meta_controller.update_from_outcome(
+                decision=decision,
+                state_before=state_before,
+                state_after=state_after,
+                reward=reward_components.total_reward,
             )
 
             execution_time = (datetime.now() - start_time).total_seconds() * 1000
@@ -142,10 +185,10 @@ class DecisionEngine:
                 execution_time_ms=execution_time,
                 shipments_dispatched=execution_result["shipments_dispatched"],
                 vehicles_utilized=execution_result["vehicles_utilized"],
-                learning_updates_applied=learning_result["updated"],
-                vfa_value_before=learning_result["value_before"],
-                vfa_value_after=learning_result["value_after"],
-                td_error=learning_result["td_error"],
+                learning_updates_applied=True,
+                vfa_value_before=vfa_value_before,
+                vfa_value_after=vfa_value_after,
+                td_error=td_error,
             )
 
             self.cycle_history.append(result)
@@ -155,7 +198,7 @@ class DecisionEngine:
             logger.info(
                 f"Cycle completed in {execution_time:.1f}ms | "
                 f"Reward: {reward_components.total_reward:.1f} | "
-                f"TD Error: {learning_result['td_error']:.2f}"
+                f"TD Error: {td_error:.2f}"
             )
             return result
 
@@ -164,8 +207,23 @@ class DecisionEngine:
             logger.error(f"Cycle failed: {str(e)}", exc_info=True)
             raise
 
+    def _normalize_action_for_transition(self, decision: MetaDecision) -> dict:
+        action_type = decision.action_type
+        if isinstance(action_type, dict):
+            action_type = action_type.get("action_type", "WAIT")
+
+        conf = decision.confidence
+        if hasattr(conf, "value"):
+            conf = conf.value
+
+        return {
+            "type": str(action_type).upper(),
+            "function_class": decision.function_class.value,
+            "confidence": float(conf),
+            "summary": decision.reasoning[:200],
+        }
+
     def _execute_decision(self, decision: MetaDecision, state: SystemState) -> Dict:
-        # Extract action_type (might be dict or string)
         action_type = decision.action_type
         if isinstance(action_type, dict):
             action_type = action_type.get("action_type", "WAIT").upper()
@@ -174,240 +232,207 @@ class DecisionEngine:
 
         if action_type == "WAIT":
             logger.info("Decision: WAIT - no action taken")
-            # FIX: Create DecisionEvent object and pass it to log_decision
-            decision_event = DecisionEvent(
-                id=str(uuid4()),
-                timestamp=datetime.now(),
-                decision_type="WAIT",
-                function_class=decision.function_class.value,
-                action_details={},
-                state_snapshot=state,
-                reasoning=decision.reasoning,
-                confidence=self._extract_value(decision.confidence),
-            )
-            self.state_manager.log_decision(decision_event)
             return {
                 "shipments_dispatched": 0,
                 "vehicles_utilized": 0,
-                "executed_batches": [],
+                "batches_created": 0,
             }
 
-        elif action_type in ["DISPATCH", "DISPATCH_IMMEDIATE", "DISPATCH_SINGLE"]:
+        elif action_type == "DISPATCH":
             batches = decision.action_details.get("batches", [])
-
-            # Handle DISPATCH_SINGLE - create batch from shipment_ids
-            if not batches and isinstance(decision.action_type, dict):
-                shipment_ids = decision.action_type.get("shipment_ids", [])
-                vehicle_id = decision.action_type.get("vehicle_id")
-                if shipment_ids:
-                    batches = [
-                        {
-                            "shipments": shipment_ids,
-                            "vehicle": vehicle_id,
-                            "batch_id": str(uuid4()),
-                        }
-                    ]
-
             if not batches:
-                logger.warning("DISPATCH decision with no batches")
+                logger.warning("DISPATCH decision but no batches provided")
                 return {
                     "shipments_dispatched": 0,
                     "vehicles_utilized": 0,
-                    "executed_batches": [],
+                    "batches_created": 0,
                 }
 
-            logger.info(f"Executing DISPATCH: {len(batches)} batches")
-
-            executed_batches = []
             total_shipments = 0
             vehicles_used = set()
 
             for batch in batches:
-                route = self._dispatch_batch(batch, state)
-                executed_batches.append(
-                    {
-                        "batch_id": (
-                            batch.batch_id
-                            if hasattr(batch, "batch_id")
-                            else batch.get("batch_id", str(uuid4()))
-                        ),
-                        "shipment_ids": (
-                            [s.id for s in batch.shipments]
-                            if hasattr(batch, "shipments")
-                            else batch.get("shipments", [])
-                        ),
-                        "vehicle_id": (
-                            batch.vehicle.id
-                            if hasattr(batch, "vehicle")
-                            else batch.get("vehicle", "unknown")
-                        ),
-                        "route_id": route.id,
-                    }
-                )
-                total_shipments += (
-                    len(batch.shipments)
-                    if hasattr(batch, "shipments")
-                    else len(batch.get("shipments", []))
-                )
-                vehicles_used.add(
-                    batch.vehicle.id
-                    if hasattr(batch, "vehicle")
-                    else batch.get("vehicle", "unknown")
+                shipments_in_batch = batch.get("shipments", [])
+                vehicle = batch.get("vehicle")
+
+                if not shipments_in_batch:
+                    continue
+
+                self._dispatch_batch(
+                    shipment_ids=shipments_in_batch,
+                    vehicle_id=vehicle,
+                    batch_id=batch.get("id", f"batch_{uuid4()}"),
+                    estimated_cost=batch.get("estimated_cost", 0),
+                    estimated_distance=batch.get("distance", 0),
                 )
 
-            # FIX: Create DecisionEvent object and pass it to log_decision
-            decision_event = DecisionEvent(
-                id=str(uuid4()),
-                timestamp=datetime.now(),
-                decision_type=action_type,
-                function_class=decision.function_class.value,
-                action_details={
-                    "batches": executed_batches,
-                    "total_shipments": total_shipments,
-                },
-                state_snapshot=state,
-                reasoning=decision.reasoning,
-                confidence=self._extract_value(decision.confidence),
-            )
-            self.state_manager.log_decision(decision_event)
+                total_shipments += len(shipments_in_batch)
+                if vehicle:
+                    vehicles_used.add(vehicle)
 
             logger.info(
-                f"Executed DISPATCH: {total_shipments} shipments, {len(vehicles_used)} vehicles"
+                f"Dispatched {total_shipments} shipments in {len(batches)} batches using {len(vehicles_used)} vehicles"
             )
+
             return {
                 "shipments_dispatched": total_shipments,
                 "vehicles_utilized": len(vehicles_used),
-                "executed_batches": executed_batches,
+                "batches_created": len(batches),
             }
 
         else:
-            raise ValueError(f"Unknown action type: {action_type}")
+            logger.warning(f"Unknown action type: {action_type}")
+            return {
+                "shipments_dispatched": 0,
+                "vehicles_utilized": 0,
+                "batches_created": 0,
+            }
 
-    def _dispatch_batch(self, batch, state: SystemState) -> Route:
-        route_id = f"route_{uuid4()}"
+    def _dispatch_batch(
+        self,
+        shipment_ids: List[str],
+        vehicle_id: Optional[str],
+        batch_id: str,
+        estimated_cost: float,
+        estimated_distance: float,
+    ):
+        for shipment_id in shipment_ids:
+            self.state_manager.update_shipment_status(
+                shipment_id=shipment_id,
+                status=ShipmentStatus.EN_ROUTE,
+                batch_id=batch_id,
+            )
 
-        # Handle both StandardBatch and dict formats
-        if hasattr(batch, "shipments"):
-            shipment_objs = batch.shipments
-            vehicle_id = batch.vehicle.id if batch.vehicle else None
-        else:
-            shipment_ids = batch.get("shipments", [])
-            shipment_objs = [s for s in state.pending_shipments if s.id in shipment_ids]
-            vehicle_id = batch.get("vehicle")
-
-        # CRITICAL: Assign vehicle if not provided (PFA doesn't assign vehicles)
-        if not vehicle_id or vehicle_id == "unknown":
-            available = state.get_available_vehicles()
-            if not available:
-                raise RuntimeError("No available vehicles for dispatch")
-            vehicle_id = available[0].id
-
-        # Get destination locations
-        destinations = []
-        for s in shipment_objs:
-            if hasattr(s, "destinations") and s.destinations:
-                destinations.extend(s.destinations)
-            elif hasattr(s, "destination"):
-                destinations.append(s.destination)
+        if vehicle_id:
+            vehicle = self.state_manager.get_vehicle_state(vehicle_id)
+            if vehicle:
+                vehicle.status = VehicleStatus.EN_ROUTE
+                vehicle.current_route_id = batch_id
+                self.state_manager.update_vehicle_state(vehicle)
 
         route = Route(
-            id=route_id,
-            vehicle_id=vehicle_id,
-            shipment_ids=[s.id for s in shipment_objs],
-            sequence=destinations,
-            estimated_duration=timedelta(hours=3),
-            estimated_distance=50.0,
+            id=batch_id,
+            vehicle_id=vehicle_id or "UNASSIGNED",
+            shipment_ids=shipment_ids,
+            sequence=[],
+            estimated_duration=timedelta(hours=estimated_distance / 40),
+            estimated_distance=estimated_distance,
             created_at=datetime.now(),
         )
-
-        for shipment in shipment_objs:
-            shipment.status = ShipmentStatus.EN_ROUTE
-            shipment.assigned_vehicle_id = vehicle_id
-            shipment.assigned_route_id = route_id
-
         self.state_manager.add_route(route)
-        return route
 
-    def _normalize_action(self, decision: MetaDecision, execution_result: Dict) -> dict:
-        # Extract action_type string
+    def _normalize_action(self, decision: MetaDecision, execution_result: Dict) -> Dict:
         action_type = decision.action_type
         if isinstance(action_type, dict):
             action_type = action_type.get("action_type", "WAIT")
 
-        return {
-            "type": action_type,
-            "batches": execution_result.get("executed_batches", []),
-            "shipment_ids": [
-                sid
-                for batch in execution_result.get("executed_batches", [])
-                for sid in batch.get("shipment_ids", [])
-            ],
+        conf = decision.confidence
+        if hasattr(conf, "value"):
+            conf = conf.value
+
+        normalized = {
+            "type": str(action_type).upper(),
+            "function_class": decision.function_class.value,
+            "shipments_dispatched": execution_result["shipments_dispatched"],
+            "vehicles_utilized": execution_result["vehicles_utilized"],
+            "batches_created": execution_result.get("batches_created", 0),
+            "confidence": float(conf),
+            "reasoning": decision.reasoning,
         }
 
-    def _trigger_learning_update(
-        self,
-        state_before: SystemState,
-        action: dict,
-        reward: float,
-        state_after: SystemState,
-    ) -> Dict:
-        vfa_estimate_before = self.vfa.estimate_value(state_before)
-        vfa_estimate_after = self.vfa.estimate_value(state_after)
+        if action_type == "DISPATCH":
+            batches = decision.action_details.get("batches", [])
+            normalized["batch_details"] = [
+                {
+                    "id": b.get("id"),
+                    "shipments": b.get("shipments", []),
+                    "vehicle": b.get("vehicle"),
+                    "estimated_cost": b.get("estimated_cost", 0),
+                    "utilization": b.get("utilization", 0),
+                }
+                for b in batches
+            ]
 
-        value_before = self._extract_value(vfa_estimate_before)
-        value_after = self._extract_value(vfa_estimate_after)
+        return normalized
 
-        td_error = reward + value_after - value_before
-
-        # FIX: Call update with positional arguments instead of keyword arguments
-        self.vfa.update(state_before, action, reward, state_after)
-
-        logger.debug(
-            f"Learning: V(s_t)={value_before:.1f}, V(s_t+1)={value_after:.1f}, r={reward:.1f}, δ={td_error:.2f}"
+    async def start_autonomous_mode(self, cycle_interval_minutes: int = 60):
+        self.status = EngineStatus.AUTONOMOUS
+        logger.info(
+            f"Starting autonomous mode (cycle every {cycle_interval_minutes} minutes)"
         )
-        return {
-            "updated": True,
-            "value_before": value_before,
-            "value_after": value_after,
-            "td_error": td_error,
-        }
 
-    def _extract_value(self, val):
-        """Extract numeric value from ValueEstimate or return as-is"""
-        return val.value if hasattr(val, "value") else float(val)
+        while self.status == EngineStatus.AUTONOMOUS:
+            try:
+                self.run_cycle()
+                await asyncio.sleep(cycle_interval_minutes * 60)
+            except Exception as e:
+                logger.error(f"Autonomous cycle failed: {e}", exc_info=True)
+                await asyncio.sleep(60)
+
+    def stop_autonomous_mode(self):
+        if self.status == EngineStatus.AUTONOMOUS:
+            self.status = EngineStatus.IDLE
+            logger.info("Autonomous mode stopped")
+
+    def get_recent_cycles(self, n: int = 20) -> List[Dict]:
+        recent = self.cycle_history[-n:]
+        return [
+            {
+                "cycle_number": r.cycle_number,
+                "timestamp": r.timestamp.isoformat(),
+                "function_class": r.decision.function_class.value,
+                "action_type": r.decision.action_type,
+                "reward": r.reward_components.total_reward,
+                "td_error": r.td_error,
+                "vfa_value": r.vfa_value_before,
+                "shipments_dispatched": r.shipments_dispatched,
+            }
+            for r in recent
+        ]
 
     def get_performance_metrics(self) -> PerformanceMetrics:
         if not self.cycle_history:
-            return PerformanceMetrics(0, 0, 0, 0.0, 0.0, 0.0, {}, 0.0)
+            return PerformanceMetrics(
+                total_cycles=0,
+                total_shipments_processed=0,
+                total_dispatches=0,
+                avg_utilization=0.0,
+                avg_reward_per_cycle=0.0,
+                avg_cycle_time_ms=0.0,
+                function_class_usage={},
+                learning_convergence=0.0,
+            )
 
-        total_shipments = sum(r.shipments_dispatched for r in self.cycle_history)
+        total_shipments = sum(c.shipments_dispatched for c in self.cycle_history)
         total_dispatches = sum(
-            1 for r in self.cycle_history if r.shipments_dispatched > 0
+            1 for c in self.cycle_history if c.shipments_dispatched > 0
         )
         avg_reward = sum(
-            r.reward_components.total_reward for r in self.cycle_history
+            c.reward_components.total_reward for c in self.cycle_history
         ) / len(self.cycle_history)
-        avg_cycle_time = sum(r.execution_time_ms for r in self.cycle_history) / len(
+        avg_cycle_time = sum(c.execution_time_ms for c in self.cycle_history) / len(
             self.cycle_history
         )
 
         function_usage = {}
-        for result in self.cycle_history:
-            fc = result.decision.function_class.value
+        for c in self.cycle_history:
+            fc = c.decision.function_class.value
             function_usage[fc] = function_usage.get(fc, 0) + 1
 
-        recent_td_errors = [abs(r.td_error) for r in self.cycle_history[-20:]]
-        learning_convergence = 1.0 / (
-            1.0 + sum(recent_td_errors) / len(recent_td_errors)
+        recent_td_errors = [abs(c.td_error) for c in self.cycle_history[-100:]]
+        learning_convergence = (
+            1.0 / (1.0 + (sum(recent_td_errors) / len(recent_td_errors)))
+            if recent_td_errors
+            else 0.0
         )
 
         return PerformanceMetrics(
-            len(self.cycle_history),
-            total_shipments,
-            total_dispatches,
-            0.0,
-            avg_reward,
-            avg_cycle_time,
-            function_usage,
-            learning_convergence,
+            total_cycles=len(self.cycle_history),
+            total_shipments_processed=total_shipments,
+            total_dispatches=total_dispatches,
+            avg_utilization=0.0,
+            avg_reward_per_cycle=avg_reward,
+            avg_cycle_time_ms=avg_cycle_time,
+            function_class_usage=function_usage,
+            learning_convergence=learning_convergence,
         )

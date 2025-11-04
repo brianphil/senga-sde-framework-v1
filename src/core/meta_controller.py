@@ -455,24 +455,32 @@ class MetaController:
     def update_from_outcome(
         self, decision: MetaDecision, state_before, state_after, reward: float
     ):
-        self.vfa.td_update(state_before, reward, state_after)
+        """Update function approximators from outcome - CORRECTED td_update call"""
+
+        # VFA td_update signature: td_update(s_t, action, reward, s_tp1)
+        # Pass empty dict for action since VFA doesn't use it
+        self.vfa.td_update(state_before, {}, reward, state_after)
 
         if decision.function_class == FunctionClass.PFA:
             from .pfa import PFAAction
 
             pfa_action = PFAAction(
-                decision.action["action_type"],
-                decision.action["shipment_ids"],
+                decision.action_details.get("action_type", "wait"),
+                decision.action_details.get("shipment_ids", []),
                 decision.reasoning,
                 decision.confidence,
             )
             self.pfa.update_from_outcome(pfa_action, reward)
 
         elif decision.function_class == FunctionClass.CFA:
-            if "estimated_cost" in decision.action:
+            if "estimated_cost" in decision.action_details:
                 self.cfa.update_parameters(
-                    decision.action["estimated_cost"],
-                    -reward if reward < 0 else decision.action["estimated_cost"],
-                    decision.action.get("estimated_utilization", 0),
-                    decision.action.get("estimated_utilization", 0),
+                    decision.action_details["estimated_cost"],
+                    (
+                        -reward
+                        if reward < 0
+                        else decision.action_details["estimated_cost"]
+                    ),
+                    decision.action_details.get("estimated_utilization", 0),
+                    decision.action_details.get("estimated_utilization", 0),
                 )

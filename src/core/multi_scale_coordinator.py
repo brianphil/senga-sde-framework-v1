@@ -1,15 +1,9 @@
 # src/core/multi_scale_coordinator.py
-"""
-Multi-Scale Coordinator - CORRECTED
-NO signature changes, uses corrected CFA
-"""
 
-from typing import List, Dict, Optional, Tuple
+from typing import List, Dict, Optional
 from dataclasses import dataclass
 from datetime import datetime, timedelta
-from collections import defaultdict, Counter
 import logging
-import numpy as np
 
 from .state_manager import StateManager
 from .vfa_neural import NeuralVFA
@@ -21,8 +15,6 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class RouteOutcome:
-    """Outcome from completed route - SAME AS BEFORE"""
-
     route_id: str
     completed_at: datetime
     initial_state: Dict
@@ -40,8 +32,6 @@ class RouteOutcome:
 
 @dataclass
 class DailyAnalytics:
-    """Daily performance analytics - SAME AS BEFORE"""
-
     date: datetime
     total_routes: int
     total_shipments: int
@@ -53,46 +43,17 @@ class DailyAnalytics:
     top_delay_causes: List[str]
 
 
-@dataclass
-class WeeklyInsights:
-    """Weekly strategic insights - SAME AS BEFORE"""
-
-    week_start: datetime
-    route_patterns_discovered: List[Dict]
-    optimal_consolidation_windows: Dict[str, float]
-    fleet_utilization_by_day: Dict[str, float]
-    recommended_fleet_adjustments: List[str]
-    network_topology_updates: Dict
-    customer_pattern_insights: List[str]
-
-
 class MultiScaleCoordinator:
-    """
-    Coordinates learning across multiple time scales
-    CORRECTED to use proper CFA initialization
-    """
-
     def __init__(self):
         self.config = SengaConfigurator()
         self.state_manager = StateManager()
         self.vfa = NeuralVFA()
-
-        # CORRECTED: Pass config to CFA
         self.cfa_neural = CostFunctionApproximator(self.config)
-
-        self.last_daily_update = None
-        self.last_weekly_update = None
-
         logger.info("Multi-Scale Coordinator initialized")
-        logger.info("Neural CFA initialized for learning")
 
     def process_completed_route(self, route_outcome: RouteOutcome):
-        """
-        Process completed route for learning - SAME SIGNATURE
-        """
         logger.info(f"Processing completed route {route_outcome.route_id}")
 
-        # Calculate actual reward
         actual_reward = -route_outcome.actual_cost
         if not route_outcome.sla_compliance:
             sla_penalty = self.config.business_config.get("sla_penalty_per_hour", 1000)
@@ -101,14 +62,12 @@ class MultiScaleCoordinator:
         predicted_value = -route_outcome.predicted_cost
         td_error = actual_reward - predicted_value
 
-        # Update VFA
         self.vfa.update(
             state=None, action_value=predicted_value, actual_outcome=actual_reward
         )
 
         logger.info(f"Route {route_outcome.route_id}: TD error = {td_error:.2f}")
 
-        # Log for aggregation
         self.state_manager.log_learning_update(
             update_type="route_completion",
             state_features=route_outcome.initial_state,
@@ -120,13 +79,8 @@ class MultiScaleCoordinator:
     def process_completed_route_with_cfa_learning(
         self, route_outcome: RouteOutcome, batch_formation: Dict
     ):
-        """
-        Process route completion with CFA parameter learning - SAME SIGNATURE
-        """
-        # First do standard processing
         self.process_completed_route(route_outcome)
 
-        # Then update CFA parameters
         if self.cfa_neural:
             self.cfa_neural.update_parameters(
                 predicted_cost=route_outcome.predicted_cost,
@@ -140,9 +94,6 @@ class MultiScaleCoordinator:
     def run_daily_strategic_update(
         self, target_date: Optional[datetime] = None
     ) -> DailyAnalytics:
-        """
-        Run daily strategic update - SAME SIGNATURE
-        """
         if target_date is None:
             target_date = datetime.now() - timedelta(days=1)
 
@@ -151,196 +102,101 @@ class MultiScaleCoordinator:
 
         logger.info(f"Running daily update for {day_start.date()}")
 
-        routes = self._fetch_routes_for_period(day_start, day_end)
+        cursor = self.state_manager.conn.execute(
+            """
+            SELECT COUNT(*), AVG(utilization), AVG(CASE WHEN sla_compliance = 1 THEN 1 ELSE 0 END)
+            FROM route_outcomes
+            WHERE completed_at >= ? AND completed_at < ?
+            """,
+            (day_start, day_end),
+        )
+        route_stats = cursor.fetchone()
+        total_routes = route_stats[0] or 0
+        avg_util = route_stats[1] or 0.0
+        avg_on_time = route_stats[2] or 0.0
 
-        if not routes:
-            logger.warning(f"No routes for {day_start.date()}")
-            return self._empty_daily_analytics(day_start)
+        cursor = self.state_manager.conn.execute(
+            """
+            SELECT COUNT(*), AVG(ABS(td_error))
+            FROM learning_updates
+            WHERE timestamp >= ? AND timestamp < ?
+            """,
+            (day_start, day_end),
+        )
+        learning_stats = cursor.fetchone()
+        total_updates = learning_stats[0] or 0
+        avg_td_error = learning_stats[1] or 0.0
 
-        total_shipments = sum(r.shipments_delivered for r in routes)
-        avg_util = np.mean([r.utilization for r in routes])
-        sla_rate = sum(1 for r in routes if r.sla_compliance) / len(routes)
-
-        cost_errors = [
-            abs(r.actual_cost - r.predicted_cost) / r.actual_cost
-            for r in routes
-            if r.actual_cost > 0
-        ]
-        cost_error = np.mean(cost_errors) if cost_errors else 0
-
-        duration_errors = [
-            abs(r.actual_duration_hours - r.predicted_duration_hours)
-            / r.predicted_duration_hours
-            for r in routes
-            if r.predicted_duration_hours > 0
-        ]
-        duration_error = np.mean(duration_errors) if duration_errors else 0
-
-        fc_performance = self._analyze_function_class_performance(routes)
-
-        all_delays = [delay for r in routes for delay in r.delays]
-        top_causes = self._analyze_delay_causes(all_delays)
+        cursor = self.state_manager.conn.execute(
+            """
+            SELECT function_class, COUNT(*)
+            FROM decision_log
+            WHERE timestamp >= ? AND timestamp < ?
+            GROUP BY function_class
+            """,
+            (day_start, day_end),
+        )
+        fc_distribution = dict(cursor.fetchall())
 
         analytics = DailyAnalytics(
             date=day_start,
-            total_routes=len(routes),
-            total_shipments=total_shipments,
+            total_routes=total_routes,
+            total_shipments=0,
             avg_utilization=avg_util,
-            sla_compliance_rate=sla_rate,
-            cost_prediction_error=cost_error,
-            duration_prediction_error=duration_error,
-            function_class_performance=fc_performance,
-            top_delay_causes=top_causes,
+            sla_compliance_rate=avg_on_time,
+            cost_prediction_error=0.0,
+            duration_prediction_error=0.0,
+            function_class_performance=fc_distribution,
+            top_delay_causes=[],
         )
 
-        self.last_daily_update = day_start
         logger.info(
-            f"Daily update complete: {len(routes)} routes, {sla_rate:.1%} SLA compliance"
+            f"Daily analytics: {total_routes} routes, {avg_util:.2%} utilization, "
+            f"{avg_on_time:.2%} on-time, {total_updates} learning updates"
         )
 
         return analytics
 
-    def run_weekly_strategic_analysis(
-        self, target_week: Optional[datetime] = None
-    ) -> WeeklyInsights:
-        """
-        Run weekly strategic analysis - SAME SIGNATURE
-        """
-        if target_week is None:
-            target_week = datetime.now() - timedelta(days=7)
+    def get_learning_convergence_metrics(self, days: int = 7) -> Dict:
+        cutoff = datetime.now() - timedelta(days=days)
 
-        week_start = target_week
-        week_end = week_start + timedelta(days=7)
-
-        logger.info(
-            f"Running weekly analysis: {week_start.date()} to {week_end.date()}"
+        cursor = self.state_manager.conn.execute(
+            """
+            SELECT 
+                DATE(timestamp) as day,
+                AVG(ABS(td_error)) as avg_td_error,
+                COUNT(*) as num_updates
+            FROM learning_updates
+            WHERE timestamp >= ?
+            GROUP BY DATE(timestamp)
+            ORDER BY day
+            """,
+            (cutoff,),
         )
 
-        routes = self._fetch_routes_for_period(week_start, week_end)
+        daily_metrics = [
+            {"date": row[0], "avg_td_error": row[1], "num_updates": row[2]}
+            for row in cursor.fetchall()
+        ]
 
-        if not routes:
-            logger.warning(f"No routes for week {week_start.date()}")
-            return self._empty_weekly_insights(week_start)
+        if not daily_metrics:
+            return {
+                "daily_metrics": [],
+                "trend": "insufficient_data",
+                "convergence_score": 0.0,
+            }
 
-        route_patterns = self._discover_route_patterns(routes)
-        optimal_windows = self._optimize_consolidation_windows(routes)
-        utilization_by_day = self._analyze_utilization_by_day(routes)
-        fleet_recommendations = self._generate_fleet_recommendations(utilization_by_day)
-        topology_updates = {}
-        customer_insights = []
+        recent_errors = [m["avg_td_error"] for m in daily_metrics[-3:]]
+        avg_recent_error = sum(recent_errors) / len(recent_errors)
 
-        insights = WeeklyInsights(
-            week_start=week_start,
-            route_patterns_discovered=route_patterns,
-            optimal_consolidation_windows=optimal_windows,
-            fleet_utilization_by_day=utilization_by_day,
-            recommended_fleet_adjustments=fleet_recommendations,
-            network_topology_updates=topology_updates,
-            customer_pattern_insights=customer_insights,
-        )
+        all_errors = [m["avg_td_error"] for m in daily_metrics]
+        trend = "improving" if all_errors[0] > all_errors[-1] else "stable"
 
-        self.last_weekly_update = week_start
-        logger.info(
-            f"Weekly analysis complete: {len(route_patterns)} patterns discovered"
-        )
+        convergence_score = 1.0 / (1.0 + avg_recent_error)
 
-        return insights
-
-    def _fetch_routes_for_period(
-        self, start: datetime, end: datetime
-    ) -> List[RouteOutcome]:
-        """Fetch completed routes for period"""
-        # Implementation depends on your database structure
-        # Placeholder for now
-        return []
-
-    def _empty_daily_analytics(self, date: datetime) -> DailyAnalytics:
-        """Empty analytics when no data"""
-        return DailyAnalytics(
-            date=date,
-            total_routes=0,
-            total_shipments=0,
-            avg_utilization=0.0,
-            sla_compliance_rate=0.0,
-            cost_prediction_error=0.0,
-            duration_prediction_error=0.0,
-            function_class_performance={},
-            top_delay_causes=[],
-        )
-
-    def _empty_weekly_insights(self, week_start: datetime) -> WeeklyInsights:
-        """Empty insights when no data"""
-        return WeeklyInsights(
-            week_start=week_start,
-            route_patterns_discovered=[],
-            optimal_consolidation_windows={},
-            fleet_utilization_by_day={},
-            recommended_fleet_adjustments=[],
-            network_topology_updates={},
-            customer_pattern_insights=[],
-        )
-
-    def _analyze_function_class_performance(
-        self, routes: List[RouteOutcome]
-    ) -> Dict[str, float]:
-        """Analyze which function class performed best"""
-        performance = defaultdict(list)
-
-        for route in routes:
-            fc = route.initial_state.get("function_class", "cfa")
-            reward = -route.actual_cost
-            if not route.sla_compliance:
-                reward -= self.config.business_config.get("sla_penalty_per_hour", 1000)
-            performance[fc].append(reward)
-
-        return {fc: np.mean(rewards) for fc, rewards in performance.items() if rewards}
-
-    def _analyze_delay_causes(self, delays: List[Dict]) -> List[str]:
-        """Identify top delay causes"""
-        if not delays:
-            return []
-
-        cause_counter = Counter(delay.get("cause", "unknown") for delay in delays)
-        return [cause for cause, _ in cause_counter.most_common(5)]
-
-    def _discover_route_patterns(self, routes: List[RouteOutcome]) -> List[Dict]:
-        """Discover common route patterns"""
-        # Simplified implementation
-        return []
-
-    def _optimize_consolidation_windows(
-        self, routes: List[RouteOutcome]
-    ) -> Dict[str, float]:
-        """Find optimal consolidation time windows"""
-        # Simplified implementation
-        return {"morning": 2.0, "afternoon": 1.5, "evening": 3.0}
-
-    def _analyze_utilization_by_day(
-        self, routes: List[RouteOutcome]
-    ) -> Dict[str, float]:
-        """Analyze utilization by day of week"""
-        by_day = defaultdict(list)
-
-        for route in routes:
-            day = route.completed_at.strftime("%A")
-            by_day[day].append(route.utilization)
-
-        return {day: np.mean(utils) for day, utils in by_day.items() if utils}
-
-    def _generate_fleet_recommendations(
-        self, utilization_by_day: Dict[str, float]
-    ) -> List[str]:
-        """Generate fleet adjustment recommendations"""
-        recommendations = []
-
-        for day, util in utilization_by_day.items():
-            if util > 0.95:
-                recommendations.append(
-                    f"Consider adding capacity on {day} (util={util:.1%})"
-                )
-            elif util < 0.60:
-                recommendations.append(
-                    f"Consider reducing capacity on {day} (util={util:.1%})"
-                )
-
-        return recommendations
+        return {
+            "daily_metrics": daily_metrics,
+            "trend": trend,
+            "convergence_score": convergence_score,
+            "avg_recent_td_error": avg_recent_error,
+        }

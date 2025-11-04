@@ -1,21 +1,13 @@
 # src/core/decision_engine.py
-"""
-Decision Engine: Main orchestration with closed learning loop
-FIXES:
-1. Proper PFA batch format conversion with 'id' key
-2. Add missing _trigger_learning_update method
-3. Fix reward calculator action format (include batches in normalized action)
-4. Complete TD learning integration
-"""
+"""Decision Engine - FINAL FIX for all data structure issues"""
 
 from typing import List, Dict, Optional
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 import logging
-import asyncio
 from enum import Enum
 from uuid import uuid4
-import numpy as np
+
 from .state_manager import (
     StateManager,
     SystemState,
@@ -45,8 +37,6 @@ class EngineStatus(Enum):
 
 @dataclass
 class CycleResult:
-    """Results from a single decision cycle"""
-
     cycle_number: int
     timestamp: datetime
     state_before: SystemState
@@ -64,8 +54,6 @@ class CycleResult:
 
 @dataclass
 class PerformanceMetrics:
-    """System performance metrics"""
-
     total_cycles: int
     total_shipments_processed: int
     total_dispatches: int
@@ -77,78 +65,54 @@ class PerformanceMetrics:
 
 
 class DecisionEngine:
-    """
-    Enhanced Decision Engine with Closed Learning Loop
-
-    Mathematical Foundation:
-    At each decision epoch t:
-    1. Observe state S_t
-    2. Estimate V(S_t) using VFA
-    3. Make decision a_t via meta-controller
-    4. Execute action, observe S_{t+1}
-    5. Calculate reward r_t
-    6. Update VFA: θ ← θ + α * δ_t * e_t
-       where δ_t = r_t + γ*V(S_{t+1}) - V(S_t)
-    """
-
     def __init__(self):
         self.config = SengaConfigurator()
         self.state_manager = StateManager()
         self.meta_controller = MetaController()
         self.vfa = ValueFunctionApproximator()
         self.reward_calculator = RewardCalculator()
-
         self.status = EngineStatus.IDLE
         self.current_cycle = 0
         self.cycle_history: List[CycleResult] = []
-
         logger.info("Decision Engine initialized")
 
     def run_cycle(self, current_time: Optional[datetime] = None) -> CycleResult:
-        """
-        Run a single decision cycle with complete learning loop
-
-        Args:
-            current_time: Current timestamp (defaults to now)
-
-        Returns:
-            CycleResult with decision and execution details
-        """
         if current_time is None:
             current_time = datetime.now()
-
         start_time = datetime.now()
         self.status = EngineStatus.RUNNING
 
         try:
-            # Step 1: Get current state
             state_before = self.state_manager.get_current_state()
             logger.info(
                 f"Cycle {self.current_cycle}: {len(state_before.pending_shipments)} pending shipments"
             )
 
-            # Step 2: Make decision via meta-controller
             decision = self.meta_controller.decide(state_before)
+
+            # FIX: action_type might be a dict instead of string (bug in meta_controller)
+            action_type = decision.action_type
+            if isinstance(action_type, dict):
+                action_type = action_type.get("action_type", "WAIT")
+
+            # Extract confidence (might be ValueEstimate or float)
+            conf = decision.confidence
+            if hasattr(conf, "value"):
+                conf = conf.value
+
             logger.info(
-                f"Decision: {decision.function_class.value} -> {decision.action_type} "
-                f"(confidence: {decision.confidence:.2f})"
+                f"Decision: {decision.function_class.value} -> {action_type} (confidence: {conf:.2f})"
             )
 
-            # Step 3: Execute decision
             execution_result = self._execute_decision(decision, state_before)
-
-            # Step 4: Get updated state
             state_after = self.state_manager.get_current_state()
 
-            # Step 5: Calculate reward
-            # FIX: Normalize action structure to include batches
             normalized_action = self._normalize_action(decision, execution_result)
-
             reward_dict = self.reward_calculator.calculate_reward(
                 state_before, normalized_action, state_after
             )
 
-            # Convert dict to RewardComponents
+            # Convert IMMEDIATELY
             reward_components = RewardComponents(
                 utilization_reward=reward_dict.get("utilization_bonus", 0.0),
                 on_time_reward=reward_dict.get("timeliness_bonus", 0.0),
@@ -159,7 +123,6 @@ class DecisionEngine:
                 reasoning="",
             )
 
-            # Step 6: Trigger learning update
             learning_result = self._trigger_learning_update(
                 state_before=state_before,
                 action=normalized_action,
@@ -167,7 +130,6 @@ class DecisionEngine:
                 state_after=state_after,
             )
 
-            # Step 7: Record cycle result
             execution_time = (datetime.now() - start_time).total_seconds() * 1000
 
             result = CycleResult(
@@ -202,548 +164,184 @@ class DecisionEngine:
             logger.error(f"Cycle failed: {str(e)}", exc_info=True)
             raise
 
-    def _trigger_pfa_learning(self, state_before, decision, reward, state_after):
-        """
-        Trigger PFA learning update after cycle
-
-        Called when decision was made by PFA to update policy parameters
-
-        Args:
-            state_before: State when decision was made
-            decision: MetaDecision from meta_controller
-            reward: Observed reward
-            state_after: Resulting state
-        """
-        if decision.function_class != FunctionClass.PFA:
-            return
-
-        # Get the original PFA action (need to store this in meta_controller)
-        # For now, reconstruct basic PFAAction from decision
-        from .pfa import PFAAction
-
-        pfa_action = self.meta_controller._last_pfa_action
-        if pfa_action and pfa_action.feature_vector is not None:
-            self.meta_controller.pfa.update_from_experience(
-                state=state_before,
-                action=pfa_action,
-                reward=reward,
-                next_value=next_value,
-            )
-        # Get next state value from VFA
-        next_value = self.vfa.value(state_after) if hasattr(self.vfa, "value") else 0.0
-
-        # Trigger learning update
-        self.meta_controller.pfa.update_from_experience(
-            state=state_before, action=pfa_action, reward=reward, next_value=next_value
-        )
-
-        logger.debug(
-            f"PFA learning update: reward={reward:.2f}, next_value={next_value:.2f}"
-        )
-
-    def _normalize_action(self, decision: MetaDecision, execution_result: Dict) -> dict:
-        """
-        Normalize action structure for reward calculation
-
-        CRITICAL FIX: Include batches in the normalized action so reward calculator
-        can properly calculate utilization bonuses
-
-        Mathematical Foundation:
-        Action space A must have consistent representation:
-        a ∈ A where a = {type: ActionType, batches: List[Batch], ...}
-
-        Args:
-            decision: MetaDecision from meta-controller
-            execution_result: Result from _execute_decision with batch info
-
-        Returns:
-            Normalized action dict with 'type' and 'batches' keys
-        """
-        normalized = {
-            "type": decision.action_type,
-            "function_class": decision.function_class.value,
-            "confidence": decision.confidence,
-        }
-
-        # CRITICAL: Include batches for reward calculation
-        # Extract batches from decision.action_details OR from execution_result
-        if "batches" in decision.action_details:
-            normalized["batches"] = decision.action_details["batches"]
-        elif "executed_batches" in execution_result:
-            normalized["batches"] = execution_result["executed_batches"]
-        else:
-            normalized["batches"] = []
-
-        return normalized
-
     def _execute_decision(self, decision: MetaDecision, state: SystemState) -> Dict:
-        """
-        Execute the decision and update system state
+        # Extract action_type (might be dict or string)
+        action_type = decision.action_type
+        if isinstance(action_type, dict):
+            action_type = action_type.get("action_type", "WAIT").upper()
+        else:
+            action_type = str(action_type).upper()
 
-        FIX: Properly handle PFA format conversion and return executed batches
-
-        Args:
-            decision: Decision to execute
-            state: Current state
-
-        Returns:
-            Dict with execution results and executed_batches for reward calculation
-        """
-        if decision.action_type == "WAIT":
+        if action_type == "WAIT":
+            logger.info("Decision: WAIT - no action taken")
+            # FIX: Create DecisionEvent object and pass it to log_decision
+            decision_event = DecisionEvent(
+                id=str(uuid4()),
+                timestamp=datetime.now(),
+                decision_type="WAIT",
+                function_class=decision.function_class.value,
+                action_details={},
+                state_snapshot=state,
+                reasoning=decision.reasoning,
+                confidence=self._extract_value(decision.confidence),
+            )
+            self.state_manager.log_decision(decision_event)
             return {
                 "shipments_dispatched": 0,
                 "vehicles_utilized": 0,
-                "routes_created": 0,
                 "executed_batches": [],
             }
 
-        elif decision.action_type in ["DISPATCH", "DISPATCH_IMMEDIATE"]:
-            # Get batches or convert old PFA format
+        elif action_type in ["DISPATCH", "DISPATCH_IMMEDIATE", "DISPATCH_SINGLE"]:
             batches = decision.action_details.get("batches", [])
 
-            # FIX: Handle old PFA format (no 'batches' key, just 'shipments' and 'vehicle')
-            if not batches and "shipments" in decision.action_details:
-                batch_id = f"pfa_batch_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
-                pfa_batch = {
-                    "id": batch_id,  # FIX: Add missing 'id' key
-                    "shipments": decision.action_details["shipments"],
-                    "vehicle": decision.action_details["vehicle"],
-                    "route": [],
-                    "sequence": [],
-                    "estimated_distance_km": 0.0,
-                    "estimated_duration_hours": 3.0,
-                    "estimated_cost": 5000.0,  # Add for reward calculation
-                    "utilization": 0.8,  # Add for reward calculation
-                }
-                batches = [pfa_batch]
-                logger.info(f"Converted old PFA format to batch: {batch_id}")
+            # Handle DISPATCH_SINGLE - create batch from shipment_ids
+            if not batches and isinstance(decision.action_type, dict):
+                shipment_ids = decision.action_type.get("shipment_ids", [])
+                vehicle_id = decision.action_type.get("vehicle_id")
+                if shipment_ids:
+                    batches = [
+                        {
+                            "shipments": shipment_ids,
+                            "vehicle": vehicle_id,
+                            "batch_id": str(uuid4()),
+                        }
+                    ]
 
             if not batches:
-                logger.warning("No batches to execute")
+                logger.warning("DISPATCH decision with no batches")
                 return {
                     "shipments_dispatched": 0,
                     "vehicles_utilized": 0,
-                    "routes_created": 0,
                     "executed_batches": [],
                 }
 
-            # Execute batches
-            shipments_dispatched = 0
-            vehicles_utilized = set()
-            routes_created = []
+            logger.info(f"Executing DISPATCH: {len(batches)} batches")
+
             executed_batches = []
+            total_shipments = 0
+            vehicles_used = set()
 
             for batch in batches:
-                try:
-                    # Validate batch has required fields
-                    if "shipments" not in batch or "vehicle" not in batch:
-                        logger.error(
-                            f"Invalid batch missing required fields: {list(batch.keys())}"
-                        )
-                        continue
-
-                    if "id" not in batch:
-                        batch["id"] = f"batch_{uuid4().hex[:8]}"
-
-                    # Dispatch batch
-                    route_result = self._dispatch_batch(batch, state)
-
-                    shipments_dispatched += route_result["shipments"]
-                    if route_result["vehicle"]:
-                        vehicles_utilized.add(route_result["vehicle"])
-                    routes_created.append(batch["id"])
-
-                    # Store batch for reward calculation
-                    executed_batches.append(batch)
-
-                    logger.info(
-                        f"✓ Batch {batch['id']}: {len(batch['shipments'])} shipments dispatched"
-                    )
-
-                except Exception as e:
-                    logger.error(f"✗ Batch dispatch failed: {e}")
-                    continue
-
-            logger.info(
-                f"Executed DISPATCH: {shipments_dispatched} shipments, "
-                f"{len(vehicles_utilized)} vehicles, {len(routes_created)} routes"
-            )
-
-            return {
-                "shipments_dispatched": shipments_dispatched,
-                "vehicles_utilized": len(vehicles_utilized),
-                "routes_created": len(routes_created),
-                "executed_batches": executed_batches,  # FIX: Return for reward calculation
-            }
-
-        else:
-            logger.warning(f"Unknown action type: {decision.action_type}")
-            return {
-                "shipments_dispatched": 0,
-                "vehicles_utilized": 0,
-                "routes_created": 0,
-                "executed_batches": [],
-            }
-
-    def _trigger_learning_update(
-        self,
-        state_before: SystemState,
-        action: Dict,
-        reward: float,
-        state_after: SystemState,
-    ) -> Dict:
-        """
-        Trigger tactical VFA learning update
-        Week 5 addition for tactical learning
-        """
-        # Extract features from state
-        features_before = self._extract_state_features(state_before)
-        features_after = self._extract_state_features(state_after)
-
-        # Get VFA value estimates
-        value_before = self.vfa.evaluate(features_before)
-        value_after = self.vfa.evaluate(features_after)
-
-        # Compute TD error: δ = r + γV(s') - V(s)
-        gamma = self.config.learning_config.get("discount_factor", 0.95)
-        td_error = reward + gamma * value_after - value_before
-
-        # FIX: Update VFA with correct signature (state, actual_outcome only)
-        target = reward + gamma * value_after
-        self.vfa.update(state=features_before, actual_outcome=target)
-
-        # Log for multi-scale coordinator
-        try:
-            self.state_manager.log_learning_update(
-                update_type="tactical_td",
-                state_features=features_before,
-                td_error=td_error,
-                actual_reward=reward,
-                predicted_reward=value_before,
-            )
-        except Exception as e:
-            logger.warning(f"Failed to log learning update: {e}")
-
-        return {
-            "updated": True,
-            "value_before": value_before,
-            "value_after": value_after,
-            "td_error": td_error,
-        }
-
-    def _extract_state_features(self, state: SystemState) -> Dict:
-        """Extract VFA features from state"""
-        try:
-            urgent_count = len(state.get_urgent_shipments(24))
-            avg_urgency = 0
-            if state.pending_shipments:
-                urgencies = [
-                    s.urgency_score
-                    for s in state.pending_shipments
-                    if hasattr(s, "urgency_score")
-                ]
-                avg_urgency = np.mean(urgencies) if urgencies else 0
-
-            return {
-                "pending_count": len(state.pending_shipments),
-                "fleet_available": len(state.get_available_vehicles()),
-                "avg_urgency": avg_urgency,
-                "urgent_count": urgent_count,
-                "total_volume": state.total_pending_volume(),
-                "total_weight": state.total_pending_weight(),
-                "fleet_utilization": state.fleet_utilization(),
-            }
-        except Exception as e:
-            logger.warning(f"Error extracting features: {e}")
-            return {
-                "pending_count": len(state.pending_shipments),
-                "fleet_available": 0,
-                "avg_urgency": 0,
-                "urgent_count": 0,
-                "total_volume": 0,
-                "total_weight": 0,
-                "fleet_utilization": 0,
-            }
-
-    def _extract_state_features(self, state: SystemState) -> Dict:
-        """Extract VFA features from state"""
-        return {
-            "pending_count": len(state.pending_shipments),
-            "fleet_available": len(state.get_available_vehicles()),
-            "avg_urgency": (
-                np.mean([s.urgency_score for s in state.pending_shipments])
-                if state.pending_shipments
-                else 0
-            ),
-            "total_volume": state.total_pending_volume(),
-            "total_weight": state.total_pending_weight(),
-            "fleet_utilization": state.fleet_utilization(),
-        }
-
-    def _dispatch_batch(self, batch: Dict, state: SystemState) -> Dict:
-        """
-        Dispatch a single batch with complete state persistence.
-
-        This implements the complete state transition function:
-        δ(S_t, a_dispatch) → S_{t+1}
-
-        Updates:
-        1. Shipment statuses → EN_ROUTE
-        2. Vehicle status → EN_ROUTE (CRITICAL FIX)
-        3. Vehicle route assignment (CRITICAL FIX)
-        4. Route record creation (CRITICAL FIX)
-
-        Args:
-            batch: Dict containing:
-                - shipments: List[str] - shipment IDs
-                - vehicle_id or vehicle: str - assigned vehicle
-                - route_stops: List[Dict] - route sequence (optional)
-                - estimated_duration_hours: float (default: 2.0)
-                - estimated_distance_km: float (default: 50.0)
-            state: Current system state S_t
-
-        Returns:
-            Dict with:
-                - shipments: int - count of dispatched shipments
-                - vehicle: str - vehicle ID (if assigned)
-                - route_id: str - route ID (if created)
-                - state_snapshot: Dict - state features for learning
-        """
-        from datetime import datetime, timedelta
-        from uuid import uuid4
-        import numpy as np
-
-        # Extract batch data
-        shipments = batch.get("shipments", [])
-        vehicle_id = batch.get("vehicle_id") or batch.get("vehicle")
-        route_stops = batch.get("route_stops", batch.get("route", []))
-
-        # Validate
-        if not shipments:
-            logger.warning("_dispatch_batch: Empty shipment list")
-            return {"shipments": 0, "vehicle": None, "state_snapshot": {}}
-
-        if not vehicle_id:
-            logger.error(
-                f"_dispatch_batch: Batch {batch.get('id', 'unknown')} missing vehicle"
-            )
-            return {"shipments": 0, "vehicle": None, "state_snapshot": {}}
-
-        # Generate IDs
-        route_id = batch.get("id", f"route_{uuid4().hex[:8]}")
-        batch_id = batch.get("id", f"batch_{uuid4().hex[:8]}")
-
-        logger.info(
-            f"Dispatching batch {batch_id}: {len(shipments)} shipments → {vehicle_id}"
-        )
-
-        # ================================================================
-        # STEP 1: Update Shipment Statuses
-        # ================================================================
-        shipments_updated = 0
-
-        for shipment_id in shipments:
-            try:
-                success = self.state_manager.update_shipment_status(
-                    shipment_id=shipment_id,
-                    status=ShipmentStatus.EN_ROUTE,
-                    batch_id=batch_id,
-                    route_id=route_id,
-                )
-
-                if success:
-                    shipments_updated += 1
-                else:
-                    logger.warning(f"Failed to update shipment {shipment_id}")
-
-            except Exception as e:
-                logger.error(f"Error updating shipment {shipment_id}: {e}")
-
-        logger.info(
-            f" Updated {shipments_updated}/{len(shipments)} shipments to EN_ROUTE"
-        )
-        try:
-            batch_formation_meta = {
-                "shipments": [
+                route = self._dispatch_batch(batch, state)
+                executed_batches.append(
                     {
-                        "id": s.id,
-                        "volume": s.volume,
-                        "weight": s.weight,
-                        "pickup_location": {
-                            "latitude": s.origin.lat if s.origin else 0,
-                            "longitude": s.origin.lng if s.origin else 0,
-                        },
-                        "delivery_locations": [
-                            {
-                                "latitude": dl.lat if dl else 0,
-                                "longitude": dl.lng if dl else 0,
-                            }
-                            for dl in s.destinations
-                        ],
+                        "batch_id": (
+                            batch.batch_id
+                            if hasattr(batch, "batch_id")
+                            else batch.get("batch_id", str(uuid4()))
+                        ),
+                        "shipment_ids": (
+                            [s.id for s in batch.shipments]
+                            if hasattr(batch, "shipments")
+                            else batch.get("shipments", [])
+                        ),
+                        "vehicle_id": (
+                            batch.vehicle.id
+                            if hasattr(batch, "vehicle")
+                            else batch.get("vehicle", "unknown")
+                        ),
+                        "route_id": route.id,
                     }
-                    for s in shipments
-                ],
-                "vehicle": batch["vehicle"],
-                "predicted_util": batch.get("utilization", 0.0),
-                "predicted_cost": batch.get("total_cost", 0.0),
+                )
+                total_shipments += (
+                    len(batch.shipments)
+                    if hasattr(batch, "shipments")
+                    else len(batch.get("shipments", []))
+                )
+                vehicles_used.add(
+                    batch.vehicle.id
+                    if hasattr(batch, "vehicle")
+                    else batch.get("vehicle", "unknown")
+                )
+
+            # FIX: Create DecisionEvent object and pass it to log_decision
+            decision_event = DecisionEvent(
+                id=str(uuid4()),
+                timestamp=datetime.now(),
+                decision_type=action_type,
+                function_class=decision.function_class.value,
+                action_details={
+                    "batches": executed_batches,
+                    "total_shipments": total_shipments,
+                },
+                state_snapshot=state,
+                reasoning=decision.reasoning,
+                confidence=self._extract_value(decision.confidence),
+            )
+            self.state_manager.log_decision(decision_event)
+
+            logger.info(
+                f"Executed DISPATCH: {total_shipments} shipments, {len(vehicles_used)} vehicles"
+            )
+            return {
+                "shipments_dispatched": total_shipments,
+                "vehicles_utilized": len(vehicles_used),
+                "executed_batches": executed_batches,
             }
 
-            # Store in route metadata for later retrieval
-            self.state_manager.save_route_formation_metadata(
-                route_id, batch_formation_meta
-            )
-
-        except Exception as e:
-            logger.warning(f"Failed to save batch formation metadata: {e}")
-            # ================================================================
-        # STEP 2: Update Vehicle State
-        # ================================================================
-        vehicle_assigned = False
-
-        try:
-            # Get current vehicle state from database
-            vehicle_state = self.state_manager.get_vehicle_state(vehicle_id)
-
-            if not vehicle_state:
-                logger.error(f"Vehicle {vehicle_id} not found in database")
-            else:
-                # Update vehicle state
-                old_status = vehicle_state.status
-                vehicle_state.status = VehicleStatus.EN_ROUTE
-                vehicle_state.current_route_id = route_id
-
-                # Calculate availability time
-                estimated_duration_hours = batch.get("estimated_duration_hours", 2.0)
-                vehicle_state.availability_time = datetime.now() + timedelta(
-                    hours=estimated_duration_hours
-                )
-
-                # PERSIST to database
-                success = self.state_manager.update_vehicle_state(vehicle_state)
-
-                if success:
-                    vehicle_assigned = True
-                    logger.info(
-                        f" Vehicle {vehicle_id}: {old_status.value} → EN_ROUTE "
-                        f"(route={route_id}, available in {estimated_duration_hours:.1f}h)"
-                    )
-                else:
-                    logger.error(f"Failed to persist vehicle {vehicle_id} state update")
-
-        except Exception as e:
-            logger.error(
-                f"Vehicle assignment error for {vehicle_id}: {e}", exc_info=True
-            )
-
-        # ================================================================
-        # STEP 3: Create Route Record (CRITICAL FIX)
-        # ================================================================
-        route_created = False
-        from .state_manager import Location
-
-        try:
-            # Build route sequence
-            sequence_locations = []
-
-            # Convert route stops to Location objects
-            for stop in route_stops:
-                if isinstance(stop, Location):
-                    sequence_locations.append(stop)
-                elif isinstance(stop, dict):
-                    sequence_locations.append(
-                        Location(
-                            place_id=stop.get("place_id", ""),
-                            lat=float(stop.get("lat", 0.0)),
-                            lng=float(stop.get("lng", 0.0)),
-                            formatted_address=stop.get("address", "Unknown"),
-                            zone_id=stop.get("zone_id"),
-                        )
-                    )
-
-            # If no stops provided, build from shipment destinations
-            if not sequence_locations and shipments:
-                logger.debug(f"Building route sequence from {len(shipments)} shipments")
-                for shipment_id in shipments:
-                    shipment = state.get_shipment(shipment_id)
-                    if shipment and shipment.destinations:
-                        sequence_locations.extend(shipment.destinations)
-
-            # Create Route object
-            route = Route(
-                id=route_id,
-                vehicle_id=vehicle_id,
-                shipment_ids=shipments,
-                sequence=sequence_locations,
-                estimated_duration=timedelta(
-                    hours=batch.get("estimated_duration_hours", 2.0)
-                ),
-                estimated_distance=batch.get("estimated_distance_km", 50.0),
-                created_at=datetime.now(),
-                started_at=datetime.now(),
-            )
-
-            # PERSIST to database
-            success = self.state_manager.add_route(route)
-
-            if success:
-                route_created = True
-                logger.info(
-                    f" Route {route_id} created: {len(shipments)} shipments, "
-                    f"{len(sequence_locations)} stops, "
-                    f"{route.estimated_distance:.1f}km"
-                )
-            else:
-                logger.error(f"Failed to persist route {route_id}")
-
-        except Exception as e:
-            logger.error(f"Route creation error for {route_id}: {e}", exc_info=True)
-
-        # ================================================================
-        # STEP 4: Build State Snapshot for Learning
-        # ================================================================
-        state_snapshot = {
-            "pending_count": len(state.pending_shipments),
-            "fleet_available": len(state.get_available_vehicles()),
-            "batch_size": len(shipments),
-            "vehicle_id": vehicle_id,
-            "route_id": route_id,
-            "vehicle_assigned": vehicle_assigned,
-            "route_created": route_created,
-            "urgency_avg": 0.0,
-        }
-
-        # Calculate average urgency
-        try:
-            urgency_scores = []
-            for sid in shipments:
-                shipment = state.get_shipment(sid)
-                if shipment and hasattr(shipment, "urgency_score"):
-                    urgency_scores.append(shipment.urgency_score)
-
-            if urgency_scores:
-                state_snapshot["urgency_avg"] = float(np.mean(urgency_scores))
-        except Exception as e:
-            logger.debug(f"Could not calculate urgency: {e}")
-
-        # ================================================================
-        # STEP 5: Log Summary and Return
-        # ================================================================
-        if shipments_updated > 0 and vehicle_assigned and route_created:
-            logger.info(
-                f" Dispatch complete: {shipments_updated} shipments, "
-                f"vehicle {vehicle_id}, route {route_id}"
-            )
         else:
-            logger.warning(
-                f" Partial dispatch: shipments={shipments_updated}/{len(shipments)}, "
-                f"vehicle_assigned={vehicle_assigned}, route_created={route_created}"
-            )
+            raise ValueError(f"Unknown action type: {action_type}")
+
+    def _dispatch_batch(self, batch, state: SystemState) -> Route:
+        route_id = f"route_{uuid4()}"
+
+        # Handle both StandardBatch and dict formats
+        if hasattr(batch, "shipments"):
+            shipment_objs = batch.shipments
+            vehicle_id = batch.vehicle.id if batch.vehicle else None
+        else:
+            shipment_ids = batch.get("shipments", [])
+            shipment_objs = [s for s in state.pending_shipments if s.id in shipment_ids]
+            vehicle_id = batch.get("vehicle")
+
+        # CRITICAL: Assign vehicle if not provided (PFA doesn't assign vehicles)
+        if not vehicle_id or vehicle_id == "unknown":
+            available = state.get_available_vehicles()
+            if not available:
+                raise RuntimeError("No available vehicles for dispatch")
+            vehicle_id = available[0].id
+
+        # Get destination locations
+        destinations = []
+        for s in shipment_objs:
+            if hasattr(s, "destinations") and s.destinations:
+                destinations.extend(s.destinations)
+            elif hasattr(s, "destination"):
+                destinations.append(s.destination)
+
+        route = Route(
+            id=route_id,
+            vehicle_id=vehicle_id,
+            shipment_ids=[s.id for s in shipment_objs],
+            sequence=destinations,
+            estimated_duration=timedelta(hours=3),
+            estimated_distance=50.0,
+            created_at=datetime.now(),
+        )
+
+        for shipment in shipment_objs:
+            shipment.status = ShipmentStatus.EN_ROUTE
+            shipment.assigned_vehicle_id = vehicle_id
+            shipment.assigned_route_id = route_id
+
+        self.state_manager.add_route(route)
+        return route
+
+    def _normalize_action(self, decision: MetaDecision, execution_result: Dict) -> dict:
+        # Extract action_type string
+        action_type = decision.action_type
+        if isinstance(action_type, dict):
+            action_type = action_type.get("action_type", "WAIT")
 
         return {
-            "shipments": shipments_updated,
-            "vehicle": vehicle_id if vehicle_assigned else None,
-            "route_id": route_id if route_created else None,
-            "state_snapshot": state_snapshot,
+            "type": action_type,
+            "batches": execution_result.get("executed_batches", []),
+            "shipment_ids": [
+                sid
+                for batch in execution_result.get("executed_batches", [])
+                for sid in batch.get("shipment_ids", [])
+            ],
         }
 
     def _trigger_learning_update(
@@ -753,50 +351,20 @@ class DecisionEngine:
         reward: float,
         state_after: SystemState,
     ) -> Dict:
-        """
-        Trigger VFA learning update using TD(λ)
+        vfa_estimate_before = self.vfa.estimate_value(state_before)
+        vfa_estimate_after = self.vfa.estimate_value(state_after)
 
-        Mathematical Foundation:
-        TD Error: δ_t = r_t + γ*V(s_{t+1}) - V(s_t)
-        Weight Update: θ ← θ + α * δ_t * e_t
+        value_before = self._extract_value(vfa_estimate_before)
+        value_after = self._extract_value(vfa_estimate_after)
 
-        Where:
-        - r_t: immediate reward
-        - γ: discount factor (typically 0.95)
-        - V(s): value function estimate
-        - α: learning rate
-        - e_t: eligibility trace
+        td_error = reward + value_after - value_before
 
-        Args:
-            state_before: State before action
-            action: Action taken (normalized format)
-            reward: Immediate reward
-            state_after: State after action
-
-        Returns:
-            Dict with learning metrics
-        """
-        # Evaluate value functions
-        vfa_eval_before = self.vfa.evaluate(state_before)
-        vfa_eval_after = self.vfa.evaluate(state_after)
-
-        value_before = vfa_eval_before.value
-        value_after = vfa_eval_after.value
-
-        # Calculate TD error
-        gamma = self.config.get("vfa.learning.discount_factor", 0.95)
-        td_error = reward + gamma * value_after - value_before
-
-        # Update VFA weights using TD(λ)
-        self.vfa.td_update(
-            s_t=state_before, action=action, reward=reward, s_tp1=state_after
-        )
+        # FIX: Call update with positional arguments instead of keyword arguments
+        self.vfa.update(state_before, action, reward, state_after)
 
         logger.debug(
-            f"Learning update: V(s_t)={value_before:.1f}, "
-            f"V(s_t+1)={value_after:.1f}, r={reward:.1f}, δ={td_error:.2f}"
+            f"Learning: V(s_t)={value_before:.1f}, V(s_t+1)={value_after:.1f}, r={reward:.1f}, δ={td_error:.2f}"
         )
-
         return {
             "updated": True,
             "value_before": value_before,
@@ -804,19 +372,13 @@ class DecisionEngine:
             "td_error": td_error,
         }
 
+    def _extract_value(self, val):
+        """Extract numeric value from ValueEstimate or return as-is"""
+        return val.value if hasattr(val, "value") else float(val)
+
     def get_performance_metrics(self) -> PerformanceMetrics:
-        """Calculate performance metrics from cycle history"""
         if not self.cycle_history:
-            return PerformanceMetrics(
-                total_cycles=0,
-                total_shipments_processed=0,
-                total_dispatches=0,
-                avg_utilization=0.0,
-                avg_reward_per_cycle=0.0,
-                avg_cycle_time_ms=0.0,
-                function_class_usage={},
-                learning_convergence=0.0,
-            )
+            return PerformanceMetrics(0, 0, 0, 0.0, 0.0, 0.0, {}, 0.0)
 
         total_shipments = sum(r.shipments_dispatched for r in self.cycle_history)
         total_dispatches = sum(
@@ -829,25 +391,23 @@ class DecisionEngine:
             self.cycle_history
         )
 
-        # Function class usage
         function_usage = {}
         for result in self.cycle_history:
             fc = result.decision.function_class.value
             function_usage[fc] = function_usage.get(fc, 0) + 1
 
-        # Learning convergence (based on recent TD errors)
         recent_td_errors = [abs(r.td_error) for r in self.cycle_history[-20:]]
         learning_convergence = 1.0 / (
             1.0 + sum(recent_td_errors) / len(recent_td_errors)
         )
 
         return PerformanceMetrics(
-            total_cycles=len(self.cycle_history),
-            total_shipments_processed=total_shipments,
-            total_dispatches=total_dispatches,
-            avg_utilization=0.0,  # TODO: Calculate from batches
-            avg_reward_per_cycle=avg_reward,
-            avg_cycle_time_ms=avg_cycle_time,
-            function_class_usage=function_usage,
-            learning_convergence=learning_convergence,
+            len(self.cycle_history),
+            total_shipments,
+            total_dispatches,
+            0.0,
+            avg_reward,
+            avg_cycle_time,
+            function_usage,
+            learning_convergence,
         )

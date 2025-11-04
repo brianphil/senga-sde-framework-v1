@@ -98,3 +98,26 @@ integrations:
   oms_integration: true
   driver_app_integration: true
   offline_mode_enabled: true
+meta_controller:
+  emergency_threshold_hours: 2.0
+  simple_state_max_shipments: 2
+  high_complexity_threshold: 5
+  high_stakes_cost_threshold: 500.0
+
+pfa:
+  queue_size_threshold: 3.0
+  urgency_threshold: 0.7
+  time_window_threshold: 2.0
+  learning_rate: 0.1
+
+cfa:
+  urgency_penalty_weight: 50.0
+  consolidation_bonus: 30.0
+  deadline_violation_penalty: 200.0
+  traffic_uncertainty_buffer: 1.2
+  learning_rate: 0.05
+
+dla:
+  horizon_hours: 4
+  use_vfa_terminal: true
+  max_scenarios: 5 # For stochastic mode

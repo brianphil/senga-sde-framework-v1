@@ -5,3 +5,4 @@ data/senga_config.back.db
 data/senga_state.back.db
 logs/
 __pycache__/
+cfa_train.py

@@ -1,200 +1,98 @@
 # src/core/pfa.py
-"""
-Policy Function Approximator - FIXED IMPLEMENTATION
-Maintains exact class name: PolicyFunctionApproximator (no breaking changes)
-"""
-
-import numpy as np
-from typing import List, Dict
+from typing import List, Optional
 from dataclasses import dataclass
-from collections import deque
+import numpy as np
 import logging
 
 logger = logging.getLogger(__name__)
 
+
 @dataclass
 class PFAAction:
     action_type: str
-    shipments: list
-    vehicle: object
-    confidence: float
+    shipment_ids: List[str]
     reasoning: str
-    feature_vector: np.ndarray = None
-    state_features: np.ndarray = None
+    confidence: float
+
 
 class PolicyFunctionApproximator:
-    """EXACT NAME - No breaking changes"""
-    
     def __init__(self):
-        self.theta = np.zeros(35)
-        self.lr = 0.01
-        self.gamma = 0.95
-        self.experience = deque(maxlen=1000)
-        logger.info("PFA initialized with policy gradient learning")
-    
-    def decide(self, state) -> PFAAction:
-        """EXACT signature - FIXED action types"""
-        # Emergency check - use DISPATCH_IMMEDIATE for emergencies
-        urgent = [s for s in state.pending_shipments 
-                 if (s.deadline - state.timestamp).total_seconds() / 3600 < 2]
-        
-        available = state.get_available_vehicles()
-        
-        if urgent and available:
-            return PFAAction(
-                action_type='DISPATCH_IMMEDIATE',  # FIXED: was EMERGENCY_DISPATCH
-                shipments=urgent[:1],
-                vehicle=available[0],
-                confidence=1.0,
-                reasoning='Emergency: deadline < 2hrs'
-            )
-        
-        # Generate candidates
-        candidates = self._generate_candidates(state)
-        
-        if not candidates:
-            return PFAAction(
-                action_type='WAIT',
-                shipments=[],
-                vehicle=None,
-                confidence=0.7,
-                reasoning='No viable candidates'
-            )
-        
-        # Policy evaluation
-        action_probs = self._policy_forward(state, candidates)
-        action_idx = np.random.choice(len(candidates), p=action_probs)
-        selected = candidates[action_idx]
-        
-        return PFAAction(
-            action_type='DISPATCH_IMMEDIATE',
-            shipments=selected['shipments'],
-            vehicle=selected['vehicle'],
-            confidence=float(action_probs[action_idx]),
-            reasoning=f"Policy π(a|s)={action_probs[action_idx]:.3f}"
-        )
-    
-    def policy_gradient_update(self, s_t, action, reward, vfa_baseline):
-        """Policy gradient update"""
-        features = self._extract_state_action_features(s_t, action)
-        
-        value_estimate = vfa_baseline.estimate_value(s_t) if vfa_baseline else 0
-        advantage = reward - (value_estimate.value if hasattr(value_estimate, 'value') else value_estimate)
-        
-        gradient = features
-        self.theta += self.lr * gradient * advantage
-        
-        self.experience.append((features, reward, advantage))
-    
-    def _policy_forward(self, state, candidates) -> np.ndarray:
-        """Compute π(a|s;θ) for all candidates"""
-        logits = []
-        for cand in candidates:
-            features = self._extract_state_action_features(state, cand)
-            logit = np.dot(self.theta, features)
-            logits.append(logit)
-        
-        logits = np.array(logits)
-        exp_logits = np.exp(logits - np.max(logits))
-        probs = exp_logits / exp_logits.sum()
-        
-        return probs
-    
-    def _generate_candidates(self, state) -> List[Dict]:
-        """Generate candidate actions - FIXED"""
-        candidates = []
-        available_veh = state.get_available_vehicles()
+        self.queue_threshold = 3.0
+        self.urgency_threshold = 0.7
+        self.time_window_threshold = 2.0
+        self.consolidation_threshold = 0.6
+        logger.info("PFA initialized")
+
+    def select_action(self, state) -> PFAAction:
+        # CORRECT: state.pending_shipments is a List
         pending = state.pending_shipments
-        
-        if not available_veh or not pending:
-            return []
-        
-        # Candidate 1: Most urgent shipment
-        urgent = sorted(pending, key=lambda s: (s.deadline - state.timestamp).total_seconds())
-        if urgent:
-            candidates.append({
-                'shipments': [urgent[0]],
-                'vehicle': available_veh[0],
-                'type': 'urgent_dispatch'
-            })
-        
-        # Candidate 2: Consolidation (same zone)
-        from collections import defaultdict
-        zone_groups = defaultdict(list)
+
+        if not pending:
+            return PFAAction("wait", [], "No pending shipments", 1.0)
+
+        # Rule 1: Critical urgency
+        critical = []
         for s in pending:
-            if s.destinations:
-                zone = s.destinations[0].zone_id or 'unknown'
-                zone_groups[zone].append(s)
-        
-        for zone, ships in zone_groups.items():
-            if len(ships) >= 2:
-                candidates.append({
-                    'shipments': ships[:3],
-                    'vehicle': available_veh[0],
-                    'type': 'consolidated'
-                })
-        
-        return candidates
-    
-    def _extract_state_action_features(self, state, action) -> np.ndarray:
-        """Extract 35 features - FIXED"""
-        import math
-        
-        # State features [20]
-        hour = state.timestamp.hour
-        hour_sin = math.sin(2*math.pi*hour/24)
-        hour_cos = math.cos(2*math.pi*hour/24)
-        
-        pending = state.pending_shipments
-        n_pending = len(pending)
-        n_available = len(state.get_available_vehicles())
-        
-        avg_urgency = 0
-        if pending:
-            urgencies = [(s.deadline - state.timestamp).total_seconds() / 3600 for s in pending]
-            avg_urgency = np.mean(urgencies)
-        
-        state_feat = np.array([
-            hour_sin, hour_cos, state.timestamp.weekday()/7.0,
-            n_pending, n_available, n_available/(len(state.fleet_state)+1e-8),
-            avg_urgency,
-            min([(s.deadline - state.timestamp).total_seconds() / 3600 for s in pending] or [24]),
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-        ])
-        
-        # Action features [8]
-        if isinstance(action, dict):
-            shipments = action.get('shipments', [])
-            vehicle = action.get('vehicle')
-        else:
-            shipments = getattr(action, 'shipments', [])
-            vehicle = getattr(action, 'vehicle', None)
-        
-        n_ships = len(shipments)
-        total_vol = sum(s.volume for s in shipments) if shipments else 0
-        utilization = total_vol / vehicle.capacity.volume if vehicle and vehicle.capacity.volume > 0 else 0
-        
-        action_feat = np.array([
-            n_ships, utilization,
-            np.mean([(s.deadline - state.timestamp).total_seconds() / 3600 for s in shipments]) if shipments else 0,
-            0, 0, 0, 0, 0
-        ])
-        
-        # Interactions [7]
-        interact_feat = np.array([n_pending * n_ships, avg_urgency * utilization, 0, 0, 0, 0, 0])
-        
-        features = np.concatenate([state_feat, action_feat, interact_feat])
-        return features[:35]
-    
-    def get_learning_metrics(self) -> Dict:
-        """EXACT signature - backward compatible"""
-        recent_rewards = [e[1] for e in list(self.experience)[-100:]]
-        recent_advantages = [e[2] for e in list(self.experience)[-100:]]
-        
-        return {
-            'num_updates': len(self.experience),
-            'learning_rate': self.lr,
-            'avg_reward': np.mean(recent_rewards) if recent_rewards else 0,
-            'avg_advantage': np.mean(recent_advantages) if recent_advantages else 0,
-            'theta_norm': np.linalg.norm(self.theta)
-        }
+            hours_to_deadline = (s.deadline - state.timestamp).total_seconds() / 3600
+            if hours_to_deadline < self.time_window_threshold:
+                critical.append(s)
+
+        if critical:
+            return PFAAction(
+                "dispatch_batch" if len(critical) > 1 else "dispatch_single",
+                [s.id for s in critical],
+                f"Emergency: {len(critical)} critical shipments",
+                0.95,
+            )
+
+        # Rule 2: Queue size trigger
+        if len(pending) >= self.queue_threshold:
+            batch = self._find_batch(pending)
+            if batch:
+                return PFAAction(
+                    "dispatch_batch",
+                    [s.id for s in batch],
+                    f"Queue size {len(pending)} >= {self.queue_threshold}",
+                    0.8,
+                )
+
+        # Rule 3: Consolidation opportunity
+        batch = self._find_batch(pending)
+        if batch and len(batch) >= 2:
+            avg_urgency = np.mean([self._urgency(s, state.timestamp) for s in batch])
+            if avg_urgency < self.urgency_threshold:
+                return PFAAction(
+                    "dispatch_batch",
+                    [s.id for s in batch],
+                    f"Good consolidation: {len(batch)} shipments",
+                    0.75,
+                )
+
+        return PFAAction("wait", [], "Waiting for consolidation", 0.6)
+
+    def _find_batch(self, shipments: List) -> Optional[List]:
+        if len(shipments) < 2:
+            return None
+
+        best_batch, best_score = None, 0
+        for i, s1 in enumerate(shipments):
+            for s2 in shipments[i + 1 :]:
+                sim = self._similarity(s1, s2)
+                if sim > self.consolidation_threshold and sim > best_score:
+                    best_batch, best_score = [s1, s2], sim
+
+        return best_batch
+
+    def _similarity(self, s1, s2) -> float:
+        if not s1.destinations or not s2.destinations:
+            return 0.0
+        d1, d2 = s1.destinations[0], s2.destinations[0]
+        dist = np.sqrt((d1.lat - d2.lat) ** 2 + (d1.lng - d2.lng) ** 2)
+        return np.exp(-dist / 0.1)
+
+    def _urgency(self, shipment, current_time) -> float:
+        hours = (shipment.deadline - current_time).total_seconds() / 3600
+        return max(0, min(1, 1.0 - hours / 24))
+
+    def update_from_outcome(self, action: PFAAction, reward: float):
+        pass  # Simple version - no learning yet

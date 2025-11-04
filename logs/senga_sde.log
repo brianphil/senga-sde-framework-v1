@@ -1,287 +1,95 @@
 
-2025-10-31 19:58:14,959 - src.api.main - INFO - ============================================================
-2025-10-31 19:58:14,961 - src.api.main - INFO - Starting Senga Sequential Decision Engine
-2025-10-31 19:58:14,961 - src.api.main - INFO - ============================================================
-2025-10-31 19:58:14,985 - src.api.main - INFO -  Configuration loaded
-2025-10-31 19:58:14,988 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 19:58:14,989 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 19:58:14,989 - src.api.main - INFO -  State Manager initialized with persistent storage
-2025-10-31 19:58:14,992 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 19:58:14,993 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 19:58:14,999 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 19:58:15,000 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 19:58:15,000 - src.core.pfa - INFO - PFA initialized with policy gradient learning
-2025-10-31 19:58:19,281 - src.core.cfa - INFO - Neural CFA initialized - will use MIP until trained
-2025-10-31 19:58:19,305 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
-2025-10-31 19:58:19,306 - src.core.dla - INFO - DLA initialized: 50 scenarios, 3hr horizon
-2025-10-31 19:58:19,316 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
-2025-10-31 19:58:19,317 - src.core.decision_engine - INFO - Decision Engine initialized
-2025-10-31 19:58:19,317 - src.api.main - INFO -  Decision Engine initialized
-2025-10-31 19:58:19,321 - src.api.main - INFO -  Loaded 6 pending orders from database
-2025-10-31 19:58:19,321 - src.api.main - INFO - ============================================================
-2025-10-31 19:58:19,322 - src.api.main - INFO - Senga SDE Ready
-2025-10-31 19:58:19,322 - src.api.main - INFO - ============================================================
-2025-10-31 19:58:19,322 - src.api.main - INFO - ============================================================
-2025-10-31 19:58:19,322 - src.api.main - INFO - Starting Senga Sequential Decision Engine
-2025-10-31 19:58:19,323 - src.api.main - INFO - ============================================================
-2025-10-31 19:58:19,323 - src.api.main - INFO -  Configuration loaded
-2025-10-31 19:58:19,326 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 19:58:19,329 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 19:58:19,332 - src.api.main - INFO -  State Manager initialized
-2025-10-31 19:58:20,687 - src.integrations.external_systems - INFO - Google Places API: Online
-2025-10-31 19:58:20,700 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
-2025-10-31 19:58:20,701 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
-2025-10-31 19:58:20,702 - src.integrations.external_systems - INFO - Integration Manager initialized
-2025-10-31 19:58:20,704 - src.api.main - INFO -  Integration Manager initialized
-2025-10-31 19:58:20,708 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 19:58:20,711 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 19:58:20,720 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 19:58:20,720 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 19:58:20,721 - src.core.pfa - INFO - PFA initialized with policy gradient learning
-2025-10-31 19:58:20,724 - src.core.cfa - INFO - Neural CFA initialized - will use MIP until trained
-2025-10-31 19:58:20,741 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
-2025-10-31 19:58:20,741 - src.core.dla - INFO - DLA initialized: 50 scenarios, 3hr horizon
-2025-10-31 19:58:20,751 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
-2025-10-31 19:58:20,751 - src.core.decision_engine - INFO - Decision Engine initialized
-2025-10-31 19:58:20,753 - src.api.main - INFO -  Decision Engine initialized
-2025-10-31 19:58:20,756 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 19:58:20,756 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 19:58:20,765 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 19:58:20,766 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 19:58:20,767 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
-2025-10-31 19:58:20,767 - src.api.main - ERROR - Failed to start Senga SDE: NeuralCFA.__init__() missing 1 required positional argument: 'config'
-Traceback (most recent call last):
-  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 860, in startup_event
-    multi_scale_coordinator = MultiScaleCoordinator()
-  File "D:\work\senga-sde-framework-v1.0.0\src\core\multi_scale_coordinator.py", line 89, in __init__
-    self.cfa_neural = NeuralCFA()
-                      ~~~~~~~~~^^
-TypeError: NeuralCFA.__init__() missing 1 required positional argument: 'config'
-2025-10-31 19:58:22,024 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:22,387 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:22,796 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:23,200 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:23,608 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:24,022 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:24,390 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:24,800 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:25,208 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:25,615 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:26,023 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:26,427 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:26,833 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:27,238 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:27,641 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:28,059 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:28,466 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:28,879 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:29,301 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:29,709 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:30,116 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:30,535 - watchfiles.main - INFO - 1 change detected
-2025-10-31 19:58:30,946 - watchfiles.main - INFO - 1 change detected
-2025-10-31 20:01:17,427 - src.api.main - INFO - ============================================================
-2025-10-31 20:01:17,429 - src.api.main - INFO - Starting Senga Sequential Decision Engine
-2025-10-31 20:01:17,429 - src.api.main - INFO - ============================================================
-2025-10-31 20:01:17,458 - src.api.main - INFO -  Configuration loaded
-2025-10-31 20:01:17,462 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 20:01:17,463 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 20:01:17,463 - src.api.main - INFO -  State Manager initialized with persistent storage
-2025-10-31 20:01:17,466 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 20:01:17,466 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 20:01:17,473 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 20:01:17,474 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 20:01:17,475 - src.core.pfa - INFO - PFA initialized with policy gradient learning
-2025-10-31 20:01:21,709 - src.core.cfa - INFO - Neural CFA initialized - will use MIP until trained
-2025-10-31 20:01:21,720 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
-2025-10-31 20:01:21,720 - src.core.dla - INFO - DLA initialized: 50 scenarios, 3hr horizon
-2025-10-31 20:01:21,727 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
-2025-10-31 20:01:21,728 - src.core.decision_engine - INFO - Decision Engine initialized
-2025-10-31 20:01:21,729 - src.api.main - INFO -  Decision Engine initialized
-2025-10-31 20:01:21,730 - src.api.main - INFO -  Loaded 6 pending orders from database
-2025-10-31 20:01:21,730 - src.api.main - INFO - ============================================================
-2025-10-31 20:01:21,730 - src.api.main - INFO - Senga SDE Ready
-2025-10-31 20:01:21,731 - src.api.main - INFO - ============================================================
-2025-10-31 20:01:21,731 - src.api.main - INFO - ============================================================
-2025-10-31 20:01:21,731 - src.api.main - INFO - Starting Senga Sequential Decision Engine
-2025-10-31 20:01:21,731 - src.api.main - INFO - ============================================================
-2025-10-31 20:01:21,732 - src.api.main - INFO -  Configuration loaded
-2025-10-31 20:01:21,738 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 20:01:21,739 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 20:01:21,739 - src.api.main - INFO -  State Manager initialized
-2025-10-31 20:01:23,505 - src.integrations.external_systems - INFO - Google Places API: Online
-2025-10-31 20:01:23,510 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
-2025-10-31 20:01:23,511 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
-2025-10-31 20:01:23,511 - src.integrations.external_systems - INFO - Integration Manager initialized
-2025-10-31 20:01:23,511 - src.api.main - INFO -  Integration Manager initialized
-2025-10-31 20:01:23,514 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 20:01:23,515 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 20:01:23,522 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 20:01:23,523 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 20:01:23,524 - src.core.pfa - INFO - PFA initialized with policy gradient learning
-2025-10-31 20:01:23,526 - src.core.cfa - INFO - Neural CFA initialized - will use MIP until trained
-2025-10-31 20:01:23,540 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
-2025-10-31 20:01:23,540 - src.core.dla - INFO - DLA initialized: 50 scenarios, 3hr horizon
-2025-10-31 20:01:23,547 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
-2025-10-31 20:01:23,547 - src.core.decision_engine - INFO - Decision Engine initialized
-2025-10-31 20:01:23,548 - src.api.main - INFO -  Decision Engine initialized
-2025-10-31 20:01:23,555 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 20:01:23,556 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 20:01:23,559 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 20:01:23,560 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 20:01:23,561 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
-2025-10-31 20:01:23,563 - src.core.cfa - INFO - Neural CFA initialized - will use MIP until trained
-2025-10-31 20:01:23,564 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
-2025-10-31 20:01:23,564 - src.core.multi_scale_coordinator - INFO - Neural CFA initialized for learning
-2025-10-31 20:01:23,564 - src.api.main - INFO -  Multi-Scale Coordinator initialized
-2025-10-31 20:01:23,565 - src.api.main - INFO - ============================================================
-2025-10-31 20:01:23,565 - src.api.main - INFO - Senga SDE started successfully!
-2025-10-31 20:01:23,568 - src.api.main - INFO - API available at http://localhost:8000
-2025-10-31 20:01:23,569 - src.api.main - INFO - Docs available at http://localhost:8000/docs
-2025-10-31 20:01:23,570 - src.api.main - INFO - ============================================================
-2025-10-31 20:01:32,924 - src.api.main - INFO - Retrieved 0 completed routes
-2025-10-31 20:01:32,942 - src.api.main - INFO -  Retrieved 6 pending orders from database
-2025-10-31 20:02:03,511 - src.api.main - INFO - Running consolidation cycle with 6 pending orders
-2025-10-31 20:02:03,513 - src.core.decision_engine - INFO - Cycle 0: 6 pending shipments
-2025-10-31 20:02:03,514 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
-2025-10-31 20:02:03,611 - src.core.decision_engine - INFO - Cycle completed in 99.7ms | Reward: -10.0 | TD Error: -10.00
-2025-10-31 20:02:03,613 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 6 waiting
-2025-10-31 20:02:03,669 - src.api.main - INFO -  Retrieved 6 pending orders from database
-2025-10-31 20:02:03,680 - src.api.main - INFO - Retrieved 0 completed routes
-2025-10-31 20:02:08,980 - src.api.main - INFO - Running consolidation cycle with 6 pending orders
-2025-10-31 20:02:08,980 - src.core.decision_engine - INFO - Cycle 1: 6 pending shipments
-2025-10-31 20:02:08,981 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
-2025-10-31 20:02:08,995 - src.core.decision_engine - INFO - Cycle completed in 14.9ms | Reward: -10.0 | TD Error: -10.00
-2025-10-31 20:02:08,998 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 6 waiting
-2025-10-31 20:02:09,057 - src.api.main - INFO -  Retrieved 6 pending orders from database
-2025-10-31 20:02:09,070 - src.api.main - INFO - Retrieved 0 completed routes
-2025-10-31 20:02:12,784 - src.api.main - INFO - Running consolidation cycle with 6 pending orders
-2025-10-31 20:02:12,784 - src.core.decision_engine - INFO - Cycle 2: 6 pending shipments
-2025-10-31 20:02:12,785 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
-2025-10-31 20:02:12,794 - src.core.decision_engine - INFO - Cycle completed in 9.8ms | Reward: -10.0 | TD Error: -10.00
-2025-10-31 20:02:12,797 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 6 waiting
-2025-10-31 20:02:12,837 - src.api.main - INFO -  Retrieved 6 pending orders from database
-2025-10-31 20:02:12,853 - src.api.main - INFO - Retrieved 0 completed routes
-2025-10-31 20:02:16,026 - src.api.main - INFO - Running consolidation cycle with 6 pending orders
-2025-10-31 20:02:16,026 - src.core.decision_engine - INFO - Cycle 3: 6 pending shipments
-2025-10-31 20:02:16,027 - src.core.decision_engine - INFO - Decision: cfa -> WAIT (confidence: 0.50)
-2025-10-31 20:02:16,034 - src.core.decision_engine - INFO - Cycle completed in 8.0ms | Reward: -10.0 | TD Error: -10.00
-2025-10-31 20:02:16,041 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 6 waiting
-2025-10-31 20:02:16,113 - src.api.main - INFO -  Retrieved 6 pending orders from database
-2025-10-31 20:02:16,131 - src.api.main - INFO - Retrieved 0 completed routes
-2025-10-31 20:05:12,111 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
-2025-10-31 20:05:12,112 - src.api.main - INFO - Shutdown complete
-2025-10-31 20:10:33,195 - src.api.main - INFO - ============================================================
-2025-10-31 20:10:33,196 - src.api.main - INFO - Starting Senga Sequential Decision Engine
-2025-10-31 20:10:33,197 - src.api.main - INFO - ============================================================
-2025-10-31 20:10:33,221 - src.api.main - INFO -  Configuration loaded
-2025-10-31 20:10:33,227 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 20:10:33,228 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 20:10:33,228 - src.api.main - INFO -  State Manager initialized with persistent storage
-2025-10-31 20:10:33,231 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 20:10:33,232 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 20:10:33,237 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 20:10:33,238 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 20:10:33,238 - src.core.pfa - INFO - PFA initialized with policy gradient learning
-2025-10-31 20:10:33,253 - watchfiles.main - INFO - 1 change detected
-2025-10-31 20:10:36,614 - src.core.cfa - INFO - Neural CFA initialized - will use MIP until trained
-2025-10-31 20:10:36,621 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
-2025-10-31 20:10:36,622 - src.core.dla - INFO - DLA initialized: 50 scenarios, 3hr horizon
-2025-10-31 20:10:36,626 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
-2025-10-31 20:10:36,627 - src.core.decision_engine - INFO - Decision Engine initialized
-2025-10-31 20:10:36,627 - src.api.main - INFO -  Decision Engine initialized
-2025-10-31 20:10:36,629 - src.api.main - INFO -  Loaded 6 pending orders from database
-2025-10-31 20:10:36,629 - src.api.main - INFO - ============================================================
-2025-10-31 20:10:36,629 - src.api.main - INFO - Senga SDE Ready
-2025-10-31 20:10:36,630 - src.api.main - INFO - ============================================================
-2025-10-31 20:10:36,630 - src.api.main - INFO - ============================================================
-2025-10-31 20:10:36,630 - src.api.main - INFO - Starting Senga Sequential Decision Engine
-2025-10-31 20:10:36,630 - src.api.main - INFO - ============================================================
-2025-10-31 20:10:36,631 - src.api.main - INFO -  Configuration loaded
-2025-10-31 20:10:36,633 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 20:10:36,634 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 20:10:36,635 - src.api.main - INFO -  State Manager initialized
-2025-10-31 20:10:38,353 - src.integrations.external_systems - INFO - Google Places API: Online
-2025-10-31 20:10:38,358 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
-2025-10-31 20:10:38,359 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
-2025-10-31 20:10:38,359 - src.integrations.external_systems - INFO - Integration Manager initialized
-2025-10-31 20:10:38,360 - src.api.main - INFO -  Integration Manager initialized
-2025-10-31 20:10:38,363 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 20:10:38,363 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 20:10:38,366 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 20:10:38,367 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 20:10:38,367 - src.core.pfa - INFO - PFA initialized with policy gradient learning
-2025-10-31 20:10:38,373 - src.core.cfa - INFO - Neural CFA initialized - will use MIP until trained
-2025-10-31 20:10:38,381 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
-2025-10-31 20:10:38,382 - src.core.dla - INFO - DLA initialized: 50 scenarios, 3hr horizon
-2025-10-31 20:10:38,390 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
-2025-10-31 20:10:38,390 - src.core.decision_engine - INFO - Decision Engine initialized
-2025-10-31 20:10:38,391 - src.api.main - INFO -  Decision Engine initialized
-2025-10-31 20:10:38,394 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 20:10:38,395 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 20:10:38,397 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
-2025-10-31 20:10:38,398 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
-2025-10-31 20:10:38,399 - src.core.vfa - INFO - Loaded VFA weights from data\vfa_weights.json: 0 updates, avg_error=0.00
-2025-10-31 20:10:38,402 - src.core.cfa - INFO - Neural CFA initialized - will use MIP until trained
-2025-10-31 20:10:38,402 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
-2025-10-31 20:10:38,404 - src.core.multi_scale_coordinator - INFO - Neural CFA initialized for learning
-2025-10-31 20:10:38,405 - src.api.main - INFO -  Multi-Scale Coordinator initialized
-2025-10-31 20:10:38,405 - src.api.main - INFO - ============================================================
-2025-10-31 20:10:38,405 - src.api.main - INFO - Senga SDE started successfully!
-2025-10-31 20:10:38,405 - src.api.main - INFO - API available at http://localhost:8000
-2025-10-31 20:10:38,406 - src.api.main - INFO - Docs available at http://localhost:8000/docs
-2025-10-31 20:10:38,406 - src.api.main - INFO - ============================================================
-2025-10-31 20:10:43,284 - src.api.main - INFO -  Retrieved 6 pending orders from database
-2025-10-31 20:10:43,309 - src.api.main - INFO - Retrieved 0 completed routes
-2025-10-31 20:11:00,132 - src.api.main - INFO - Running consolidation cycle with 6 pending orders
-2025-10-31 20:11:00,134 - src.core.decision_engine - INFO - Cycle 0: 6 pending shipments
-2025-10-31 20:11:00,139 - src.core.decision_engine - ERROR - Cycle failed: StandardBatch.__init__() got an unexpected keyword argument 'id'
-Traceback (most recent call last):
-  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 131, in run_cycle
-    decision = self.meta_controller.decide(state_before)
-  File "D:\work\senga-sde-framework-v1.0.0\src\core\meta_controller.py", line 134, in decide
-    return self._use_cfa(state)
-           ~~~~~~~~~~~~~^^^^^^^
-  File "D:\work\senga-sde-framework-v1.0.0\src\core\meta_controller.py", line 219, in _use_cfa
-    solution = self.cfa.optimize(state, value_function=self.vfa)
-  File "D:\work\senga-sde-framework-v1.0.0\src\core\cfa.py", line 156, in optimize
-    return self._heuristic_dispatch(shipments, vehicles, state)
-           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\work\senga-sde-framework-v1.0.0\src\core\cfa.py", line 435, in _heuristic_dispatch
-    StandardBatch(
-    ~~~~~~~~~~~~~^
-        id=f"batch_{len(batches)}",
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<7 lines>...
-        estimated_completion=state.timestamp,
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-TypeError: StandardBatch.__init__() got an unexpected keyword argument 'id'
-2025-10-31 20:11:00,142 - src.api.main - ERROR - Consolidation cycle failed: StandardBatch.__init__() got an unexpected keyword argument 'id'
-Traceback (most recent call last):
-  File "D:\work\senga-sde-framework-v1.0.0\src\api\main.py", line 1123, in trigger_consolidation_cycle
-    cycle_result = decision_engine.run_cycle()
-  File "D:\work\senga-sde-framework-v1.0.0\src\core\decision_engine.py", line 131, in run_cycle
-    decision = self.meta_controller.decide(state_before)
-  File "D:\work\senga-sde-framework-v1.0.0\src\core\meta_controller.py", line 134, in decide
-    return self._use_cfa(state)
-           ~~~~~~~~~~~~~^^^^^^^
-  File "D:\work\senga-sde-framework-v1.0.0\src\core\meta_controller.py", line 219, in _use_cfa
-    solution = self.cfa.optimize(state, value_function=self.vfa)
-  File "D:\work\senga-sde-framework-v1.0.0\src\core\cfa.py", line 156, in optimize
-    return self._heuristic_dispatch(shipments, vehicles, state)
-           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\work\senga-sde-framework-v1.0.0\src\core\cfa.py", line 435, in _heuristic_dispatch
-    StandardBatch(
-    ~~~~~~~~~~~~~^
-        id=f"batch_{len(batches)}",
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<7 lines>...
-        estimated_completion=state.timestamp,
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-TypeError: StandardBatch.__init__() got an unexpected keyword argument 'id'
-2025-10-31 20:11:36,656 - src.api.main - INFO - Shutting down Senga Sequential Decision Engine
-2025-10-31 20:11:36,657 - src.api.main - INFO - Shutdown complete
+2025-11-04 19:50:30,951 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-11-04 19:50:30,951 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-11-04 19:50:30,952 - src.api.main - INFO -  State Manager initialized with persistent storage
+2025-11-04 19:50:30,954 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-11-04 19:50:30,955 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-11-04 19:50:30,962 - src.core.pfa - INFO - PFA initialized
+2025-11-04 19:50:30,962 - src.core.cfa - INFO - CFA initialized
+2025-11-04 19:50:30,962 - src.core.dla - INFO - DLA initialized: deterministic lookahead, 4hr horizon
+2025-11-04 19:50:31,133 - watchfiles.main - INFO - 1 change detected
+2025-11-04 19:50:33,288 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-11-04 19:50:33,294 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-11-04 19:50:33,295 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-11-04 19:50:33,295 - src.api.main - INFO -  Decision Engine initialized
+2025-11-04 19:50:33,299 - src.api.main - INFO -  Loaded 15 pending orders from database
+2025-11-04 19:50:33,299 - src.api.main - INFO - ============================================================
+2025-11-04 19:50:33,300 - src.api.main - INFO - Senga SDE Ready
+2025-11-04 19:50:33,300 - src.api.main - INFO - ============================================================
+2025-11-04 19:50:33,300 - src.api.main - INFO - ============================================================
+2025-11-04 19:50:33,300 - src.api.main - INFO - Starting Senga Sequential Decision Engine
+2025-11-04 19:50:33,301 - src.api.main - INFO - ============================================================
+2025-11-04 19:50:33,301 - src.api.main - INFO -  Configuration loaded
+2025-11-04 19:50:33,303 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-11-04 19:50:33,304 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-11-04 19:50:33,304 - src.api.main - INFO -  State Manager initialized
+2025-11-04 19:50:34,834 - src.integrations.external_systems - INFO - Google Places API: Online
+2025-11-04 19:50:34,841 - src.integrations.external_systems - ERROR - OMS API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-11-04 19:50:34,843 - src.integrations.external_systems - ERROR - Driver App API: Offline - Invalid URL '/health': No scheme supplied. Perhaps you meant https:///health?
+2025-11-04 19:50:34,844 - src.integrations.external_systems - INFO - Integration Manager initialized
+2025-11-04 19:50:34,846 - src.api.main - INFO -  Integration Manager initialized
+2025-11-04 19:50:34,853 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-11-04 19:50:34,854 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-11-04 19:50:34,855 - src.core.pfa - INFO - PFA initialized
+2025-11-04 19:50:34,856 - src.core.cfa - INFO - CFA initialized
+2025-11-04 19:50:34,858 - src.core.dla - INFO - DLA initialized: deterministic lookahead, 4hr horizon
+2025-11-04 19:50:34,865 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-11-04 19:50:34,878 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-11-04 19:50:34,878 - src.core.decision_engine - INFO - Decision Engine initialized
+2025-11-04 19:50:34,879 - src.api.main - INFO -  Decision Engine initialized
+2025-11-04 19:50:34,882 - src.core.state_manager_extensions - WARNING - Could not create index on completed_at: no such column: completed_at
+2025-11-04 19:50:34,883 - src.core.state_manager_extensions - INFO - Route outcome tables initialized
+2025-11-04 19:50:34,890 - src.core.vfa_neural - INFO - Neural VFA initialized on cpu
+2025-11-04 19:50:34,891 - src.core.cfa - INFO - CFA initialized
+2025-11-04 19:50:34,893 - src.core.multi_scale_coordinator - INFO - Multi-Scale Coordinator initialized
+2025-11-04 19:50:34,893 - src.core.multi_scale_coordinator - INFO - Neural CFA initialized for learning
+2025-11-04 19:50:34,893 - src.api.main - INFO -  Multi-Scale Coordinator initialized
+2025-11-04 19:50:34,894 - src.api.main - INFO - ============================================================
+2025-11-04 19:50:34,894 - src.api.main - INFO - Senga SDE started successfully!
+2025-11-04 19:50:34,894 - src.api.main - INFO - API available at http://localhost:8000
+2025-11-04 19:50:34,895 - src.api.main - INFO - Docs available at http://localhost:8000/docs
+2025-11-04 19:50:34,895 - src.api.main - INFO - ============================================================
+2025-11-04 19:50:39,115 - src.api.main - INFO -  Retrieved 15 pending orders from database
+2025-11-04 19:50:39,135 - src.api.main - INFO - Retrieved 0 completed routes
+2025-11-04 19:50:43,663 - src.api.main - INFO - Running consolidation cycle with 15 pending orders
+2025-11-04 19:50:43,670 - src.core.decision_engine - INFO - Cycle 0: 15 pending shipments
+2025-11-04 19:50:43,674 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH (confidence: 0.95)
+2025-11-04 19:50:43,679 - src.core.decision_engine - INFO - Executing DISPATCH: 1 batches
+2025-11-04 19:50:43,764 - watchfiles.main - INFO - 1 change detected
+2025-11-04 19:50:43,943 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 1 vehicles
+2025-11-04 19:50:43,954 - src.core.decision_engine - INFO - Cycle completed in 290.1ms | Reward: 0.0 | TD Error: -0.03
+2025-11-04 19:50:43,958 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 15 waiting
+2025-11-04 19:50:43,999 - src.api.main - INFO -  Retrieved 15 pending orders from database
+2025-11-04 19:50:44,009 - src.api.main - INFO - Retrieved 0 completed routes
+2025-11-04 19:50:44,124 - watchfiles.main - INFO - 5 changes detected
+2025-11-04 19:50:53,939 - src.api.main - INFO - Running consolidation cycle with 15 pending orders
+2025-11-04 19:50:53,939 - src.core.decision_engine - INFO - Cycle 1: 15 pending shipments
+2025-11-04 19:50:53,940 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH (confidence: 0.95)
+2025-11-04 19:50:53,940 - src.core.decision_engine - INFO - Executing DISPATCH: 1 batches
+2025-11-04 19:50:53,995 - watchfiles.main - INFO - 2 changes detected
+2025-11-04 19:50:54,205 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 1 vehicles
+2025-11-04 19:50:54,215 - src.core.decision_engine - INFO - Cycle completed in 275.9ms | Reward: 0.0 | TD Error: -0.03
+2025-11-04 19:50:54,221 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 15 waiting
+2025-11-04 19:50:54,254 - src.api.main - INFO -  Retrieved 15 pending orders from database
+2025-11-04 19:50:54,263 - src.api.main - INFO - Retrieved 0 completed routes
+2025-11-04 19:50:54,363 - watchfiles.main - INFO - 5 changes detected
+2025-11-04 19:51:01,258 - src.api.main - INFO - Running consolidation cycle with 15 pending orders
+2025-11-04 19:51:01,259 - src.core.decision_engine - INFO - Cycle 2: 15 pending shipments
+2025-11-04 19:51:01,260 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH (confidence: 0.95)
+2025-11-04 19:51:01,260 - src.core.decision_engine - INFO - Executing DISPATCH: 1 batches
+2025-11-04 19:51:01,342 - watchfiles.main - INFO - 2 changes detected
+2025-11-04 19:51:01,538 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 1 vehicles
+2025-11-04 19:51:01,548 - src.core.decision_engine - INFO - Cycle completed in 288.8ms | Reward: 0.0 | TD Error: -0.03
+2025-11-04 19:51:01,556 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 15 waiting
+2025-11-04 19:51:01,594 - src.api.main - INFO -  Retrieved 15 pending orders from database
+2025-11-04 19:51:01,607 - src.api.main - INFO - Retrieved 0 completed routes
+2025-11-04 19:51:01,710 - watchfiles.main - INFO - 5 changes detected
+2025-11-04 19:51:04,605 - src.api.main - INFO - Running consolidation cycle with 15 pending orders
+2025-11-04 19:51:04,606 - src.core.decision_engine - INFO - Cycle 3: 15 pending shipments
+2025-11-04 19:51:04,607 - src.core.decision_engine - INFO - Decision: pfa -> DISPATCH (confidence: 0.95)
+2025-11-04 19:51:04,607 - src.core.decision_engine - INFO - Executing DISPATCH: 1 batches
+2025-11-04 19:51:04,702 - watchfiles.main - INFO - 2 changes detected
+2025-11-04 19:51:04,869 - src.core.decision_engine - INFO - Executed DISPATCH: 1 shipments, 1 vehicles
+2025-11-04 19:51:04,884 - src.core.decision_engine - INFO - Cycle completed in 277.7ms | Reward: 0.0 | TD Error: -0.02
+2025-11-04 19:51:04,894 - src.api.main - INFO -  Consolidation cycle complete: 0 dispatched, 15 waiting
+2025-11-04 19:51:04,947 - src.api.main - INFO -  Retrieved 15 pending orders from database

@@ -1095,6 +1095,9 @@ async def get_completed_routes(limit: int = 20):
 #         logger.error(f"Failed to get completed routes: {e}", exc_info=True)
 #         raise HTTPException(status_code=500, detail=str(e))
 # ============= Decision Engine Endpoints =============
+from src.api.route_completion_api import router as routes_router
+
+app.include_router(routes_router)
 
 
 @app.post("/decisions/consolidation-cycle", response_model=ConsolidationCycleResponse)

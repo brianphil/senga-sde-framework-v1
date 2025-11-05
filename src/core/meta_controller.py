@@ -496,5 +496,5 @@ class MetaController:
                         else decision.action_details["estimated_cost"]
                     ),
                     decision.action_details.get("estimated_utilization", 0),
-                    decision.action_details.get("estimated_utilization", 0),
+                    decision.action_details.get("actual_utilization", 0),
                 )

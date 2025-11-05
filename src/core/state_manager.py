@@ -14,6 +14,8 @@ import json
 import uuid
 from pathlib import Path
 import logging
+
+from .standard_types import serialize_for_json
 from ..config.senga_config import SengaConfigurator
 from .state_manager_extensions import StateManagerExtensions
 
@@ -528,19 +530,24 @@ class StateManager:
         # Decision log table (append-only for learning)
         self.conn.execute(
             """
-            CREATE TABLE IF NOT EXISTS decision_log (
-                id TEXT PRIMARY KEY,
-                timestamp TIMESTAMP NOT NULL,
-                decision_type TEXT NOT NULL,
-                function_class TEXT NOT NULL,
-                state_snapshot TEXT NOT NULL,  -- JSON
-                action_details TEXT NOT NULL,  -- JSON
-                reasoning TEXT,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            )
-        """
+                CREATE TABLE IF NOT EXISTS decision_log (
+                    id TEXT PRIMARY KEY,
+                    timestamp TIMESTAMP NOT NULL,
+                    decision_type TEXT NOT NULL,
+                    function_class TEXT NOT NULL,
+                    state_snapshot TEXT NOT NULL,  -- JSON
+                    action_details TEXT NOT NULL,  -- JSON
+                    reasoning TEXT,
+                    confidence REAL,               -- NEW COLUMN
+                    reward REAL,                   -- NEW COLUMN
+                    vfa_value_before REAL,         -- NEW COLUMN
+                    vfa_value_after REAL,          -- NEW COLUMN
+                    td_error REAL,                 -- NEW COLUMN
+                    alternatives_considered TEXT,  -- NEW COLUMN (JSON)
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    )
+                """
         )
-
         # State transitions for TD learning
         self.conn.execute(
             """
@@ -1109,23 +1116,69 @@ class StateManager:
 
     # ============= Decision Logging =============
 
+    # Add this at the top of state_manager.py after imports
+    def serialize_for_json(obj):
+        """
+        Helper function to serialize objects for JSON storage
+        """
+        if hasattr(obj, "to_dict"):
+            return obj.to_dict()
+        elif hasattr(obj, "__dict__"):
+            # Handle dataclasses and regular objects
+            return {
+                k: serialize_for_json(v)
+                for k, v in obj.__dict__.items()
+                if not k.startswith("_")
+            }
+        elif isinstance(obj, (list, tuple)):
+            return [serialize_for_json(item) for item in obj]
+        elif isinstance(obj, dict):
+            return {key: serialize_for_json(value) for key, value in obj.items()}
+        elif isinstance(obj, (str, int, float, bool, type(None))):
+            return obj
+        elif isinstance(obj, datetime):
+            return obj.isoformat()
+        elif isinstance(obj, timedelta):
+            return obj.total_seconds()
+        elif isinstance(obj, Enum):
+            return obj.value
+        else:
+            # For any other type, convert to string representation
+            return str(obj)
+
+    # Update the log_decision method in StateManager class:
     def log_decision(self, decision: DecisionEvent) -> bool:
         """Log a decision for audit and learning"""
         try:
+            # Serialize ALL complex objects in the decision event
+            serialized_action_details = serialize_for_json(decision.action_details)
+            serialized_state_snapshot = serialize_for_json(decision.state_snapshot)
+            serialized_alternatives = serialize_for_json(
+                decision.alternatives_considered
+            )
+
             self.conn.execute(
                 """
                 INSERT INTO decision_log (id, timestamp, decision_type, function_class, 
-                                         state_snapshot, action_details, reasoning)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                                        state_snapshot, action_details, reasoning,
+                                        confidence, reward, vfa_value_before, 
+                                        vfa_value_after, td_error, alternatives_considered)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
                 (
                     decision.id,
                     decision.timestamp,
                     decision.decision_type,
                     decision.function_class,
-                    json.dumps(decision.state_snapshot.to_dict()),
-                    json.dumps(decision.action_details),
+                    json.dumps(serialized_state_snapshot),
+                    json.dumps(serialized_action_details),
                     decision.reasoning,
+                    decision.confidence,
+                    decision.reward,
+                    decision.vfa_value_before,
+                    decision.vfa_value_after,
+                    decision.td_error,
+                    json.dumps(serialized_alternatives),
                 ),
             )
             self.conn.commit()

@@ -76,6 +76,70 @@ class DecisionEngine:
         self.cycle_history: List[CycleResult] = []
         logger.info("Decision Engine initialized")
 
+    @staticmethod
+    def serialize_action_details(action_details: dict) -> dict:
+        """Ensure action_details are JSON serializable"""
+
+        def _serialize(obj):
+            if hasattr(obj, "to_dict"):
+                return obj.to_dict()
+            elif hasattr(obj, "__dict__"):
+                return {
+                    k: _serialize(v)
+                    for k, v in obj.__dict__.items()
+                    if not k.startswith("_")
+                }
+            elif isinstance(obj, (list, tuple)):
+                return [_serialize(item) for item in obj]
+            elif isinstance(obj, dict):
+                return {key: _serialize(value) for key, value in obj.items()}
+            elif isinstance(obj, (str, int, float, bool, type(None))):
+                return obj
+            elif isinstance(obj, datetime):
+                return obj.isoformat()
+            elif isinstance(obj, timedelta):
+                return obj.total_seconds()
+            elif isinstance(obj, Enum):
+                return obj.value
+            else:
+                return str(obj)
+
+        return _serialize(action_details)
+
+    @staticmethod
+    def serialize_for_json(obj):
+        """
+        Helper function to serialize objects for JSON storage
+        """
+        if hasattr(obj, "to_dict"):
+            return obj.to_dict()
+        elif hasattr(obj, "__dict__"):
+            # Handle dataclasses and regular objects
+            return {
+                k: DecisionEngine.serialize_for_json(v)
+                for k, v in obj.__dict__.items()
+                if not k.startswith("_")
+            }
+        elif isinstance(obj, (list, tuple)):
+            return [DecisionEngine.serialize_for_json(item) for item in obj]
+        elif isinstance(obj, dict):
+            return {
+                key: DecisionEngine.serialize_for_json(value)
+                for key, value in obj.items()
+            }
+        elif isinstance(obj, (str, int, float, bool, type(None))):
+            return obj
+        elif isinstance(obj, datetime):
+            return obj.isoformat()
+        elif isinstance(obj, timedelta):
+            return obj.total_seconds()
+        elif isinstance(obj, Enum):
+            return obj.value
+        else:
+            # For any other type, convert to string representation
+            return str(obj)
+
+    # Update the run_cycle method to serialize before creating DecisionEvent:
     def run_cycle(self, current_time: Optional[datetime] = None) -> CycleResult:
         if current_time is None:
             current_time = datetime.now()
@@ -105,13 +169,18 @@ class DecisionEngine:
                 f"Decision: {decision.function_class.value} -> {action_type} (confidence: {conf:.2f})"
             )
 
+            # SERIALIZE action_details BEFORE creating DecisionEvent
+            serialized_action_details = self.serialize_action_details(
+                decision.action_details
+            )
+
             decision_event = DecisionEvent(
                 id=str(uuid4()),
                 timestamp=current_time,
                 state_snapshot=state_before,
                 decision_type=str(action_type),
                 function_class=decision.function_class.value,
-                action_details=decision.action_details,
+                action_details=serialized_action_details,  # Use serialized version
                 reasoning=decision.reasoning,
                 confidence=conf,
                 vfa_value_before=vfa_value_before,
@@ -208,6 +277,7 @@ class DecisionEngine:
             raise
 
     def _normalize_action_for_transition(self, decision: MetaDecision) -> dict:
+        """Normalize action with proper serialization for state transition logging"""
         action_type = decision.action_type
         if isinstance(action_type, dict):
             action_type = action_type.get("action_type", "WAIT")
@@ -216,14 +286,93 @@ class DecisionEngine:
         if hasattr(conf, "value"):
             conf = conf.value
 
+        # Ensure the action details are serializable
+        serialized_details = self.serialize_action_details(decision.action_details)
+
         return {
             "type": str(action_type).upper(),
             "function_class": decision.function_class.value,
             "confidence": float(conf),
             "summary": decision.reasoning[:200],
+            "details": serialized_details,  # Use serialized version
         }
 
+    def _dispatch_batch(
+        self,
+        shipment_ids: List[str],
+        vehicle_id: Optional[str],
+        batch_id: str,
+        estimated_cost: float,
+        estimated_distance: float,
+        route_sequence: List = None,  # This contains dicts, not Location objects
+    ):
+        """
+        Dispatch a batch of shipments
+
+        FIXED: Convert dict route sequence to Location objects
+        """
+        from .state_manager import Location
+
+        # Update shipment statuses
+        for shipment_id in shipment_ids:
+            self.state_manager.update_shipment_status(
+                shipment_id=shipment_id,
+                status=ShipmentStatus.EN_ROUTE,
+                batch_id=batch_id,
+            )
+
+        # Update vehicle status
+        if vehicle_id:
+            vehicle = self.state_manager.get_vehicle_state(vehicle_id)
+            if vehicle:
+                vehicle.status = VehicleStatus.EN_ROUTE
+                vehicle.current_route_id = batch_id
+                self.state_manager.update_vehicle_state(vehicle)
+
+        # Convert dict route sequence to Location objects
+        location_sequence = []
+        if route_sequence:
+            for stop_dict in route_sequence:
+                # Handle both dict formats (from RouteStop serialization and legacy)
+                if isinstance(stop_dict, dict):
+                    location_sequence.append(
+                        Location(
+                            place_id=stop_dict.get(
+                                "place_id", f"stop_{len(location_sequence)}"
+                            ),
+                            lat=stop_dict.get("lat", stop_dict.get("location_lat", 0)),
+                            lng=stop_dict.get("lng", stop_dict.get("location_lon", 0)),
+                            formatted_address=stop_dict.get(
+                                "formatted_address",
+                                stop_dict.get("location_address", "Unknown"),
+                            ),
+                            zone_id=stop_dict.get("zone_id"),
+                        )
+                    )
+                else:
+                    # If it's already a Location object, use as-is
+                    location_sequence.append(stop_dict)
+
+        # Create Route with proper Location objects
+        route = Route(
+            id=batch_id,
+            vehicle_id=vehicle_id or "UNASSIGNED",
+            shipment_ids=shipment_ids,
+            sequence=location_sequence,  # Now contains Location objects, not dicts
+            estimated_duration=timedelta(hours=estimated_distance / 40),
+            estimated_distance=estimated_distance,
+            created_at=datetime.now(),
+        )
+        self.state_manager.add_route(route)
+
+        logger.debug(f"Route {batch_id} created with {len(location_sequence)} stops")
+
     def _execute_decision(self, decision: MetaDecision, state: SystemState) -> Dict:
+        """
+        Execute decision and update state
+
+        FIXED: Ensure route_sequence is properly formatted
+        """
         action_type = decision.action_type
         if isinstance(action_type, dict):
             action_type = action_type.get("action_type", "WAIT").upper()
@@ -252,8 +401,45 @@ class DecisionEngine:
             vehicles_used = set()
 
             for batch in batches:
+                # Handle both serialized RouteStop objects and dicts
                 shipments_in_batch = batch.get("shipments", [])
                 vehicle = batch.get("vehicle")
+
+                # Extract route sequence - ensure it's a list of dicts
+                route_sequence = []
+                if "route_stops" in batch:
+                    # New serialized format - RouteStop objects converted to dicts
+                    for stop in batch["route_stops"]:
+                        if isinstance(stop, dict):
+                            route_sequence.append(
+                                {
+                                    "lat": stop.get("location_lat", 0),
+                                    "lng": stop.get("location_lon", 0),
+                                    "formatted_address": stop.get(
+                                        "location_address", ""
+                                    ),
+                                    "shipment_ids": stop.get("shipment_ids", []),
+                                }
+                            )
+                elif "route" in batch:
+                    # Legacy format - already dicts
+                    route_sequence = batch.get("route", [])
+                else:
+                    # Fallback: create minimal route
+                    route_sequence = [
+                        {
+                            "lat": 0,
+                            "lng": 0,
+                            "formatted_address": "Origin",
+                            "shipment_ids": [],
+                        },
+                        {
+                            "lat": 0,
+                            "lng": 0,
+                            "formatted_address": "Destination",
+                            "shipment_ids": shipments_in_batch,
+                        },
+                    ]
 
                 if not shipments_in_batch:
                     continue
@@ -263,7 +449,8 @@ class DecisionEngine:
                     vehicle_id=vehicle,
                     batch_id=batch.get("id", f"batch_{uuid4()}"),
                     estimated_cost=batch.get("estimated_cost", 0),
-                    estimated_distance=batch.get("distance", 0),
+                    estimated_distance=batch.get("estimated_distance", 0),
+                    route_sequence=route_sequence,  # This is now a list of dicts
                 )
 
                 total_shipments += len(shipments_in_batch)
@@ -287,73 +474,6 @@ class DecisionEngine:
                 "vehicles_utilized": 0,
                 "batches_created": 0,
             }
-
-    def _dispatch_batch(
-        self,
-        shipment_ids: List[str],
-        vehicle_id: Optional[str],
-        batch_id: str,
-        estimated_cost: float,
-        estimated_distance: float,
-    ):
-        for shipment_id in shipment_ids:
-            self.state_manager.update_shipment_status(
-                shipment_id=shipment_id,
-                status=ShipmentStatus.EN_ROUTE,
-                batch_id=batch_id,
-            )
-
-        if vehicle_id:
-            vehicle = self.state_manager.get_vehicle_state(vehicle_id)
-            if vehicle:
-                vehicle.status = VehicleStatus.EN_ROUTE
-                vehicle.current_route_id = batch_id
-                self.state_manager.update_vehicle_state(vehicle)
-
-        route = Route(
-            id=batch_id,
-            vehicle_id=vehicle_id or "UNASSIGNED",
-            shipment_ids=shipment_ids,
-            sequence=[],
-            estimated_duration=timedelta(hours=estimated_distance / 40),
-            estimated_distance=estimated_distance,
-            created_at=datetime.now(),
-        )
-        self.state_manager.add_route(route)
-
-    def _normalize_action(self, decision: MetaDecision, execution_result: Dict) -> Dict:
-        action_type = decision.action_type
-        if isinstance(action_type, dict):
-            action_type = action_type.get("action_type", "WAIT")
-
-        conf = decision.confidence
-        if hasattr(conf, "value"):
-            conf = conf.value
-
-        normalized = {
-            "type": str(action_type).upper(),
-            "function_class": decision.function_class.value,
-            "shipments_dispatched": execution_result["shipments_dispatched"],
-            "vehicles_utilized": execution_result["vehicles_utilized"],
-            "batches_created": execution_result.get("batches_created", 0),
-            "confidence": float(conf),
-            "reasoning": decision.reasoning,
-        }
-
-        if action_type == "DISPATCH":
-            batches = decision.action_details.get("batches", [])
-            normalized["batch_details"] = [
-                {
-                    "id": b.get("id"),
-                    "shipments": b.get("shipments", []),
-                    "vehicle": b.get("vehicle"),
-                    "estimated_cost": b.get("estimated_cost", 0),
-                    "utilization": b.get("utilization", 0),
-                }
-                for b in batches
-            ]
-
-        return normalized
 
     async def start_autonomous_mode(self, cycle_interval_minutes: int = 60):
         self.status = EngineStatus.AUTONOMOUS
@@ -389,6 +509,41 @@ class DecisionEngine:
             }
             for r in recent
         ]
+
+    def _normalize_action(self, decision: MetaDecision, execution_result: Dict) -> Dict:
+        """Normalize action with execution results for reward calculation"""
+        action_type = decision.action_type
+        if isinstance(action_type, dict):
+            action_type = action_type.get("action_type", "WAIT")
+
+        conf = decision.confidence
+        if hasattr(conf, "value"):
+            conf = conf.value
+
+        normalized = {
+            "type": str(action_type).upper(),
+            "function_class": decision.function_class.value,
+            "shipments_dispatched": execution_result["shipments_dispatched"],
+            "vehicles_utilized": execution_result["vehicles_utilized"],
+            "batches_created": execution_result.get("batches_created", 0),
+            "confidence": float(conf),
+            "reasoning": decision.reasoning,
+        }
+
+        if action_type == "DISPATCH":
+            batches = decision.action_details.get("batches", [])
+            normalized["batch_details"] = [
+                {
+                    "id": b.get("id"),
+                    "shipments": b.get("shipments", []),
+                    "vehicle": b.get("vehicle"),
+                    "estimated_cost": b.get("estimated_cost", 0),
+                    "utilization": b.get("utilization", 0),
+                }
+                for b in batches
+            ]
+
+        return normalized
 
     def get_performance_metrics(self) -> PerformanceMetrics:
         if not self.cycle_history:

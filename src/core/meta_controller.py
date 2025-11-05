@@ -78,34 +78,46 @@ class MetaController:
 
     def decide(self, state: SystemState) -> MetaDecision:
         """
-        Main decision coordination - CORRECTED for actual PFA API
-        """
-        # Step 1: Get PFA action using correct method name
-        pfa_action = self.pfa.select_action(state)  # CORRECT: select_action not decide
-        self._last_pfa_action = pfa_action
+        Main decision coordination - FIXED to prioritize CFA for consolidation
 
-        # Handle dispatch_batch
+        Decision flow:
+        1. Emergency (< 2hrs deadline)? → PFA immediate dispatch
+        2. Simple (≤2 shipments, low complexity)? → PFA
+        3. High complexity/stakes? → DLA
+        4. Default (consolidation opportunity)? → CFA
+        """
+        # Check for emergencies first
+        if self._is_emergency(state):
+            logger.info("EMERGENCY detected - using PFA immediate dispatch")
+            pfa_action = self.pfa.select_action(state)
+            return self._convert_pfa_to_decision(pfa_action)
+
+        # Check if truly simple (≤2 shipments)
+        num_shipments = len(state.pending_shipments)
+        if num_shipments <= self.simple_max:
+            logger.info(f"Simple state ({num_shipments} shipments) - using PFA")
+            pfa_action = self.pfa.select_action(state)
+            return self._convert_pfa_to_decision(pfa_action)
+
+        # For 3+ shipments, assess complexity/stakes
+        complexity = self._assess_complexity(state)
+        stakes = self._assess_stakes(state)
+
+        if stakes.is_high_stakes or complexity.is_complex:
+            logger.info("High stakes/complexity - using DLA")
+            return self._use_dla(state, complexity, stakes)
+
+        # Default: Use CFA for consolidation (3+ shipments, normal complexity)
+        logger.info(
+            f"Consolidation opportunity ({num_shipments} shipments) - using CFA"
+        )
+        return self._use_cfa(state)
+
+    def _convert_pfa_to_decision(self, pfa_action) -> MetaDecision:
+        """Convert PFA action to MetaDecision"""
         if pfa_action.action_type == "dispatch_batch":
             batch = {
-                "batch_id": f"PFA_{datetime.now().timestamp()}",
-                "shipments": pfa_action.shipment_ids,
-                "vehicle": None,  # PFA doesn't assign vehicles
-            }
-            return MetaDecision(
-                function_class=FunctionClass.PFA,
-                action_type="DISPATCH",
-                action_details={
-                    "type": "DISPATCH",
-                    "batches": [batch],
-                },
-                reasoning=pfa_action.reasoning,
-                confidence=pfa_action.confidence,
-            )
-
-        # Handle dispatch_single
-        if pfa_action.action_type == "dispatch_single":
-            batch = {
-                "batch_id": f"PFA_{datetime.now().timestamp()}",
+                "id": f"PFA_{datetime.now().timestamp()}",
                 "shipments": pfa_action.shipment_ids,
                 "vehicle": None,
             }
@@ -119,28 +131,30 @@ class MetaController:
                 reasoning=pfa_action.reasoning,
                 confidence=pfa_action.confidence,
             )
-
-        # Handle wait
-        if pfa_action.action_type == "wait":
-            # Only wait if confidence is high, otherwise try CFA
-            if pfa_action.confidence > 0.7:
-                return MetaDecision(
-                    function_class=FunctionClass.PFA,
-                    action_type="WAIT",
-                    action_details={"type": "WAIT"},
-                    reasoning=pfa_action.reasoning,
-                    confidence=pfa_action.confidence,
-                )
-
-        # Step 2: If PFA didn't give confident answer, assess complexity
-        complexity = self._assess_complexity(state)
-        stakes = self._assess_stakes(state)
-
-        # Step 3: Route to CFA or DLA
-        if stakes.is_high_stakes or complexity.is_complex:
-            return self._use_dla(state, complexity, stakes)
-        else:
-            return self._use_cfa(state)
+        elif pfa_action.action_type == "dispatch_single":
+            batch = {
+                "id": f"PFA_{datetime.now().timestamp()}",
+                "shipments": pfa_action.shipment_ids,
+                "vehicle": None,
+            }
+            return MetaDecision(
+                function_class=FunctionClass.PFA,
+                action_type="DISPATCH",
+                action_details={
+                    "type": "DISPATCH",
+                    "batches": [batch],
+                },
+                reasoning=pfa_action.reasoning,
+                confidence=pfa_action.confidence,
+            )
+        else:  # wait
+            return MetaDecision(
+                function_class=FunctionClass.PFA,
+                action_type="WAIT",
+                action_details={"type": "WAIT"},
+                reasoning=pfa_action.reasoning,
+                confidence=pfa_action.confidence,
+            )
 
     def _assess_complexity(self, state: SystemState) -> ComplexityAssessment:
         """
